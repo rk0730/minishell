@@ -29,7 +29,6 @@ chmod 755 minishell
 exec_test() {
 	# 全ての引数を改行で結合
 	commands=$(printf "%s\n" "$@")
-	# commands=$(printf "%b" "$commands\nexit")
 
 	# minishellで結合されたコマンドを実行
 	TEST1=$(printf "%b" "$commands" | ./minishell 2>/dev/null)
