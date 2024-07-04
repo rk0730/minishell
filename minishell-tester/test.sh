@@ -44,6 +44,7 @@ exec_test() {
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "
 	else
+		wrong_counter=$((wrong_counter + 1))
 		printf " $BOLDRED%s$RESET" "✗ "
 	fi
 
@@ -65,6 +66,7 @@ exec_test() {
 	fi
 	if [ -n "$ERR1" ] || [ -n "$ERR2" ]; then
 		echo
+		errmsg_counter=$((errmsg_counter + 1))
 		printf "$BOLDRED Your errmsg : \n%.20s\n$BOLDRED$ERR1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 		printf "$BOLDGREEN Expected errmsg : \n%.20s\n$BOLDGREEN$ERR2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 	fi
@@ -80,9 +82,15 @@ printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
 
+wrong_counter=0
+errmsg_counter=0
+
 # コマンドをテストする　必ず最後にexitを入れる
 exec_test 'ls' 'exit'
 exec_test 'pwd' 'exit 42'
 exec_test 'lsl' 'echo $?' 'exit'
 exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
 
+# テスト結果の表示
+echo
+printf "Wrong : $BOLDRED%d$RESET  Error massage : $BOLDYELLOW%d$RESET\n" $wrong_counter $errmsg_counter
