@@ -23,7 +23,7 @@ BOLDWHITE="\033[1m\033[37m"
 
 # minishellをビルド
 # make -C ..
-cp ../minishell .
+# cp ../minishell .
 chmod 755 minishell
 
 exec_test() {
@@ -31,17 +31,21 @@ exec_test() {
 	commands=$(printf "%s\n" "$@")
 
 	# minishellで結合されたコマンドを実行
-	TEST1=$(printf "%b" "$commands" | ./minishell 2>/dev/null)
-	ERR1=$(printf "%b" "$commands" | ./minishell 2>&1 1>/dev/null)
+	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
+	TEST1=$(cat $stdout_file)
+	ERR1=$(cat $stderr_file)
 
 	# bashで結合されたコマンドを実行
-	TEST2=$(printf "%b" "$commands" | bash 2>/dev/null)
-	ERR2=$(printf "%b" "$commands" | bash 2>&1 1>/dev/null)
+	printf "%b" "$commands" | bash > $stdout_file 2> $stderr_file
 	ES_2=$?
+	TEST2=$(cat $stdout_file)
+	ERR2=$(cat $stderr_file)
+	# エラーメッセージの整形（各行:で分割し、3番目以降のフィールドを取得）
+	ERR2=$(echo "$ERR2" | cut -d':' -f3- | sed 's/^ //')
 
 	# テスト結果の表示
-	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
+	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ "$ERR1" == "$ERR2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "
 	else
 		wrong_counter=$((wrong_counter + 1))
@@ -64,14 +68,12 @@ exec_test() {
 		printf "$BOLDRED Your exit status : $BOLDRED$ES_1$RESET\n"
 		printf "$BOLDGREEN Expected exit status : $BOLDGREEN$ES_2$RESET\n"
 	fi
-	if [ -n "$ERR1" ] || [ -n "$ERR2" ]; then
+	if [ "$ERR1" != "$ERR2" ]; then
 		echo
-		errmsg_counter=$((errmsg_counter + 1))
 		printf "$BOLDRED Your errmsg : \n%.20s\n$BOLDRED$ERR1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 		printf "$BOLDGREEN Expected errmsg : \n%.20s\n$BOLDGREEN$ERR2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 	fi
 	echo
-	sleep 0.1
 }
 
 printf "$BOLDMAGENTA __  __ _____ _   _ _____  _____ _    _ ______ _      _      \n"
@@ -82,15 +84,28 @@ printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
 
+# カウンターの初期化
 wrong_counter=0
-errmsg_counter=0
+
+# テスト用のファイルを作成
+stdout_file=$(mktemp)
+stderr_file=$(mktemp)
 
 # コマンドをテストする　必ず最後にexitを入れる
 exec_test 'ls' 'exit'
+exec_test 'sleep 5 | sleep 5' 'exit'
 exec_test 'pwd' 'exit 42'
-exec_test 'lsl' 'echo $?' 'exit'
+exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
+exec_test 'lsl' 'exit'
 exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
 
 # テスト結果の表示
 echo
-printf "Wrong : $BOLDRED%d$RESET  Error massage : $BOLDYELLOW%d$RESET\n" $wrong_counter $errmsg_counter
+if [ $wrong_counter -eq 0 ]; then
+	printf "$BOLDGREEN Perfect!!!$RESET\n"
+else
+	printf "$BOLDRED%d$RESET wrong result\n" $wrong_counter
+fi
+
+# テスト用のファイルを削除
+rm -f $stdout_file $stderr_file

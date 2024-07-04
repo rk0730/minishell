@@ -17,10 +17,18 @@ int main() {
 
 		//exitコマンドが入力されたら終了
 		if (strncmp(input, "exit", 4) == 0) {
-			printf("finish minishell\n");
+			// printf("finish minishell\n");
 			free(input);
 			return 0;
 		}
+
+		// lslならエラーメッセージを表示
+		if (strncmp(input, "lsl", 3) == 0) {
+			fprintf(stderr, "lsl: command not found\n");
+			free(input);
+			continue;
+		}
+
 		// printf("You entered: %s\n", input);
 		printf("execute %s\n", input);
 
