@@ -16,7 +16,7 @@ int main() {
 		input = readline("MINISHELL$ ");
 
 		//exitコマンドが入力されたら終了
-		if (strcmp(input, "exit") == 0) {
+		if (strncmp(input, "exit", 4) == 0) {
 			printf("finish minishell\n");
 			free(input);
 			return 0;
