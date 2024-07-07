@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:18:29 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/06/29 01:53:42 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/07 11:24:43 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int	ft_printf_fd(int fd, const char *format, ...)
 	return (ans);
 }
 
-int	ft_printf(const char *format, ...)
-{
-	va_list	args;
-	int		result;
+// int	ft_printf(const char *format, ...)
+// {
+// 	va_list	args;
+// 	int		result;
 
-	va_start(args, format);
-	result = ft_printf_fd(STDOUT_FILENO, format, args);
-	va_end(args);
-	return (result);
-}
+// 	va_start(args, format);
+// 	result = ft_printf_fd(STDOUT_FILENO, format, args);
+// 	va_end(args);
+// 	return (result);
+// }
