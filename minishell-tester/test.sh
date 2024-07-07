@@ -92,7 +92,6 @@ stdout_file=$(mktemp)
 stderr_file=$(mktemp)
 
 # コマンドをテストする　必ず最後にexitを入れる
-# exec_test 'ls' 'exit'
 # exec_test 'sleep 5 | sleep 5' 'exit'
 # exec_test 'pwd' 'exit 42'
 # exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
@@ -104,6 +103,11 @@ stderr_file=$(mktemp)
 exec_test '/bin/ls' 'exit'
 exec_test '/bin/pwd' 'exit'
 exec_test '/bin/echo' 'exit'
+exec_test 'ls' 'exit'
+exec_test 'pwd' 'exit'
+exec_test './a.out' 'exit'
+exec_test 'lsll' 'exit'
+exec_test 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' 'exit'
 
 
 # テスト結果の表示

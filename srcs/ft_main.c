@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/07 18:48:14 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/07 20:58:12 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,7 @@ int main(int argc, char **argv, char **envp) {
 	// t_env_pair **env_list = ft_gen_env_list(envp);
 	t_env_pair **env_list;
 	env_list = ft_gen_env_list(envp);
-	
-	
-	// t_env_pair *tmp = *env_list;
-	// while (tmp) {
-	// 	printf("%s==%s\n", tmp->key, tmp->value);
-	// 	tmp = tmp->next;
-	// }
-	
-	printf("%p %p %s====%s\n", env_list, (*env_list)->key, (*env_list)->key, (*env_list)->value);
-	printf("--------------------------\n");
-	printf("%p %p %s====%s\n", env_list, (*env_list)->key, (*env_list)->key, (*env_list)->value);
-	printf("%p %p %s====%s\n", env_list, (*env_list)->key, (*env_list)->key, (*env_list)->value);
-	printf("--------------------------\n");
-	printf("%p %p %s====%s\n", env_list, (*env_list)->key, (*env_list)->key, (*env_list)->value);
 	char **path_array = ft_gen_path_array(env_list);
-	int i = 0;
-	while (path_array[i])
-	{
-		printf("%s\n", path_array[i]);
-		i++;
-	}
 	
 	while (1) {
 		// Readlineを使用してユーザー入力を取得
@@ -77,7 +57,7 @@ int main(int argc, char **argv, char **envp) {
 			exit(1);
 		} else if (pid == 0) {
 			// 子プロセス
-			ft_exec_cmd(input);
+			ft_exec_cmd(input, path_array);
 		} else {
 			// 親プロセス
 			// 子プロセスの終了を待つ
