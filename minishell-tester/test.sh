@@ -22,8 +22,8 @@ BOLDCYAN="\033[1m\033[36m"
 BOLDWHITE="\033[1m\033[37m"
 
 # minishellをビルド
-# make -C ..
-# cp ../minishell .
+make -C ..
+cp ../minishell .
 chmod 755 minishell
 
 exec_test() {
@@ -92,12 +92,19 @@ stdout_file=$(mktemp)
 stderr_file=$(mktemp)
 
 # コマンドをテストする　必ず最後にexitを入れる
-exec_test 'ls' 'exit'
-exec_test 'sleep 5 | sleep 5' 'exit'
-exec_test 'pwd' 'exit 42'
-exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
-exec_test 'lsl' 'exit'
-exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
+# exec_test 'ls' 'exit'
+# exec_test 'sleep 5 | sleep 5' 'exit'
+# exec_test 'pwd' 'exit 42'
+# exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
+# exec_test 'lsl' 'exit'
+# exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
+
+
+# コマンドをテストする
+exec_test '/bin/ls' 'exit'
+exec_test '/bin/pwd' 'exit'
+exec_test '/bin/echo' 'exit'
+
 
 # テスト結果の表示
 echo

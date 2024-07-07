@@ -1,0 +1,13 @@
+<mxfile host="65bd71144e">
+    <diagram id="GvdNMi-sKTnuqSEQmimu" name="ページ1">
+        <mxGraphModel dx="597" dy="637" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;全体について&lt;/font&gt;&lt;br&gt;srcsの中にcmd, env, utilsというモジュールがある。これらモジュールには1つずつヘッダーファイルがあり、それはincludesディレクトリに入っている。そして、これらのヘッダーファイルには外部のモジュールに公開する関数だけが書かれている。&lt;br&gt;外部に公開しないヘルプ関数を作りたい場合はそのモジュールの中にsrcs/env/env_help.hのようにしてヘッダーファイルを作り、そこで宣言する。&lt;br&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;各モジュールについて&lt;br&gt;&lt;/font&gt;utils 汎用的な関数が入っていて、他の全てのモジュールで最初にincludeする&lt;br&gt;env 環境変数の操作に関する関数が入っている&lt;br&gt;cmd コマンドの実行に関する関数が入っている&lt;br&gt;ft_main.cでこれらのモジュールのヘッダーを全てinlcudeし、呼び出す&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="40" width="440" height="290" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
