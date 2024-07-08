@@ -21,11 +21,6 @@ BOLDMAGENTA="\033[1m\033[35m"
 BOLDCYAN="\033[1m\033[36m"
 BOLDWHITE="\033[1m\033[37m"
 
-# minishellをビルド
-make -C ..
-cp ../minishell .
-chmod 755 minishell
-
 exec_test() {
 	# 全ての引数を改行で結合
 	commands=$(printf "%s\n" "$@")
@@ -76,6 +71,16 @@ exec_test() {
 	echo
 }
 
+# minishellをビルド
+make -C ..
+cp ../minishell .
+chmod 755 minishell
+
+# 権限の変更
+chmod 000 no_permission
+chmod 444 no_write_permission
+chmod 222 no_read_permission
+
 printf "$BOLDMAGENTA __  __ _____ _   _ _____  _____ _    _ ______ _      _      \n"
 printf "|  \/  |_   _| \ | |_   _|/ ____| |  | |  ____| |    | |     \n"
 printf "| \  / | | | |  \| | | | | (___ | |__| | |__  | |    | |     \n"
@@ -105,9 +110,15 @@ exec_test '/bin/pwd' 'exit'
 exec_test '/bin/echo' 'exit'
 exec_test 'ls' 'exit'
 exec_test 'pwd' 'exit'
-exec_test './a.out' 'exit'
+exec_test './hello' 'exit'
 exec_test 'lsll' 'exit'
 exec_test 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' 'exit'
+exec_test 'echo hello' 'exit'
+exec_test 'echo hello world' 'exit'
+exec_test 'echo hello      world!' 'exit'
+exec_test 'cat no_write_permission' 'exit'
+exec_test 'cat no_read_permission' 'exit'
+exec_test 'cat no_such_file' 'exit'
 
 
 # テスト結果の表示
@@ -117,6 +128,11 @@ if [ $wrong_counter -eq 0 ]; then
 else
 	printf "$BOLDRED%d$RESET wrong result\n" $wrong_counter
 fi
+
+# 権限を戻す
+chmod 644 no_permission
+chmod 644 no_write_permission
+chmod 644 no_read_permission
 
 # テスト用のファイルを削除
 rm -f $stdout_file $stderr_file
