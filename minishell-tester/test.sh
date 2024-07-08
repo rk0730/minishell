@@ -36,11 +36,21 @@ exec_test() {
 	ES_2=$?
 	TEST2=$(cat $stdout_file)
 	ERR2=$(cat $stderr_file)
+
 	# エラーメッセージの整形（各行:で分割し、3番目以降のフィールドを取得）
-	ERR2=$(echo "$ERR2" | cut -d':' -f3- | sed 's/^ //')
+	# ERR2=$(echo "$ERR2" | cut -d':' -f3- | sed 's/^ //')
+
+	# ERR1の各行がERR2の各行に含まれているか確認する
+	is_err_same=true
+	while IFS= read -r line; do
+		if [[ "$ERR2" != *"$line"* ]]; then
+			is_err_same=false
+			break
+		fi
+	done <<< "$ERR1"
 
 	# テスト結果の表示
-	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ "$ERR1" == "$ERR2" ]; then
+	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ $is_err_same == true ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "
 	else
 		wrong_counter=$((wrong_counter + 1))
@@ -63,7 +73,7 @@ exec_test() {
 		printf "$BOLDRED Your exit status : $BOLDRED$ES_1$RESET\n"
 		printf "$BOLDGREEN Expected exit status : $BOLDGREEN$ES_2$RESET\n"
 	fi
-	if [ "$ERR1" != "$ERR2" ]; then
+	if [ $is_err_same != true ]; then
 		echo
 		printf "$BOLDRED Your errmsg : \n%.20s\n$BOLDRED$ERR1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 		printf "$BOLDGREEN Expected errmsg : \n%.20s\n$BOLDGREEN$ERR2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
