@@ -6,17 +6,14 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/09 11:42:34 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/09 18:48:14 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//cmdモジュールで作った関数のうち、外部に公開するもののみここで宣言する
-
-//cmdモジュールはコマンドの実行に関する関数を集めたモジュールである
 
 #ifndef CMD_H
 # define CMD_H
 
+# include "env.h"
 # include "utils.h"
 
 enum e_cmd_error
