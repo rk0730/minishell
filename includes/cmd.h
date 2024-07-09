@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/07 19:20:23 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/09 11:42:34 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # define CMD_H
 
 # include "utils.h"
+
+enum e_cmd_error
+{
+	CMD_ERROR = 1,
+	CMD_NOT_FOUND = 127,
+};
 
 void	ft_exec_cmd(char *cmd, char **path_array);
 

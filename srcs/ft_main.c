@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/07 20:58:12 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/09 11:41:17 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 int main(int argc, char **argv, char **envp) {
 	char *input;
+	int	status;
 
+	status = 0;//初期化
 	// 消す
 	if (argc == 0)
 		printf("%s", argv[0]);
@@ -34,7 +36,7 @@ int main(int argc, char **argv, char **envp) {
 		if (input == NULL)
 		{
 			printf("exit\n");
-			return (0);
+			return (WEXITSTATUS(status));
 		}
 
 		if (ft_strlen(input) == 0) {
@@ -45,7 +47,7 @@ int main(int argc, char **argv, char **envp) {
 		//exitコマンドが入力されたら終了
 		if (strncmp(input, "exit", 4) == 0) {
 			free(input);
-			return 0;
+			return (WEXITSTATUS(status));
 		}
 
 		// printf("execute %s\n", input);
@@ -61,7 +63,7 @@ int main(int argc, char **argv, char **envp) {
 		} else {
 			// 親プロセス
 			// 子プロセスの終了を待つ
-			wait(NULL);
+			wait(&status);
 		}
 
 
@@ -72,7 +74,7 @@ int main(int argc, char **argv, char **envp) {
 		free(input);
 	}
 
-	return 0;
+	return (WEXITSTATUS(status));
 }
 
 // #include <libc.h>
