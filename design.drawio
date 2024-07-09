@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="GvdNMi-sKTnuqSEQmimu" name="ページ1">
-        <mxGraphModel dx="1764" dy="1724" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1992" dy="1878" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -8,19 +8,19 @@
                     <mxGeometry x="-30" y="-490" width="440" height="290" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="cmdモジュール" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="350" y="390" width="370" height="60" as="geometry"/>
+                    <mxGeometry x="720" y="230" width="370" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="envモジュール" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-30" y="390" width="330" height="60" as="geometry"/>
+                    <mxGeometry x="340" y="230" width="330" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="utilsモジュール" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="780" y="390" width="320" height="60" as="geometry"/>
+                    <mxGeometry x="1150" y="230" width="320" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="&lt;h3&gt;説明&lt;/h3&gt;forkなどをする前に入力文字列から実行するコマンドの情報を全てまとめる&lt;br&gt;パイプの前までの1つのコマンドの情報が入った構造体を1つ作る&lt;br&gt;この情報にはexecveに渡す二次元配列、入力、出力リダイレクト先のfdなどがある&lt;br&gt;二次元配列には”の処理や$環境変数の展開などは全て終わらせた物&lt;br&gt;パイプが出てきたら次のコマンド用の同じ構造体を作り、前のコマンドと同じように情報を入れる。これらの構造体は連結リストで管理する。" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
-                    <mxGeometry x="350" y="540" width="360" height="220" as="geometry"/>
+                    <mxGeometry x="720" y="380" width="360" height="220" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="cmd_info" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="1060" width="140" height="150" as="geometry">
+                    <mxGeometry x="730" y="900" width="140" height="150" as="geometry">
                         <mxRectangle x="350" y="720" width="90" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
@@ -37,7 +37,7 @@
                     <mxGeometry y="120" width="140" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="23" value="cmd_arrayの例" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="1280" width="140" height="150" as="geometry"/>
+                    <mxGeometry x="730" y="1120" width="140" height="150" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="ls" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="23" vertex="1">
                     <mxGeometry y="30" width="140" height="30" as="geometry"/>
@@ -52,7 +52,7 @@
                     <mxGeometry y="120" width="140" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="29" value="cmd_arrayの例" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="540" y="1290" width="140" height="210" as="geometry"/>
+                    <mxGeometry x="910" y="1130" width="140" height="210" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" value="echo" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="29" vertex="1">
                     <mxGeometry y="30" width="140" height="30" as="geometry"/>
@@ -73,64 +73,164 @@
                     <mxGeometry y="180" width="140" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="ls .. -l&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22cmd_array%E3%81%AE%E4%BE%8B%22%20style%3D%22swimlane%3BfontStyle%3D0%3BchildLayout%3DstackLayout%3Bhorizontal%3D1%3BstartSize%3D30%3BhorizontalStack%3D0%3BresizeParent%3D1%3BresizeParentMax%3D0%3BresizeLast%3D0%3Bcollapsible%3D1%3BmarginBottom%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22530%22%20y%3D%22720%22%20width%3D%22140%22%20height%3D%22150%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%223%22%20value%3D%22ls%22%20style%3D%22text%3BstrokeColor%3Dnone%3BfillColor%3Dnone%3Balign%3Dleft%3BverticalAlign%3Dmiddle%3BspacingLeft%3D4%3BspacingRight%3D4%3Boverflow%3Dhidden%3Bpoints%3D%5B%5B0%2C0.5%5D%2C%5B1%2C0.5%5D%5D%3BportConstraint%3Deastwest%3Brotatable%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20y%3D%2230%22%20width%3D%22140%22%20height%3D%2230%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%224%22%20value%3D%22..%22%20style%3D%22text%3BstrokeColor%3Dnone%3BfillColor%3Dnone%3Balign%3Dleft%3BverticalAlign%3Dmiddle%3BspacingLeft%3D4%3BspacingRight%3D4%3Boverflow%3Dhidden%3Bpoints%3D%5B%5B0%2C0.5%5D%2C%5B1%2C0.5%5D%5D%3BportConstraint%3Deastwest%3Brotatable%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20y%3D%2260%22%20width%3D%22140%22%20height%3D%2230%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%225%22%20value%3D%22-l%22%20style%3D%22text%3BstrokeColor%3Dnone%3BfillColor%3Dnone%3Balign%3Dleft%3BverticalAlign%3Dmiddle%3BspacingLeft%3D4%3BspacingRight%3D4%3Boverflow%3Dhidden%3Bpoints%3D%5B%5B0%2C0.5%5D%2C%5B1%2C0.5%5D%5D%3BportConstraint%3Deastwest%3Brotatable%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20y%3D%2290%22%20width%3D%22140%22%20height%3D%2230%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%226%22%20value%3D%22NULL%22%20style%3D%22text%3BstrokeColor%3Dnone%3BfillColor%3Dnone%3Balign%3Dleft%3BverticalAlign%3Dmiddle%3BspacingLeft%3D4%3BspacingRight%3D4%3Boverflow%3Dhidden%3Bpoints%3D%5B%5B0%2C0.5%5D%2C%5B1%2C0.5%5D%5D%3BportConstraint%3Deastwest%3Brotatable%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20y%3D%22120%22%20width%3D%22140%22%20height%3D%2230%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="1230" width="120" height="40" as="geometry"/>
+                    <mxGeometry x="730" y="1070" width="120" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="echo hello &quot;&quot;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&quot;$USER&quot; '$USER'" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="540" y="1230" width="230" height="40" as="geometry"/>
+                    <mxGeometry x="910" y="1070" width="230" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="&lt;h3&gt;&lt;ul&gt;&lt;li&gt;外部に公開する関数&lt;/li&gt;&lt;/ul&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;ft----&lt;/li&gt;&lt;ul&gt;&lt;li&gt;その説明&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;Value 3&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;align=left;" vertex="1" parent="1">
-                    <mxGeometry x="-30" y="790" width="250" height="100" as="geometry"/>
+                <mxCell id="52" value="&lt;h3&gt;&lt;ul&gt;&lt;li&gt;外部に公開する関数&lt;/li&gt;&lt;/ul&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;ft_gen_env_list&lt;/li&gt;&lt;ul&gt;&lt;li&gt;環境変数の連結リストを作る&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;ft_gen_path_array&lt;/li&gt;&lt;ul&gt;&lt;li&gt;PATHの二次元配列を作る&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="630" width="320" height="290" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="&lt;h3&gt;使用変数の例&lt;/h3&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="360" y="980" width="210" height="60" as="geometry"/>
+                <mxCell id="54" value="&lt;h3&gt;使用変数の例&lt;/h3&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="730" y="820" width="210" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="350" y="465" width="210" height="60" as="geometry"/>
+                <mxCell id="56" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="305" width="210" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="57" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="56">
+                <mxCell id="57" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="56" vertex="1">
                     <mxGeometry y="30" width="210" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="60" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="-30" y="465" width="200" height="60" as="geometry"/>
+                <mxCell id="60" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="305" width="200" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="60">
+                <mxCell id="61" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="60" vertex="1">
                     <mxGeometry y="30" width="200" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="62" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="780" y="465" width="230" height="60" as="geometry"/>
+                <mxCell id="62" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1150" y="305" width="230" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="なし" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="62">
+                <mxCell id="63" value="なし" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="62" vertex="1">
                     <mxGeometry y="30" width="230" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="64" value="&lt;h3&gt;説明&lt;/h3&gt;&lt;div&gt;環境変数に関する操作を行うモジュール&lt;/div&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bh3%26gt%3B%E8%AA%AC%E6%98%8E%26lt%3B%2Fh3%26gt%3Bfork%E3%81%AA%E3%81%A9%E3%82%92%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E5%85%A5%E5%8A%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A8%E3%81%A6%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%AE%E5%89%8D%E3%81%BE%E3%81%A7%E3%81%AE1%E3%81%A4%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%921%E3%81%A4%E4%BD%9C%E3%82%8B%26lt%3Bbr%26gt%3B%E3%81%93%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AB%E3%81%AFexecve%E3%81%AB%E6%B8%A1%E3%81%99%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%80%81%E5%85%A5%E5%8A%9B%E3%80%81%E5%87%BA%E5%8A%9B%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E5%85%88%E3%81%AEfd%E3%81%AA%E3%81%A9%E3%81%8C%E3%81%82%E3%82%8B%26lt%3Bbr%26gt%3B%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%AF%E2%80%9D%E3%81%AE%E5%87%A6%E7%90%86%E3%82%84%24%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E5%B1%95%E9%96%8B%E3%81%AA%E3%81%A9%E3%81%AF%E5%85%A8%E3%81%A6%E7%B5%82%E3%82%8F%E3%82%89%E3%81%9B%E3%81%9F%E7%89%A9%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%8C%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%89%E6%AC%A1%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%94%A8%E3%81%AE%E5%90%8C%E3%81%98%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%92%E4%BD%9C%E3%82%8A%E3%80%81%E5%89%8D%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%80%82%E3%81%93%E3%82%8C%E3%82%89%E3%81%AE%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AF%E9%80%A3%E7%B5%90%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E3%80%82%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3Balign%3Dleft%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22350%22%20y%3D%22540%22%20width%3D%22360%22%20height%3D%22220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
-                    <mxGeometry x="-30" y="540" width="320" height="220" as="geometry"/>
+                <mxCell id="64" value="&lt;h3&gt;説明&lt;/h3&gt;&lt;div&gt;環境変数に関する操作を行うモジュール&lt;/div&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bh3%26gt%3B%E8%AA%AC%E6%98%8E%26lt%3B%2Fh3%26gt%3Bfork%E3%81%AA%E3%81%A9%E3%82%92%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E5%85%A5%E5%8A%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A8%E3%81%A6%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%AE%E5%89%8D%E3%81%BE%E3%81%A7%E3%81%AE1%E3%81%A4%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%921%E3%81%A4%E4%BD%9C%E3%82%8B%26lt%3Bbr%26gt%3B%E3%81%93%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AB%E3%81%AFexecve%E3%81%AB%E6%B8%A1%E3%81%99%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%80%81%E5%85%A5%E5%8A%9B%E3%80%81%E5%87%BA%E5%8A%9B%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E5%85%88%E3%81%AEfd%E3%81%AA%E3%81%A9%E3%81%8C%E3%81%82%E3%82%8B%26lt%3Bbr%26gt%3B%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%AF%E2%80%9D%E3%81%AE%E5%87%A6%E7%90%86%E3%82%84%24%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E5%B1%95%E9%96%8B%E3%81%AA%E3%81%A9%E3%81%AF%E5%85%A8%E3%81%A6%E7%B5%82%E3%82%8F%E3%82%89%E3%81%9B%E3%81%9F%E7%89%A9%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%8C%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%89%E6%AC%A1%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%94%A8%E3%81%AE%E5%90%8C%E3%81%98%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%92%E4%BD%9C%E3%82%8A%E3%80%81%E5%89%8D%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%80%82%E3%81%93%E3%82%8C%E3%82%89%E3%81%AE%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AF%E9%80%A3%E7%B5%90%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E3%80%82%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3Balign%3Dleft%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22350%22%20y%3D%22540%22%20width%3D%22360%22%20height%3D%22220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="380" width="320" height="220" as="geometry"/>
                 </mxCell>
-                <mxCell id="65" value="&lt;h3&gt;説明&lt;/h3&gt;&lt;div&gt;汎用的な関数を提供するモジュール&lt;/div&gt;&lt;div&gt;stdioなどのヘッダーファイル、libft、ft_printfもここでincludeする&lt;/div&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bh3%26gt%3B%E8%AA%AC%E6%98%8E%26lt%3B%2Fh3%26gt%3Bfork%E3%81%AA%E3%81%A9%E3%82%92%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E5%85%A5%E5%8A%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A8%E3%81%A6%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%AE%E5%89%8D%E3%81%BE%E3%81%A7%E3%81%AE1%E3%81%A4%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%921%E3%81%A4%E4%BD%9C%E3%82%8B%26lt%3Bbr%26gt%3B%E3%81%93%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AB%E3%81%AFexecve%E3%81%AB%E6%B8%A1%E3%81%99%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%80%81%E5%85%A5%E5%8A%9B%E3%80%81%E5%87%BA%E5%8A%9B%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E5%85%88%E3%81%AEfd%E3%81%AA%E3%81%A9%E3%81%8C%E3%81%82%E3%82%8B%26lt%3Bbr%26gt%3B%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%AF%E2%80%9D%E3%81%AE%E5%87%A6%E7%90%86%E3%82%84%24%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E5%B1%95%E9%96%8B%E3%81%AA%E3%81%A9%E3%81%AF%E5%85%A8%E3%81%A6%E7%B5%82%E3%82%8F%E3%82%89%E3%81%9B%E3%81%9F%E7%89%A9%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%8C%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%89%E6%AC%A1%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%94%A8%E3%81%AE%E5%90%8C%E3%81%98%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%92%E4%BD%9C%E3%82%8A%E3%80%81%E5%89%8D%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%80%82%E3%81%93%E3%82%8C%E3%82%89%E3%81%AE%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AF%E9%80%A3%E7%B5%90%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E3%80%82%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3Balign%3Dleft%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22350%22%20y%3D%22540%22%20width%3D%22360%22%20height%3D%22220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
-                    <mxGeometry x="780" y="540" width="320" height="220" as="geometry"/>
+                <mxCell id="65" value="&lt;h3&gt;説明&lt;/h3&gt;&lt;div&gt;汎用的な関数を提供するモジュール&lt;/div&gt;&lt;div&gt;stdioなどのヘッダーファイル、libft、ft_printfもここでincludeする&lt;/div&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bh3%26gt%3B%E8%AA%AC%E6%98%8E%26lt%3B%2Fh3%26gt%3Bfork%E3%81%AA%E3%81%A9%E3%82%92%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E5%85%A5%E5%8A%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A8%E3%81%A6%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%AE%E5%89%8D%E3%81%BE%E3%81%A7%E3%81%AE1%E3%81%A4%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%921%E3%81%A4%E4%BD%9C%E3%82%8B%26lt%3Bbr%26gt%3B%E3%81%93%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AB%E3%81%AFexecve%E3%81%AB%E6%B8%A1%E3%81%99%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%80%81%E5%85%A5%E5%8A%9B%E3%80%81%E5%87%BA%E5%8A%9B%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E5%85%88%E3%81%AEfd%E3%81%AA%E3%81%A9%E3%81%8C%E3%81%82%E3%82%8B%26lt%3Bbr%26gt%3B%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%AF%E2%80%9D%E3%81%AE%E5%87%A6%E7%90%86%E3%82%84%24%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E5%B1%95%E9%96%8B%E3%81%AA%E3%81%A9%E3%81%AF%E5%85%A8%E3%81%A6%E7%B5%82%E3%82%8F%E3%82%89%E3%81%9B%E3%81%9F%E7%89%A9%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%8C%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%89%E6%AC%A1%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%94%A8%E3%81%AE%E5%90%8C%E3%81%98%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%92%E4%BD%9C%E3%82%8A%E3%80%81%E5%89%8D%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%80%82%E3%81%93%E3%82%8C%E3%82%89%E3%81%AE%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AF%E9%80%A3%E7%B5%90%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E3%80%82%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3Balign%3Dleft%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22350%22%20y%3D%22540%22%20width%3D%22360%22%20height%3D%22220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="1150" y="380" width="320" height="220" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" value="&lt;h3&gt;&lt;ul&gt;&lt;li&gt;外部に公開する関数&lt;/li&gt;&lt;/ul&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;ft----&lt;/li&gt;&lt;ul&gt;&lt;li&gt;その説明&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;Value 3&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="1">
-                    <mxGeometry x="350" y="790" width="250" height="100" as="geometry"/>
+                <mxCell id="66" value="&lt;h3&gt;&lt;ul&gt;&lt;li&gt;外部に公開する関数&lt;/li&gt;&lt;/ul&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;ft----&lt;/li&gt;&lt;ul&gt;&lt;li&gt;その説明&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;Value 3&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="630" width="250" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="&lt;h3&gt;&lt;ul&gt;&lt;li&gt;外部に公開する関数&lt;/li&gt;&lt;/ul&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;ft_free_array&lt;/li&gt;&lt;ul&gt;&lt;li&gt;2次元配列を全部freeする&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;Value 3&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="1">
-                    <mxGeometry x="780" y="790" width="250" height="100" as="geometry"/>
+                <mxCell id="67" value="&lt;h3&gt;&lt;ul&gt;&lt;li&gt;外部に公開する関数&lt;/li&gt;&lt;/ul&gt;&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;ft_free_array&lt;/li&gt;&lt;ul&gt;&lt;li&gt;2次元配列を全部freeする&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;Value 3&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="1" vertex="1">
+                    <mxGeometry x="1150" y="630" width="250" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="68" value="main" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="-35" y="-200" width="330" height="60" as="geometry"/>
+                <mxCell id="68" value="main" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-30" y="230" width="330" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="-35" y="-125" width="200" height="120" as="geometry"/>
+                <mxCell id="69" value="includeするモジュール" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-30" y="305" width="200" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="70" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="69">
+                <mxCell id="70" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="69" vertex="1">
                     <mxGeometry y="30" width="200" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="72" value="envモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="69">
+                <mxCell id="72" value="envモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="69" vertex="1">
                     <mxGeometry y="60" width="200" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="73" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="69">
+                <mxCell id="73" value="utilsモジュール" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="69" vertex="1">
                     <mxGeometry y="90" width="200" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="71" value="&lt;h3&gt;説明&lt;/h3&gt;&lt;div&gt;入力を読み取り、コマンド履歴に追加する&lt;/div&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bh3%26gt%3B%E8%AA%AC%E6%98%8E%26lt%3B%2Fh3%26gt%3Bfork%E3%81%AA%E3%81%A9%E3%82%92%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E5%85%A5%E5%8A%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A8%E3%81%A6%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%AE%E5%89%8D%E3%81%BE%E3%81%A7%E3%81%AE1%E3%81%A4%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%921%E3%81%A4%E4%BD%9C%E3%82%8B%26lt%3Bbr%26gt%3B%E3%81%93%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AB%E3%81%AFexecve%E3%81%AB%E6%B8%A1%E3%81%99%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%80%81%E5%85%A5%E5%8A%9B%E3%80%81%E5%87%BA%E5%8A%9B%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E5%85%88%E3%81%AEfd%E3%81%AA%E3%81%A9%E3%81%8C%E3%81%82%E3%82%8B%26lt%3Bbr%26gt%3B%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%AF%E2%80%9D%E3%81%AE%E5%87%A6%E7%90%86%E3%82%84%24%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E5%B1%95%E9%96%8B%E3%81%AA%E3%81%A9%E3%81%AF%E5%85%A8%E3%81%A6%E7%B5%82%E3%82%8F%E3%82%89%E3%81%9B%E3%81%9F%E7%89%A9%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%8C%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%89%E6%AC%A1%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%94%A8%E3%81%AE%E5%90%8C%E3%81%98%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%92%E4%BD%9C%E3%82%8A%E3%80%81%E5%89%8D%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%80%82%E3%81%93%E3%82%8C%E3%82%89%E3%81%AE%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AF%E9%80%A3%E7%B5%90%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E3%80%82%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3Balign%3Dleft%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22350%22%20y%3D%22540%22%20width%3D%22360%22%20height%3D%22220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
-                    <mxGeometry x="-35" y="40" width="315" height="100" as="geometry"/>
+                <mxCell id="71" value="&lt;h3&gt;説明&lt;/h3&gt;&lt;div&gt;入力を読み取り、コマンド履歴に追加する&lt;/div&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bh3%26gt%3B%E8%AA%AC%E6%98%8E%26lt%3B%2Fh3%26gt%3Bfork%E3%81%AA%E3%81%A9%E3%82%92%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E5%85%A5%E5%8A%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A8%E3%81%A6%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%AE%E5%89%8D%E3%81%BE%E3%81%A7%E3%81%AE1%E3%81%A4%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%921%E3%81%A4%E4%BD%9C%E3%82%8B%26lt%3Bbr%26gt%3B%E3%81%93%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AB%E3%81%AFexecve%E3%81%AB%E6%B8%A1%E3%81%99%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%80%81%E5%85%A5%E5%8A%9B%E3%80%81%E5%87%BA%E5%8A%9B%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E5%85%88%E3%81%AEfd%E3%81%AA%E3%81%A9%E3%81%8C%E3%81%82%E3%82%8B%26lt%3Bbr%26gt%3B%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%AF%E2%80%9D%E3%81%AE%E5%87%A6%E7%90%86%E3%82%84%24%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E5%B1%95%E9%96%8B%E3%81%AA%E3%81%A9%E3%81%AF%E5%85%A8%E3%81%A6%E7%B5%82%E3%82%8F%E3%82%89%E3%81%9B%E3%81%9F%E7%89%A9%26lt%3Bbr%26gt%3B%E3%83%91%E3%82%A4%E3%83%97%E3%81%8C%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%89%E6%AC%A1%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%94%A8%E3%81%AE%E5%90%8C%E3%81%98%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%92%E4%BD%9C%E3%82%8A%E3%80%81%E5%89%8D%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%80%82%E3%81%93%E3%82%8C%E3%82%89%E3%81%AE%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AF%E9%80%A3%E7%B5%90%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E3%80%82%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3Balign%3Dleft%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22350%22%20y%3D%22540%22%20width%3D%22360%22%20height%3D%22220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="-30" y="470" width="315" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="モジュール関連図" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="-440" width="320" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="75" value="main関数" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="640" y="-380" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="79" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="76" target="75">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="env" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="-310" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="77" target="75">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="77" value="cmd" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="735" y="-310" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" style="edgeStyle=none;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="78" target="76">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="82" style="edgeStyle=none;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="78" target="77">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="78" value="utils" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="650" y="-190" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="83" value="フローチャート" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="940" y="-440" width="630" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="92" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="85" target="87">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="85" value="入力を読み取る" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1140" y="-305" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="106" target="85">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1200" y="-80" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="1200" y="-50"/>
+                            <mxPoint x="1300" y="-50"/>
+                            <mxPoint x="1300" y="-290"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="107" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="86" target="106">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" value="終了ステータス設定" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1140" y="-190" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="87" target="86">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="87" target="100">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="実行" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1140" y="-250" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="89" target="96">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="実行開始" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="-360" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="91" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="90" target="85">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" value="開始" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1140" y="-360" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="96" target="103">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="96" value="コマンドの情報を構造体に格納する" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="-290" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="100" value="exitなら終了" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="980" y="-250" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="103" target="104">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="forkを使って多段パイプ実装" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="-210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="110" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="104" target="105">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="ビルトインコマンドならそれを実行&lt;br&gt;そうでないならexecve" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="-120" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="最後のコマンドの終了ステータスを返す" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="-30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" value="履歴に入れる" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1140" y="-130" width="120" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

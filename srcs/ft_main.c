@@ -6,11 +6,10 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/09 11:41:17 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/09 15:37:01 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "env.h"
 #include "cmd.h"
 
