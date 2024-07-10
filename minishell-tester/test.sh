@@ -133,6 +133,9 @@ exec_test 'cat no_write_permission' 'exit'
 exec_test 'cat no_read_permission' 'exit'
 exec_test 'cat no_such_file' 'exit'
 
+# heredocもこれでテストできそう
+exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
+
 
 # テスト結果の表示
 echo

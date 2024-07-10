@@ -32,6 +32,15 @@ sleep 0.5
 # プロンプトが表示されたらコマンドを送信
 expect \"$wait\" { send \"pwd\n\" }
 expect \"$wait\" { send \"ls\n\" }
+
+expect \"$wait\" { send \"cat << EOF\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
 expect \"$wait\" { send \"exit\n\" }
 expect eof
 "
