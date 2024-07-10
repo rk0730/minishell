@@ -13,28 +13,31 @@
                 <mxCell id="6" value="utilsモジュール" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1210" y="230" width="320" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="&lt;h3&gt;説明&lt;/h3&gt;forkなどをする前に入力文字列から実行するコマンドの情報を全てまとめる&lt;br&gt;パイプの前までの1つのコマンドの情報が入った構造体を1つ作る&lt;br&gt;この情報にはexecveに渡す二次元配列、入力、出力リダイレクト先のファイル群の名前、heardocのリミッター群などがある&lt;br&gt;二次元配列には”の処理や$環境変数の展開などは全て終わらせた物&lt;br&gt;パイプが出てきたら次のコマンド用の同じ構造体を作り、前のコマンドと同じように情報を入れる。これらの構造体は連結リストで管理する。（連結リストじゃなくて普通の配列でいい気がする？）" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
-                    <mxGeometry x="720" y="360" width="360" height="220" as="geometry"/>
+                <mxCell id="7" value="&lt;h3&gt;説明&lt;/h3&gt;forkなどをする前に入力文字列から実行するコマンドの情報を全てまとめる&lt;br&gt;パイプの前までの1つのコマンドの情報が入った構造体を1つ作る&lt;br&gt;この情報にはexecveに渡す二次元配列、入力、出力リダイレクト先のファイル群の名前、heardocのリミッター群などがある&lt;br&gt;infileやheredocが複数ある場合、その最後にあるもののみが入力になるので、infileが最後かheredocが最後かを判定するフラグとしてe_in型の変数を用意した&lt;br&gt;outfileについてもいくつかある場合は最後のファイルのみが出力ファイルになるが、これはchar **outfile_listの最後を見ればいいだけ&lt;br&gt;二次元配列には”の処理や$環境変数の展開などは全て終わらせた物&lt;br&gt;パイプが出てきたら次のコマンド用の同じ構造体を作り、前のコマンドと同じように情報を入れる。これらの構造体は連結リストで管理する。（連結リストじゃなくて普通の配列でいい気がする？）" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="360" width="380" height="300" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="cmd_info" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="720" y="760" width="140" height="180" as="geometry">
+                    <mxGeometry x="720" y="760" width="220" height="210" as="geometry">
                         <mxRectangle x="350" y="720" width="90" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="9" value="char ** cmd_array" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="8" vertex="1">
-                    <mxGeometry y="30" width="140" height="30" as="geometry"/>
+                    <mxGeometry y="30" width="220" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="char** infile_list" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="8" vertex="1">
-                    <mxGeometry y="60" width="140" height="30" as="geometry"/>
+                    <mxGeometry y="60" width="220" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="char** outfile_list" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="8" vertex="1">
-                    <mxGeometry y="90" width="140" height="30" as="geometry"/>
+                    <mxGeometry y="90" width="220" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="118" value="char** limiter_list" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="8">
-                    <mxGeometry y="120" width="140" height="30" as="geometry"/>
+                <mxCell id="118" value="char** limiter_list" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="8" vertex="1">
+                    <mxGeometry y="120" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="119" value="e_in INFILE or HEREDOC (or NONE)（列挙体）&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="8">
+                    <mxGeometry y="150" width="220" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="(cmd_info next)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="8" vertex="1">
-                    <mxGeometry y="150" width="140" height="30" as="geometry"/>
+                    <mxGeometry y="180" width="220" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="23" value="cmd_arrayの例" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="720" y="1050" width="140" height="150" as="geometry"/>
