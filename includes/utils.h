@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/09 18:42:51 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/11 20:58:21 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@
 // }	t_env_pair;
 
 void	ft_free_array(char **array);
+void	ft_show_all(char **array);
+int		ft_array_len(char **array);
 
 #endif

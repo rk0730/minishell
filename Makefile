@@ -20,6 +20,7 @@ SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
 
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_token.c
 
 
 #OBJS
