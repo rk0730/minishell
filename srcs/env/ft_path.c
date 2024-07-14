@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:59:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/07 19:01:57 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/14 17:05:49 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ char	**ft_gen_path_array(t_env_pair **env_list)
 	char		**path_array;
 	char		*path;
 
-	tmp = *env_list;
+	// to do: 環境変数ごとdelete?されたときは、env_listがnullになるためif文を追加
+	tmp = NULL;
+	if (env_list != NULL)
+		tmp = *env_list;
 	while (tmp)
 	{
 		if (ft_strlen(tmp->key) == 4 && ft_strncmp(tmp->key, "PATH", 4) == 0)
