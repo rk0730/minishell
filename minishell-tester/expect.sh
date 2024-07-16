@@ -65,14 +65,43 @@ sleep 0.5
 # プロンプトが表示されたらコマンドを送信
 expect \"$wait\" { send \"lsl\n\" }
 expect \"$wait\" { send \"cat no_permission\n\" }
+expect \"$wait\" { send \"time sleep 2 | sleep 2 | sleep 2\n\" }
 
 expect \"$wait\" { send \"cat << EOF\n\" }
 expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
 
-expect \"$wait\" { send \"cat << EOF\n\" }
-expect \"> \" { send \"test\n\" }
+expect \"$wait\" { send \"<< EOF << eof << eee cat\n\" }
+expect \"> \" { send \"test1\n\" }
+expect \"> \" { send \"eof\n\" }
+expect \"> \" { send \"test2\n\" }
+expect \"> \" { send \"eee\n\" }
+expect \"> \" { send \"test3\n\" }
 expect \"> \" { send \"EOF\n\" }
+expect \"> \" { send \"test4\n\" }
+expect \"> \" { send \"eof\n\" }
+expect \"> \" { send \"test5\n\" }
+expect \"> \" { send \"test6\n\" }
+expect \"> \" { send \"eee\n\" }
+
+expect \"$wait\" { send \"echo 'test file' > file\n\" }
+expect \"$wait\" { send \"cat << EOF < file\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"123\n\" }
+expect \"> \" { send \"EOF\n\" }
+expect \"$wait\" { send \"rm file\n\" }
+
+expect \"$wait\" { send \"cat <<eof | cat << EOF\n\" }
+expect \"> \" { send \"test1\n\" }
+expect \"> \" { send \"eof\n\" }
+expect \"> \" { send \"test2\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF >\n\" }
+expect \"> \" { send \"test1\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat > << EOF\n\" }
 
 expect \"$wait\" { send \"exit\n\" }
 expect eof
