@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/07 18:44:42 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/16 17:15:22 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	ft_show_env_list(t_env_pair **env_list)
 	while (tmp)
 	{
 		printf("%s==%s\n", tmp->key, tmp->value);
+		// なぜかここでtmpのkey,valueを表示すると*env_listのアドレスが変わる
+		// printf("%p\n", *env_list);
 		tmp = tmp->next;
 	}
 }
