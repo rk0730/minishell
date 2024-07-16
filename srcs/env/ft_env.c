@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/16 17:37:26 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/16 19:10:54 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,38 @@ static t_env_pair	*ft_new_env(char *env)
 	return (env_pair);
 }
 
-static void	ft_add_env_list(t_env_pair *env_list, char *env)
+static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 {
-	t_env_pair	*new_env;
-	t_env_pair	*tmp;
+	t_env_pair	*last;
 
-	new_env = ft_new_env(env);
-	if (!env_list)
-		exit(EXIT_FAILURE);
-	tmp = env_list;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new_env;
+	if (!new)
+		return ;
+	if (!*env_list_p)
+	{
+		*env_list_p = new;
+		return ;
+	}
+	last = *env_list_p;
+	while (last->next)
+		last = last->next;
+	last->next = new;
 }
 
 t_env_pair	*ft_gen_env_list(char **envp)
 {
-	// t_env_pair	**env_list;
-	t_env_pair	*first;
-	size_t		i;
+	t_env_pair	*env_list;
+	t_env_pair	*new;
+	int			i;
 
-	first = ft_new_env(envp[0]);
-	i = 1;
+	i = 0;
+	env_list = NULL;
 	while (envp[i])
 	{
-		// printf("first %s %s\n", first->key, first->value);
-		ft_add_env_list(first, envp[i]);
+		new = ft_new_env(envp[i]);
+		ft_add_env_list(&env_list, new);
 		i++;
 	}
-	return (first);
+	return (env_list);
 }
 
 void	ft_show_env_list(t_env_pair *env_list)
