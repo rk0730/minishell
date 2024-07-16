@@ -133,6 +133,8 @@ exec_test 'ls -a' 'exit'
 exec_test 'cat no_write_permission' 'exit'
 exec_test 'cat no_read_permission' 'exit'
 exec_test 'cat no_such_file' 'exit'
+exec_test 'echo $USER $SHELL' 'exit'
+exec_test '$USER' 'exit'
 
 # heredocもこれでテストできそう
 exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'

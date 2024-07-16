@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/11 20:51:29 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/16 17:56:57 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,16 @@ static void	ft_exec_direct(char **cmd_array)
 }
 
 // コマンドを実行する関数、これを呼んだプロセスはexitされる
-void	ft_exec_cmd(char *cmd, char **path_array)
+void	ft_exec_cmd(char *cmd, t_env_pair *env_list)
 {
 	char	**cmd_array;
+	char	**tokens;
+	char	**path_array;
 	
-	cmd_array = ft_gen_tokens(cmd);//ft_gen_cmd_array()に変える！
+	// cmd_array = ft_gen_tokens(cmd);//ft_gen_cmd_array()に変える！
+	tokens = ft_gen_tokens(cmd);
+	cmd_array = ft_gen_cmd_array(tokens, env_list);
+	path_array = ft_gen_path_array(env_list);
 	if (ft_strchr(cmd, '/') != NULL)
 		ft_exec_direct(cmd_array);
 	else

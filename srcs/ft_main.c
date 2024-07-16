@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/16 17:37:38 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/16 17:59:08 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ int main(int argc, char **argv, char **envp) {
 	if (argc == 0)
 		printf("%s", argv[0]);
 
-	// 環境変数を表示
-	// t_env_pair **env_list = ft_gen_env_list(envp);
 	t_env_pair *env_list;
 	env_list = ft_gen_env_list(envp);
-	char **path_array = ft_gen_path_array(env_list);
 	while (1) {
 		// Readlineを使用してユーザー入力を取得
 		input = readline("MINISHELL$ ");
@@ -57,7 +54,7 @@ int main(int argc, char **argv, char **envp) {
 			exit(1);
 		} else if (pid == 0) {
 			// 子プロセス
-			ft_exec_cmd(input, path_array);
+			ft_exec_cmd(input, env_list);
 		} else {
 			// 親プロセス
 			// 子プロセスの終了を待つ

@@ -6,21 +6,64 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:44:39 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/11 20:57:50 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/16 17:54:53 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static char	*ft_expand_double_quotes()
+// strの環境変数を展開した文字列を返す
+static char	*ft_expand_env(char *str, t_env_pair *env_list)
 {
-	
+	char	*result;
+	char	*tmp;
+	char	*before;
+	int		i;
+	int		end;
+
+	result = ft_strdup("");
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$')
+		{
+			end = i;
+			while (str[end] != '\0' && str[end] != ' ' && str[end] != '\"' && str[end] != '\'')
+				end++;
+			tmp = ft_search_env(ft_substr(str, i + 1, end - i - 1), env_list);
+		}
+		else
+		{
+			end = i;
+			while (str[end] != '\0' && str[end] != '$')
+				end++;
+			tmp = ft_substr(str, i, end - i);
+		}
+		before = result;
+		result = ft_strjoin(before, tmp);
+		free(before);
+		free(tmp);
+		i = end;
+	}
+	return (result);
 }
 
 
 // tokenの各文字列が"で挟まれていたら環境変数展開したり、'で挟まれていたらそれを除く（リダイレクトは飛ばす）
-char	**ft_cmd_array(char **tokens)
+char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list)
 {
+	char	**cmd_array;
+	int		i;
 
-	return (NULL);
+	i = 0;
+	cmd_array = (char **)malloc(sizeof(char *) * (ft_array_len(tokens) + 1));
+	if (!cmd_array)
+		return (NULL);
+	while (tokens[i])
+	{
+		cmd_array[i] = ft_expand_env(tokens[i], env_list);
+		i++;
+	}
+	cmd_array[i] = NULL;
+	return (cmd_array);
 }
