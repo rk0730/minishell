@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:44:39 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/16 17:54:53 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/17 22:40:44 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static char	*ft_expand_env(char *str, t_env_pair *env_list)
 	{
 		if (str[i] == '$')
 		{
+			if (str[i+1] == '\"' || str[i+1] == '\'')
+			{
+				i++;
+				continue ;
+			}
 			end = i;
 			while (str[end] != '\0' && str[end] != ' ' && str[end] != '\"' && str[end] != '\'')
 				end++;
