@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_search_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/16 17:56:08 by kitaoryoma       ###   ########.fr       */
+/*   Created: 2024/07/16 17:42:33 by kitaoryoma        #+#    #+#             */
+/*   Updated: 2024/07/16 17:43:22 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "env.h"
 
-# include "utils.h"
-
-typedef struct s_env_pair
+// searchという環境変数が見つかったらそのvalueを返す
+char	*ft_search_env(char *search, t_env_pair *env_list)
 {
-	char				*key;
-	char				*value;
-	struct s_env_pair	*next;
-}	t_env_pair;
+	t_env_pair	*tmp;
 
-t_env_pair	*ft_gen_env_list(char **envp);
-char		**ft_gen_path_array(t_env_pair *env_list);
-void		ft_show_env_list(t_env_pair *env_list);
-char		*ft_search_env(char *search, t_env_pair *env_list);
-
-#endif
+	tmp = env_list;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->key, search, ft_strlen(tmp->key)+1) == 0)
+			return (ft_strdup(tmp->value));
+		tmp = tmp->next;
+	}
+	return (ft_strdup(""));
+}

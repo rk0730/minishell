@@ -14,6 +14,7 @@ SRCS += $(SRCDIR)/ft_main.c
 ENV = env
 SRCS += $(SRCDIR)/$(ENV)/ft_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_path.c
+SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
 
 UTILS = utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
@@ -21,6 +22,7 @@ SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmd_array.c
 
 
 #OBJS

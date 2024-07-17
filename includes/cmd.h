@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/11 20:18:06 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/16 17:46:17 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ enum e_token_status
 	REDIRECT,// >>>や<<<,<>など不適なリダイレクト
 };
 
-void	ft_exec_cmd(char *cmd, char **path_array);
-
-//臨時で追加
+void	ft_exec_cmd(char *cmd, t_env_pair *env_list);
 char	**ft_gen_tokens(char *input);
+char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list);
 
 #endif
