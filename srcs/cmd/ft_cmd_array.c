@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:44:39 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/20 19:49:43 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 20:56:36 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
 			// 	continue ;
 			// }
 			end = i;
-			while (word[end] != '\0' && word[end] != ' ' && word[end] != '\"' && word[end] != '\'')
+			while (word[end] != '\0' && word[end] != ' ' && word[end] != '\"' && word[end] != '\'' && word[end]!= '\n')
 				end++;
 			if (end - i == 1)
 			{
@@ -144,6 +144,5 @@ char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list)
 			cmd_array = ft_add_str(cmd_array, tmp);
 		i++;
 	}
-	cmd_array[i] = NULL;
 	return (cmd_array);
 }

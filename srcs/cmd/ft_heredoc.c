@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_in.c                                            :+:      :+:    :+:   */
+/*   ft_in_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 20:05:36 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 21:18:12 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_heredoc(char **tokens, t_env_pair *env_list)
 	char	*limiter;
 	int		is_quote;
 	char	*line;
+	char	*tmp;
 	int		status;
 	int		result;
 
@@ -91,30 +92,24 @@ int	ft_heredoc(char **tokens, t_env_pair *env_list)
 					ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
 					exit(EXIT_FAILURE);
 				}
-				printf("limiter %s\n", limiter);
 				while (1)
 				{
 					line = readline("heredoc > ");
-					char *tmp = ft_strjoin(line, "\n");
-					free(line);
-					line = tmp;
+					tmp = line;
+					line = ft_strjoin(tmp, "\n");
+					free(tmp);
 					if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
 					{
-						printf("break\n");
 						free(line);
 						break ;
 					}
-					line = ft_expand_env(line, env_list, 1);
-					// printf("line %s\n", line);
-					// printf("4 %d\n", line[4]);
+					if (!is_quote)
+						line = ft_expand_env(line, env_list, 1);
 					write(pipe_fd[1], line, ft_strlen(line));
 					free(line);
 				}
-				printf("after while\n");
 				close(pipe_fd[1]);
-				printf("before free\n");
 				free(limiter);
-				printf("after free\n");
 				exit(EXIT_SUCCESS);
 			}
 			close(pipe_fd[1]);
@@ -128,6 +123,5 @@ int	ft_heredoc(char **tokens, t_env_pair *env_list)
 		}
 		i++;
 	}
-	printf("result %d\n", result);
 	return (result);
 }

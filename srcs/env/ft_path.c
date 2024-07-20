@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:59:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 20:18:42 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 20:51:37 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,10 @@ char	**ft_gen_path_array(t_env_pair *env_list)
 		tmp = env_list;
 	while (tmp)
 	{
-		printf("test\n");
 		if (ft_strncmp(tmp->key, "PATH", 5) == 0)
 		{
-			printf("found\n");
 			path = tmp->value;
-			printf("before split %s\n", path);
 			path_array = ft_split(path, ':');
-			printf("after split\n");
-			ft_show_all(path_array);
 			return (path_array);
 		}
 		tmp = tmp->next;

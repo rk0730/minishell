@@ -28,7 +28,7 @@ exec_test() {
 	# minishellで結合されたコマンドを実行
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
-	TEST1=$(cat $stdout_file | grep -v "MINISHELL") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外
+	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外
 	ERR1=$(cat $stderr_file)
 
 	# bashで結合されたコマンドを実行
@@ -159,11 +159,13 @@ exec_test 'echo test2 > in2' '< in1 < in2 cat' 'rm in1' 'rm in2' 'exit'
 exec_test 'echo test1 > in1' 'ls | cat < in1' 'rm in1' 'exit'
 exec_test 'echo test1 > in1' 'echo test2 > in2' 'cat < in1 | cat < in2' 'rm in1' 'rm in2' 'exit'
 exec_test '> newfile' 'ls' 'rm newfile' 'exit'
+exec_test 'echo hello > no_permission' 'exit'
 exec_test 'echo hello > $NOTHING' 'exit'
 exec_test 'echo hello > ""' 'exit'
 
 # # heredocもこれでテストできそう
 exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
+exec_test '<< EOF << eof << eee cat' 'test1' 'eof' 'test2' 'eee' 'test3' 'EOF' 'test4' 'eof' 'test5' 'test6' 'eee' 'exit'
 exec_test 'cat << EOF' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test 'cat << "EOF"' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test "cat << 'EOF'" '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'

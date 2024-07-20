@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:08:59 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 20:22:01 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 20:49:05 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	ft_help(char ***result_p, char const *s, char c)
 		if (end <= start)
 			continue ;
 		(*result_p)[count] = ft_substr(s, (unsigned int)start, end - start);
-		printf("result[%zu]: %s\n", count, (*result_p)[count]);
 		ft_check_free(result_p, count);
 		if (!(*result_p))
 			return ;
@@ -85,9 +84,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	words = ft_count_words(s, c);
-	printf("words: %zu\n", words);
 	result = (char **)malloc(sizeof(char *) * (words + 1));
-	printf("after malloc-----------\n");
 	if (!result)
 		return (NULL);
 	result[words] = NULL;

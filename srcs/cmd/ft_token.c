@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/11 20:52:15 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/20 20:44:47 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static void	ft_gen_tokens_h(char **tokens, char *input, int len)
 		num++;
 	}
 	tokens[num] = NULL;
-	// ft_show_all(tokens);
 }
 
 char	**ft_gen_tokens(char *input)

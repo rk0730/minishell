@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fd.c                                            :+:      :+:    :+:   */
+/*   ft_out_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:13:31 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 18:48:05 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 22:41:19 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int	ft_out_fd(char **tokens, t_env_pair *env_list)
 			if (result != -1)
 				close(result);
 			file = ft_tokenize(tokens[i + 1], env_list);
+			if (file == NULL)
+			{
+				ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
+				return (-2);
+			}
 			if (ft_strncmp(tokens[i], ">", 2) == 0)
 			{
 				result = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
