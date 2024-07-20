@@ -37,17 +37,21 @@ exec_test() {
 	TEST2=$(cat $stdout_file)
 	ERR2=$(cat $stderr_file)
 
-	# エラーメッセージの整形（各行:で分割し、3番目以降のフィールドを取得）
-	# ERR2=$(echo "$ERR2" | cut -d':' -f3- | sed 's/^ //')
-
 	# ERR1の各行がERR2の各行に含まれているか確認する
 	is_err_same=true
-	while IFS= read -r line; do
-		if [[ "$ERR2" != *"$line"* ]]; then
+	IFS=$'\n' ERR1=(${ERR1})
+	IFS=$'\n' ERR2=(${ERR2})
+	#行数が同じかどうか確認
+	if [ ${#ERR1[@]} -ne ${#ERR2[@]} ]; then
+		is_err_same=false
+	fi
+	#行ごとに比較
+	for i in ${!ERR1[@]}; do
+		if [[ "$ERR2" != *"$ERR1" ]]; then
 			is_err_same=false
 			break
 		fi
-	done <<< "$ERR1"
+	done
 
 	# テスト結果の表示
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ $is_err_same == true ]; then
@@ -91,6 +95,9 @@ chmod 755 minishell
 chmod 000 no_permission
 chmod 444 no_write_permission
 chmod 222 no_read_permission
+
+# hello作成
+cc hello.c -o hello
 
 printf "$BOLDMAGENTA __  __ _____ _   _ _____  _____ _    _ ______ _      _      \n"
 printf "|  \/  |_   _| \ | |_   _|/ ____| |  | |  ____| |    | |     \n"
