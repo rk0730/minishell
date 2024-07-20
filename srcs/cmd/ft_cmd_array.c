@@ -6,14 +6,14 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:44:39 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/20 15:58:23 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 19:49:43 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
 // strの環境変数を展開した文字列を返す doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
-static char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
+char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
 {
 	char	*result;
 	char	*tmp;
@@ -133,6 +133,12 @@ char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list)
 	cmd_array[0] = NULL;
 	while (tokens[i])
 	{
+		//リダイレクト関連の文字列だったら飛ばす
+		if (ft_strncmp(tokens[i], ">", 2) == 0 || ft_strncmp(tokens[i], "<", 2) == 0 || ft_strncmp(tokens[i], "<<", 3) == 0 || ft_strncmp(tokens[i], ">>", 3) == 0)
+		{
+			i += 2;
+			continue ;
+		}
 		tmp = ft_tokenize(tokens[i], env_list);
 		if (tmp != NULL)
 			cmd_array = ft_add_str(cmd_array, tmp);

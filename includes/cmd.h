@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 15:01:20 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 19:49:37 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,21 @@ typedef enum e_token_status
 	REDIRECT,// >>>や<<<,<>など不適なリダイレクト
 }	t_token_status;
 
+typedef struct s_cmd_info
+{
+	char	**cmd_array;
+	int		fd_in;
+	int		fd_out;
+}	t_cmd_info;	
+
+
 void	ft_exec_cmd(char *cmd, t_env_pair *env_list);
 char	**ft_gen_tokens(char *input);
 char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list);
+char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote);
+char	*ft_tokenize(char *str, t_env_pair *env_list);
+int		ft_fd_error(char **tokens);
+int		ft_out_fd(char **tokens, t_env_pair *env_list);
+int		ft_heredoc(char **tokens, t_env_pair *env_list);
 
 #endif

@@ -23,6 +23,8 @@ CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_array.c
+SRCS += $(SRCDIR)/$(CMD)/ft_fd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_in.c
 
 
 #OBJS
