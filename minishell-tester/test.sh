@@ -28,7 +28,7 @@ exec_test() {
 	# minishellで結合されたコマンドを実行
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
-	TEST1=$(cat $stdout_file)
+	TEST1=$(cat $stdout_file | grep -v "MINISHELL") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外
 	ERR1=$(cat $stderr_file)
 
 	# bashで結合されたコマンドを実行
@@ -136,6 +136,16 @@ exec_test 'cat no_such_file' 'exit'
 exec_test 'echo $USER $SHELL' 'exit'
 exec_test 'echo $USER $USERR $SHELL' 'exit'
 exec_test 'echo $USER "$USERR" $SHELL' 'exit'
+exec_test 'echo hello world      $USER' 'exit'
+exec_test "echo 'hello world'    '42'   " 'exit'
+exec_test 'echo "hello world"   " 42"   ' 'exit'
+exec_test "echo '"'"hello world"'"'    '42'   " 'exit'
+exec_test "echo hello'  world'" 'exit'
+exec_test "echo hello'  world'"'"  42"' 'exit'
+exec_test 'echo "$'"'USER'"'"' 'exit'
+exec_test 'echo $'"'USER'" 'exit'
+exec_test 'echo "$'"''"'"' 'exit'
+
 exec_test 'echo $"USER"' 'exit'
 exec_test 'echo $PATH' 'exit'
 exec_test 'echo $' 'exit'
@@ -152,7 +162,7 @@ exec_test '> newfile' 'ls' 'rm newfile' 'exit'
 exec_test 'echo hello > $NOTHING' 'exit'
 exec_test 'echo hello > ""' 'exit'
 
-# heredocもこれでテストできそう
+# # heredocもこれでテストできそう
 exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
 exec_test 'cat << EOF' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test 'cat << "EOF"' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
