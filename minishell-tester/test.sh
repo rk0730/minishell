@@ -96,8 +96,9 @@ chmod 000 no_permission
 chmod 444 no_write_permission
 chmod 222 no_read_permission
 
-# hello作成
+# 実行ファイル作成
 cc hello.c -o hello
+cc argv.c -o argv
 
 printf "$BOLDMAGENTA __  __ _____ _   _ _____  _____ _    _ ______ _      _      \n"
 printf "|  \/  |_   _| \ | |_   _|/ ____| |  | |  ____| |    | |     \n"
@@ -128,7 +129,6 @@ exec_test 'echo hello' 'exit'
 exec_test 'echo hello world' 'exit'
 exec_test 'echo hello      world!' 'exit'
 exec_test '   echo    hello               world!       ' 'exit'
-exec_test 'pwd' 'exit 42'
 exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
 exec_test 'lsl' 'exit'
 exec_test 'ls -a' 'exit'
@@ -166,20 +166,16 @@ exec_test 'echo $' 'exit'
 exec_test 'echo $a"USER"' 'exit'
 exec_test 'echo $""' 'exit'
 exec_test '$USER' 'exit'
-exec_test 'exit 24 | exit 42' 'echo $?' 'exit'
 exec_test 'touch newfile' 'echo hello>newfile' 'cat newfile' 'rm newfile' 'exit'
 exec_test 'touch newfile' 'echo hello>newfile' 'cat <"newfile"<'"'new'file>"'"out"'"''" 'rm newfile out' 'exit'
 exec_test 'ls > out1 > out2' 'echo :out1' 'cat out1' 'echo :out2' 'cat out2' 'rm out1 out2' 'rm out2' 'exit'
 exec_test 'echo test1 > in1' 'echo test2 > in2' '< in1 < in2 cat' 'rm in1' 'rm in2' 'exit'
 exec_test 'echo test2 > in2' '< in1 < in2 cat' 'rm in1' 'rm in2' 'exit'
-exec_test 'echo test1 > in1' 'ls | cat < in1' 'rm in1' 'exit'
-exec_test 'echo test1 > in1' 'echo test2 > in2' 'cat < in1 | cat < in2' 'rm in1' 'rm in2' 'exit'
 exec_test '> newfile' 'ls' 'rm newfile' 'exit'
 exec_test 'echo hello > no_permission' 'exit'
 exec_test 'echo hello > $NOTHING' 'exit'
 exec_test 'echo hello > ""' 'exit'
 
-exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
 
 # heredocもこれでテストできそう
 exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
@@ -202,12 +198,25 @@ exec_test 'cat << EOF > out > out2' 'test' 'EOF' 'cat out' 'cat out2' 'rm out' '
 exec_test 'echo aaa > out1' 'cat << EOF > out > out2' 'test' 'EOF' 'cat out' 'cat out2' 'rm out out1 out2' 'exit'
 exec_test 'touch newfile' 'cat << EOF < newfile > newfile' 'test' 'EOF' 'cat newfile' 'rm newfile' 'exit'
 exec_test 'touch newfile' 'cat < newfile << EOF > newfile' 'test' 'EOF' 'cat newfile' 'rm newfile' 'exit'
-
-
 exec_test 'cat << EOF' '$?' '"$?' '"$?"' '$USER' '"$USER"' 'EOF' 'exit'
 exec_test 'lsl' 'cat << $?' '"$?' '"$?"' '$USER' '"$USER"' '$?' 'exit'
 exec_test 'cat << $??' '$?' '"$?' '"$?"' '"$??"' '$???' '$??' 'exit'
 
+exec_test 'ls | grep .c' 'exit'
+exec_test '< no_such_file ls | wc' 'exit'
+exec_test 'cat Makefile | grep minishell | sort' 'exit'
+exec_test 'cat   hello.c | wc -cl  | wc   |  grep o  | sort | cat' 'exit'
+exec_test 'cat hello.c | sort | wc | ls | cd | wc' 'pwd' 'exit'
+exec_test 'ls|ls|ls|ls|ls|ls' 'exit'
+exec_test 'echo test1 > in1' 'ls | cat < in1' 'rm in1' 'exit'
+exec_test 'echo test1 > in1' 'echo test2 > in2' 'cat < in1 | cat < in2' 'rm in1' 'rm in2' 'exit'
+
+exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
+exec_test 'export foo="a   b"' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
+exec_test 'export foo=abc$USER' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
+
+exec_test 'pwd' 'exit 42'
+exec_test 'exit 24 | exit 42' 'echo $?' 'exit'
 
 # テスト結果の表示
 echo

@@ -68,8 +68,6 @@ expect \"$wait\" { sleep 0.02; send \"lsl\n\" }
 
 expect \"$wait\" { send \"cat no_permission\n\" }
 
-expect \"$wait\" { send \"time sleep 2 | sleep 2 | sleep 2\n\" }
-
 expect \"$wait\" { send \"cat << EOF\n\" }
 expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
@@ -133,6 +131,16 @@ expect \"> \" { sleep 0.02; send \"EOF\n\" }
 expect \"$wait\" { send \"cat > no_write_permission <<\n\" }
 
 expect \"$wait\" { send \"cat > no_write_permission << EOF <<\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+
+expect \"$wait\" { send \"time sleep 2 | sleep 2 | sleep 2\n\" }
+
+expect \"$wait\" { send \"time < no_such_file sleep 3 | sleep 1\n\" }
+
+expect \"$wait\" { send \"cat hello.c | wc -cl\n\" }
+
+expect \"$wait\" { send \"cat << EOF | ls\n\" }
 expect \"> \" { sleep 0.02; send \"test\n\" }
 expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
