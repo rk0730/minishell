@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/21 19:59:47 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/21 22:52:41 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,14 @@ static int	ft_next_token_h(char *input, int i, int *token_status, char c)
 
 static int	ft_next_token(char *in, int i, int *token_status)
 {
-	while (in[i] != '\0' && in[i] != ' ')
+	if (in[i] == '>' || in[i] == '<')
+		return (ft_next_token_h2(in, i));
+	while (in[i] != '\0' && in[i] != ' ' && in[i] != '<' && in[i] != '>')
 	{
 		if (in[i] == '\'')
 			i = ft_next_token_h(in, i, token_status, '\'');
 		else if (in[i] == '\"')
 			i = ft_next_token_h(in, i, token_status, '\"');
-		else if (in[i] == '<' || in[i] == '>')
-		{
-			i = ft_next_token_h2(in, i);
-			break ;
-		}
 		else
 		{
 			while (in[i] && in[i] != ' ' && in[i] != '\'' && in[i] != '\"'

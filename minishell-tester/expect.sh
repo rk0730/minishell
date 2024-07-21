@@ -64,7 +64,7 @@ sleep 0.5
 
 # プロンプトが表示されたらコマンドを送信
 
-expect \"$wait\" { send \"lsl\n\" }
+expect \"$wait\" { sleep 0.02; send \"lsl\n\" }
 
 expect \"$wait\" { send \"cat no_permission\n\" }
 
@@ -75,68 +75,66 @@ expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
 
 expect \"$wait\" { send \"<< EOF << eof << eee cat\n\" }
-expect \"> \" { send \"test1\n\" }
-expect \"> \" { send \"eof\n\" }
-expect \"> \" { send \"test2\n\" }
-expect \"> \" { send \"eee\n\" }
-expect \"> \" { send \"test3\n\" }
-expect \"> \" { send \"EOF\n\" }
-expect \"> \" { send \"test4\n\" }
-expect \"> \" { send \"eof\n\" }
-expect \"> \" { send \"test5\n\" }
-expect \"> \" { send \"test6\n\" }
-expect \"> \" { send \"eee\n\" }
+expect \"> \" { sleep 0.02; send \"test1\n\" }
+expect \"> \" { sleep 0.02; send \"eof\n\" }
+expect \"> \" { sleep 0.02; send \"test2\n\" }
+expect \"> \" { sleep 0.02; send \"eee\n\" }
+expect \"> \" { sleep 0.02; send \"test3\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test4\n\" }
+expect \"> \" { sleep 0.02; send \"eof\n\" }
+expect \"> \" { sleep 0.02; send \"test5\n\" }
+expect \"> \" { sleep 0.02; send \"test6\n\" }
+expect \"> \" { sleep 0.02; send \"eee\n\" }
 
-expect \"$wait\" { send \"printf \n\" }
 expect \"$wait\" { send \"echo 'test file' > file\n\" }
 expect \"$wait\" { send \"cat << EOF < file\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"123\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"123\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 expect \"$wait\" { send \"rm file\n\" }
 
 expect \"$wait\" { send \"cat <<eof | cat << EOF\n\" }
-expect \"> \" { send \"test1\n\" }
-expect \"> \" { send \"eof\n\" }
-expect \"> \" { send \"test2\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test1\n\" }
+expect \"> \" { sleep 0.02; send \"eof\n\" }
+expect \"> \" { sleep 0.02; send \"test2\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >\n\" }
-expect \"> \" { send \"test1\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test1\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat <<<< EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF <\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF <<<<\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF > < no_write_permission\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
-expect \"$wait\" { send \"cat << EOF > <\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"$wait\" { sleep 0.02; send \"cat << EOF > <\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat > no_write_permission <<\n\" }
 
 expect \"$wait\" { send \"cat > no_write_permission << EOF <<\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
-
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"exit\n\" }
 expect eof
