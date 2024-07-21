@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/20 22:32:27 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/21 20:00:10 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,36 @@ void	ft_exec_cmd(char *cmd, t_env_pair *env_list)
 	// tokensからfdのエラーをチェックする
 	if (ft_fd_error(tokens) == 1)
 	{
+		//ヒアドクはここでやる必要あり
+		cmd_info.fd_in = ft_heredoc(tokens, env_list);
 		ft_free_array(tokens);
 		exit(SYNTAX_ERROR);
 	}
 	//cmd_array out_fd in_fdなどの情報をtokenから持ってくる
-	cmd_info.fd_in = ft_in_fd(tokens, env_list);
-	cmd_info.fd_out = ft_out_fd(tokens, env_list);
+	//まずヒアドク、最後がリダイレクト記号の場合はエラー処理、次にinfile outfileを同時に頭から順に実行する
+	cmd_info.fd_in = ft_heredoc(tokens, env_list);
+	// 最後の文字がリダイレクト記号だった場合のエラー処理
+	if (ft_is_last_redirect(tokens) == 1)
+	{
+		ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
+		ft_free_array(tokens);
+		exit(SYNTAX_ERROR);
+	}
+	// cmd_info.fd_out = ft_out_fd(tokens, env_list);
+	ft_in_out_fd(tokens, env_list, &cmd_info, cmd_info.fd_in);
 	cmd_info.cmd_array = ft_gen_cmd_array(tokens, env_list);
 	ft_free_array(tokens);
-	if (ft_array_len(cmd_info.cmd_array) == 0)
-	{
-		close(cmd_info.fd_out);
-		close(cmd_info.fd_in);
-		exit(EXIT_SUCCESS);
-	}
 	if (cmd_info.fd_out == -2 || cmd_info.fd_in == -2)
 	{
 		ft_free_array(cmd_info.cmd_array);
 		exit(EXIT_FAILURE);
+	}
+	if (ft_array_len(cmd_info.cmd_array) == 0)
+	{
+		close(cmd_info.fd_out);
+		close(cmd_info.fd_in);
+		ft_free_array(cmd_info.cmd_array);
+		exit(EXIT_SUCCESS);
 	}
 	path_array = ft_gen_path_array(env_list);
 	if (ft_strchr(cmd_info.cmd_array[0], '/') != NULL)

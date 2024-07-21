@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/20 20:44:47 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/21 19:59:47 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static int	ft_next_token_h2(char *input, int i, int *token_status)
+static int	ft_next_token_h2(char *input, int i)
 {
-	int	end;
+	// int	end;
 
-	end = i;
-	while (input[end] == input[i])
-		end++;
-	if (end - i > 2 || input[end] == '<' || input[end] == '>')
-		*token_status = REDIRECT;
-	return (end);
+	// end = i;
+	// while (input[end] == input[i])
+	// 	end++;
+	// if (end - i > 2 || input[end] == '<' || input[end] == '>')
+	// 	*token_status = REDIRECT;
+	while (input[i] == '>' || input[i] == '<')
+		i++;
+	return (i);
 }
 
 static int	ft_next_token_h(char *input, int i, int *token_status, char c)
@@ -51,7 +53,7 @@ static int	ft_next_token(char *in, int i, int *token_status)
 			i = ft_next_token_h(in, i, token_status, '\"');
 		else if (in[i] == '<' || in[i] == '>')
 		{
-			i = ft_next_token_h2(in, i, token_status);
+			i = ft_next_token_h2(in, i);
 			break ;
 		}
 		else
@@ -106,6 +108,7 @@ static void	ft_gen_tokens_h(char **tokens, char *input, int len)
 	tokens[num] = NULL;
 }
 
+// トークンを生成する関数　クォーテーションエラーがある場合はNULLを返す　他のエラーはここでは見逃す
 char	**ft_gen_tokens(char *input)
 {
 	int		token_status;

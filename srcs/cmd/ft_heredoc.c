@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_in_fd.c                                         :+:      :+:    :+:   */
+/*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 21:18:12 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/21 19:35:36 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-// limiterを求める関数、"や'で囲まれているものはそのまま返す、syntax errorがあればNULLを返す is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
+// クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
+// limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
 static char	*ft_limit_tokenize(char *str, int *is_quote)
 {
 	char	*result;
@@ -81,6 +82,8 @@ int	ft_heredoc(char **tokens, t_env_pair *env_list)
 		{
 			if (result != -1)
 				close(result);
+			if (tokens[i + 1] == NULL)//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
+				return (-2);
 			pipe(pipe_fd);
 			pid = fork();
 			if (pid == 0)

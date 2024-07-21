@@ -63,8 +63,11 @@ spawn $run
 sleep 0.5
 
 # プロンプトが表示されたらコマンドを送信
+
 expect \"$wait\" { send \"lsl\n\" }
+
 expect \"$wait\" { send \"cat no_permission\n\" }
+
 expect \"$wait\" { send \"time sleep 2 | sleep 2 | sleep 2\n\" }
 
 expect \"$wait\" { send \"cat << EOF\n\" }
@@ -84,6 +87,7 @@ expect \"> \" { send \"test5\n\" }
 expect \"> \" { send \"test6\n\" }
 expect \"> \" { send \"eee\n\" }
 
+expect \"$wait\" { send \"printf \n\" }
 expect \"$wait\" { send \"echo 'test file' > file\n\" }
 expect \"$wait\" { send \"cat << EOF < file\n\" }
 expect \"> \" { send \"test\n\" }
@@ -107,10 +111,6 @@ expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
 expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
 
-expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
-
 expect \"$wait\" { send \"cat << EOF >\n\" }
 expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
@@ -128,6 +128,12 @@ expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF > <\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat > no_write_permission <<\n\" }
+
+expect \"$wait\" { send \"cat > no_write_permission << EOF <<\n\" }
 expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
 

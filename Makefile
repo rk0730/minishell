@@ -26,6 +26,7 @@ SRCS += $(SRCDIR)/$(CMD)/ft_cmd_array.c
 SRCS += $(SRCDIR)/$(CMD)/ft_out_fd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_in_fd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
+SRCS += $(SRCDIR)/$(CMD)/ft_in_out_fd.c
 
 
 #OBJS

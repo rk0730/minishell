@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 21:33:58 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/21 19:57:59 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_token_status
 	NORMAL,
 	SINGLE_QUOTE,//'が足りない
 	DOUBLE_QUOTE,//"が足りない
-	REDIRECT,// >>>や<<<,<>など不適なリダイレクト
+	// REDIRECT,// >>>や<<<,<>など不適なリダイレクト
 }	t_token_status;
 
 typedef struct s_cmd_info
@@ -44,9 +44,11 @@ char	**ft_gen_tokens(char *input);
 char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list);
 char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote);
 char	*ft_tokenize(char *str, t_env_pair *env_list);
+int		ft_is_last_redirect(char **tokens);
 int		ft_fd_error(char **tokens);
-int		ft_in_fd(char **tokens, t_env_pair *env_list);
-int		ft_out_fd(char **tokens, t_env_pair *env_list);
+int		ft_in_fd(char **tokens, t_env_pair *env_list, int i);
+int		ft_out_fd(char **tokens, t_env_pair *env_list, int i);
 int		ft_heredoc(char **tokens, t_env_pair *env_list);
+void	ft_in_out_fd(char **tokens, t_env_pair *env_list, t_cmd_info *cmd_info, int heredoc_fd);
 
 #endif
