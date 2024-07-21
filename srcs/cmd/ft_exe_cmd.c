@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/21 20:00:10 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/21 23:22:17 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ static void	ft_exec_direct(t_cmd_info cmd_info)
 }
 
 // コマンドを実行する関数、これを呼んだプロセスはexitされる
-void	ft_exec_cmd(char *cmd, t_env_pair *env_list)
+void	ft_exec_cmd(char *cmd, t_env_info env_info)
 {
-	char	**tokens;
-	char	**path_array;
+	char		**tokens;
+	char		**path_array;
 	t_cmd_info	cmd_info;
-	
-	// cmd_array = ft_gen_tokens(cmd);//ft_gen_cmd_array()に変える！
-	
+
+
 	tokens = ft_gen_tokens(cmd);
 	if (tokens == NULL)//クォーテーションの文法エラー
 	{
@@ -74,13 +73,13 @@ void	ft_exec_cmd(char *cmd, t_env_pair *env_list)
 	if (ft_fd_error(tokens) == 1)
 	{
 		//ヒアドクはここでやる必要あり
-		cmd_info.fd_in = ft_heredoc(tokens, env_list);
+		cmd_info.fd_in = ft_heredoc(tokens, env_info);
 		ft_free_array(tokens);
 		exit(SYNTAX_ERROR);
 	}
 	//cmd_array out_fd in_fdなどの情報をtokenから持ってくる
 	//まずヒアドク、最後がリダイレクト記号の場合はエラー処理、次にinfile outfileを同時に頭から順に実行する
-	cmd_info.fd_in = ft_heredoc(tokens, env_list);
+	cmd_info.fd_in = ft_heredoc(tokens, env_info);
 	// 最後の文字がリダイレクト記号だった場合のエラー処理
 	if (ft_is_last_redirect(tokens) == 1)
 	{
@@ -89,8 +88,8 @@ void	ft_exec_cmd(char *cmd, t_env_pair *env_list)
 		exit(SYNTAX_ERROR);
 	}
 	// cmd_info.fd_out = ft_out_fd(tokens, env_list);
-	ft_in_out_fd(tokens, env_list, &cmd_info, cmd_info.fd_in);
-	cmd_info.cmd_array = ft_gen_cmd_array(tokens, env_list);
+	ft_in_out_fd(tokens, env_info, &cmd_info, cmd_info.fd_in);
+	cmd_info.cmd_array = ft_gen_cmd_array(tokens, env_info);
 	ft_free_array(tokens);
 	if (cmd_info.fd_out == -2 || cmd_info.fd_in == -2)
 	{
@@ -104,7 +103,7 @@ void	ft_exec_cmd(char *cmd, t_env_pair *env_list)
 		ft_free_array(cmd_info.cmd_array);
 		exit(EXIT_SUCCESS);
 	}
-	path_array = ft_gen_path_array(env_list);
+	path_array = ft_gen_path_array(env_info.env_list);
 	if (ft_strchr(cmd_info.cmd_array[0], '/') != NULL)
 		ft_exec_direct(cmd_info);
 	else

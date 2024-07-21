@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:44:39 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/20 20:56:36 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/21 23:18:28 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
 // strの環境変数を展開した文字列を返す doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
-char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
+char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 {
 	char	*result;
 	char	*tmp;
@@ -25,7 +25,12 @@ char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
 	i = 0;
 	while (word[i] != '\0')
 	{
-		if (word[i] == '$')
+		if (word[i] == '$' && word[i+1] == '?')//環境変数展開でも$?だけ別処理
+		{
+			tmp = ft_itoa(env_info.last_status);
+			end = i + 2;
+		}
+		else if (word[i] == '$')
 		{
 			// if (word[i+1] == '\"' || word[i+1] == '\'')
 			// {
@@ -43,7 +48,7 @@ char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
 					tmp = ft_strdup("");//""で囲まれているわけではなく、$の後ろに何もない場合は何も返さない
 			}
 			else
-				tmp = ft_search_env(ft_substr(word, i + 1, end - i - 1), env_list);
+				tmp = ft_search_env(ft_substr(word, i + 1, end - i - 1), env_info.env_list);
 		}
 		else
 		{
@@ -62,7 +67,7 @@ char	*ft_expand_env(char *word, t_env_pair *env_list, int is_doublequote)
 }
 
 // ""で囲まれているものはft_expand_envで環境変数展開、''で囲まれていたらそのままつなげる
-char	*ft_tokenize(char *str, t_env_pair *env_list)
+char	*ft_tokenize(char *str, t_env_info env_info)
 {
 	char	*result;
 	char	*tmp;
@@ -79,7 +84,7 @@ char	*ft_tokenize(char *str, t_env_pair *env_list)
 			end = i + 1;
 			while (str[end] != '\0' && str[end] != '\"')
 				end++;
-			tmp = ft_expand_env(ft_substr(str, i + 1, end - i - 1), env_list, 1);
+			tmp = ft_expand_env(ft_substr(str, i + 1, end - i - 1), env_info, 1);
 			end++;
 		}
 		else if (str[i] == '\'')
@@ -102,7 +107,7 @@ char	*ft_tokenize(char *str, t_env_pair *env_list)
 				end = i;
 				while (str[end] != '\0' && str[end] != '\"' && str[end] != '\'')
 					end++;
-				tmp = ft_expand_env(ft_substr(str, i, end - i), env_list, 0);
+				tmp = ft_expand_env(ft_substr(str, i, end - i), env_info, 0);
 			}
 		}
 		before = result;
@@ -120,7 +125,7 @@ char	*ft_tokenize(char *str, t_env_pair *env_list)
 }
 
 // tokenの各文字列が"で挟まれていたら環境変数展開したり、'で挟まれていたらそれを除く（リダイレクトは飛ばす）
-char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list)
+char	**ft_gen_cmd_array(char **tokens, t_env_info env_info)
 {
 	char	**cmd_array;
 	char	*tmp;
@@ -134,12 +139,13 @@ char	**ft_gen_cmd_array(char **tokens, t_env_pair *env_list)
 	while (tokens[i])
 	{
 		//リダイレクト関連の文字列だったら飛ばす
-		if (ft_strncmp(tokens[i], ">", 2) == 0 || ft_strncmp(tokens[i], "<", 2) == 0 || ft_strncmp(tokens[i], "<<", 3) == 0 || ft_strncmp(tokens[i], ">>", 3) == 0)
+		// if (ft_strncmp(tokens[i], ">", 2) == 0 || ft_strncmp(tokens[i], "<", 2) == 0 || ft_strncmp(tokens[i], "<<", 3) == 0 || ft_strncmp(tokens[i], ">>", 3) == 0)
+		if (ft_is_redirect(tokens[i]))
 		{
 			i += 2;
 			continue ;
 		}
-		tmp = ft_tokenize(tokens[i], env_list);
+		tmp = ft_tokenize(tokens[i], env_info);
 		if (tmp != NULL)
 			cmd_array = ft_add_str(cmd_array, tmp);
 		i++;

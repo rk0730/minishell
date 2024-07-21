@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/21 19:35:36 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/21 23:10:11 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*ft_limit_tokenize(char *str, int *is_quote)
 }
 
 // heredocでの入力が入ったfdを返す 一回もheredocがなければ-1 エラーがあれば-2を返す
-int	ft_heredoc(char **tokens, t_env_pair *env_list)
+int	ft_heredoc(char **tokens, t_env_info env_info)
 {
 	int		pipe_fd[2];
 	pid_t	pid;
@@ -107,7 +107,7 @@ int	ft_heredoc(char **tokens, t_env_pair *env_list)
 						break ;
 					}
 					if (!is_quote)
-						line = ft_expand_env(line, env_list, 1);
+						line = ft_expand_env(line, env_info, 1);
 					write(pipe_fd[1], line, ft_strlen(line));
 					free(line);
 				}

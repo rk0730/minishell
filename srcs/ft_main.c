@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/16 17:59:08 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/21 23:27:26 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 #include "cmd.h"
 
 int main(int argc, char **argv, char **envp) {
-	char *input;
-	int	status;
+	char		*input;
+	int			status;
+	t_env_pair	*env_list;
+	t_env_info	env_info;
 
 	status = 0;//初期化
 	// 消す
 	if (argc == 0)
 		printf("%s", argv[0]);
 
-	t_env_pair *env_list;
 	env_list = ft_gen_env_list(envp);
+	env_info.env_list = env_list;
+	env_info.last_status = 0;
 	while (1) {
 		// Readlineを使用してユーザー入力を取得
 		input = readline("MINISHELL$ ");
@@ -54,11 +57,12 @@ int main(int argc, char **argv, char **envp) {
 			exit(1);
 		} else if (pid == 0) {
 			// 子プロセス
-			ft_exec_cmd(input, env_list);
+			ft_exec_cmd(input, env_info);
 		} else {
 			// 親プロセス
 			// 子プロセスの終了を待つ
 			wait(&status);
+			env_info.last_status = WEXITSTATUS(status);
 		}
 
 

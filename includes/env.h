@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/16 17:56:08 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/21 23:04:39 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_env_pair
 	char				*value;
 	struct s_env_pair	*next;
 }	t_env_pair;
+
+typedef struct s_env_info
+{
+	t_env_pair	*env_list;
+	int			last_status;
+}	t_env_info;
 
 t_env_pair	*ft_gen_env_list(char **envp);
 char		**ft_gen_path_array(t_env_pair *env_list);
