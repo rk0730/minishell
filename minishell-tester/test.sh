@@ -39,15 +39,15 @@ exec_test() {
 
 	# ERR1の各行がERR2の各行に含まれているか確認する
 	is_err_same=true
-	IFS=$'\n' ERR1=(${ERR1})
-	IFS=$'\n' ERR2=(${ERR2})
+	IFS=$'\n' ERR_ARRAY1=(${ERR1})
+	IFS=$'\n' ERR_ARRAY2=(${ERR2})
 	#行数が同じかどうか確認
-	if [ ${#ERR1[@]} -ne ${#ERR2[@]} ]; then
+	if [ ${#ERR_ARRAY1[@]} -ne ${#ERR_ARRAY2[@]} ]; then
 		is_err_same=false
 	fi
 	#行ごとに比較
-	for i in ${!ERR1[@]}; do
-		if [[ "$ERR2" != *"$ERR1" ]]; then
+	for i in ${!ERR_ARRAY1[@]}; do
+		if [[ "$ERR_ARRAY2" != *"$ERR_ARRAY1" ]]; then
 			is_err_same=false
 			break
 		fi
@@ -115,14 +115,6 @@ stdout_file=$(mktemp)
 stderr_file=$(mktemp)
 
 # コマンドをテストする　必ず最後にexitを入れる
-# exec_test 'sleep 5 | sleep 5' 'exit'
-# exec_test 'pwd' 'exit 42'
-# exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
-# exec_test 'lsl' 'exit'
-# exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
-
-
-# コマンドをテストする
 exec_test '/bin/ls' 'exit'
 exec_test '/bin/pwd' 'exit'
 exec_test '/bin/echo' 'exit'
@@ -136,6 +128,9 @@ exec_test 'echo hello' 'exit'
 exec_test 'echo hello world' 'exit'
 exec_test 'echo hello      world!' 'exit'
 exec_test '   echo    hello               world!       ' 'exit'
+exec_test 'pwd' 'exit 42'
+exec_test 'lsl' 'echo $?' '' '' '' '' '' '' '' '' '' '' '' '' 'ls' 'echo $?' 'exit'
+exec_test 'lsl' 'exit'
 exec_test 'ls -a' 'exit'
 exec_test 'cat no_write_permission' 'exit'
 exec_test 'cat no_read_permission' 'exit'
@@ -152,7 +147,19 @@ exec_test "echo hello'  world'"'"  42"' 'exit'
 exec_test 'echo "$'"'USER'"'"' 'exit'
 exec_test 'echo $'"'USER'" 'exit'
 exec_test 'echo "$'"''"'"' 'exit'
-
+exec_test 'echo "$"' 'exit'
+exec_test 'echo '$'' 'exit'
+exec_test 'echo $' 'exit'
+exec_test 'echo $?' 'exit'
+exec_test 'echo $?HELLO' 'exit'
+exec_test 'lsl' 'echo $?' 'exit'
+exec_test 'lsl' '$?' 'echo "$?""hello"' 'exit'
+exec_test 'lsl' 'echo $?HELLO' 'exit'
+exec_test 'echo $??' 'exit'
+exec_test 'echo $??HELLO' 'exit'
+exec_test 'lsl' 'echo $???' 'exit'
+exec_test 'lsl' '$???' 'echo $?' 'exit'
+exec_test 'lsl' 'echo $?abc' 'exit'
 exec_test 'echo $"USER"' 'exit'
 exec_test 'echo $PATH' 'exit'
 exec_test 'echo $' 'exit'
@@ -170,7 +177,9 @@ exec_test 'echo hello > no_permission' 'exit'
 exec_test 'echo hello > $NOTHING' 'exit'
 exec_test 'echo hello > ""' 'exit'
 
-# # heredocもこれでテストできそう
+exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
+
+# heredocもこれでテストできそう
 exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
 exec_test '<< EOF << eof << eee cat' 'test1' 'eof' 'test2' 'eee' 'test3' 'EOF' 'test4' 'eof' 'test5' 'test6' 'eee' 'exit'
 exec_test 'cat << EOF' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
@@ -180,6 +189,22 @@ exec_test 'cat << E"O"F' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test "cat << E'O'F" '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test "cat << E'O'F" '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test 'cat << $PATH' '$USER' '"$USER"' \''$USER'\' '$PATH' 'exit'
+exec_test 'cat << EOF > out' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'echo test > out' 'cat << EOF >> out' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'cat << EOF < no_permission > out' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'cat << EOF < no_write_permission > no_write_permission' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'cat << EOF < no_write_permission' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'cat > no_write_permission < no_write_permission << EOF' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'cat > no_write_permission < no_permission << EOF' 'test' 'EOF' 'cat out' 'rm out' 'exit'
+exec_test 'cat << EOF > out > out2' 'test' 'EOF' 'cat out' 'cat out2' 'rm out' 'rm out2' 'exit'
+exec_test 'echo aaa > out1' 'cat << EOF > out > out2' 'test' 'EOF' 'cat out' 'cat out2' 'rm out' 'rm out2' 'exit'
+exec_test 'touch newfile' 'cat << EOF < newfile > newfile' 'test' 'EOF' 'cat newfile' 'rm newfile' 'exit'
+exec_test 'touch newfile' 'cat < newfile << EOF > newfile' 'test' 'EOF' 'cat newfile' 'rm newfile' 'exit'
+
+
+exec_test 'cat << EOF' '$?' '"$?' '"$?"' '$USER' '"$USER"' 'EOF' 'exit'
+exec_test 'lsl' 'cat << $?' '"$?' '"$?"' '$USER' '"$USER"' '$?' 'exit'
+exec_test 'cat << $??' '$?' '"$?' '"$?"' '"$??"' '$???' '$??' 'exit'
 
 
 # テスト結果の表示

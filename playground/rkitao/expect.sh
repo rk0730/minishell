@@ -38,8 +38,8 @@ expect \"> \" { send \"test\n\" }
 expect \"> \" { send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { send \"\cc\n\" }
+expect \"$wait\" { send \"EOF\n\" }
 
 expect \"$wait\" { send \"exit\n\" }
 expect eof

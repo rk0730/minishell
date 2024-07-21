@@ -101,7 +101,36 @@ expect \"$wait\" { send \"cat << EOF >\n\" }
 expect \"> \" { send \"test1\n\" }
 expect \"> \" { send \"EOF\n\" }
 
-expect \"$wait\" { send \"cat > << EOF\n\" }
+expect \"$wait\" { send \"cat <<<< EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF >\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF <\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF <<<<\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF > < no_write_permission\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF > <\n\" }
+expect \"> \" { send \"test\n\" }
+expect \"> \" { send \"EOF\n\" }
+
 
 expect \"$wait\" { send \"exit\n\" }
 expect eof
