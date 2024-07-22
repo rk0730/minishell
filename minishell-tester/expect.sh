@@ -144,6 +144,26 @@ expect \"$wait\" { send \"cat << EOF | ls\n\" }
 expect \"> \" { sleep 0.02; send \"test\n\" }
 expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
+expect \"$wait\" { send \"cat < no_permission | < no_read_permission cat | cat << EOF |cat|cat|cat\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat << EOF | cat << EOF | cat << EOF | cat << EOF|cat\n\" }
+expect \"> \" { sleep 0.02; send \"1\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"2\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"3\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"4\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+
+expect \"$wait\" { send \"cat <no_\\\"read\\\"_permission > no_write_\\\"permission\\\"\\\"\\\" | ls | cat <<EOF | cat< no_permission|ls|cat<<eof\n\" }
+expect \"> \" { sleep 0.02; send \"TEST\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"eof\n\" }
+
 expect \"$wait\" { send \"exit\n\" }
 expect eof
 "
