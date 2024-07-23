@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/21 23:21:23 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/23 08:52:48 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote);
 char	*ft_tokenize(char *str, t_env_info env_info);
 int		ft_is_last_redirect(char **tokens);
 int		ft_is_redirect(char *str);
-int		ft_fd_error(char **tokens);
+int		ft_redirect_err(char **tokens);
 int		ft_in_fd(char **tokens, t_env_info env_info, int i);
 int		ft_out_fd(char **tokens, t_env_info env_info, int i);
 void	ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd);

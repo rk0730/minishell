@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/21 23:22:17 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/23 08:52:29 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_exec_cmd(char *cmd, t_env_info env_info)
 		exit(SYNTAX_ERROR);
 	}
 	// tokensからfdのエラーをチェックする
-	if (ft_fd_error(tokens) == 1)
+	if (ft_redirect_err(tokens) == 1)
 	{
 		//ヒアドクはここでやる必要あり
 		cmd_info.fd_in = ft_heredoc(tokens, env_info);

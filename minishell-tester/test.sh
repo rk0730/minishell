@@ -216,6 +216,9 @@ exec_test 'cat < no_permission | < no_read_permission cat | cat << EOF |cat|cat|
 exec_test 'cat>no_permission | cat' 'exit'
 exec_test 'cat > no_permission | cat | ls|cat' 'exit'
 exec_test 'cat <no_"read"_permission > no_write_"permission""" | ls | cat <<EOF | cat< no_permission|ls|cat<<eof' 'TEST' 'EOF' 'test' 'eof' 'exit'
+exec_test 'cat < no_read_permission | cat << EOF | lsl | <<eof cat "|" ls | cat > no_write_permission' '1' 'EOF' '2' 'eof' 'exit'
+exec_test 'cat < no_read_permission | cat << EOF | lsl | <<<<eof cat "|" ls | cat > no_write_permission >' '1' 'EOF' 'exit'
+exec_test '<no_such_file ls|lsl|ls "|"|ls|>"|" cat' 'ls' 'cat "|"' 'rm "|"' 'exit'
 
 exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
 exec_test 'env | grep TEST' 'export TEST=test | env | grep USER=' 'env | grep TEST' 'exit'

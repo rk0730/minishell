@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:13:31 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/21 23:18:54 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/23 08:52:20 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_is_redirect(char *str)
 }
 
 // リダイレクト先がない、<<< >>>などがないかどうか確認する　あったら1を返す（最後のリダイレクト記号のリダイレクト先がない問題はここではチェックしない）
-int	ft_fd_error(char **tokens)
+int	ft_redirect_err(char **tokens)
 {
 	int	i;
 
