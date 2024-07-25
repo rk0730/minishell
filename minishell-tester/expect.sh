@@ -164,6 +164,8 @@ expect \"> \" { sleep 0.02; send \"EOF\n\" }
 expect \"> \" { sleep 0.02; send \"test\n\" }
 expect \"> \" { sleep 0.02; send \"eof\n\" }
 
+expect \"$wait\" { send \"cat | ls\n\"; sleep 0.02; send \"\n\" }
+
 expect \"$wait\" { send \"exit\n\" }
 expect eof
 "
