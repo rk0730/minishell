@@ -29,7 +29,7 @@ run=$1
 
 # 引数がbashかminishellかでwait変数（プロンプト）の値を変える
 if [ $1 == "bash" ]; then
-	wait="bash-3.2$ "
+	wait="$ "
 	rum="bash"
 	printf "\n$BOLDMAGENTA%s$RESET\n\n" "bash"
 elif [ $1 == "minishell" ]; then
@@ -105,8 +105,6 @@ expect \"> \" { sleep 0.02; send \"EOF\n\" }
 expect \"$wait\" { send \"cat <<<< EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
-expect \"> \" { sleep 0.02; send \"test\n\" }
-expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >\n\" }
 expect \"> \" { sleep 0.02; send \"test\n\" }
@@ -117,21 +115,15 @@ expect \"> \" { sleep 0.02; send \"test\n\" }
 expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF <<<<\n\" }
-expect \"> \" { sleep 0.02; send \"test\n\" }
-expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF > < no_write_permission\n\" }
-expect \"> \" { sleep 0.02; send \"test\n\" }
-expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
-expect \"$wait\" { send \"<no_such_file ls|lsl|ls \\\"|\\\"|ls|>\\\"|\\\" cat' 'ls' 'cat \\\"|\\\"' 'rm \\\"|\\\"\" }
-expect \"$wait\" { send \"ls\" }
-expect \"$wait\" { send \"cat \\\"|\\\"\" }
-expect \"$wait\" { send \"rm \\\"|\\\"\" }
+expect \"$wait\" { send \"<no_such_file ls|lsl|ls \\\"|\\\"|ls|>\\\"|\\\" cat' 'ls' 'cat \\\"|\\\"' 'rm \\\"|\\\"\n\" }
+expect \"$wait\" { send \"ls\n\" }
+expect \"$wait\" { send \"cat \\\"|\\\"\n\" }
+expect \"$wait\" { send \"rm \\\"|\\\"\n\" }
 
 expect \"$wait\" { sleep 0.02; send \"cat << EOF > <\n\" }
-expect \"> \" { sleep 0.02; send \"test\n\" }
-expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat > no_write_permission <<\n\" }
 
@@ -171,9 +163,7 @@ expect \"> \" { sleep 0.02; send \"eof\n\" }
 
 expect \"$wait\" { send \"ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls\n\" }
 
-expect \$wait\" { send \"ls | | ls\" }
-
-expect \"$wait\" { send \"cat | ls\n\"; sleep 0.02; send \"\n\" }
+expect \"$wait\" { send \"ls | | ls\n\" }
 
 expect \"$wait\" { send \"exit\n\" }
 expect eof

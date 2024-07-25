@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmdinfo_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/25 16:40:33 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/26 02:48:27 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info)
 {
 	t_cmd_info	*cmd_list;
 	char		**tokens;
-	int			redirect_err;
+	// int			redirect_err;
 	int i;
 
 	cmd_list = (t_cmd_info *)malloc(sizeof(t_cmd_info) * ft_array_len(cmds));
@@ -24,12 +24,16 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info)
 		exit(EXIT_FAILURE);
 	// リダイレクトエラーがないか確認する
 	i = 0;
-	redirect_err = 0;
+	// redirect_err = 0;
 	while (i < ft_array_len(cmds))
 	{
 		tokens = ft_gen_tokens(cmds[i]);
 		if (ft_redirect_err(tokens) == 1)
-			redirect_err = 1;
+		{
+			ft_free_array(tokens);
+			return (NULL);
+			// redirect_err = 1;
+		}
 		ft_free_array(tokens);
 		i++;
 	}
@@ -41,12 +45,12 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info)
 		ft_free_array(tokens);
 		i++;
 	}
-	// リダイレクトエラー
-	if (redirect_err == 1)
-	{
-		free(cmd_list);
-		return (NULL);
-	}
+	// // リダイレクトエラー
+	// if (redirect_err == 1)
+	// {
+	// 	free(cmd_list);
+	// 	return (NULL);
+	// }
 	// 最後の文字がリダイレクト記号
 	tokens = ft_gen_tokens(cmds[ft_array_len(cmds) - 1]);
 	if (ft_is_last_redirect(tokens))
