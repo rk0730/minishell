@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/21 23:27:26 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/25 20:45:28 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv, char **envp) {
 		if (input == NULL)
 		{
 			printf("exit\n");
-			return (WEXITSTATUS(status));
+			return (env_info.last_status);
 		}
 
 		if (ft_strlen(input) == 0) {
@@ -45,25 +45,27 @@ int main(int argc, char **argv, char **envp) {
 		//exitコマンドが入力されたら終了
 		if (strncmp(input, "exit", 4) == 0) {
 			free(input);
-			return (WEXITSTATUS(status));
+			return (env_info.last_status);
 		}
 
 		// printf("execute %s\n", input);
 
-		pid_t pid;
-		pid = fork();
-		if (pid == -1) {
-			perror("fork");
-			exit(1);
-		} else if (pid == 0) {
-			// 子プロセス
-			ft_exec_cmd(input, env_info);
-		} else {
-			// 親プロセス
-			// 子プロセスの終了を待つ
-			wait(&status);
-			env_info.last_status = WEXITSTATUS(status);
-		}
+		// pid_t pid;
+		// pid = fork();
+		// if (pid == -1) {
+		// 	perror("fork");
+		// 	exit(1);
+		// } else if (pid == 0) {
+		// 	// 子プロセス
+		// 	ft_exec_cmd(input, env_info);
+		// } else {
+		// 	// 親プロセス
+		// 	// 子プロセスの終了を待つ
+		// 	wait(&status);
+		// 	env_info.last_status = WEXITSTATUS(status);
+		// }
+		env_info.last_status = ft_exec_cmdline(input, env_info);
+		// printf("last_status: %d\n", env_info.last_status);
 
 
 		// ヒストリーに入力を追加

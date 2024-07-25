@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/23 08:52:48 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/25 17:41:11 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,19 @@ typedef enum e_token_status
 
 typedef struct s_cmd_info
 {
-	char	**cmd_array;
+	char	**cmd_argv;
 	int		fd_in;
 	int		fd_out;
 }	t_cmd_info;	
 
 
-void	ft_exec_cmd(char *cmd, t_env_info env_info);
+char	**ft_gen_cmds(char *cmd);
+// void	ft_exec_cmd(char *cmd, t_env_info env_info);
+t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info);
+int	ft_exec_cmdline(char *input, t_env_info env_info);
+int		ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int write_pipe);
 char	**ft_gen_tokens(char *input);
-char	**ft_gen_cmd_array(char **tokens, t_env_info env_info);
+char	**ft_gen_cmd_argv(char **tokens, t_env_info env_info);
 char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote);
 char	*ft_tokenize(char *str, t_env_info env_info);
 int		ft_is_last_redirect(char **tokens);

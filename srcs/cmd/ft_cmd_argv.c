@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmd_array.c                                     :+:      :+:    :+:   */
+/*   ft_cmd_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 20:44:39 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/21 23:18:28 by kitaoryoma       ###   ########.fr       */
+/*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
+/*   Updated: 2024/07/25 16:12:49 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,17 @@ char	*ft_tokenize(char *str, t_env_info env_info)
 }
 
 // tokenの各文字列が"で挟まれていたら環境変数展開したり、'で挟まれていたらそれを除く（リダイレクトは飛ばす）
-char	**ft_gen_cmd_array(char **tokens, t_env_info env_info)
+char	**ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 {
-	char	**cmd_array;
+	char	**cmd_argv;
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	cmd_array = (char **)malloc(sizeof(char *));
-	if (!cmd_array)
+	cmd_argv = (char **)malloc(sizeof(char *));
+	if (!cmd_argv)
 		return (NULL);
-	cmd_array[0] = NULL;
+	cmd_argv[0] = NULL;
 	while (tokens[i])
 	{
 		//リダイレクト関連の文字列だったら飛ばす
@@ -147,8 +147,8 @@ char	**ft_gen_cmd_array(char **tokens, t_env_info env_info)
 		}
 		tmp = ft_tokenize(tokens[i], env_info);
 		if (tmp != NULL)
-			cmd_array = ft_add_str(cmd_array, tmp);
+			cmd_argv = ft_add_str(cmd_argv, tmp);
 		i++;
 	}
-	return (cmd_array);
+	return (cmd_argv);
 }
