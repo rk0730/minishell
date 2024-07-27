@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 RESET="\033[0m"
 BLACK="\033[30m"
@@ -19,32 +19,45 @@ BOLDMAGENTA="\033[1m\033[35m"
 BOLDCYAN="\033[1m\033[36m"
 BOLDWHITE="\033[1m\033[37m"
 
-# 引数の数が1でない場合はエラーを出力して終了
-if [ $# -ne 1 ]; then
-	echo "Usage: $0 bash or minishell"
+# 引数の数が2でない場合はエラーを出力して終了
+if [ $# -ne 2 ]; then
+	echo "Usage: $0 <bash or ./minishell> <\"$ \" or \"# \" or \"MINISHELL$ \">"
 	exit 1
 fi
 
 run=$1
+wait=$2
 
 # 引数がbashかminishellかでwait変数（プロンプト）の値を変える
-if [ $1 == "bash" ]; then
-	wait="$ "
-	rum="bash"
-	printf "\n$BOLDMAGENTA%s$RESET\n\n" "bash"
-elif [ $1 == "minishell" ]; then
-	# minishellをビルド
-	wait="MINISHELL$ "
-	run="./minishell"
-	make -C .. all
-	make -C .. clean
+# if [ $1 == "bash" ]; then
+# 	wait="bash-$(bash --version | head -n 1 | awk '{split($4, version, "."); print version[1] "." version[2]}')$ "
+# 	rum="bash"
+# 	printf "\n$BOLDMAGENTA%s$RESET\n\n" "bash"
+# elif [ $1 == "minishell" ]; then
+# 	# minishellをビルド
+# 	wait="MINISHELL$ "
+# 	run="./minishell"
+# 	make -C .. all
+# 	make -C .. clean
+# 	cp ../minishell .
+# 	chmod 755 minishell
+# 	printf "\n$BOLDMAGENTA%s$RESET\n\n" "minishell"
+# else
+# 	echo "Usage: $0 bash or minishell"
+# 	exit 1
+# fi
+
+# minishellをビルド
+if [ $1 == "./minishell" ]; then
+	rm -f minishell
+	make -C .. re > /dev/null
+	make -C .. clean > /dev/null
 	cp ../minishell .
 	chmod 755 minishell
-	printf "\n$BOLDMAGENTA%s$RESET\n\n" "minishell"
-else
-	echo "Usage: $0 bash or minishell"
-	exit 1
 fi
+
+printf "$BOLDMAGENTA run: %s$RESET\n" "$run"
+printf "$BOLDMAGENTA wait: %s$RESET\n" "$wait"
 
 # 権限の変更
 chmod 000 no_permission
@@ -56,7 +69,7 @@ chmod 222 no_read_permission
 expect -c "
 
 # タイムアウトを10秒に設定
-set timeout 10
+set timeout 15
 
 # 実行ファイルを起動
 spawn $run
@@ -173,3 +186,5 @@ expect eof
 chmod 644 no_permission
 chmod 644 no_write_permission
 chmod 644 no_read_permission
+
+rm -f minishell

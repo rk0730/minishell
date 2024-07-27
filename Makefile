@@ -46,7 +46,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(FTPRINTF)
-	$(CC) $(CFLAGS) $(INCLUDES) $(LIB) -o $@ $^
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIB)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) all

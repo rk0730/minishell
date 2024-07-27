@@ -86,9 +86,10 @@ exec_test() {
 }
 
 # minishellをビルド
-make -C .. all
-make -C .. clean
-cp ../minishell .
+rm -f minishell
+make -C .. re > /dev/null
+make -C .. clean > /dev/null
+cp ../minishell . 
 chmod 755 minishell
 
 # 権限の変更
@@ -212,8 +213,8 @@ exec_test 'echo test1 > in1' 'ls | cat < in1' 'rm in1' 'exit'
 exec_test 'echo test1 > in1' 'echo test2 > in2' 'cat < in1 | cat < in2' 'rm in1' 'rm in2' 'exit'
 exec_test 'cat < no_permission | ls > out | cat' 'ls' 'cat out' 'rm out' 'exit'
 exec_test 'cat < no_permission|<no_read_permission cat| ls > out' 'ls' 'cat out' 'rm out' 'exit'
-exec_test 'cat < no_permission | < no_read_permission cat | cat << EOF |cat|cat|cat' 'test' '' 'EOF' 'exit'
-exec_test 'cat>no_permission | cat' 'exit'
+exec_test 'cat < no_permission | < no_read_permission cat | cat << EOF |cat|cat|cat' 'test' 'EOF' 'exit'
+exec_test 'cat>no_permission<<EOF | cat' 'test' 'EOF' 'exit'
 exec_test 'cat > no_permission | cat | ls|cat' 'exit'
 exec_test 'cat <no_"read"_permission > no_write_"permission""" | ls | cat <<EOF | cat< no_permission|ls|cat<<eof' 'TEST' 'EOF' 'test' 'eof' 'exit'
 exec_test 'cat < no_read_permission | cat << EOF | lsl | <<eof cat "|" ls | cat > no_write_permission' '1' 'EOF' '2' 'eof' 'exit'
@@ -274,3 +275,4 @@ chmod 644 no_read_permission
 
 # テスト用のファイルを削除
 rm -f $stdout_file $stderr_file
+rm -f minishell
