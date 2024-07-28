@@ -30,6 +30,7 @@ SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_argv.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmds.c
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 
 
 #OBJS

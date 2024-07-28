@@ -50,8 +50,8 @@ wait=$2
 # minishellをビルド
 if [ $1 == "./minishell" ]; then
 	rm -f minishell
-	make -C .. re > /dev/null
-	make -C .. clean > /dev/null
+	make -C .. re
+	make -C .. clean
 	cp ../minishell .
 	chmod 755 minishell
 fi

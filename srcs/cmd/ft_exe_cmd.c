@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/25 21:02:34 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 14:13:14 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,18 @@ int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int writ
 	// printf("read_pipe: %d\n", read_pipe);
 	// printf("write_pipe: %d\n", write_pipe);
 	if (cmd_info.fd_out == -2 || cmd_info.fd_in == -2)
+	{
+		close(read_pipe);
+		close(write_pipe);
 		return (EXIT_FAILURE);
+	}
 	if (ft_array_len(cmd_info.cmd_argv) == 0)
 	{
 		close(cmd_info.fd_in);
 		close(cmd_info.fd_out);
 		close(read_pipe);
 		close(write_pipe);
-		return (0);
-	}
-	// pipeに入出力するのか、ファイルに入出力するのかを判断する
-	if (cmd_info.fd_in != -1)
-	{
-		close(read_pipe);
-		dup2(cmd_info.fd_in, STDIN_FILENO);
-		close(cmd_info.fd_in);
-	} else if (read_pipe != -1)
-	{
-		dup2(read_pipe, STDIN_FILENO);
-		close(read_pipe);
-	}
-	if (cmd_info.fd_out != -1)
-	{
-		close(write_pipe);
-		dup2(cmd_info.fd_out, STDOUT_FILENO);
-		close(cmd_info.fd_out);
-	} else if (write_pipe != -1)
-	{
-		dup2(write_pipe, STDOUT_FILENO);
-		close(write_pipe);
+		return (EXIT_SUCCESS);
 	}
 	//ビルトインの場合はforkせずにここで実行し、終了ステータスを返す
 	pid = fork();
@@ -106,6 +89,27 @@ int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int writ
 		exit(EXIT_FAILURE);
 	else if (pid == 0)
 	{
+		// pipeに入出力するのか、ファイルに入出力するのかを判断する
+		if (cmd_info.fd_in != -1)
+		{
+			close(read_pipe);
+			dup2(cmd_info.fd_in, STDIN_FILENO);
+			close(cmd_info.fd_in);
+		} else if (read_pipe != -1)
+		{
+			dup2(read_pipe, STDIN_FILENO);
+			close(read_pipe);
+		}
+		if (cmd_info.fd_out != -1)
+		{
+			close(write_pipe);
+			dup2(cmd_info.fd_out, STDOUT_FILENO);
+			close(cmd_info.fd_out);
+		} else if (write_pipe != -1)
+		{
+			dup2(write_pipe, STDOUT_FILENO);
+			close(write_pipe);
+		}
 		path_array = ft_gen_path_array(env_info.env_list);
 		if (ft_strchr(cmd_info.cmd_argv[0], '/') != NULL)
 			ft_exec_direct(cmd_info);
@@ -114,10 +118,10 @@ int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int writ
 	}
 	else
 	{
-		// close(cmd_info.fd_out);
-		// close(cmd_info.fd_in);
-		// close(read_pipe);
-		// close(write_pipe);
+		close(cmd_info.fd_out);
+		close(cmd_info.fd_in);
+		close(read_pipe);
+		close(write_pipe);
 		waitpid(pid, &status, 0);
 		return (WEXITSTATUS(status));
 	}

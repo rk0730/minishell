@@ -87,8 +87,8 @@ exec_test() {
 
 # minishellをビルド
 rm -f minishell
-make -C .. re > /dev/null
-make -C .. clean > /dev/null
+make -C .. re
+make -C .. clean
 cp ../minishell . 
 chmod 755 minishell
 
