@@ -6,16 +6,18 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 21:17:00 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 23:18:26 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "cmd.h"
 
-static void	ft_sigint(int signum)
+volatile sig_atomic_t g_signum = 0;
+
+static void	ft_sigint(int sig)
 {
-	(void)signum;
+	(void)sig;
 	ft_status_code(1, 130);
 	printf("\n");
 	rl_on_new_line();
@@ -26,12 +28,10 @@ static void	ft_sigint(int signum)
 
 
 int main(int argc, char **argv, char **envp) {
-	int			status;
 	t_env_pair	*env_list;
 	t_env_info	*env_info_p;
 	int			input_pipe[2];
 
-	status = 0;//初期化
 	// 消す
 	if (argc == 0)
 		printf("%s", argv[0]);
@@ -83,19 +83,23 @@ int main(int argc, char **argv, char **envp) {
 		// 	wait(&status);
 		// 	env_info_p.last_status = WEXITSTATUS(status);
 		// }
-		ft_status_code(1, ft_exec_cmdline(env_info_p));
+		// ft_status_code(1, ft_exec_cmdline(env_info_p));
+		printf("return %d\n", ft_exec_cmdline(env_info_p));
+		printf("last_status: %d\n", ft_status_code(0, 0));
 		// printf("last_status: %d\n", env_info_p->last_status);
 		// printf("last input: %s\n", env_info_p->input);
 
 
 		// ヒストリーに入力を追加
 		add_history(env_info_p->input);
+		
+		g_signum = 0;
 
 		// 入力のメモリを解放
 		free(env_info_p->input);
 	}
 
-	return (WEXITSTATUS(status));
+	return (ft_status_code(0, 0));
 }
 
 // #include <libc.h>

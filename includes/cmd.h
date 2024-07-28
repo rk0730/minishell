@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 18:44:18 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 21:55:56 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ enum e_cmd_error
 	CMD_ERROR = 1,
 	CMD_NOT_FOUND = 127,
 	SYNTAX_ERROR = 2,
+	SIGINT_ERROR = 130
 };
 
 typedef enum e_token_status

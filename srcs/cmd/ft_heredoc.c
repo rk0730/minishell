@@ -6,16 +6,19 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 21:17:16 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 22:57:04 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-// static void	ft_sigint_heredoc(int signum)
-// {
-// 	(void)signum;
-// }
+static void	ft_sigint_heredoc(int sig)
+{
+	g_signum = sig;
+	// printf("SIGINT in ft_heredoc\n");
+	printf("\n");
+	close(STDIN_FILENO);
+}
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
 // limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
@@ -79,6 +82,7 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 
 	i = 0;
 	result = -1;
+	signal(SIGINT, ft_sigint_heredoc);
 	while (tokens[i])
 	{
 		if (ft_strncmp(tokens[i], "<<", 3) == 0)
@@ -110,13 +114,28 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 				// line = ft_strjoin(tmp, "\n");
 				// free(tmp);
 				line = get_next_line(env_info_p->input_fd);
+				tmp = line;
+				line = ft_strtrim(tmp, "\n");
+				free(tmp);
+				// printf("gnl line : %s\n", line);
 				if (line == NULL)
 				{
-					printf("heredoc > ");
-					rl_redisplay();
-					line = get_next_line(STDIN_FILENO);
+					// printf("heredoc > ");
+					// // rl_on_new_line();
+					// rl_replace_line("", 0);
+					// rl_redisplay();
+					// line = get_next_line(STDIN_FILENO);
+					line = readline("heredoc > ");
+					// printf("line : %s\n", line);
 				}
-				// if (line == NULL) おそらくここがctrl + Dの処理になる
+				if (line == NULL)
+				{
+					close(pipe_fd[1]);
+					return (-2);
+				}
+				tmp = line;
+				line = ft_strjoin(tmp, "\n");
+				free(tmp);
 				tmp = env_info_p->input;
 				env_info_p->input = ft_strjoin(tmp, line);
 				free(tmp);

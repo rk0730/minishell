@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 20:55:43 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 23:14:10 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 		tokens = ft_gen_tokens(cmds[i]);
 		cmd_list[i].fd_in = ft_heredoc(tokens, env_info_p);
 		ft_free_array(tokens);
+		if (g_signum == SIGINT)
+			return (NULL);
 		i++;
 	}
 	// // リダイレクトエラー
