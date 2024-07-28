@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 15:05:23 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 17:26:14 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 		tokens = ft_gen_tokens(cmds[i]);
 		if (ft_redirect_err(tokens) == 1)
 		{
+			cmd_list[i].fd_in = ft_heredoc(tokens, env_info_p);
 			ft_free_array(tokens);
 			return (NULL);
 			// redirect_err = 1;
