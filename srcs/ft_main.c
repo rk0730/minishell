@@ -6,12 +6,24 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 18:48:39 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 19:19:20 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "cmd.h"
+
+static void	ft_sigint(int signum)
+{
+	(void)signum;
+	ft_status_code(1, 130);
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+
 
 int main(int argc, char **argv, char **envp) {
 	int			status;
@@ -26,6 +38,9 @@ int main(int argc, char **argv, char **envp) {
 	env_list = ft_gen_env_list(envp);
 	env_info_p = (t_env_info *)malloc(sizeof(t_env_info));
 	env_info_p->env_list = env_list;
+	ft_status_code(1, 0);
+	signal(SIGINT, ft_sigint);
+	signal(SIGQUIT, SIG_IGN);
 	while (1) {
 		// Readlineを使用してユーザー入力を取得
 		env_info_p->input = readline("MINISHELL$ ");

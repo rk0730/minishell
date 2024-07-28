@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 15:29:11 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 18:53:21 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/errno.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <signal.h>
 
 # include "libft.h"
 # include "ft_printf.h"
