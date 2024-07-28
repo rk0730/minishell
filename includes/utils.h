@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 16:19:54 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 15:29:11 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 // typedef struct s_env_pair
 // {

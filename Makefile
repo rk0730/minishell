@@ -18,6 +18,8 @@ SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
 
 UTILS = utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
+SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
+SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
 
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
@@ -39,7 +41,7 @@ OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCDIR = includes
 
-INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR)
+INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(SRCDIR)/$(UTILS)
 LIB = -lreadline
 
 NAME = minishell

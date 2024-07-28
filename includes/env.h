@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/21 23:04:39 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/28 14:52:50 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_env_info
 {
 	t_env_pair	*env_list;
 	int			last_status;
+	char		*input;//ヒアドクなども含めた入力　環境変数ではないが都合がいいのでここに入れる
 }	t_env_info;
 
 t_env_pair	*ft_gen_env_list(char **envp);

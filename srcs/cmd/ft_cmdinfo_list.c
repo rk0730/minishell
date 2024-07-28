@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmdinfo_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/26 02:48:27 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/28 15:05:23 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info)
+t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 {
 	t_cmd_info	*cmd_list;
 	char		**tokens;
@@ -41,7 +41,7 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info)
 	while (i < ft_array_len(cmds))
 	{
 		tokens = ft_gen_tokens(cmds[i]);
-		cmd_list[i].fd_in = ft_heredoc(tokens, env_info);
+		cmd_list[i].fd_in = ft_heredoc(tokens, env_info_p);
 		ft_free_array(tokens);
 		i++;
 	}
@@ -63,8 +63,8 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info env_info)
 	while (i < ft_array_len(cmds))
 	{
 		tokens = ft_gen_tokens(cmds[i]);
-		ft_in_out_fd(tokens, env_info, &(cmd_list[i]), cmd_list[i].fd_in);
-		cmd_list[i].cmd_argv = ft_gen_cmd_argv(tokens, env_info);
+		ft_in_out_fd(tokens, *env_info_p, &(cmd_list[i]), cmd_list[i].fd_in);
+		cmd_list[i].cmd_argv = ft_gen_cmd_argv(tokens, *env_info_p);
 		ft_free_array(tokens);
 		i++;
 	}
