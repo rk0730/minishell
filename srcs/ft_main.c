@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 23:18:26 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/29 03:33:20 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int main(int argc, char **argv, char **envp) {
 		// 	env_info_p.last_status = WEXITSTATUS(status);
 		// }
 		// ft_status_code(1, ft_exec_cmdline(env_info_p));
-		printf("return %d\n", ft_exec_cmdline(env_info_p));
-		printf("last_status: %d\n", ft_status_code(0, 0));
+		ft_status_code(1, ft_exec_cmdline(env_info_p));
 		// printf("last_status: %d\n", env_info_p->last_status);
 		// printf("last input: %s\n", env_info_p->input);
 

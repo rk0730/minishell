@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:59:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 20:51:37 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/29 03:32:25 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ char	**ft_gen_path_array(t_env_pair *env_list)
 	}
 	path_array = (char **)malloc(sizeof(char *) * 1);
 	path_array[0] = NULL;
-	ft_show_all(path_array);
+	// ft_show_all(path_array);
 	return (path_array);
 }

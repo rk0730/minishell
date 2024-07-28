@@ -42,6 +42,10 @@ OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCDIR = includes
 
+# なぜかrkitaoのmacではこれで実行した方が良さげなので置いておく
+# INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(SRCDIR)/$(UTILS) -I/opt/homebrew/opt/readline/include
+# LIB = -lreadline -lncurses -L/opt/homebrew/opt/readline/lib
+
 INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(SRCDIR)/$(UTILS)
 LIB = -lreadline
 
