@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 19:19:20 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 20:48:38 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int argc, char **argv, char **envp) {
 	int			status;
 	t_env_pair	*env_list;
 	t_env_info	*env_info_p;
+	int			input_pipe[2];
 
 	status = 0;//初期化
 	// 消す
@@ -39,11 +40,16 @@ int main(int argc, char **argv, char **envp) {
 	env_info_p = (t_env_info *)malloc(sizeof(t_env_info));
 	env_info_p->env_list = env_list;
 	ft_status_code(1, 0);
-	signal(SIGINT, ft_sigint);
-	signal(SIGQUIT, SIG_IGN);
 	while (1) {
+		signal(SIGINT, ft_sigint);
+		signal(SIGQUIT, SIG_IGN);
 		// Readlineを使用してユーザー入力を取得
 		env_info_p->input = readline("MINISHELL$ ");
+		printf("input: %s---\n", env_info_p->input);
+		pipe(input_pipe);
+		ft_printf_fd(input_pipe[1], "%s", env_info_p->input);
+		close(input_pipe[1]);
+		env_info_p->input_fd = input_pipe[0];
 
 		if (env_info_p->input == NULL)
 		{

@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 15:00:21 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 20:51:23 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	int			std_in;
 	int			std_out;
 	int			status;
+	char		*input_cmd;
+	char		*tmp;
 
 	std_in = dup(STDIN_FILENO);
 	std_out = dup(STDOUT_FILENO);
-	cmds = ft_gen_cmds(env_info_p->input);
+	input_cmd = get_next_line(env_info_p->input_fd);
+	tmp = input_cmd;
+	input_cmd = ft_strtrim(tmp, "\n");
+	free(tmp);
+	cmds = ft_gen_cmds(input_cmd);
 	if (!cmds)
 		return (SYNTAX_ERROR);
 	cmd_list = ft_cmd_info_list(cmds, env_info_p);
@@ -41,5 +47,6 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	close(std_out);
 	ft_free_array(cmds);
 	free(cmd_list);
+	close(env_info_p->input_fd);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 18:53:21 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 20:28:37 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 // 	char				*value;
 // 	struct s_env_pair	*next;
 // }	t_env_pair;
+
+extern volatile sig_atomic_t	signum;
 
 void	ft_free_array(char **array);
 void	ft_show_all(char **array);

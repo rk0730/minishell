@@ -6,11 +6,16 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 16:11:27 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 20:54:43 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
+
+// static void	ft_sigint_heredoc(int signum)
+// {
+// 	(void)signum;
+// }
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
 // limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
@@ -65,13 +70,11 @@ static char	*ft_limit_tokenize(char *str, int *is_quote)
 int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 {
 	int		pipe_fd[2];
-	// pid_t	pid;
 	int		i;
 	char	*limiter;
 	int		is_quote;
 	char	*line;
 	char	*tmp;
-	// int		status;
 	int		result;
 
 	i = 0;
@@ -102,10 +105,20 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 			}
 			while (1)
 			{
-				line = readline("heredoc > ");
-				tmp = line;
-				line = ft_strjoin(tmp, "\n");
-				free(tmp);
+				// line = readline("heredoc > ");
+				// tmp = line;
+				// line = ft_strjoin(tmp, "\n");
+				// free(tmp);
+				printf("before\n");
+				line = get_next_line(env_info_p->input_fd);
+				printf("after\n");
+				if (line == NULL)
+				{
+					printf("heredoc > ");
+					line = get_next_line(STDIN_FILENO);
+				}
+				printf("line %s---\n", line);
+				// if (line == NULL) おそらくここがctrl + Dの処理になる
 				tmp = env_info_p->input;
 				env_info_p->input = ft_strjoin(tmp, line);
 				free(tmp);
