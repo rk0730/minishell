@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/25 16:12:49 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 18:49:19 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 	{
 		if (word[i] == '$' && word[i+1] == '?')//環境変数展開でも$?だけ別処理
 		{
-			tmp = ft_itoa(env_info.last_status);
+			tmp = ft_itoa(ft_status_code(0, 0));
 			end = i + 2;
 		}
 		else if (word[i] == '$')

@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 16:09:47 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 18:48:39 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int main(int argc, char **argv, char **envp) {
 	env_list = ft_gen_env_list(envp);
 	env_info_p = (t_env_info *)malloc(sizeof(t_env_info));
 	env_info_p->env_list = env_list;
-	env_info_p->last_status = 0;
 	while (1) {
 		// Readlineを使用してユーザー入力を取得
 		env_info_p->input = readline("MINISHELL$ ");
@@ -34,7 +33,7 @@ int main(int argc, char **argv, char **envp) {
 		if (env_info_p->input == NULL)
 		{
 			printf("exit\n");
-			return (env_info_p->last_status);
+			return (ft_status_code(0, 0));
 		}
 
 		if (ft_strlen(env_info_p->input) == 0) {
@@ -45,7 +44,7 @@ int main(int argc, char **argv, char **envp) {
 		//exitコマンドが入力されたら終了
 		if (strncmp(env_info_p->input, "exit", 4) == 0) {
 			free(env_info_p->input);
-			return (env_info_p->last_status);
+			return (ft_status_code(0, 0));
 		}
 
 		// printf("execute %s\n", env_info_p->input);
@@ -64,7 +63,7 @@ int main(int argc, char **argv, char **envp) {
 		// 	wait(&status);
 		// 	env_info_p.last_status = WEXITSTATUS(status);
 		// }
-		env_info_p->last_status = ft_exec_cmdline(env_info_p);
+		ft_status_code(1, ft_exec_cmdline(env_info_p));
 		// printf("last_status: %d\n", env_info_p->last_status);
 		// printf("last input: %s\n", env_info_p->input);
 

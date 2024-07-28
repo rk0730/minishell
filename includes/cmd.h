@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 15:04:58 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 18:44:18 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int			ft_in_fd(char **tokens, t_env_info env_info, int i);
 int			ft_out_fd(char **tokens, t_env_info env_info, int i);
 void		ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd);
 int			ft_heredoc(char **tokens, t_env_info *env_info_p);
+int			ft_status_code(int flag, int new_status);
 
 #endif
