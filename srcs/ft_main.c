@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 20:48:38 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/28 21:17:00 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int main(int argc, char **argv, char **envp) {
 		signal(SIGQUIT, SIG_IGN);
 		// Readlineを使用してユーザー入力を取得
 		env_info_p->input = readline("MINISHELL$ ");
-		printf("input: %s---\n", env_info_p->input);
 		pipe(input_pipe);
 		ft_printf_fd(input_pipe[1], "%s", env_info_p->input);
 		close(input_pipe[1]);
