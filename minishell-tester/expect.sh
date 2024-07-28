@@ -77,13 +77,13 @@ sleep 0.5
 
 # プロンプトが表示されたらコマンドを送信
 
-expect \"$wait\" { sleep 0.02; send \"lsl\n\" }
+expect \"$wait\" { send \"lsl\n\" }
 
 expect \"$wait\" { send \"cat no_permission\n\" }
 
 expect \"$wait\" { send \"cat << EOF\n\" }
-expect \"> \" { send \"test\n\" }
-expect \"> \" { send \"EOF\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"<< EOF << eof << eee cat\n\" }
 expect \"> \" { sleep 0.02; send \"test1\n\" }
@@ -118,6 +118,8 @@ expect \"> \" { sleep 0.02; send \"EOF\n\" }
 expect \"$wait\" { send \"cat <<<< EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >>>> out\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF >\n\" }
 expect \"> \" { sleep 0.02; send \"test\n\" }
@@ -128,8 +130,12 @@ expect \"> \" { sleep 0.02; send \"test\n\" }
 expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF <<<<\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat << EOF > < no_write_permission\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"<no_such_file ls|lsl|ls \\\"|\\\"|ls|>\\\"|\\\" cat' 'ls' 'cat \\\"|\\\"' 'rm \\\"|\\\"\n\" }
 expect \"$wait\" { send \"ls\n\" }
@@ -137,6 +143,8 @@ expect \"$wait\" { send \"cat \\\"|\\\"\n\" }
 expect \"$wait\" { send \"rm \\\"|\\\"\n\" }
 
 expect \"$wait\" { sleep 0.02; send \"cat << EOF > <\n\" }
+expect \"> \" { sleep 0.02; send \"test\n\" }
+expect \"> \" { sleep 0.02; send \"EOF\n\" }
 
 expect \"$wait\" { send \"cat > no_write_permission <<\n\" }
 
