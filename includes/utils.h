@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/11 20:58:21 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/20 14:09:56 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/errno.h>
+# include <sys/wait.h>
 
 # include "libft.h"
 # include "ft_printf.h"
@@ -33,5 +34,7 @@
 void	ft_free_array(char **array);
 void	ft_show_all(char **array);
 int		ft_array_len(char **array);
+char	**ft_add_str(char **array, char *str);
+
 
 #endif
