@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/31 10:44:43 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/31 11:26:51 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ enum e_cmd_error
 	CMD_ERROR = 1,
 	CMD_NOT_FOUND = 127,
 	SYNTAX_ERROR = 2,
-	SIGINT_ERROR = 130
+	SIGINT_ERROR = 130,
+	SIGQUIT_ERROR = 131,
 };
 
 typedef enum e_token_status
@@ -58,5 +59,8 @@ int			ft_out_fd(char **tokens, t_env_info env_info, int i);
 void		ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd);
 int			ft_heredoc(char **tokens, t_env_info *env_info_p);
 int			ft_status_code(int flag, int new_status);
+void		ft_sigint_cmd(int sig);
+void		ft_sigquit_cmd(int sig);
+void		ft_change_g_signum(int sig);
 
 #endif

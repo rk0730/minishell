@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/28 14:13:14 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/01 03:27:31 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int writ
 			dup2(write_pipe, STDOUT_FILENO);
 			close(write_pipe);
 		}
+		//シグナルはデフォに戻す
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		path_array = ft_gen_path_array(env_info.env_list);
 		if (ft_strchr(cmd_info.cmd_argv[0], '/') != NULL)
 			ft_exec_direct(cmd_info);
@@ -122,8 +125,11 @@ int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int writ
 		close(cmd_info.fd_in);
 		close(read_pipe);
 		close(write_pipe);
+		//親プロセスはシグナルを無視する
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		waitpid(pid, &status, 0);
-		return (WEXITSTATUS(status));
+		return (status);
 	}
 	return (EXIT_FAILURE);
 }

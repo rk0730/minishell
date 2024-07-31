@@ -6,13 +6,13 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/31 10:52:06 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/01 04:18:51 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static void ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int index, int pipe_fd[4])
+static void	ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int index, int pipe_fd[4])
 {
 	pid_t pid;
 	// pid_t pid2;
@@ -62,6 +62,7 @@ static void ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int index, i
 	}
 }
 
+// パイプを使う　ここに入ったプロセスは全てexitされる
 static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 {
 	int pipe_fd[4];
@@ -69,6 +70,9 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_ind
 	// pid_t pid2;
 	int status;
 
+	//子プロセスなのでシグナルは無視する
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0) {
@@ -93,19 +97,51 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_ind
 	}
 }
 
+// cmd_listにまとめた全コマンドを実行し、終了ステータスを返す（複数コマンドがあればft_exec_pipeにまわす）
 int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 {
 	pid_t pid;
 	int status;
 
 	if (last_index == 0) {
-		return (ft_exec_cmd(cmd_list[0], env_info, -1, -1));
+		status = ft_exec_cmd(cmd_list[0], env_info, -1, -1);
+		if (status == SIGINT)
+		{
+			printf("\n");
+			return (SIGINT_ERROR);
+		}
+		else if (status == SIGQUIT)
+		{
+			printf("Quit\n");
+			return (SIGQUIT_ERROR);
+		}
+		else if (status == 1)
+			return (status);
+		return (WEXITSTATUS(status));
 	}
 	pid = fork();
 	if (pid == 0) {
 		ft_exec_pipe(cmd_list, env_info, last_index);
 	} else {
+		signal(SIGINT, ft_change_g_signum);
+		signal(SIGQUIT, ft_change_g_signum);
 		waitpid(pid, &status, 0);
+		if (g_signum == SIGINT)
+		{
+			printf("\n");
+			if (status != 0)
+				return (SIGINT_ERROR);
+			return (WEXITSTATUS(status));
+		}
+		else if (g_signum == SIGQUIT)
+		{
+			if (status != 0)
+			{
+				printf("Quit\n");
+				return (SIGQUIT_ERROR);
+			}
+			return (WEXITSTATUS(status));
+		}
 		return (WEXITSTATUS(status));
 	}
 	ft_printf_fd(STDERR_FILENO, "error in ft_exec_cmd_list\n");
