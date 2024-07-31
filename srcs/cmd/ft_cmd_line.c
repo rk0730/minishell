@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/29 03:32:32 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/07/31 10:51:41 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 		return (SYNTAX_ERROR);
 	}
 	last_index = ft_array_len(cmds) - 1;
-	status = ft_exec_pipe(cmd_list, *env_info_p, last_index);
+	status = ft_exec_cmd_list(cmd_list, *env_info_p, last_index);
 	dup2(std_in, STDIN_FILENO);
 	dup2(std_out, STDOUT_FILENO);
 	close(std_in);

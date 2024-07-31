@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 14:16:42 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/31 10:52:06 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static void ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int index, int pipe_fd[4]) {
+static void ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int index, int pipe_fd[4])
+{
 	pid_t pid;
 	// pid_t pid2;
 
@@ -59,24 +60,21 @@ static void ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int index, i
 			waitpid(pid, NULL, 0);
 		}
 	}
-}	
+}
 
-int	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
+static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 {
 	int pipe_fd[4];
 	pid_t pid;
 	// pid_t pid2;
 	int status;
 
-	if (last_index == 0) {
-		return (ft_exec_cmd(cmd_list[0], env_info, -1, -1));
-	}
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0) {
 		//再帰
 		ft_recursive(cmd_list, env_info, last_index - 1, pipe_fd);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	} else {
 		//親プロセス
 		//最後のコマンドを実行する
@@ -91,10 +89,28 @@ int	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 		// }
 		status = ft_exec_cmd(cmd_list[last_index], env_info, pipe_fd[0], -1);
 		waitpid(pid, NULL, 0);
-		return (status);
+		exit(status);
 	}
 }
 
+int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
+{
+	pid_t pid;
+	int status;
+
+	if (last_index == 0) {
+		return (ft_exec_cmd(cmd_list[0], env_info, -1, -1));
+	}
+	pid = fork();
+	if (pid == 0) {
+		ft_exec_pipe(cmd_list, env_info, last_index);
+	} else {
+		waitpid(pid, &status, 0);
+		return (WEXITSTATUS(status));
+	}
+	ft_printf_fd(STDERR_FILENO, "error in ft_exec_cmd_list\n");
+	return (-1);
+}
 
 // i個目のコマンドを実行し、終了ステータスを返す
 // int	ft_recursive(t_cmd_info *cmd_list, t_env_info env_info, int i, int out_fd)

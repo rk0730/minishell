@@ -116,7 +116,7 @@ wrong_counter=0
 stdout_file=$(mktemp)
 stderr_file=$(mktemp)
 
-# コマンドをテストする　必ず最後にexitを入れる
+# # コマンドをテストする　必ず最後にexitを入れる
 # exec_test '/bin/ls' 'exit'
 # exec_test '/bin/pwd' 'exit'
 # exec_test '/bin/echo' 'exit'
@@ -178,7 +178,7 @@ stderr_file=$(mktemp)
 # exec_test 'echo hello > ""' 'exit'
 
 
-# heredocもこれでテストできそう
+# # heredocもこれでテストできそう
 # exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
 # exec_test '<< EOF << eof << eee cat' 'test1' 'eof' 'test2' 'eee' 'test3' 'EOF' 'test4' 'eof' 'test5' 'test6' 'eee' 'exit'
 # exec_test 'cat <<EOF' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
