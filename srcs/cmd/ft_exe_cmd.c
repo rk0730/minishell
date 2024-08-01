@@ -6,13 +6,13 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/01 03:27:31 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/01 11:16:51 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static void	ft_find_and_exec(t_cmd_info cmd_info, char **path_array)
+static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env, char **path_array)
 {
 	char	*tmp;
 	char	*cmd_path;
@@ -30,7 +30,7 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **path_array)
 			// 	dup2(cmd_info.fd_out, STDOUT_FILENO);
 			// if (cmd_info.fd_in != 1)
 			// 	dup2(cmd_info.fd_in, STDIN_FILENO);
-			if (execve(cmd_path, cmd_info.cmd_argv, NULL) == -1)
+			if (execve(cmd_path, cmd_info.cmd_argv, cmd_env) == -1)
 				exit(CMD_ERROR);
 		}
 		free(cmd_path);
@@ -41,13 +41,13 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **path_array)
 	exit(CMD_NOT_FOUND);
 }
 
-static void	ft_exec_direct(t_cmd_info cmd_info)
+static void	ft_exec_direct(t_cmd_info cmd_info, char **cmd_env)
 {
 	// if (cmd_info.fd_out != -1)
 	// 	dup2(cmd_info.fd_out, STDOUT_FILENO);
 	// if (cmd_info.fd_in != 1)
 	// 	dup2(cmd_info.fd_in, STDIN_FILENO);
-	if (execve(cmd_info.cmd_argv[0], cmd_info.cmd_argv, NULL) == -1)
+	if (execve(cmd_info.cmd_argv[0], cmd_info.cmd_argv, cmd_env) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0], strerror(errno));
 		exit(CMD_ERROR);
@@ -56,9 +56,10 @@ static void	ft_exec_direct(t_cmd_info cmd_info)
 }
 
 // コマンドを実行する（execveならfork ビルトインならそのまま）終了ステータスを返す
-int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
 {
 	char	**path_array;
+	char	**cmd_env;
 	int		status;
 	pid_t	pid;
 
@@ -114,10 +115,11 @@ int	ft_exec_cmd(t_cmd_info cmd_info,t_env_info env_info, int read_pipe, int writ
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		path_array = ft_gen_path_array(env_info.env_list);
+		cmd_env = ft_gen_cmd_env(env_info.env_list);
 		if (ft_strchr(cmd_info.cmd_argv[0], '/') != NULL)
-			ft_exec_direct(cmd_info);
+			ft_exec_direct(cmd_info, cmd_env);
 		else
-			ft_find_and_exec(cmd_info, path_array);
+			ft_find_and_exec(cmd_info, cmd_env, path_array);
 	}
 	else
 	{

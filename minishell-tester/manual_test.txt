@@ -1,4 +1,5 @@
 手打ちでチェックするやつ
+以下をminishellの中でminishellを開いてチェックもする
 
 ctrl + c
 echo $?
@@ -8,9 +9,51 @@ ls
 ctrl + \
 echo $?
 
-（これはもしかかしたらやらないかも、これで履歴を表示したあとの実行がむずいのでこの機能ごとなくす説がある）
 cat << EOF
 test
 EOF
 上矢印キー
 
+cat
+(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+sleep 3
+すぐに(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+sleep 3 | sleep 3
+すぐに(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+sleep 3 | sleep 3 | sleep 3 | sleep 3
+1秒待って(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+sleep 4 | sleep 4 | sleep 1
+1秒待って(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+sleep 4 | sleep 1 | sleep 4
+1秒待って(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+sleep 1 | sleep 4 | sleep 4
+1秒待って(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+cat | ls
+(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+cat | cat | ls
+(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+cat | cat
+(ctrl+c, ctrl+\, ctrl+d)
+echo $?
+
+cat | cat | cat | cat | cat
+(ctrl+c, ctrl+\, ctrl+d)
+echo $?

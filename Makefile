@@ -15,6 +15,7 @@ ENV = env
 SRCS += $(SRCDIR)/$(ENV)/ft_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_path.c
 SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
+SRCS += $(SRCDIR)/$(ENV)/ft_gen_cmd_env.c
 
 UTILS = utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
@@ -33,7 +34,7 @@ SRCS += $(SRCDIR)/$(CMD)/ft_cmd_argv.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmds.c
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
-SRCS += $(SRCDIR)/$(CMD)/ft_status_code.c
+SRCS += $(SRCDIR)/$(CMD)/ft_static.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
 
 
