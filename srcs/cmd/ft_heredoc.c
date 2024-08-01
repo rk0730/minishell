@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 22:57:04 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/01 13:00:42 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ static char	*ft_limit_tokenize(char *str, int *is_quote)
 	}
 	if (ft_strchr(str, '\'') != NULL || ft_strchr(str, '\"') != NULL)
 		*is_quote = 1;
-	tmp = result;
-	result = ft_strjoin(tmp, "\n");
-	free(tmp);
 	return (result);
 }
 
@@ -87,20 +84,12 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 	{
 		if (ft_strncmp(tokens[i], "<<", 3) == 0)
 		{
-			if (result == -1)
-			{
-				tmp = env_info_p->input;
-				env_info_p->input = ft_strjoin(tmp, "\n");
-				free(tmp);
-			}
-			else
-			{
+			// 前回のheredocがあれば不要なので閉じる
+			if (result != -1)
 				close(result);
-			}
 			if (tokens[i + 1] == NULL)//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
 				return (-2);
 			pipe(pipe_fd);
-			// close(pipe_fd[0]);
 			limiter = ft_limit_tokenize(tokens[i + 1], &is_quote);
 			if (limiter == NULL)
 			{
@@ -109,10 +98,6 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 			}
 			while (1)
 			{
-				// line = readline("heredoc > ");
-				// tmp = line;
-				// line = ft_strjoin(tmp, "\n");
-				// free(tmp);
 				line = get_next_line(env_info_p->input_fd);
 				tmp = line;
 				line = ft_strtrim(tmp, "\n");
@@ -120,24 +105,38 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 				// printf("gnl line : %s\n", line);
 				if (line == NULL)
 				{
-					// printf("heredoc > ");
-					// // rl_on_new_line();
-					// rl_replace_line("", 0);
-					// rl_redisplay();
-					// line = get_next_line(STDIN_FILENO);
 					line = readline("heredoc > ");
 					// printf("line : %s\n", line);
 				}
 				if (line == NULL)
 				{
-					close(pipe_fd[1]);
-					return (-2);
+					if (g_signum == SIGINT)
+					{
+						close(pipe_fd[1]);
+						return (-2);
+					}
+					else
+					{
+						//lineがNULLなのにSIGINTではないということはctrl+dが押されたということ
+						ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
+						write(STDERR_FILENO, limiter, ft_strlen(limiter));
+						ft_printf_fd(STDERR_FILENO, "')\n");
+						break ;
+					}
 				}
-				tmp = line;
-				line = ft_strjoin(tmp, "\n");
-				free(tmp);
+				// 初めての入力の場合、改行を追加
+				if (ft_strchr(env_info_p->input, '\n') == NULL)
+				{
+					tmp = env_info_p->input;
+					env_info_p->input = ft_strjoin(tmp, "\n");
+					free(tmp);
+				}
+				// 読み取った行と改行を履歴に追加
 				tmp = env_info_p->input;
 				env_info_p->input = ft_strjoin(tmp, line);
+				free(tmp);
+				tmp = env_info_p->input;
+				env_info_p->input = ft_strjoin(tmp, "\n");
 				free(tmp);
 				if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
 				{
@@ -146,7 +145,9 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 				}
 				if (!is_quote)
 					line = ft_expand_env(line, *env_info_p, 1);
+				// 読み取った行と改行をfdに書き込む
 				write(pipe_fd[1], line, ft_strlen(line));
+				write(pipe_fd[1], "\n", 1);
 				free(line);
 			}
 			close(pipe_fd[1]);

@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/29 03:33:20 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/01 11:35:28 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int main(int argc, char **argv, char **envp) {
 			return (ft_status_code(0, 0));
 		}
 
-		if (ft_strlen(env_info_p->input) == 0) {
+		if (ft_strlen(env_info_p->input) == 0)
+		{
 			free(env_info_p->input);
-			continue;
+			continue ;
 		}
 
 		//exitコマンドが入力されたら終了
@@ -67,23 +68,6 @@ int main(int argc, char **argv, char **envp) {
 			return (ft_status_code(0, 0));
 		}
 
-		// printf("execute %s\n", env_info_p->input);
-
-		// pid_t pid;
-		// pid = fork();
-		// if (pid == -1) {
-		// 	perror("fork");
-		// 	exit(1);
-		// } else if (pid == 0) {
-		// 	// 子プロセス
-		// 	ft_exec_cmd(env_info_p->input, env_info_p);
-		// } else {
-		// 	// 親プロセス
-		// 	// 子プロセスの終了を待つ
-		// 	wait(&status);
-		// 	env_info_p.last_status = WEXITSTATUS(status);
-		// }
-		// ft_status_code(1, ft_exec_cmdline(env_info_p));
 		ft_status_code(1, ft_exec_cmdline(env_info_p));
 		// printf("last_status: %d\n", env_info_p->last_status);
 		// printf("last input: %s\n", env_info_p->input);
@@ -91,7 +75,7 @@ int main(int argc, char **argv, char **envp) {
 
 		// ヒストリーに入力を追加
 		add_history(env_info_p->input);
-		
+
 		g_signum = 0;
 
 		// 入力のメモリを解放

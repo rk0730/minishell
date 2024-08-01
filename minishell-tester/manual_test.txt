@@ -57,3 +57,40 @@ echo $?
 cat | cat | cat | cat | cat
 (ctrl+c, ctrl+\, ctrl+d)
 echo $?
+
+ヒアドクをシグナルやEOFで抜けた際の履歴が微妙だったが、全行追加することにした　bashの方も動きがまちまちな気がする
+
+cat << EOF
+(ctrl+c, ctrl+\, ctrl+d)
+上矢印キー
+echo $?
+
+cat << EOF
+test
+(ctrl+c, ctrl+\, ctrl+d)
+上矢印キー
+echo $?
+
+cat << EOF | cat << eof
+1
+EOF
+2
+ctrl+d
+上矢印キー
+echo $?
+
+cat << EOF | cat << eof
+1
+ctrl+d
+2
+ctrl+d
+上矢印キー
+echo $?
+
+cat << EOF | cat << eof
+1
+ctrl+d
+2
+eof
+上矢印キー
+echo $?
