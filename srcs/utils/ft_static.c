@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_static.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:42:27 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/01 13:01:02 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/02 20:30:30 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "utils.h"
 
 int	ft_status_code(int flag, int new_status)
 {

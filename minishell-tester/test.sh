@@ -28,7 +28,7 @@ exec_test() {
 	# minishellで結合されたコマンドを実行
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
-	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外
+	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
 	ERR1=$(cat $stderr_file)
 
 	# bashで結合されたコマンドを実行
@@ -117,6 +117,7 @@ stdout_file=$(mktemp)
 stderr_file=$(mktemp)
 
 # コマンドをテストする　必ず最後にexitを入れる
+exec_test '/bin/ls'
 exec_test '/bin/ls' 'exit'
 exec_test '/bin/pwd' 'exit'
 exec_test '/bin/echo' 'exit'
@@ -202,22 +203,22 @@ exec_test 'cat << EOF' '$?' '"$?' '"$?"' '$USER' '"$USER"' 'EOF' 'exit'
 exec_test 'lsl' 'cat << $?' '"$?' '"$?"' '$USER' '"$USER"' '$?' 'exit'
 exec_test 'cat << $??' '$?' '"$?' '"$?"' '"$??"' '$???' '$??' 'exit'
 
-# # パイプ
-# exec_test 'ls | grep .c' 'exit'
-# exec_test '< no_such_file ls | wc' 'exit'
-# exec_test 'cat Makefile | grep minishell | sort' 'exit'
-# exec_test 'cat   hello.c | wc -cl  | wc   |  grep o  | sort | cat' 'exit'
-# exec_test 'cat hello.c | sort | wc | ls | cd | wc' 'pwd' 'exit'
-# exec_test 'ls|ls|ls|ls|ls|ls' 'exit'
-# exec_test 'echo test1 > in1' 'ls | cat < in1' 'rm in1' 'exit'
-# exec_test 'echo test1 > in1' 'echo test2 > in2' 'cat < in1 | cat < in2' 'rm in1' 'rm in2' 'exit'
-# exec_test 'cat < no_permission | ls > out | cat' 'ls' 'cat out' 'rm out' 'exit'
-# exec_test 'cat < no_permission|<no_read_permission cat| ls > out' 'ls' 'cat out' 'rm out' 'exit'
-# exec_test 'cat < no_permission | < no_read_permission cat | cat << EOF |cat|cat|cat' 'test' 'EOF' 'exit'
-# exec_test 'cat>no_permission<<EOF | cat' 'test' 'EOF' 'exit'
-# exec_test 'cat > no_permission | cat | ls|cat' 'exit'
-# exec_test 'cat <no_"read"_permission > no_write_"permission""" | ls | cat <<EOF | cat< no_permission|ls|cat<<eof' 'TEST' 'EOF' 'test' 'eof' 'exit'
-# exec_test 'cat < no_read_permission | cat << EOF | lsl | <<eof cat "|" ls | cat > no_write_permission' '1' 'EOF' '2' 'eof' 'exit'
+# パイプ
+exec_test 'ls | grep .c' 'exit'
+exec_test '< no_such_file ls | wc' 'exit'
+exec_test 'cat Makefile | grep minishell | sort' 'exit'
+exec_test 'cat   hello.c | wc -cl  | wc   |  grep o  | sort | cat' 'exit'
+exec_test 'cat hello.c | sort | wc | ls | cd | wc' 'pwd' 'exit'
+exec_test 'ls|ls|ls|ls|ls|ls' 'exit'
+exec_test 'echo test1 > in1' 'ls | cat < in1' 'rm in1' 'exit'
+exec_test 'echo test1 > in1' 'echo test2 > in2' 'cat < in1 | cat < in2' 'rm in1' 'rm in2' 'exit'
+exec_test 'cat < no_permission | ls > out | cat' 'ls' 'cat out' 'rm out' 'exit'
+exec_test 'cat < no_permission|<no_read_permission cat| ls > out' 'ls' 'cat out' 'rm out' 'exit'
+exec_test 'cat < no_permission | < no_read_permission cat | cat << EOF |cat|cat|cat' 'test' 'EOF' 'exit'
+exec_test 'cat>no_permission<<EOF | cat' 'test' 'EOF' 'exit'
+exec_test 'cat > no_permission | cat | ls|cat' 'exit'
+exec_test 'cat <no_"read"_permission > no_write_"permission""" | ls | cat <<EOF | cat< no_permission|ls|cat<<eof' 'TEST' 'EOF' 'test' 'eof' 'exit'
+exec_test 'cat < no_read_permission | cat << EOF | lsl | <<eof cat "|" ls | cat > no_write_permission' '1' 'EOF' '2' 'eof' 'exit'
 
 # exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
 # exec_test 'env | grep TEST' 'ls | export TEST=test' 'env | grep TEST' 'exit'
@@ -231,7 +232,7 @@ exec_test 'cat << $??' '$?' '"$?' '"$?"' '"$??"' '$???' '$??' 'exit'
 # exec_test 'pwd' 'ls | cd no_such_dir | cat' 'pwd' 'exit'
 # exec_test 'cat | ls' '' 'exit'
 
-# # exitテスト
+# exitテスト
 exec_test 'pwd' 'exit 42'
 exec_test 'pwd' 'exit 1 2'
 exec_test 'pwd' 'exit 2147483647'
@@ -274,6 +275,13 @@ exec_test 'pwd' 'exit --10'
 exec_test 'pwd' 'exit --10 1'
 exec_test 'pwd' 'exit ++10 1'
 exec_test 'pwd' 'exit ++10'
+exec_test 'pwd' 'exit "  42   "'
+exec_test 'pwd' 'exit "  1""2""3"'
+exec_test 'pwd' 'exit "   """"1""2""""3""   ""   "'
+exec_test 'pwd' 'exit "  1  3 "' 'echo $?' 'exit'
+exec_test 'pwd' 'exit +'
+exec_test 'pwd' 'exit ++'
+exec_test 'pwd' 'exit -'
 exec_test 'exit 24 | exit 42' 'echo $?' 'exit'
 exec_test 'exit 1 2 | exit 42' 'echo $?' 'exit'
 exec_test 'exit 42 | exit 1 2' 'echo $?' 'exit'

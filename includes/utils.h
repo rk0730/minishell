@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 16:41:12 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 20:30:43 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_free_array(char **array);
 void	ft_show_all(char **array);
 int		ft_array_len(char **array);
 char	**ft_add_str(char **array, char *str);
+int		ft_status_code(int flag, int new_status);
 
 
 #endif

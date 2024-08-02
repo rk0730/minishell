@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 17:25:52 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 20:30:50 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int			ft_is_redirect(char *str);
 int			ft_redirect_err(char **tokens);
 void		ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd);
 int			ft_heredoc(char **tokens, t_env_info *env_info_p);
-int			ft_status_code(int flag, int new_status);
 void		ft_sigint_cmd(int sig);
 void		ft_sigquit_cmd(int sig);
 void		ft_change_g_signum(int sig);

@@ -21,6 +21,7 @@ UTILS = utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
+SRCS += $(SRCDIR)/$(UTILS)/ft_static.c
 
 BUILIN = builtins
 SRCS += $(SRCDIR)/$(BUILIN)/ft_call_builtin.c
@@ -37,7 +38,6 @@ SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
-SRCS += $(SRCDIR)/$(CMD)/ft_static.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_redirect.c

@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 15:10:26 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 19:18:47 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ int main(int argc, char **argv, char **envp) {
 			free(env_info_p->input);
 			continue ;
 		}
-		//exitコマンドが入力されたら終了
-		if (strncmp(env_info_p->input, "exit", 4) == 0) {
-			free(env_info_p->input);
-			exit(ft_status_code(0, 0));
-		}
+		// コマンドを実行
 		ft_status_code(1, ft_exec_cmdline(env_info_p));
 		// ヒストリーに入力を追加
 		add_history(env_info_p->input);
