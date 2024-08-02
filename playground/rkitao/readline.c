@@ -21,6 +21,24 @@ void	sigquit_handler_child(int sig)
 	exit(EXIT_FAILURE);
 }
 
+void signal_1(int sig)
+{
+	g_signum = sig;
+	printf("signal 1\n");
+}
+
+void signal_2(int sig)
+{
+	g_signum = sig;
+	printf("signal 2\n");
+}
+
+void signal_3(int sig)
+{
+	g_signum = sig;
+	printf("signal 3\n");
+}
+
 int	main(void)
 {
 	char	*line;
@@ -32,12 +50,13 @@ int	main(void)
 		line = readline("prompt> ");
 		if (!line)
 			break ;
+		signal(SIGQUIT, signal_1);
 		pid = fork();
 		if (pid == -1)
 			exit(EXIT_FAILURE);
 		else if (pid == 0)
 		{
-			signal(SIGQUIT, sigquit_handler_child);
+			signal(SIGQUIT, SIG_DFL);
 			printf("exec: %s\n", line);
 			if (strlen(line) == 0)
 				exit(EXIT_SUCCESS);
@@ -47,7 +66,7 @@ int	main(void)
 		}
 		else
 		{
-			signal(SIGQUIT, sigquit_handler);
+			// signal(SIGQUIT, signal_2);
 			waitpid(pid, NULL, 0);
 			if (g_signum == SIGQUIT)
 			{

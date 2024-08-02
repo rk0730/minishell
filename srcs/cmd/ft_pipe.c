@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/01 04:18:51 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/02 14:42:08 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_ind
 	// pid_t pid2;
 	int status;
 
-	//子プロセスなのでシグナルは無視する
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	// //子プロセスなのでシグナルは無視する
+	// signal(SIGINT, SIG_IGN);
+	// signal(SIGQUIT, SIG_IGN);
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0) {
@@ -104,13 +104,16 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 	int status;
 
 	if (last_index == 0) {
+		signal(SIGINT, ft_change_g_signum);
+		signal(SIGQUIT, ft_change_g_signum);
 		status = ft_exec_cmd(cmd_list[0], env_info, -1, -1);
-		if (status == SIGINT)
+		// printf("signal %d status %d", g_signum, status);
+		if (g_signum == SIGINT)
 		{
 			printf("\n");
 			return (SIGINT_ERROR);
 		}
-		else if (status == SIGQUIT)
+		else if (g_signum == SIGQUIT)
 		{
 			printf("Quit\n");
 			return (SIGQUIT_ERROR);
@@ -126,6 +129,7 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 		signal(SIGINT, ft_change_g_signum);
 		signal(SIGQUIT, ft_change_g_signum);
 		waitpid(pid, &status, 0);
+		// printf("signal %d status %d", g_signum, status);
 		if (g_signum == SIGINT)
 		{
 			printf("\n");
