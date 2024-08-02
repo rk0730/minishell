@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/01 11:35:28 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/02 15:05:22 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv, char **envp) {
 		if (env_info_p->input == NULL)
 		{
 			printf("exit\n");
-			return (ft_status_code(0, 0));
+			exit(ft_status_code(0, 0));
 		}
 
 		if (ft_strlen(env_info_p->input) == 0)
@@ -65,7 +65,7 @@ int main(int argc, char **argv, char **envp) {
 		//exitコマンドが入力されたら終了
 		if (strncmp(env_info_p->input, "exit", 4) == 0) {
 			free(env_info_p->input);
-			return (ft_status_code(0, 0));
+			exit(ft_status_code(0, 0));
 		}
 
 		ft_status_code(1, ft_exec_cmdline(env_info_p));
@@ -81,13 +81,5 @@ int main(int argc, char **argv, char **envp) {
 		// 入力のメモリを解放
 		free(env_info_p->input);
 	}
-
-	return (ft_status_code(0, 0));
+	return (0);
 }
-
-// #include <libc.h>
-
-// __attribute__((destructor))
-// static void destructor() {
-// 	system("leaks -q minishell");
-// }

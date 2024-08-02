@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 14:42:08 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 15:00:17 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_ind
 	// pid_t pid2;
 	int status;
 
-	// //子プロセスなのでシグナルは無視する
-	// signal(SIGINT, SIG_IGN);
-	// signal(SIGQUIT, SIG_IGN);
+	//子プロセスなのでシグナルは無視する
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0) {
@@ -83,14 +83,6 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info env_info, int last_ind
 		//親プロセス
 		//最後のコマンドを実行する
 		close(pipe_fd[1]);
-		// pid2 = fork();
-		// if (pid2 == 0) {
-		// 	ft_exec_cmd(cmd_list[last_index], env_info, pipe_fd[0], -1);
-		// 	exit(0);
-		// } else {
-		// 	close(pipe_fd[0]);
-		// 	waitpid(pid2, &status, 0);
-		// }
 		status = ft_exec_cmd(cmd_list[last_index], env_info, pipe_fd[0], -1);
 		waitpid(pid, NULL, 0);
 		exit(status);
@@ -104,16 +96,13 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 	int status;
 
 	if (last_index == 0) {
-		signal(SIGINT, ft_change_g_signum);
-		signal(SIGQUIT, ft_change_g_signum);
 		status = ft_exec_cmd(cmd_list[0], env_info, -1, -1);
-		// printf("signal %d status %d", g_signum, status);
-		if (g_signum == SIGINT)
+		if (status % 128 == SIGINT)
 		{
 			printf("\n");
 			return (SIGINT_ERROR);
 		}
-		else if (g_signum == SIGQUIT)
+		else if (status % 128 == SIGQUIT)
 		{
 			printf("Quit\n");
 			return (SIGQUIT_ERROR);
@@ -129,7 +118,6 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index)
 		signal(SIGINT, ft_change_g_signum);
 		signal(SIGQUIT, ft_change_g_signum);
 		waitpid(pid, &status, 0);
-		// printf("signal %d status %d", g_signum, status);
 		if (g_signum == SIGINT)
 		{
 			printf("\n");
