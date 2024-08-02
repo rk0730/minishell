@@ -6,40 +6,14 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 15:23:07 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 17:25:52 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
 
-# include "env.h"
-# include "utils.h"
-
-enum e_cmd_error
-{
-	CMD_ERROR = 1,
-	CMD_NOT_FOUND = 127,
-	SYNTAX_ERROR = 2,
-	SIGINT_ERROR = 130,
-	SIGQUIT_ERROR = 131,
-};
-
-typedef enum e_token_status
-{
-	NORMAL,
-	SINGLE_QUOTE,//'が足りない
-	DOUBLE_QUOTE,//"が足りない
-	// REDIRECT,// >>>や<<<,<>など不適なリダイレクト
-}	t_token_status;
-
-typedef struct s_cmd_info
-{
-	char	**cmd_argv;
-	int		fd_in;
-	int		fd_out;
-}	t_cmd_info;	
-
+# include "builtins.h"
 
 char		**ft_gen_cmds(char *cmd);
 t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p);

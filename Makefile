@@ -22,6 +22,12 @@ SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
 
+BUILIN = builtins
+SRCS += $(SRCDIR)/$(BUILIN)/ft_call_builtin.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_cd.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_pwd.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_exit.c
+
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_argv.c
@@ -69,6 +75,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)/$(ENV)
 	@mkdir -p $(OBJDIR)/$(UTILS)
 	@mkdir -p $(OBJDIR)/$(CMD)
+	@mkdir -p $(OBJDIR)/$(BUILIN)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
