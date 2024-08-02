@@ -6,63 +6,58 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/28 18:49:19 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 16:54:52 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-// strの環境変数を展開した文字列を返す doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
-char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
+static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
+{
+	if (str[i] == '\"')
+	{
+		*endp = i + 1;
+		while (str[*endp] != '\0' && str[*endp] != '\"')
+			(*endp)++;
+		(*endp)++;
+		return (ft_expand_env(ft_substr(str, i + 1, *endp - i - 2), env_info, 1));
+	}
+	else if (str[i] == '\'')
+	{
+		*endp = i + 1;
+		while (str[*endp] != '\0' && str[*endp] != '\'')
+			(*endp)++;
+		(*endp)++;
+		return (ft_substr(str, i + 1, *endp - i - 2));
+	}
+	ft_printf_fd(STDERR_FILENO, "error in ft_tokenize ft_help1\n");
+	return (NULL);
+}
+
+static char	*ft_help2(char *str, int i, int *endp, t_env_info env_info)
+{
+	if (str[i] == '$' && str[i + 1] == '\0')//$の1文字だけの場合のみ例外処理、$と表示するため
+	{
+		*endp = i + 1;
+		return (ft_strdup("$"));
+	}
+	else
+	{
+		*endp = i;
+		while (str[*endp] != '\0' && str[*endp] != '\"' && str[*endp] != '\'')
+			(*endp)++;
+		return (ft_expand_env(ft_substr(str, i, *endp - i), env_info, 0));
+	}
+}
+
+static char	*ft_help4(int *ip, int end, char **old_p, char **tmp_p)
 {
 	char	*result;
-	char	*tmp;
-	char	*before;
-	int		i;
-	int		end;
 
-	result = ft_strdup("");
-	i = 0;
-	while (word[i] != '\0')
-	{
-		if (word[i] == '$' && word[i+1] == '?')//環境変数展開でも$?だけ別処理
-		{
-			tmp = ft_itoa(ft_status_code(0, 0));
-			end = i + 2;
-		}
-		else if (word[i] == '$')
-		{
-			// if (word[i+1] == '\"' || word[i+1] == '\'')
-			// {
-			// 	i++;
-			// 	continue ;
-			// }
-			end = i;
-			while (word[end] != '\0' && word[end] != ' ' && word[end] != '\"' && word[end] != '\'' && word[end]!= '\n')
-				end++;
-			if (end - i == 1)
-			{
-				if (is_doublequote == 1)
-					tmp = ft_strdup("$");
-				else
-					tmp = ft_strdup("");//""で囲まれているわけではなく、$の後ろに何もない場合は何も返さない
-			}
-			else
-				tmp = ft_search_env(ft_substr(word, i + 1, end - i - 1), env_info.env_list);
-		}
-		else
-		{
-			end = i;
-			while (word[end] != '\0' && word[end] != '$')
-				end++;
-			tmp = ft_substr(word, i, end - i);
-		}
-		before = result;
-		result = ft_strjoin(before, tmp);
-		free(before);
-		free(tmp);
-		i = end;
-	}
+	*ip = end;
+	result = ft_strjoin(*old_p, *tmp_p);
+	free(*old_p);
+	free(*tmp_p);
 	return (result);
 }
 
@@ -71,7 +66,7 @@ char	*ft_tokenize(char *str, t_env_info env_info)
 {
 	char	*result;
 	char	*tmp;
-	char	*before;
+	// char	*before;
 	int		i;
 	int		end;
 
@@ -79,42 +74,11 @@ char	*ft_tokenize(char *str, t_env_info env_info)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\"')
-		{
-			end = i + 1;
-			while (str[end] != '\0' && str[end] != '\"')
-				end++;
-			tmp = ft_expand_env(ft_substr(str, i + 1, end - i - 1), env_info, 1);
-			end++;
-		}
-		else if (str[i] == '\'')
-		{
-			end = i + 1;
-			while (str[end] != '\0' && str[end] != '\'')
-				end++;
-			tmp = ft_substr(str, i + 1, end - i - 1);
-			end++;
-		}
+		if (str[i] == '\"' || str[i] == '\'')
+			tmp = ft_help1(str, i, &end, env_info);
 		else
-		{
-			if (str[i] == '$' && str[i + 1] == '\0')//$の1文字だけの場合のみ例外処理、$と表示するため
-			{
-				tmp = ft_strdup("$");
-				end = i + 1;
-			}
-			else
-			{
-				end = i;
-				while (str[end] != '\0' && str[end] != '\"' && str[end] != '\'')
-					end++;
-				tmp = ft_expand_env(ft_substr(str, i, end - i), env_info, 0);
-			}
-		}
-		before = result;
-		result = ft_strjoin(before, tmp);
-		free(before);
-		free(tmp);
-		i = end;
+			tmp = ft_help2(str, i, &end, env_info);
+		result = ft_help4(&i, end, &result, &tmp);
 	}
 	if (ft_strchr(str, '\'') == NULL && ft_strchr(str, '\"') == NULL && ft_strlen(result) == 0)
 	{

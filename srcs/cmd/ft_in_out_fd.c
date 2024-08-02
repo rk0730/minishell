@@ -3,14 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/21 23:20:30 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/02 15:21:50 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
+
+// 入力リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
+static int	ft_in_fd(char **tokens, t_env_info env_info, int i)
+{
+	int		result;
+	char	*file;
+
+	file = ft_tokenize(tokens[i + 1], env_info);
+	if (file == NULL)
+	{
+		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
+		return (-2);
+	}
+	result = open(file, O_RDONLY);
+	if (result == -1)
+	{
+		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		return (-2);
+	}
+	return (result);
+}
+
+// tokens[i]が">>"か">"かを判定して、その後のファイル名を開いて、そのfdを返す
+// 出力、追記リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
+static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
+{
+	int		result;
+	char	*file;
+
+	file = ft_tokenize(tokens[i + 1], env_info);
+	if (file == NULL)
+	{
+		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
+		return (-2);
+	}
+	if (ft_strncmp(tokens[i], ">", 2) == 0)
+	{
+		result = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
+	else if (ft_strncmp(tokens[i], ">>", 3) == 0)
+		result = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+	{
+		result = -1;
+		printf("error in ft_out_fd\n");
+	}
+	if (result == -1)
+	{
+		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		return (-2);
+	}
+	return (result);
+}
 
 // エラーがあった場合は-2を返す（権限、ambiguous redirectなど）
 // リダイレクト先がない場合は-1を返す

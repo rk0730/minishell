@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/25 19:46:29 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 15:13:48 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static char	*ft_next_cmd(char *cmd, int *ip)
 	}
 	else
 		return (ft_substr(cmd, start, *ip - start));
-	
 }
 
 // |で分割する。クォーテーションエラーと| |のエラーも確認する

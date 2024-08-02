@@ -23,19 +23,19 @@ SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
 
 CMD = cmd
-SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
-SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
-SRCS += $(SRCDIR)/$(CMD)/ft_in_fd.c
-SRCS += $(SRCDIR)/$(CMD)/ft_in_out_fd.c
-SRCS += $(SRCDIR)/$(CMD)/ft_out_fd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
-SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_argv.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmds.c
+SRCS += $(SRCDIR)/$(CMD)/ft_in_out_fd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
+SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
-SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
-SRCS += $(SRCDIR)/$(CMD)/ft_static.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
+SRCS += $(SRCDIR)/$(CMD)/ft_static.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
+SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_redirect.c
+SRCS += $(SRCDIR)/$(CMD)/ft_expand_env.c
 
 
 #OBJS

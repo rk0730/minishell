@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/21 22:52:41 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/02 16:56:30 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 static int	ft_next_token_h2(char *input, int i)
 {
-	// int	end;
-
-	// end = i;
-	// while (input[end] == input[i])
-	// 	end++;
-	// if (end - i > 2 || input[end] == '<' || input[end] == '>')
-	// 	*token_status = REDIRECT;
 	while (input[i] == '>' || input[i] == '<')
 		i++;
 	return (i);
@@ -43,6 +36,7 @@ static int	ft_next_token_h(char *input, int i, int *token_status, char c)
 	return (i);
 }
 
+// iを次のトークンの先頭に移動させる
 static int	ft_next_token(char *in, int i, int *token_status)
 {
 	if (in[i] == '>' || in[i] == '<')
@@ -63,6 +57,7 @@ static int	ft_next_token(char *in, int i, int *token_status)
 	return (i);
 }
 
+// tokenの数を数える
 static int	ft_count_tokens(char *input, int *token_status)
 {
 	int	count;
@@ -70,7 +65,6 @@ static int	ft_count_tokens(char *input, int *token_status)
 
 	count = 0;
 	iter = 0;
-	// *token_status = NORMAL;
 	while (input[iter] != '\0' && input[iter] == ' ')
 		iter++;
 	while (input[iter])
@@ -83,6 +77,7 @@ static int	ft_count_tokens(char *input, int *token_status)
 	return (count);
 }
 
+// 文字列を抽出してtokensに入れる
 static void	ft_gen_tokens_h(char **tokens, char *input, int len)
 {
 	int	num;
