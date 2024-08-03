@@ -28,6 +28,7 @@ SRCS += $(SRCDIR)/$(BUILIN)/ft_call_builtin.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_cd.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_pwd.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_exit.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_env.c
 
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c

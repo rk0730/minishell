@@ -220,6 +220,7 @@ exec_test 'cat > no_permission | cat | ls|cat' 'exit'
 exec_test 'cat <no_"read"_permission > no_write_"permission""" | ls | cat <<EOF | cat< no_permission|ls|cat<<eof' 'TEST' 'EOF' 'test' 'eof' 'exit'
 exec_test 'cat < no_read_permission | cat << EOF | lsl | <<eof cat "|" ls | cat > no_write_permission' '1' 'EOF' '2' 'eof' 'exit'
 
+exec_test 'env | grep USER' 'env | grep SHELL' 'env | grep PATH' 'exit'
 # exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
 # exec_test 'env | grep TEST' 'ls | export TEST=test' 'env | grep TEST' 'exit'
 # exec_test 'env | grep TEST' 'export TEST=test | env | grep USER=' 'env | grep TEST' 'exit'

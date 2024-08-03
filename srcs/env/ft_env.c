@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/16 19:10:54 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/03 11:40:05 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_show_env_list(t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		printf("%s==%s\n", tmp->key, tmp->value);
+		printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 }
