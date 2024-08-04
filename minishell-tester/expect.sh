@@ -186,6 +186,20 @@ expect \"$wait\" { send \"ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|
 
 expect \"$wait\" { send \"ls | | ls\n\" }
 
+expect \"$wait\" { send \"echo 1 2    3     4\n\" }
+
+expect \"$wait\" { send \"echo -n test1 test2\n\" }
+
+expect \"$wait\" { send \"echo -nnnn test1 test2    test3 -nn\n\" }
+
+expect \"$wait\" { send \"echo -n   -n -n test1 test2\n\" }
+
+expect \"$wait\" { send \"echo -nnnn -n -a -n test -n -nn -nnn\n\" }
+
+expect \"$wait\" { send \"echo -'nnnn' test\n\" }
+
+expect \"$wait\" { send \"echo -'nnnn'test\n\" }
+
 expect \"$wait\" { send \"exit\n\" }
 expect eof
 "

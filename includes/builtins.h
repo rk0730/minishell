@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 17:51:35 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 23:42:46 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ typedef struct s_cmd_info
 
 void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe);
 int		ft_call_builtin(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
+int		ft_echo(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_pwd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
+int		ft_env(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 
 #endif
