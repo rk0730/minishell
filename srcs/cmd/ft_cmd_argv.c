@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 16:54:52 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 18:45:58 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
 {
+	char	*tmp;
+	char	*result;
+
 	if (str[i] == '\"')
 	{
 		*endp = i + 1;
 		while (str[*endp] != '\0' && str[*endp] != '\"')
 			(*endp)++;
 		(*endp)++;
-		return (ft_expand_env(ft_substr(str, i + 1, *endp - i - 2), env_info, 1));
+		tmp = ft_substr(str, i + 1, *endp - i - 2);
+		result = ft_expand_env(tmp, env_info, 1);
+		return (result);
 	}
 	else if (str[i] == '\'')
 	{
@@ -36,6 +41,9 @@ static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
 
 static char	*ft_help2(char *str, int i, int *endp, t_env_info env_info)
 {
+	char	*tmp;
+	char	*result;
+
 	if (str[i] == '$' && str[i + 1] == '\0')//$の1文字だけの場合のみ例外処理、$と表示するため
 	{
 		*endp = i + 1;
@@ -46,20 +54,22 @@ static char	*ft_help2(char *str, int i, int *endp, t_env_info env_info)
 		*endp = i;
 		while (str[*endp] != '\0' && str[*endp] != '\"' && str[*endp] != '\'')
 			(*endp)++;
-		return (ft_expand_env(ft_substr(str, i, *endp - i), env_info, 0));
+		tmp = ft_substr(str, i, *endp - i);
+		result = ft_expand_env(tmp, env_info, 0);
+		return (result);
 	}
 }
 
-static char	*ft_help4(int *ip, int end, char **old_p, char **tmp_p)
-{
-	char	*result;
+// static char	*ft_help4(int *ip, int end, char **old_p, char **tmp_p)
+// {
+// 	char	*result;
 
-	*ip = end;
-	result = ft_strjoin(*old_p, *tmp_p);
-	free(*old_p);
-	free(*tmp_p);
-	return (result);
-}
+// 	*ip = end;
+// 	result = ft_strjoin(*old_p, *tmp_p);
+// 	free(*old_p);
+// 	free(*tmp_p);
+// 	return (result);
+// }
 
 // ""で囲まれているものはft_expand_envで環境変数展開、''で囲まれていたらそのままつなげる
 char	*ft_tokenize(char *str, t_env_info env_info)
@@ -78,7 +88,8 @@ char	*ft_tokenize(char *str, t_env_info env_info)
 			tmp = ft_help1(str, i, &end, env_info);
 		else
 			tmp = ft_help2(str, i, &end, env_info);
-		result = ft_help4(&i, end, &result, &tmp);
+		i = end;
+		result = ft_join_free(result, tmp);
 	}
 	if (ft_strchr(str, '\'') == NULL && ft_strchr(str, '\"') == NULL && ft_strlen(result) == 0)
 	{

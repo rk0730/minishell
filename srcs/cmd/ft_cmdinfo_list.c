@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmdinfo_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 16:55:22 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 14:45:49 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 		ft_free_array(tokens);
 		return (NULL);
 	}
+	ft_free_array(tokens);
 	// リダイレクト処理と環境変数を展開し、cmd_argvを生成する
 	i = 0;
 	while (i < ft_array_len(cmds))

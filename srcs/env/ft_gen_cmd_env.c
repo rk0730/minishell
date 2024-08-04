@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:07:53 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/01 11:24:03 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/04 17:08:00 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	**ft_gen_cmd_env(t_env_pair *env_list)
 		free(tmp_str);
 		tmp_str = env_str;
 		env_str = ft_strjoin(tmp_str, tmp->value);
+		free(tmp_str);
 		cmd_env = ft_add_str(cmd_env, env_str);
 		tmp = tmp->next;
 	}

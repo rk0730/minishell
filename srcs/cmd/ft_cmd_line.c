@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 16:55:03 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 16:44:46 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 {
 	char		**cmds;
 	t_cmd_info	*cmd_list;
+	int			i;
 	int			last_index;
 	int			std_in;
 	int			std_out;
@@ -33,6 +34,7 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	free(tmp);
 	// コマンドを|で分割
 	cmds = ft_gen_cmds(input_cmd);
+	free(input_cmd);
 	if (!cmds)
 		return (SYNTAX_ERROR);
 	//　各コマンドのリダイレクトや環境変数展開などを実行する
@@ -58,6 +60,12 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	close(std_in);
 	close(std_out);
 	ft_free_array(cmds);
+	i = 0;
+	while (i <= last_index)
+	{
+		ft_free_array(cmd_list[i].cmd_argv);
+		i++;
+	}
 	free(cmd_list);
 	close(env_info_p->input_fd);
 	return (status);

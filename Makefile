@@ -22,6 +22,7 @@ SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
 SRCS += $(SRCDIR)/$(UTILS)/ft_static.c
+SRCS += $(SRCDIR)/$(UTILS)/ft_join_free.c
 
 BUILIN = builtins
 SRCS += $(SRCDIR)/$(BUILIN)/ft_call_builtin.c

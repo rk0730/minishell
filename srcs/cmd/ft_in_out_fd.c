@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/02 15:21:50 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 18:28:42 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static int	ft_in_fd(char **tokens, t_env_info env_info, int i)
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		free(file);
 		return (-2);
 	}
+	free(file);
 	return (result);
 }
 
@@ -60,8 +62,10 @@ static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		free(file);
 		return (-2);
 	}
+	free(file);
 	return (result);
 }
 
