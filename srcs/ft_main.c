@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 19:18:47 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 23:19:37 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ static void	ft_sigint(int sig)
 
 
 
-int main(int argc, char **argv, char **envp) {
+int	main(int argc, char **argv, char **envp)
+{
 	t_env_pair	*env_list;
 	t_env_info	*env_info_p;
 	int			input_pipe[2];
 
-	// 消す
-	if (argc == 0)
-		printf("%s", argv[0]);
-
+	(void)argc;
+	(void)argv;
 	env_list = ft_gen_env_list(envp);
 	env_info_p = (t_env_info *)malloc(sizeof(t_env_info));
 	env_info_p->env_list = env_list;
 	ft_status_code(1, 0);
-	while (1) {
+	while (1)
+	{
 		signal(SIGINT, ft_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		// Readlineを使用してユーザー入力を取得

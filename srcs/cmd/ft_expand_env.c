@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 18:40:21 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/04 22:57:16 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 {
 	char	*result;
 	char	*tmp;
-	// char	*before;
 	int		i;
 	int		end;
 

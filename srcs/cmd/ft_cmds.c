@@ -6,19 +6,17 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 19:28:09 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/04 22:44:14 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static char	*ft_next_cmd(char *cmd, int *ip)
+// エラーなら1を返す
+static int	ft_next_cmd_h(char *cmd, int *ip)
 {
-	int		start;
-	int		tmp;
 	char	c;
 
-	start = *ip;
 	while (cmd[*ip] && cmd[*ip] != '|')
 	{
 		if (cmd[*ip] == '\'' || cmd[*ip] == '\"')
@@ -30,11 +28,22 @@ static char	*ft_next_cmd(char *cmd, int *ip)
 			if (cmd[*ip] == '\0')
 			{
 				ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
-				return (NULL);
+				return (1);
 			}
 		}
 		(*ip)++;
 	}
+	return (0);
+}
+
+static char	*ft_next_cmd(char *cmd, int *ip)
+{
+	int		start;
+	int		tmp;
+
+	start = *ip;
+	if (ft_next_cmd_h(cmd, ip) == 1)
+		return (NULL);
 	//すべてスペースでないか確認する
 	tmp = start;
 	while (cmd[tmp] && cmd[tmp] == ' ')
