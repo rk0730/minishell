@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmds.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 15:13:48 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 19:28:09 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char	*ft_next_cmd(char *cmd, int *ip)
 {
-	int	start;
-	int	tmp;
-	char c;
+	int		start;
+	int		tmp;
+	char	c;
 
 	start = *ip;
 	while (cmd[*ip] && cmd[*ip] != '|')
