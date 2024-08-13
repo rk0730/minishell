@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 22:57:16 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/13 23:28:26 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static char	*ft_help1(int i, int *endp)
 static char	*ft_help2(char *word, int i, int *endp, int is_doublequote)
 {
 	*endp = i;
-	while (word[*endp] != '\0' && word[*endp] != ' ' && word[*endp] != '\"' && word[*endp] != '\'' && word[*endp]!= '\n')
+	while (word[*endp] != '\0' && word[*endp] != ' ' && word[*endp] != '\"' && word[*endp] != '\'' && word[*endp]!= '\n' && word[*endp] != '=' && !(word[*endp] == '$' && *endp != i))
 		(*endp)++;
 	if (*endp - i == 1)
 	{
+		printf("in difference is 1\n");
 		if (is_doublequote == 1)
 			return (ft_strdup("$"));
 		else
@@ -63,10 +64,16 @@ char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 
 	result = ft_strdup("");
 	i = 0;
+	end = 0;
 	while (word[i] != '\0')
 	{
 		if (word[i] == '$' && word[i+1] == '?')//環境変数展開でも$?だけ別処理
 			tmp = ft_help1(i, &end);
+		else if (word[i] == '$' && (word[i+1] == '\0' || word[i+1] == '='))
+		{
+			tmp = ft_strdup("$");
+			end++;
+		}
 		else if (word[i] == '$')
 		{
 			tmp = ft_help2(word, i, &end, is_doublequote);
