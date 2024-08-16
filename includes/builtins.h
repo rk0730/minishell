@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/07 23:38:19 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/08/17 03:36:50 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pi
 int		ft_pwd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_env(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
-int		ft_export(t_cmd_info cmd_info, t_env_info env_info);
+int		ft_export(t_cmd_info cmd_info, t_env_info env_info,  int read_pipe, int write_pipe);
+int		ft_unset(t_cmd_info cmd_info, t_env_info env_info,  int read_pipe, int write_pipe);
 #endif

@@ -32,6 +32,7 @@ SRCS += $(SRCDIR)/$(BUILIN)/ft_exit.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_env.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_echo.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_export.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_unset.c
 
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c

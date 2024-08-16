@@ -15,7 +15,7 @@ static	int	ft_is_all_alnum(char *s)
 	}
 	return (1);
 }
-t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
+static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 {
 	t_env_pair	*tmp;
 
@@ -90,12 +90,13 @@ static  int ft_setenv(t_env_pair *env_list, char *str)
 	return (0);
 }
 
-int		ft_export(t_cmd_info cmd_info, t_env_info env_info)
+int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
 {
     int i;
     int status;
 
     i = 1;
+	ft_choose_fd(cmd_info, read_pipe, write_pipe);
     while (cmd_info.cmd_argv[i])
 	{
 		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
