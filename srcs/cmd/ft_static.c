@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_static.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 17:27:26 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/08/02 16:40:48 by rkitao           ###   ########.fr       */
+/*   Created: 2024/07/28 18:42:27 by rkitao            #+#    #+#             */
+/*   Updated: 2024/08/01 13:01:02 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-void	ft_pwd()
+int	ft_status_code(int flag, int new_status)
 {
-	char *pathname[PATH_MAX];
+	static int	status = 0;
 
-	getcwd(pathname, PATH_MAX);
-	ft_printf("%s\n", pathname);
+	if (flag)
+	{
+		status = new_status;
+		return (status);
+	}
+	else
+		return (status);
 }

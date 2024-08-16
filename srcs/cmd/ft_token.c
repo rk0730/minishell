@@ -3,25 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/11 20:52:15 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/08/02 16:56:30 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static int	ft_next_token_h2(char *input, int i, int *token_status)
+static int	ft_next_token_h2(char *input, int i)
 {
-	int	end;
-
-	end = i;
-	while (input[end] == input[i])
-		end++;
-	if (end - i > 2 || input[end] == '<' || input[end] == '>')
-		*token_status = REDIRECT;
-	return (end);
+	while (input[i] == '>' || input[i] == '<')
+		i++;
+	return (i);
 }
 
 static int	ft_next_token_h(char *input, int i, int *token_status, char c)
@@ -41,19 +36,17 @@ static int	ft_next_token_h(char *input, int i, int *token_status, char c)
 	return (i);
 }
 
+// iを次のトークンの先頭に移動させる
 static int	ft_next_token(char *in, int i, int *token_status)
 {
-	while (in[i] != '\0' && in[i] != ' ')
+	if (in[i] == '>' || in[i] == '<')
+		return (ft_next_token_h2(in, i));
+	while (in[i] != '\0' && in[i] != ' ' && in[i] != '<' && in[i] != '>')
 	{
 		if (in[i] == '\'')
 			i = ft_next_token_h(in, i, token_status, '\'');
 		else if (in[i] == '\"')
 			i = ft_next_token_h(in, i, token_status, '\"');
-		else if (in[i] == '<' || in[i] == '>')
-		{
-			i = ft_next_token_h2(in, i, token_status);
-			break ;
-		}
 		else
 		{
 			while (in[i] && in[i] != ' ' && in[i] != '\'' && in[i] != '\"'
@@ -64,6 +57,7 @@ static int	ft_next_token(char *in, int i, int *token_status)
 	return (i);
 }
 
+// tokenの数を数える
 static int	ft_count_tokens(char *input, int *token_status)
 {
 	int	count;
@@ -71,7 +65,6 @@ static int	ft_count_tokens(char *input, int *token_status)
 
 	count = 0;
 	iter = 0;
-	// *token_status = NORMAL;
 	while (input[iter] != '\0' && input[iter] == ' ')
 		iter++;
 	while (input[iter])
@@ -84,6 +77,7 @@ static int	ft_count_tokens(char *input, int *token_status)
 	return (count);
 }
 
+// 文字列を抽出してtokensに入れる
 static void	ft_gen_tokens_h(char **tokens, char *input, int len)
 {
 	int	num;
@@ -104,9 +98,9 @@ static void	ft_gen_tokens_h(char **tokens, char *input, int len)
 		num++;
 	}
 	tokens[num] = NULL;
-	// ft_show_all(tokens);
 }
 
+// トークンを生成する関数　クォーテーションエラーがある場合はNULLを返す　他のエラーはここでは見逃す
 char	**ft_gen_tokens(char *input)
 {
 	int		token_status;

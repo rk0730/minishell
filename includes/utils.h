@@ -6,7 +6,7 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/20 14:09:56 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/02 16:41:12 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 # include <readline/history.h>
 # include <sys/errno.h>
 # include <sys/wait.h>
+# include <fcntl.h>
+# include <signal.h>
+# include <linux/limits.h>
 
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
-// typedef struct s_env_pair
-// {
-// 	char				*key;
-// 	char				*value;
-// 	struct s_env_pair	*next;
-// }	t_env_pair;
+extern volatile sig_atomic_t	g_signum;
+
 
 void	ft_free_array(char **array);
 void	ft_show_all(char **array);

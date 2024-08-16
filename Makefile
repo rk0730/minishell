@@ -15,14 +15,27 @@ ENV = env
 SRCS += $(SRCDIR)/$(ENV)/ft_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_path.c
 SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
+SRCS += $(SRCDIR)/$(ENV)/ft_gen_cmd_env.c
 
 UTILS = utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
+SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
+SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
 
 CMD = cmd
-SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
-SRCS += $(SRCDIR)/$(CMD)/ft_cmd_array.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmd_argv.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmds.c
+SRCS += $(SRCDIR)/$(CMD)/ft_in_out_fd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
+SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
+SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
+SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
+SRCS += $(SRCDIR)/$(CMD)/ft_static.c
+SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
+SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_redirect.c
+SRCS += $(SRCDIR)/$(CMD)/ft_expand_env.c
 
 
 #OBJS
@@ -31,7 +44,11 @@ OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCDIR = includes
 
-INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR)
+# なぜかrkitaoのmacではこれで実行した方が良さげなので置いておく
+# INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(SRCDIR)/$(UTILS) -I/opt/homebrew/opt/readline/include
+# LIB = -lreadline -lncurses -L/opt/homebrew/opt/readline/lib
+
+INCLUDES = -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(SRCDIR)/$(UTILS)
 LIB = -lreadline
 
 NAME = minishell
@@ -39,7 +56,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(FTPRINTF)
-	$(CC) $(CFLAGS) $(INCLUDES) $(LIB) -o $@ $^
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIB)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) all

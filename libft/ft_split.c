@@ -6,11 +6,12 @@
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:08:59 by rkitao            #+#    #+#             */
-/*   Updated: 2024/04/29 13:51:17 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/07/20 20:49:05 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static size_t	ft_count_words(char const *s, char c)
 {
