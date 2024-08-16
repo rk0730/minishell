@@ -1,6 +1,20 @@
 #include "builtins.h"
 #include "env.h"
 
+// to do: create test case
+static	int	ft_is_all_alnum(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isalnum(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 {
 	t_env_pair	*tmp;
@@ -65,6 +79,9 @@ static  int ft_setenv(t_env_pair *env_list, char *str)
 	t_env_pair	*new;
 
 	new = ft_new_env(str);
+	//  not forget to free
+	if (!(ft_strchr(new->key, '_') || ft_is_all_alnum(new->key)))
+		return (1);
 	// printf("new key: %s new value: %s\n", new->key, new->value);
 	if (ft_search_env_node(new->key, env_list) && *(new->value))
 		ft_update_env_list(&env_list, new);
