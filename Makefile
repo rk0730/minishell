@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -31,6 +31,7 @@ SRCS += $(SRCDIR)/$(BUILIN)/ft_pwd.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_exit.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_env.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_echo.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_export.c
 
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
