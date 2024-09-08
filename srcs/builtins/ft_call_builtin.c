@@ -42,7 +42,7 @@ int	ft_call_builtin(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int
 {
 	if (ft_strncmp(cmd_info.cmd_argv[0], "echo", 5) == 0)
 		return (ft_echo(cmd_info, env_info, read_pipe, write_pipe));
-	else if (ft_strncmp(cmd_info.cmd_argv[0], "cd", 3) == 0)
+	if (ft_strncmp(cmd_info.cmd_argv[0], "cd", 3) == 0)
 		return (ft_cd(cmd_info, env_info, read_pipe, write_pipe));
 	else if (ft_strncmp(cmd_info.cmd_argv[0], "pwd", 4) == 0)
 		return (ft_pwd(cmd_info, env_info, read_pipe, write_pipe));

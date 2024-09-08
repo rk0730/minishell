@@ -35,10 +35,13 @@ int ft_unset(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_
 
     i = 1;
 	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+    status = 0;
     while (cmd_info.cmd_argv[i])
 	{
 		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
-        status |= ft_delenv(&(env_info.env_list), cmd_info.cmd_argv[i++]);
+        if (ft_strncmp(cmd_info.cmd_argv[i], "_", 2) != 0)
+            status |= ft_delenv(&(env_info.env_list), cmd_info.cmd_argv[i]);
+        i++;
 	}
     return (status);
 }

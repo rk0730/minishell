@@ -124,7 +124,7 @@ char	**ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 		}
 		if (!tokens[i + 1])
 			last_index = 1;
-		printf("last index flag: %d\n", last_index);
+		// printf("last index flag: %d\n", last_index);
 		tmp = ft_tokenize(tokens[i], env_info);
 		if (tmp != NULL)
 			cmd_argv = ft_add_str(cmd_argv, tmp);

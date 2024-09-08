@@ -5,15 +5,19 @@
 static	int	ft_is_all_alnum(char *s)
 {
 	int	i;
+	int	is_all_num;
 
 	i = 0;
+	is_all_num = 0;
 	while (s[i])
 	{
 		if (!ft_isalnum(s[i]))
 			return (0);
+		if (ft_isalpha(s[i]) || s[i] == '_')
+			is_all_num = 1;
 		i++;
 	}
-	return (1);
+	return (is_all_num);
 }
 static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 {
@@ -97,6 +101,7 @@ int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int writ
 
     i = 1;
 	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	status = 0;
     while (cmd_info.cmd_argv[i])
 	{
 		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
