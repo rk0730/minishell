@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/29 00:07:57 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:02:30 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ char	**ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 	char	**cmd_argv;
 	char	*tmp;
 	int		i;
-	int		last_index;
+	// int		last_index;
 
 	i = 0;
 	cmd_argv = (char **)malloc(sizeof(char *));
-	last_index = 0;
+	// last_index = 0;
 	if (!cmd_argv)
 		return (NULL);
 	cmd_argv[0] = NULL;
@@ -122,8 +122,8 @@ char	**ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 			i += 2;
 			continue ;
 		}
-		if (!tokens[i + 1])
-			last_index = 1;
+		// if (!tokens[i + 1])
+		// 	last_index = 1;
 		// printf("last index flag: %d\n", last_index);
 		tmp = ft_tokenize(tokens[i], env_info);
 		if (tmp != NULL)

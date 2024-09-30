@@ -2,16 +2,16 @@
 #include "env.h"
 
 // to do: create test case
-static	int	ft_is_all_alnum(char *s)
+static	int	ft_is_valid_envnm(char *s, int len)
 {
 	int	i;
 	int	is_all_num;
 
 	i = 0;
 	is_all_num = 0;
-	while (s[i])
+	while (i < len)
 	{
-		if (!ft_isalnum(s[i]))
+		if (!(ft_isalnum(s[i]) || s[i] == '_'))
 			return (0);
 		if (ft_isalpha(s[i]) || s[i] == '_')
 			is_all_num = 1;
@@ -36,12 +36,16 @@ static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 static t_env_pair	*ft_new_env(char *env)
 {
 	t_env_pair	*env_pair;
+	char		*e_pos;
 
+	if (!env)
+		return (NULL);
+	e_pos = ft_strchr(env, '=');
 	env_pair = (t_env_pair *)malloc(sizeof(t_env_pair));
 	if (!env_pair)
 		return (NULL);
-	env_pair->key = ft_substr(env, 0, ft_strchr(env, '=') - env);
-	env_pair->value = ft_substr(env, ft_strchr(env, '=') - env + 1, env + ft_strlen(env) - ft_strchr(env, '=') - 1);
+	env_pair->key = ft_substr(env, 0, e_pos - env);
+	env_pair->value = ft_substr(env, e_pos - env + 1, env + ft_strlen(env) - e_pos - 1);
 	env_pair->next = NULL;
 	return (env_pair);
 }
@@ -81,10 +85,18 @@ static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 static  int ft_setenv(t_env_pair *env_list, char *str)
 {
 	t_env_pair	*new;
+	char		*e_pos;
 
+	e_pos = ft_strchr(str, '=');
+	// =がない場合で変数名に禁足文字ない場合と変数名が上書きできない_の場合
+	if ((!e_pos && ft_is_valid_envnm(str, ft_strlen(str))) ||(e_pos - str == 1 && *str == '_'))
+		return (0);
+	// 変数名に禁足文字ある場合
+	if (!ft_is_valid_envnm(str, e_pos - str))
+		return (1);
 	new = ft_new_env(str);
 	//  not forget to free
-	if (!(ft_strchr(new->key, '_') || ft_is_all_alnum(new->key)))
+	if (!(new))
 		return (1);
 	// printf("new key: %s new value: %s\n", new->key, new->value);
 	if (ft_search_env_node(new->key, env_list) && *(new->value))
