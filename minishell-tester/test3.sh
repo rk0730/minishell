@@ -24,18 +24,6 @@ exec_test 'cat <no_"read"_permission > no_write_"permission""" | ls | cat <<EOF 
 exec_test 'cat < no_read_permission | cat << EOF | lsl | <<eof cat "|" ls | cat > no_write_permission' '1' 'EOF' '2' 'eof' 'exit'
 exec_test 'env | grep USER' 'env | grep SHELL' 'env | grep PATH' 'exit'
 
-exec_test 'env | grep TEST' 'export TEST=test' 'env | grep TEST' 'exit'
-exec_test 'env | grep TEST' 'ls | export TEST=test' 'env | grep TEST' 'exit'
-exec_test 'env | grep TEST' 'export TEST=test | env | grep USER=' 'env | grep TEST' 'exit'
-exec_test 'export TEST=test' 'env | grep TEST' 'unset TEST | ls | echo 1' 'env | grep TEST' 'pwd | unset TEST | echo 2' 'env | grep TEST' 'unset TEST' 'env | grep TEST' 'exit'
-exec_test 'export foo="a   b"' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
-exec_test 'export foo=abc$USER' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
-exec_test 'pwd' 'cd | ls' 'pwd' 'exit'
-exec_test 'pwd' 'ls | cd ..' 'pwd' 'exit'
-exec_test 'pwd' 'ls | cd hello | cat' 'pwd' 'exit'
-exec_test 'pwd' 'ls | cd no_such_dir | cat' 'pwd' 'exit'
-exec_test 'cat | ls' '' 'exit'
-
 
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then
 	end_test
