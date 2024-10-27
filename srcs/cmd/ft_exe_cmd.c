@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/10/27 15:38:16 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/27 23:38:09 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,19 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int wri
 {
 	int		status;
 	pid_t	pid;
+	t_env_pair *new_;
 
+	// 環境変数_を更新する
+	new_ = (t_env_pair *)malloc(sizeof(t_env_pair));
+	new_->key = ft_strdup("_");
+	new_->value = ft_strdup(cmd_info.cmd_argv[ft_array_len(cmd_info.cmd_argv) - 1]);
+	new_->next = NULL;
+	// builtinの場合はここで実行し、終了ステータスを返す
 	status = ft_exec_cmd_h(cmd_info, env_info, read_pipe, write_pipe);
-	if (status != -1)
+	if (status != -1){
+		ft_update_env_list(&(env_info.env_list), new_, 0);
 		return (status);
+	}
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);
@@ -117,6 +126,7 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int wri
 	{
 		ft_exec_cmd_parent(cmd_info, read_pipe, write_pipe);
 		waitpid(pid, &status, 0);
+		ft_update_env_list(&(env_info.env_list), new_, 0);
 		return (WEXITSTATUS(status));
 	}
 	return (EXIT_FAILURE);

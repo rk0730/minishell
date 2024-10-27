@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ./test_utils.sh
 
 start_test
