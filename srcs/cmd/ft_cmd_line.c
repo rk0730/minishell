@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 19:21:01 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/27 18:58:03 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,18 @@ static int	ft_help2(char **cmds, t_cmd_info *cmd_list, t_env_info *env_info_p)
 	int	last_index;
 	int	status;
 	int	i;
+	t_env_pair *new_;
 
 	// コマンドを実行する
 	last_index = ft_array_len(cmds) - 1;
 	status = ft_exec_cmd_list(cmd_list, *env_info_p, last_index);
+	// 環境変数_を更新する
+	new_ = (t_env_pair *)malloc(sizeof(t_env_pair));
+	new_->key = "_";
+	new_->value = cmd_list[last_index].cmd_argv[ft_array_len(cmd_list[last_index].cmd_argv) - 1];
+	new_->next = NULL;
+	ft_update_env_list(&env_info_p->env_list, &new_);
+	free(new_);
 	i = 0;
 	while (i <= last_index)
 	{
