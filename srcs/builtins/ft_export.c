@@ -11,6 +11,8 @@ static	int	ft_is_valid_envnm(char *s, int len)
 	is_all_num = 0;
 	while (i < len)
 	{
+		if (!(ft_isalpha(s[i]) || s[i] == '_') && i == 0)
+			return (0);
 		if (!(ft_isalnum(s[i]) || s[i] == '_'))
 			return (0);
 		if (ft_isalpha(s[i]) || s[i] == '_')
