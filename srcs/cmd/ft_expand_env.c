@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 16:29:38 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/17 03:29:55 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static char	*ft_help1(int i, int *endp)
 static char	*ft_help2(char *word, int i, int *endp, int is_doublequote)
 {
 	*endp = i;
-	while (word[*endp] != '\0' && word[*endp] != ' ' && word[*endp] != '\"' && word[*endp] != '\'' && word[*endp]!= '\n')
+	while (word[*endp] != '\0' && word[*endp] != ' ' && word[*endp] != '\"' && word[*endp] != '\'' && word[*endp]!= '\n' && word[*endp] != '=' && !(word[*endp] == '$' && *endp != i))
 		(*endp)++;
+	// while (word[*endp] != '\0' && word[*endp] != ' ' && word[*endp] != '\"' && word[*endp] != '\'' && word[*endp]!= '\n')
 	if (*endp - i == 1)
 	{
 		if (is_doublequote == 1)
@@ -42,41 +43,49 @@ static char	*ft_help3(char *word, int i, int *endp)
 	return (ft_substr(word, i, *endp - i));
 }
 
-static char	*ft_help4(int *ip, int end, char **old_p, char **tmp_p)
+static char	*ft_help4(char *word, int i, int end, t_env_info env_info)
 {
-	char	*result;
+	char	*tmp;
+	char	*tmp1;
 
-	*ip = end;
-	result = ft_strjoin(*old_p, *tmp_p);
-	free(*old_p);
-	free(*tmp_p);
-	return (result);
+	tmp1 = ft_substr(word, i + 1, end - i - 1);
+	tmp = ft_search_env(tmp1, env_info.env_list);
+	free(tmp1);
+	return (tmp);
 }
 
-// strの環境変数を展開した文字列を返す doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
+// wordの環境変数を展開した文字列を返す（wordはfreeされる） doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
 char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 {
 	char	*result;
 	char	*tmp;
-	// char	*before;
 	int		i;
 	int		end;
 
 	result = ft_strdup("");
 	i = 0;
+	end = 0;
 	while (word[i] != '\0')
 	{
+		// printf("words is here: %s\n", word);
 		if (word[i] == '$' && word[i+1] == '?')//環境変数展開でも$?だけ別処理
 			tmp = ft_help1(i, &end);
+		else if (word[i] == '$' && word[i+1] == '=')
+		{
+			tmp = ft_strdup("$");
+			end++;
+		}
 		else if (word[i] == '$')
 		{
 			tmp = ft_help2(word, i, &end, is_doublequote);
 			if (tmp == NULL)
-				tmp = ft_search_env(ft_substr(word, i + 1, end - i - 1), env_info.env_list);
+				tmp = ft_help4(word, i, end, env_info);
 		}
 		else
 			tmp = ft_help3(word, i, &end);
-		result = ft_help4(&i, end, &result, &tmp);
+		i = end;
+		result = ft_join_free(result, tmp);
 	}
+	free(word);
 	return (result);
 }

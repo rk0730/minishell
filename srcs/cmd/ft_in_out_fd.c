@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/02 15:21:50 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/08/04 23:06:26 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static int	ft_in_fd(char **tokens, t_env_info env_info, int i)
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		free(file);
 		return (-2);
 	}
+	free(file);
 	return (result);
 }
 
@@ -52,17 +54,33 @@ static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
 	}
 	else if (ft_strncmp(tokens[i], ">>", 3) == 0)
 		result = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else
-	{
-		result = -1;
-		printf("error in ft_out_fd\n");
-	}
+	// else
+	// {
+	// 	result = -1;
+	// 	printf("error in ft_out_fd\n");
+	// }
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		free(file);
 		return (-2);
 	}
+	free(file);
 	return (result);
+}
+
+// エラーなら1を返す
+static int	ft_in_out_fd_h(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int i)
+{
+	if (tokens[i][0] == '>')
+	{
+		if (cmd_info->fd_out != -1)
+			close(cmd_info->fd_out);
+		cmd_info->fd_out = ft_out_fd(tokens, env_info, i);
+		if (cmd_info->fd_out == -2)
+			return (1);
+	}
+	return (0);
 }
 
 // エラーがあった場合は-2を返す（権限、ambiguous redirectなど）
@@ -77,14 +95,8 @@ void	ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int 
 	cmd_info->fd_out = -1;
 	while (tokens[i])
 	{
-		if (tokens[i][0] == '>')
-		{
-			if (cmd_info->fd_out != -1)
-				close(cmd_info->fd_out);
-			cmd_info->fd_out = ft_out_fd(tokens, env_info, i);
-			if (cmd_info->fd_out == -2)
-				return ;
-		}
+		if (ft_in_out_fd_h(tokens, env_info, cmd_info, i) == 1)
+			return ;
 		else if (ft_strncmp(tokens[i], "<", 2) == 0)
 		{
 			if (cmd_info->fd_in != -1 && cmd_info->fd_in != heredoc_fd)

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_static.c                                        :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 18:42:27 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/01 13:01:02 by kitaoryoma       ###   ########.fr       */
+/*   Created: 2024/08/03 11:38:14 by kitaoryoma        #+#    #+#             */
+/*   Updated: 2024/08/04 23:57:08 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "builtins.h"
 
-int	ft_status_code(int flag, int new_status)
+int	ft_env(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
 {
-	static int	status = 0;
-
-	if (flag)
-	{
-		status = new_status;
-		return (status);
-	}
-	else
-		return (status);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_show_env_list(env_info.env_list);
+	return (0);
 }

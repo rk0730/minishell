@@ -287,11 +287,6 @@ exec_test 'exit 24 | exit 42' 'echo $?' 'exit'
 exec_test 'exit 1 2 | exit 42' 'echo $?' 'exit'
 exec_test 'exit 42 | exit 1 2' 'echo $?' 'exit'
 exec_test 'exit 1 2 | exit 42 | exit 3 4' 'echo $?' 'exit'
-exec_test 'exit | exit' 'exit'
-
-# # cdテスト
-# exec_test 'unset HOME' 'cd' 'exit'
-# exec_test 'cd ..' 'env | grep PWD' 'exit'
 
 # export test
 exec_test 'echo $'USER'$' 'exit'
@@ -301,6 +296,27 @@ exec_test 'echo $USER$=9' 'exit'
 exec_test 'echo $USER=9' 'exit'
 exec_test 'echo $"USER=9"' 'exit'
 exec_test 'echo $'USER=9'' 'exit'
+# can't check error status
+exec_test 'export A B C $ | echo $A' 'echo $?' 'exit'
+exec_test 'export A=9 B=6 C=3 | echo $A=$B ' 'echo $?' 'exit'
+exec_test 'export A=9 B=6 C=3 | export $A=$B | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A=9 B=6 C=3 | export A=$B | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A=9 B=6 C | export $C=$B | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A=9 B=6 C=3 | export $"C"=$B | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A=9 B=6 C=3 | export $'C'=$B | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A= | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A | echo $A $B' 'echo $?' 'exit'
+exec_test 'export A=9 | echo $A $B' 'echo $?' 'exit'
+exec_test 'export _9=9 | echo $A $B' 'echo $?' 'exit'
+exec_test 'export _=9 | echo $_ $B' 'echo $?' 'exit'
+exec_test 'export _ | echo $_ $B' 'echo $?' 'exit'
+exec_test 'export %& | echo $%& $B' 'echo $?' 'exit'
+exec_test 'export %&=9 | echo $%& $B' 'echo $?' 'exit'
+exec_test 'export _9=%& | echo $_9 $B' 'echo $?' 'exit'
+
+# # cdテスト
+# exec_test 'unset HOME' 'cd' 'exit'
+# exec_test 'cd ..' 'env | grep PWD' 'exit'
 
 # テスト結果の表示
 echo

@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_static.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 17:27:26 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/08/02 18:23:54 by rkitao           ###   ########.fr       */
+/*   Created: 2024/07/28 18:42:27 by rkitao            #+#    #+#             */
+/*   Updated: 2024/08/02 20:30:30 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "utils.h"
 
-int	ft_pwd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_status_code(int flag, int new_status)
 {
-	char	pathname[PATH_MAX];
+	static int	status = 0;
 
-	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
-	getcwd(pathname, PATH_MAX);
-	printf("%s\n", pathname);
-	return (0);
+	if (flag)
+	{
+		status = new_status;
+		return (status);
+	}
+	else
+		return (status);
 }

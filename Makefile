@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -21,6 +21,18 @@ UTILS = utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
+SRCS += $(SRCDIR)/$(UTILS)/ft_static.c
+SRCS += $(SRCDIR)/$(UTILS)/ft_join_free.c
+
+BUILIN = builtins
+SRCS += $(SRCDIR)/$(BUILIN)/ft_call_builtin.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_cd.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_pwd.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_exit.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_env.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_echo.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_export.c
+SRCS += $(SRCDIR)/$(BUILIN)/ft_unset.c
 
 CMD = cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_token.c
@@ -31,7 +43,6 @@ SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
-SRCS += $(SRCDIR)/$(CMD)/ft_static.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
 SRCS += $(SRCDIR)/$(CMD)/ft_redirect.c
@@ -69,6 +80,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)/$(ENV)
 	@mkdir -p $(OBJDIR)/$(UTILS)
 	@mkdir -p $(OBJDIR)/$(CMD)
+	@mkdir -p $(OBJDIR)/$(BUILIN)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
