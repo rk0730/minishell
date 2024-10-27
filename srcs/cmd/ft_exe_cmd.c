@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/04 22:57:02 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/27 15:38:16 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int wri
 	{
 		ft_exec_cmd_parent(cmd_info, read_pipe, write_pipe);
 		waitpid(pid, &status, 0);
-		return (status);
+		return (WEXITSTATUS(status));
 	}
 	return (EXIT_FAILURE);
 }
