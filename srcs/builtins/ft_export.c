@@ -11,6 +11,8 @@ static	int	ft_is_valid_envnm(char *s, int len)
 	is_all_num = 0;
 	while (i < len)
 	{
+		if (!(ft_isalpha(s[i]) || s[i] == '_') && i == 0)
+			return (0);
 		if (!(ft_isalnum(s[i]) || s[i] == '_'))
 			return (0);
 		if (ft_isalpha(s[i]) || s[i] == '_')
@@ -93,7 +95,7 @@ static  int ft_setenv(t_env_pair *env_list, char *str)
 		return (0);
 	// 変数名に禁足文字ある場合
 	if (!ft_is_valid_envnm(str, e_pos - str))
-		return (1);
+		return (2);
 	new = ft_new_env(str);
 	//  not forget to free
 	if (!(new))
@@ -110,6 +112,7 @@ int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int writ
 {
     int i;
     int status;
+	int return_st;
 
     i = 1;
 	ft_choose_fd(cmd_info, read_pipe, write_pipe);
@@ -117,7 +120,14 @@ int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int writ
     while (cmd_info.cmd_argv[i])
 	{
 		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
-        status |= ft_setenv(env_info.env_list, cmd_info.cmd_argv[i++]);
+        return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
+		if (return_st == 2) 
+		{
+			ft_printf_fd(STDERR_FILENO, "export: `%s': not a valid identifier\n", cmd_info.cmd_argv[i]);
+			return_st = 1;
+		}
+		status |= return_st;
+		i++;
 	}
     return (status);
 }

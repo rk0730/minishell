@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/09/30 14:21:46 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:24:58 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,30 @@ void	ft_show_env_list(t_env_pair *env_list)
 		if (tmp->value)
 			printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
+	}
+}
+
+void	ft_free_env_list(t_env_pair *env_list)
+{
+	t_env_pair	*node;
+	
+	node = env_list;
+	if (!env_list)
+		return ;
+	while (env_list)
+	{
+		node = env_list->next;
+		if (env_list->key)
+		{
+			free(env_list->key);
+			env_list->key = NULL;
+		}
+		if (env_list->value)
+		{
+			free(env_list->value);
+			env_list->value = NULL;
+		}
+		free(env_list);
+		env_list = node;
 	}
 }
