@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/01 11:15:30 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/27 19:06:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef struct s_env_info
 	char		*input;//ヒアドクなども含めた入力　環境変数ではないが都合がいいのでここに入れる
 	int			input_fd;//同上
 }	t_env_info;
+
+enum e_export_mode
+{
+	REPLACE = 0,
+	ADD = 1
+};
 
 t_env_pair	*ft_gen_env_list(char **envp);
 char		**ft_gen_path_array(t_env_pair *env_list);
