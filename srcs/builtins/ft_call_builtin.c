@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:24:47 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/07 23:43:26 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/08/17 03:41:27 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	ft_call_builtin(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int
 {
 	if (ft_strncmp(cmd_info.cmd_argv[0], "echo", 5) == 0)
 		return (ft_echo(cmd_info, env_info, read_pipe, write_pipe));
-	else if (ft_strncmp(cmd_info.cmd_argv[0], "cd", 3) == 0)
+	if (ft_strncmp(cmd_info.cmd_argv[0], "cd", 3) == 0)
 		return (ft_cd(cmd_info, env_info, read_pipe, write_pipe));
 	else if (ft_strncmp(cmd_info.cmd_argv[0], "pwd", 4) == 0)
 		return (ft_pwd(cmd_info, env_info, read_pipe, write_pipe));
 	else if (ft_strncmp(cmd_info.cmd_argv[0], "export", 7) == 0)
-		return (ft_export(cmd_info, env_info));
-	// else if (ft_strncmp(cmd_info.cmd_argv[0], "unset", 6) == 0)
-	// 	return (ft_unset(cmd_info, env_info, read_pipe, write_pipe));
+		return (ft_export(cmd_info, env_info, read_pipe, write_pipe));
+	else if (ft_strncmp(cmd_info.cmd_argv[0], "unset", 6) == 0)
+		return (ft_unset(cmd_info, env_info, read_pipe, write_pipe));
 	else if (ft_strncmp(cmd_info.cmd_argv[0], "env", 4) == 0)
 		return (ft_env(cmd_info, env_info, read_pipe, write_pipe));
 	else if (ft_strncmp(cmd_info.cmd_argv[0], "exit", 5) == 0)
