@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/05 22:22:02 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/14 07:26:38 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	main(int argc, char **argv, char **envp)
 		// ctrl+dが押されるとNULLが返ってくるので終了
 		if (env_info_p->input == NULL)
 		{
+			ft_free_env_list(env_list);
+			free(env_info_p);
 			printf("exit\n");
 			exit(ft_status_code(0, 0));
 		}

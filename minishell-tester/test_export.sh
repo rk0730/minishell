@@ -90,7 +90,7 @@ rm -f minishell
 make -C .. re
 make -C .. clean
 cp ../minishell . 
-chmod 755 minishell
+sudo chmod 755 minishell
 
 # 権限の変更
 chmod 000 no_permission
@@ -310,10 +310,11 @@ exec_test 'export A=9 | echo $A $B' 'echo $?' 'exit'
 exec_test 'export _9=9 | echo $A $B' 'echo $?' 'exit'
 exec_test 'export _=9 | echo $_ $B' 'echo $?' 'exit'
 exec_test 'export _ | echo $_ $B' 'echo $?' 'exit'
-exec_test 'export %& | echo $%& $B' 'echo $?' 'exit'
-exec_test 'export %&=9 | echo $%& $B' 'echo $?' 'exit'
-exec_test 'export _9=%& | echo $_9 $B' 'echo $?' 'exit'
-
+# sintax errorだからスルーかな
+# exec_test 'export %& | echo $%& $B' 'echo $?' 'exit'
+# exec_test 'export %&=9 | echo $%& $B' 'echo $?' 'exit'
+# exec_test 'export _9=%& | echo $_9 $B' 'echo $?' 'exit'
+exec_test 'export _9=1 | echo $_9' 'echo $?' 'exit'
 # # cdテスト
 # exec_test 'unset HOME' 'cd' 'exit'
 # exec_test 'cd ..' 'env | grep PWD' 'exit'

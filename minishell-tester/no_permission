@@ -1,1 +1,13 @@
+argv
+argv.c
+exit_status.sh
+expect.sh
 hello
+hello.c
+ls1000.txt
+manual_test.txt
+no_permission
+no_read_permission
+no_write_permission
+test.sh
+test_export.sh
