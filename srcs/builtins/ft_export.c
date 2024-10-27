@@ -35,26 +35,23 @@ static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 	return (NULL);
 }
 
-static t_env_pair	*ft_new_env(char *env)
+static t_env_pair	*ft_new_env(char *key, char *value)
 {
 	t_env_pair	*env_pair;
-	char		*e_pos;
 
-	if (!env)
-		return (NULL);
-	e_pos = ft_strchr(env, '=');
 	env_pair = (t_env_pair *)malloc(sizeof(t_env_pair));
 	if (!env_pair)
 		return (NULL);
-	env_pair->key = ft_substr(env, 0, e_pos - env);
-	env_pair->value = ft_substr(env, e_pos - env + 1, env + ft_strlen(env) - e_pos - 1);
+	env_pair->key = key;
+	env_pair->value = value;
 	env_pair->next = NULL;
 	return (env_pair);
 }
 
-static void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new)
+static void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 {
 	t_env_pair	*node;
+	char		*tmp;
 
 	if (!new)
 		return ;
@@ -64,7 +61,16 @@ static void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new)
 		return ;
 	}
 	node = ft_search_env_node(new->key, *env_list_p);
-	node->value = new->value;
+	free(new->key);
+	if (mode == 0)
+		node->value = new->value;
+	else
+	{
+		tmp = ft_strjoin(node->value, new->value);
+		free(new->value);
+		free(node->value);
+		node->value = tmp;
+	}
 }
 
 static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
@@ -84,25 +90,47 @@ static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 	last->next = new;
 }
 
+static	char *ft_last_ad(char *str) 
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i])
+		i++;
+	return (&(str[i-1]));
+}
+
 static  int ft_setenv(t_env_pair *env_list, char *str)
 {
 	t_env_pair	*new;
 	char		*e_pos;
+	char		*key;
+	char		*value;
+	int			plus_flg;
 
 	e_pos = ft_strchr(str, '=');
+	plus_flg = REPLACE;
 	// =がない場合で変数名に禁足文字ない場合と変数名が上書きできない_の場合
 	if ((!e_pos && ft_is_valid_envnm(str, ft_strlen(str))) ||(e_pos - str == 1 && *str == '_'))
 		return (0);
-	// 変数名に禁足文字ある場合
-	if (!ft_is_valid_envnm(str, e_pos - str))
+	if (!e_pos)
 		return (2);
-	new = ft_new_env(str);
+	// 変数名に禁足文字ある場合
+	if (ft_strchr(str, '+') == e_pos - 1)
+		plus_flg = ADD;
+	key = ft_substr(str, 0, e_pos - str - plus_flg);
+	if (!ft_is_valid_envnm(key, e_pos - str - plus_flg))
+		return (2);
+	value = ft_substr(str, e_pos - str + 1, str + ft_strlen(str) - e_pos - 1);
+	new = ft_new_env(key, value);
 	//  not forget to free
 	if (!(new))
 		return (1);
 	// printf("new key: %s new value: %s\n", new->key, new->value);
 	if (ft_search_env_node(new->key, env_list) && *(new->value))
-		ft_update_env_list(&env_list, new);
+		ft_update_env_list(&env_list, new, plus_flg);
 	if (!ft_search_env_node(new->key, env_list))
 		ft_add_env_list(&env_list, new);
 	return (0);

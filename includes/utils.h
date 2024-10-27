@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 17:21:48 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/27 18:59:37 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 
 extern volatile sig_atomic_t	g_signum;
 
+
+typedef enum e_bool
+{
+    FALSE = 0,
+    TRUE = 1
+}	t_bool;
 
 void	ft_free_array(char **array);
 void	ft_show_all(char **array);

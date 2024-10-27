@@ -137,6 +137,7 @@ exec_test 'export 9K=9' 'echo $K' 'exit'
 exec_test 'export 9_=9' 'echo $K' 'exit'
 exec_test 'export 9K' 'echo $K' 'exit'
 exec_test 'export K=9' 'echo $K' 'exit'
+exec_test 'export K=9' 'export K+=9' 'echo $K' 'exit'
 # sintax errorだからスルーかな
 # exec_test 'export %& | echo $%& $B' 'echo $?' 'exit'
 # exec_test 'export %&=9 | echo $%& $B' 'echo $?' 'exit'
