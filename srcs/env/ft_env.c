@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/03 14:24:58 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:19:42 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ void	ft_show_env_list(t_env_pair *env_list)
 	while (tmp)
 	{
 		if (tmp->value)
-			printf("%s=%s\n", tmp->key, tmp->value);
+		{
+			if (strncmp(tmp->key, "_", 2) == 0)
+				printf("%s=%s\n", tmp->key, "/usr/bin/env");
+			else
+				printf("%s=%s\n", tmp->key, tmp->value);
+		}
 		tmp = tmp->next;
 	}
 }
