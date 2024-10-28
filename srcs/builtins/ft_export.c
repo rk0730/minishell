@@ -96,18 +96,6 @@ static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 	last->next = new;
 }
 
-static	char *ft_last_ad(char *str) 
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (NULL);
-	while (str[i])
-		i++;
-	return (&(str[i-1]));
-}
-
 static  int ft_setenv(t_env_pair *env_list, char *str)
 {
 	t_env_pair	*new;

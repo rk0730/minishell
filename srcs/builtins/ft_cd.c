@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/08/05 23:44:38 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:36:11 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pip
 		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", dir_name, strerror(errno));
 		return (CMD_ERROR);
 	}
-	ft_printf_fd(STDERR_FILENO, "error in ft_cd\n");
+	// ft_printf_fd(STDERR_FILENO, "error in ft_cd\n");
 	return (CMD_ERROR);
 }
 
