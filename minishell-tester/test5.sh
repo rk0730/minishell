@@ -53,6 +53,10 @@ exec_test 'pwd' 'echo $_' 'ls | ls' 'echo $_'  'exit'
 exec_test 'echo $_' 'exit'
 exec_test 'echo $USER' 'echo $_' 'exit'
 
+# unset
+exec_test 'env | grep USER' 'unset USER' 'env | grep USER' 'exit'
+exec_test 'unset PATH' 'ls' 'exit'
+
 # # cdテスト
 # exec_test 'unset HOME' 'cd' 'exit'
 # exec_test 'cd ..' 'env | grep PWD' 'exit'

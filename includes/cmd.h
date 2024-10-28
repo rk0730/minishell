@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 20:30:50 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/10/29 01:02:16 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 char		**ft_gen_cmds(char *cmd);
 t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p);
 int			ft_exec_cmdline(t_env_info *env_info_p);
-int			ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
-int			ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info env_info, int last_index);
+int			ft_exec_cmd(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe);
+int			ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_index);
 char		**ft_gen_tokens(char *input);
 char		**ft_gen_cmd_argv(char **tokens, t_env_info env_info);
 char		*ft_expand_env(char *word, t_env_info env_info, int is_doublequote);
