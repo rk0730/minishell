@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/10/27 23:38:09 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/28 16:07:20 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int wri
 	// 環境変数_を更新する
 	new_ = (t_env_pair *)malloc(sizeof(t_env_pair));
 	new_->key = ft_strdup("_");
-	new_->value = ft_strdup(cmd_info.cmd_argv[ft_array_len(cmd_info.cmd_argv) - 1]);
+	if (ft_array_len(cmd_info.cmd_argv) == 0)
+		new_->value = ft_strdup("");
+	else
+		new_->value = ft_strdup(cmd_info.cmd_argv[ft_array_len(cmd_info.cmd_argv) - 1]);
 	new_->next = NULL;
 	// builtinの場合はここで実行し、終了ステータスを返す
 	status = ft_exec_cmd_h(cmd_info, env_info, read_pipe, write_pipe);
