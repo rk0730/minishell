@@ -5,3 +5,4 @@ hello
 argv
 *.o
 *.a
+minishell-tester/result.log

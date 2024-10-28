@@ -29,6 +29,9 @@ declare stdout_file
 declare stderr_file
 
 start_test() {
+	# ログファイルのクリア
+	> result.log
+
 	# minishellをビルド
 	rm -f minishell
 	make -C .. re
