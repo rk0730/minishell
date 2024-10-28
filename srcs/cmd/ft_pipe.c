@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 23:17:27 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/28 16:42:10 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,8 @@ static int	ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info env_info)
 		printf("Quit\n");
 		return (SIGQUIT_ERROR);
 	}
-	else if (status == 1)
+	else
 		return (status);
-	return (WEXITSTATUS(status));
 }
 
 // ft_exec_pipeの終了を待つ部分
