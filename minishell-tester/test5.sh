@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ./test_utils.sh
 
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then
@@ -26,7 +28,7 @@ exec_test 'export 9K=9' 'echo $K' 'exit'
 exec_test 'export 9_=9' 'echo $K' 'exit'
 exec_test 'export 9K' 'echo $K' 'exit'
 exec_test 'export K=9' 'echo $K' 'exit'
-exec_test 'export K=9' 'export K+=9' 'echo $
+exec_test 'export K=9' 'export K+=9' 'echo $K' 'exit'
 # sintax errorだからスルーかな
 # exec_test 'export %& | echo $%& $B' 'echo $?' 'exit'
 # exec_test 'export %&=9 | echo $%& $B' 'echo $?' 'exit'
@@ -44,6 +46,12 @@ exec_test 'pwd' 'ls | cd ..' 'pwd' 'exit'
 exec_test 'pwd' 'ls | cd hello | cat' 'pwd' 'exit'
 exec_test 'pwd' 'ls | cd no_such_dir | cat' 'pwd' 'exit'
 exec_test 'cat | ls' '' 'exit'
+
+exec_test 'env | grep _=' 'exit'
+exec_test 'ls' 'echo $_' 'env | grep _=' 'exit'
+exec_test 'pwd' 'echo $_' 'ls | ls' 'echo $_'  'exit'
+exec_test 'echo $_' 'exit'
+exec_test 'echo $USER' 'echo $_' 'exit'
 
 # # cdテスト
 # exec_test 'unset HOME' 'cd' 'exit'

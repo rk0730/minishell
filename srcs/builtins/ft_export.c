@@ -48,7 +48,9 @@ static t_env_pair	*ft_new_env(char *key, char *value)
 	return (env_pair);
 }
 
-static void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
+// mode 0: replace, 1: add
+// newのkeyとnew自身はfreeされる
+void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 {
 	t_env_pair	*node;
 	char		*tmp;
@@ -63,7 +65,10 @@ static void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mod
 	node = ft_search_env_node(new->key, *env_list_p);
 	free(new->key);
 	if (mode == 0)
+	{
+		free(node->value);
 		node->value = new->value;
+	}
 	else
 	{
 		tmp = ft_strjoin(node->value, new->value);
@@ -71,6 +76,7 @@ static void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mod
 		free(node->value);
 		node->value = tmp;
 	}
+	free(new);
 }
 
 static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)

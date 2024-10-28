@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ./test_utils.sh
 
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then
