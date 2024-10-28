@@ -99,6 +99,27 @@ exec_test() {
 	else
 		wrong_counter=$((wrong_counter + 1))
 		printf " $BOLDRED%s$RESET" "✗ "
+
+		# エラー内容を result.log に書き込む
+		echo "---------------Command-------------------" >> result.log
+		echo "$commands" >> result.log
+		echo "--------------Your output----------------" >> result.log
+		echo "$TEST1" >> result.log
+		echo "-------------Expected output-------------" >> result.log
+		echo "$TEST2" >> result.log
+		echo "------------Your exit status-------------" >> result.log
+		echo "$ES_1" >> result.log
+		echo "-----------Expected exit status----------" >> result.log
+		echo "$ES_2" >> result.log
+		if [ $is_err_same != true ]; then
+			echo "-----------Your error messages-----------" >> result.log
+			echo "$ERR1" >> result.log
+			echo "---------Expected error messages---------" >> result.log
+			echo "$ERR2" >> result.log
+		fi
+		echo "-----------------------------------------" >> result.log
+		echo "" >> result.log
+		echo "" >> result.log
 	fi
 
 	# コマンドの表示
