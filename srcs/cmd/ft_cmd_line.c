@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/27 23:53:04 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/29 00:54:49 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_help2(char **cmds, t_cmd_info *cmd_list, t_env_info *env_info_p)
 
 	// コマンドを実行する
 	last_index = ft_array_len(cmds) - 1;
-	status = ft_exec_cmd_list(cmd_list, *env_info_p, last_index);
+	status = ft_exec_cmd_list(cmd_list, env_info_p, last_index);
 	i = 0;
 	while (i <= last_index)
 	{
