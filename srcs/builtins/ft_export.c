@@ -78,7 +78,7 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 	}
 	// TODO considering why segumentation fault if free new variable
 	// ここは、もしかしたらsubstrの部分で問題かもしれない。export作り直した方がはやそう。
-	// free(new);
+	free(new);
 }
 
 static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
@@ -112,22 +112,19 @@ static  int ft_setenv(t_env_pair *env_list, char *str)
 	if ((!e_pos && ft_is_valid_envnm(str, ft_strlen(str))) ||(e_pos - str == 1 && *str == '_'))
 		return (0);
 	if (!e_pos)
-		return (2);
+		return (1);
 	// 変数名に禁足文字ある場合
 	if (ft_strchr(str, '+') == e_pos - 1)
 		plus_flg = ADD;
 	key = ft_substr(str, 0, e_pos - str - plus_flg);
 	if (!ft_is_valid_envnm(key, e_pos - str - plus_flg))
-		return (2);
+		return (1);
 	value = ft_substr(str, e_pos - str + 1, str + ft_strlen(str) - e_pos - 1);
 	new = ft_new_env(key, value);
-	//  not forget to free
-	if (!(new))
-		return (1);
 	// printf("new key: %s new value: %s\n", new->key, new->value);
 	if (ft_search_env_node(new->key, env_list) && *(new->value))
 		ft_update_env_list(&env_list, new, plus_flg);
-	if (!ft_search_env_node(new->key, env_list))
+	else if (!ft_search_env_node(new->key, env_list))
 		ft_add_env_list(&env_list, new);
 	return (0);
 }
@@ -145,11 +142,8 @@ int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int writ
 	{
 		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
         return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
-		if (return_st == 2) 
-		{
+		if (return_st == 1) 
 			ft_printf_fd(STDERR_FILENO, "export: `%s': not a valid identifier\n", cmd_info.cmd_argv[i]);
-			return_st = 1;
-		}
 		status |= return_st;
 		i++;
 	}
