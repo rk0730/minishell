@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/29 01:38:51 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/29 10:36:04 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_inde
 	pid_t	pid;
 
 	if (last_index == 0)
-		return (ft_exec_one_cmd(cmd_list, env_info));
+		return (ft_exec_one_cmd(cmd_list, env_info_p));
 	pid = fork();
 	if (pid == 0)
 	{
