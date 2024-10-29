@@ -6,4 +6,4 @@ argv
 *.o
 *.a
 minishell-tester/result.log
-playground/*
+playground/

@@ -1,6 +1,22 @@
 #include "builtins.h"
 #include "env.h"
 
+static void	ft_show_env_list2(t_env_pair *env_list)
+{
+	t_env_pair	*tmp;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		if (tmp->value)
+		{
+			if (strncmp(tmp->key, "_", 2) != 0)
+				printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+		}
+		tmp = tmp->next;
+	}
+}
+
 // to do: create test case
 static	int	ft_is_valid_envnm(char *s, int len)
 {
@@ -147,5 +163,7 @@ int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int writ
 		status |= return_st;
 		i++;
 	}
+	if (i == 1)
+		ft_show_env_list2(env_info.env_list);
     return (status);
 }
