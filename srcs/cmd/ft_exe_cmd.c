@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/10/29 12:33:06 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:36:53 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int 
 	// builtinの場合はここで実行し、終了ステータスを返す
 	status = ft_exec_cmd_h(cmd_info, env_info_p, read_pipe, write_pipe);
 	if (status != -1){
-		ft_update_env_list(&(env_info.env_list), new_, 0);
+		ft_update_env_list(&(env_info_p->env_list), new_, 0);
 		return (status);
 	}
 	pid = fork();

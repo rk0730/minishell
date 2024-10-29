@@ -78,7 +78,7 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 	}
 	// TODO considering why segumentation fault if free new variable
 	// ここは、もしかしたらsubstrの部分で問題かもしれない。export作り直した方がはやそう。
-	free(new);
+	// free(new);
 }
 
 static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
