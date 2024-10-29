@@ -1,6 +1,28 @@
 #include "builtins.h"
 #include "env.h"
 
+void refresh_node(t_env_pair *node)
+{
+    if (!node)
+        return ;
+    printf("%s=%s\n", node->key, node->value);
+    if (node->key)
+    {
+        // free(node->key);
+        node->key = NULL;
+    }
+    if (node->value)
+    {
+        // free(node->value);
+        node->value = NULL;
+    }
+    if (node)
+    {
+        // free(node);
+        node = NULL;
+    }
+}
+
 static  int ft_delenv(t_env_pair **env_list, char *key)
 {
     t_env_pair *tmp;
@@ -8,22 +30,24 @@ static  int ft_delenv(t_env_pair **env_list, char *key)
 
     tmp = *env_list;
     prev = NULL;
-    while (tmp)
+    while (tmp) 
     {
-        if (ft_strncmp(tmp->key, key, ft_strlen(tmp->key) + 1) == 0)
-            break;
-        prev = tmp;
-        tmp = tmp->next;
+        if (ft_strncmp(tmp->key, key, ft_strlen(key)) == 0) 
+        {
+            if (prev == NULL)
+                *env_list = tmp->next;
+            else
+                prev->next = tmp->next;
+            // TODO fix segumentation fault when following condition: unset SHELL
+            // refresh_node(tmp);
+            break ;
+        } 
+        else 
+        {
+            prev = tmp;
+            tmp = tmp->next;
+        }
     }
-    if (!tmp)
-        return (0);
-    if (prev)
-        prev->next = tmp->next;
-    else
-        *env_list = tmp->next; 
-    free(tmp->key);
-    free(tmp->value);
-    free(tmp);
     return (0);
 }
 
