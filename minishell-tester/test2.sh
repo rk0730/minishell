@@ -27,7 +27,7 @@ exec_test 'cat << '"'"'$PA'"'"'TH' '$PATH'
 exec_test 'cat << '"'"'$PA'"'"'TH' '$USER' '$US"ER' '$USER' '"PATH' '$PATH""' 'TH' "''TH" "'"'$PA'"'"'TH' '$PATH'
 exec_test 'cat << '"'"'$PATH'"'" '$USER' '$US"ER' '"$PATH' '$PATH""' '$PATH'
 exec_test 'cat << $PATH' '$USER' '$US"ER' '"$PATH' '$PATH""' '$PATH'
-exec_test 'cat << EOF' '$_1' '$_?' '$_____?' '$_____1?' '$_____11' 'EOF'
+exec_test 'cat << EOF' '$_1' '$_2' '$_____?' '$_____1?' '$_____11' 'EOF'
 
 
 
