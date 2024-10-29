@@ -106,14 +106,18 @@ exec_test() {
 		# エラー内容を result.log に書き込む
 		echo "---------------Command-------------------" >> result.log
 		echo "$commands" >> result.log
-		echo "--------------Your output----------------" >> result.log
-		echo "$TEST1" >> result.log
-		echo "-------------Expected output-------------" >> result.log
-		echo "$TEST2" >> result.log
-		echo "------------Your exit status-------------" >> result.log
-		echo "$ES_1" >> result.log
-		echo "-----------Expected exit status----------" >> result.log
-		echo "$ES_2" >> result.log
+		if [ "$TEST1" != "$TEST2" ]; then
+			echo "--------------Your output----------------" >> result.log
+			echo "$TEST1" >> result.log
+			echo "-------------Expected output-------------" >> result.log
+			echo "$TEST2" >> result.log
+		fi
+		if [ "$ES_1" != "$ES_2" ]; then
+			echo "------------Your exit status-------------" >> result.log
+			echo "$ES_1" >> result.log
+			echo "-----------Expected exit status----------" >> result.log
+			echo "$ES_2" >> result.log
+		fi
 		if [ $is_err_same != true ]; then
 			echo "-----------Your error messages-----------" >> result.log
 			echo "$ERR1" >> result.log
