@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/10/28 16:07:20 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/28 15:27:00 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int wri
 	// builtinの場合はここで実行し、終了ステータスを返す
 	status = ft_exec_cmd_h(cmd_info, env_info, read_pipe, write_pipe);
 	if (status != -1){
+		// TODO not to forget
 		ft_update_env_list(&(env_info.env_list), new_, 0);
 		return (status);
 	}

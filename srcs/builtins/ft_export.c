@@ -76,6 +76,8 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 		free(node->value);
 		node->value = tmp;
 	}
+	// TODO considering why segumentation fault if free new variable
+	// ここは、もしかしたらsubstrの部分で問題かもしれない。export作り直した方がはやそう。
 	free(new);
 }
 

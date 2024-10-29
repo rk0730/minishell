@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/27 19:31:58 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/28 15:09:03 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		ft_pwd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 int		ft_env(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_export(t_cmd_info cmd_info, t_env_info env_info,  int read_pipe, int write_pipe);
-
 void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode);
 int		ft_unset(t_cmd_info cmd_info, t_env_info env_info,  int read_pipe, int write_pipe);
 #endif
