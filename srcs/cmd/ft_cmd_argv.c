@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/09/30 14:02:30 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:22:28 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
+// ""や''を開き、""なら中身をexpand_env、''ならそのまま返す
 static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
@@ -39,25 +40,23 @@ static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
 	return (NULL);
 }
 
+// $"や$'の時は飛ばす　それ以外の$はexpand_envする
+// ""や''で囲まれていない文字列をexpand_envする
 static char	*ft_help2(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
 	char	*result;
 
-	if (str[i] == '$' && str[i + 1] == '\0')//$の1文字だけの場合のみ例外処理、$と表示するため
-	{
-		*endp = i + 1;
-		return (ft_strdup("$"));
-	}
+	*endp = i;
+	while (str[*endp] != '\0' && str[*endp] != '\"' && str[*endp] != '\'')
+		(*endp)++;
+	// 末尾が$"や$'の時は$を無視する
+	if (str[*endp - 1] == '$' && (str[*endp] == '\'' || str[*endp] == '\"'))
+		tmp = ft_substr(str, i, *endp - i - 1);
 	else
-	{
-		*endp = i;
-		while (str[*endp] != '\0' && str[*endp] != '\"' && str[*endp] != '\'')
-			(*endp)++;
 		tmp = ft_substr(str, i, *endp - i);
-		result = ft_expand_env(tmp, env_info, 0);
-		return (result);
-	}
+	result = ft_expand_env(tmp, env_info, 0);
+	return (result);
 }
 
 // static char	*ft_help4(int *ip, int end, char **old_p, char **tmp_p)

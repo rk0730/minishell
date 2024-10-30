@@ -9,7 +9,8 @@ fi
 # テスト2 必ず最後にexitを入れる
 
 # heredoc
-exec_test 'cat << EOF' 'test' '$USER' 'EOF' 'exit'
+exec_test 'cat << EOF' 'test' '$USER' '$TEST' '$1' '$11' 'EOF' 'exit'
+exec_test 'cat << EOF' '$a111111$' '"$USE'"'R'$"'"' '$""' '$"' 'EOF' 'exit'
 exec_test '<< EOF << eof << eee cat' 'test1' 'eof' 'test2' 'eee' 'test3' 'EOF' 'test4' 'eof' 'test5' 'test6' 'eee' 'exit'
 exec_test 'cat <<EOF' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test 'cat <<"EOF"' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
@@ -18,6 +19,19 @@ exec_test 'cat <<E"O"F' '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test "cat << E'O'F" '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test "cat << E'O'F" '$USER' '"$USER"' \''$USER'\' 'EOF' 'exit'
 exec_test 'cat <<$PATH' '$USER' '"$USER"' \''$USER'\' '$PATH' 'exit'
+
+exec_test "cat << '"'"''$USER'"'" '$USER' "'"'"$USER"'"'" '"$USER"' '""$USER' '"$USER'
+exec_test "cat << '"'"$USER"'"'" '$USER' "'"'"$USER"'"'" '"$USER"'
+exec_test 'cat << "$USER"' '"$USER"' '$USER'
+exec_test 'cat << '"'"'$PA'"'"'TH' '$PATH'
+exec_test 'cat << '"'"'$PA'"'"'TH' '$USER' '$US"ER' '$USER' '"PATH' '$PATH""' 'TH' "''TH" "'"'$PA'"'"'TH' '$PATH'
+exec_test 'cat << '"'"'$PATH'"'" '$USER' '$US"ER' '"$PATH' '$PATH""' '$PATH'
+exec_test 'cat << $PATH' '$USER' '$US"ER' '"$PATH' '$PATH""' '$PATH'
+exec_test 'cat << EOF' '$_1' '$_2' '$_____?' '$_____1?' '$_____11' 'EOF'
+
+
+
+
 exec_test 'cat << EOF > out' 'test' 'EOF' 'cat out' 'rm out' 'exit'
 exec_test 'echo test > out' 'cat << EOF >> out' 'test' 'EOF' 'cat out' 'rm out' 'exit'
 exec_test 'cat << EOF < no_permission > out' 'test' 'EOF' 'cat out' 'rm out' 'exit'
