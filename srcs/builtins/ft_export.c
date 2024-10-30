@@ -1,4 +1,5 @@
 #include "builtins.h"
+#include "cmd.h"
 #include "env.h"
 
 static void	ft_show_env_list2(t_env_pair *env_list)
@@ -9,7 +10,7 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	while (tmp)
 	{
 		if (tmp->value)
-			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 }
