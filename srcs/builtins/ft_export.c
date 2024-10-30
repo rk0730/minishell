@@ -9,10 +9,7 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	while (tmp)
 	{
 		if (tmp->value)
-		{
-			if (strncmp(tmp->key, "_", 2) != 0)
-				printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
-		}
+			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 }
