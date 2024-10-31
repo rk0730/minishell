@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:29:34 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/05 22:10:20 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:22:48 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_echo(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 	int	i;
 
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	i = 1;
 	while (ft_is_option(cmd_info.cmd_argv[i]))
 		i++;

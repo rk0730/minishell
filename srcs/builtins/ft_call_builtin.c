@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_call_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:24:47 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/29 00:31:03 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/10/31 14:24:42 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "builtins.h"
 
 // pipeに入出力するのか、ファイルに入出力するのかを判断する
-void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe)
+void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe, t_bool need_input)
 {
 	if (cmd_info.fd_in != -1)
 	{
 		close(read_pipe);
-		dup2(cmd_info.fd_in, STDIN_FILENO);
+		if (need_input)
+			dup2(cmd_info.fd_in, STDIN_FILENO);
 		close(cmd_info.fd_in);
-	} else if (read_pipe != -1)
+	}else if (read_pipe != -1)
 	{
-		dup2(read_pipe, STDIN_FILENO);
+		if (need_input)
+			dup2(read_pipe, STDIN_FILENO);
 		close(read_pipe);
 	}
 	if (cmd_info.fd_out != -1)

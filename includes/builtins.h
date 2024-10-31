@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/29 12:33:56 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:24:32 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_cmd_info
 }	t_cmd_info;	
 
 
-void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe);
+void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe, t_bool need_input);
 int		ft_call_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe);
 int		ft_echo(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
