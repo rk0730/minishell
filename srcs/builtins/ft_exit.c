@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:11 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 20:41:55 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/10/31 14:22:41 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 	char	*trim;
 
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	if (cmd_info.cmd_argv[1] == NULL)
 	{
 		if (read_pipe == -1 && write_pipe == -1)

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/10/29 12:45:03 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:23:12 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	ft_exec_cmd_child(t_cmd_info cmd_info, t_env_info *env_info_p, int r
 	char	**cmd_env;
 
 	// pipeに入出力するのか、ファイルに入出力するのかを判断する
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe, TRUE);
 	//シグナルはデフォに戻す
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);

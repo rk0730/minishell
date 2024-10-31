@@ -150,7 +150,7 @@ int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int writ
 	int return_st;
 
     i = 1;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	status = 0;
     while (cmd_info.cmd_argv[i])
 	{

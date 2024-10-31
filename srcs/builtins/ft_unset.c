@@ -58,7 +58,7 @@ int ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int wri
     int status;
 
     i = 1;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
     status = 0;
     while (cmd_info.cmd_argv[i])
 	{

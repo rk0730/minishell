@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 17:27:26 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/31 14:22:34 by yyamasak         ###   ########.fr       */
+/*   Created: 2022/06/22 17:32:45 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/22 17:32:50 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int	ft_pwd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	main(int argc, char const *argv[])
 {
-	char	pathname[PATH_MAX];
+	int	pid;
 
-	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
-	getcwd(pathname, PATH_MAX);
-	printf("%s\n", pathname);
+	pid = fork();
+	open("infile", O_RDONLY);
+	while (1)
+	{
+		printf("Helloo miniHELL %i\n", pid);
+		sleep(1);
+	}
 	return (0);
 }

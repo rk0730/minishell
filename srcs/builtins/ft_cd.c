@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/29 12:40:46 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:22:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pip
 	char	*dir_name;
 
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe);
+	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	argc = ft_array_len(cmd_info.cmd_argv);
 	if (argc < 2)
 		return (0);
