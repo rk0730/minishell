@@ -2,6 +2,9 @@
 
 # MINISHELL-TESTER
 
+# メモリリークを見るかどうか
+declare is_leak_test=true
+
 RESET="\033[0m"
 BLACK="\033[30m"
 RED="\033[31m"
@@ -96,63 +99,108 @@ exec_test() {
 		fi
 	done
 
-	# テスト結果の表示
-	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ $is_err_same == true ]; then
-		printf " $BOLDGREEN%s$RESET" "✓ "
-	else
-		wrong_counter=$((wrong_counter + 1))
-		printf " $BOLDRED%s$RESET" "✗ "
+	# メモリリークのテスト
+	declare ES_VAL
+	if [ "$is_leak_test" == true ]; then
+		# メモリリークが起きた時のステータスコードを決める
+		VALGRIND_ERROR=$(($ES_1 + 1))
+		# Valgrindで結合されたコマンドを実行
+		printf "%b" "$commands" | valgrind --leak-check=full --error-exitcode=$VALGRIND_ERROR ./minishell > $stdout_file 2> $stderr_file
+		ES_VAL=$?
+	fi
 
-		# エラー内容を result.log に書き込む
+	# テスト結果を変数に格納
+	declare TEST_RESULT
+	declare LEAK_TEST_RESULT
+	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ "$is_err_same" == true ]; then
+		TEST_RESULT=true
+	else
+		TEST_RESULT=false
+	fi
+	# リークテスト結果も変数に格納
+	if [ "$is_leak_test" == false ] || [ "$ES_1" -eq "$ES_VAL" ]; then
+		LEAK_TEST_RESULT=true
+	else
+		LEAK_TEST_RESULT=false
+	fi
+
+	# コンソールにテスト結果を表示
+	if [ "$TEST_RESULT" == true ] && [ "$LEAK_TEST_RESULT" == true ]; then
+		# 結果があっていてメモリリークもなし
+		printf " $BOLDGREEN%s$RESET" "✓ "
+	elif [ "$TEST_RESULT" == false ]; then
+		# 間違い
+		printf " $BOLDRED%s$RESET" "✗ "
+		wrong_counter=$((wrong_counter + 1))
+	else
+		# 結果はあってるがメモリリークがある
+		printf " $BOLDYELLOW%s$RESET" "⚠️ "
+		wrong_counter=$((wrong_counter + 1))
+	fi
+	# コマンドの表示
+	printf "$CYAN"
+	printf "\n%s" "$commands"
+	printf "$RESET"
+	echo
+
+
+	# result.log にテスト結果を書き込む
+	if [ "$TEST_RESULT" == false ] || [ "$LEAK_TEST_RESULT" == false ]; then
+		# 何かしらのミスがあるのでエラーコマンドを result.log に書き込む
 		echo "---------------Command-------------------" >> result.log
 		echo "$commands" >> result.log
-		if [ "$TEST1" != "$TEST2" ]; then
-			echo "--------------Your output----------------" >> result.log
-			echo "$TEST1" >> result.log
-			echo "-------------Expected output-------------" >> result.log
-			echo "$TEST2" >> result.log
-			echo "-------------output diff-------------" >> result.log
-			diff <(echo "$TEST1") <(echo "$TEST2") >> result.log
-		fi
-		if [ "$ES_1" != "$ES_2" ]; then
-			echo "------------Your exit status-------------" >> result.log
-			echo "$ES_1" >> result.log
-			echo "-----------Expected exit status----------" >> result.log
-			echo "$ES_2" >> result.log
-		fi
-		if [ $is_err_same != true ]; then
-			echo "-----------Your error messages-----------" >> result.log
-			echo "$ERR1" >> result.log
-			echo "---------Expected error messages---------" >> result.log
-			echo "$ERR2" >> result.log
-		fi
+	fi
+	# 結果が違ったものを result.log に書き込む
+	if [ "$TEST1" != "$TEST2" ]; then
+		echo "--------------Your output----------------" >> result.log
+		echo "$TEST1" >> result.log
+		echo "-------------Expected output-------------" >> result.log
+		echo "$TEST2" >> result.log
+		echo "-------------output diff-------------" >> result.log
+		diff <(echo "$TEST1") <(echo "$TEST2") >> result.log
+	fi
+	if [ "$ES_1" != "$ES_2" ]; then
+		echo "------------Your exit status-------------" >> result.log
+		echo "$ES_1" >> result.log
+		echo "-----------Expected exit status----------" >> result.log
+		echo "$ES_2" >> result.log
+	fi
+	if [ "$is_err_same" != true ]; then
+		echo "-----------Your error messages-----------" >> result.log
+		echo "$ERR1" >> result.log
+		echo "---------Expected error messages---------" >> result.log
+		echo "$ERR2" >> result.log
+	fi
+	# メモリリークのテスト結果を result.log に書き込む
+	if [ "$LEAK_TEST_RESULT" == false ]; then
+		echo "--------------leak summary--------------" >> result.log
+		echo "memory leak detected" >> result.log
+	fi
+
+	if [ "$TEST_RESULT" == false ] || [ "$LEAK_TEST_RESULT" == false ]; then
+		# 何かしらのミスがあったので区切りを result.log に書き込む
 		echo "-----------------------------------------" >> result.log
 		echo "" >> result.log
 		echo "" >> result.log
 	fi
 
-	# コマンドの表示
-	printf "$CYAN"
-	printf "\n%s" "$commands"
-	printf "$RESET"
-
 	# 出力結果の表示
-	if [ "$TEST1" != "$TEST2" ]; then
-		echo
-		printf "$BOLDRED Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-		printf "$BOLDGREEN Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-	fi
-	if [ "$ES_1" != "$ES_2" ]; then
-		echo
-		printf "$BOLDRED Your exit status : $BOLDRED$ES_1$RESET\n"
-		printf "$BOLDGREEN Expected exit status : $BOLDGREEN$ES_2$RESET\n"
-	fi
-	if [ $is_err_same != true ]; then
-		echo
-		printf "$BOLDRED Your errmsg : \n%.20s\n$BOLDRED$ERR1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-		printf "$BOLDGREEN Expected errmsg : \n%.20s\n$BOLDGREEN$ERR2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-	fi
-	echo
+	# if [ "$TEST1" != "$TEST2" ]; then
+	# 	echo
+	# 	printf "$BOLDRED Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	# 	printf "$BOLDGREEN Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	# fi
+	# if [ "$ES_1" != "$ES_2" ]; then
+	# 	echo
+	# 	printf "$BOLDRED Your exit status : $BOLDRED$ES_1$RESET\n"
+	# 	printf "$BOLDGREEN Expected exit status : $BOLDGREEN$ES_2$RESET\n"
+	# fi
+	# if [ $is_err_same != true ]; then
+	# 	echo
+	# 	printf "$BOLDRED Your errmsg : \n%.20s\n$BOLDRED$ERR1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	# 	printf "$BOLDGREEN Expected errmsg : \n%.20s\n$BOLDGREEN$ERR2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	# fi
+	# echo
 }
 
 end_test() {
