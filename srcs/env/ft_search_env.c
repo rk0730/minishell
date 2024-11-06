@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_search_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:42:33 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/07/16 17:43:22 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/06 14:26:12 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ char	*ft_search_env(char *search, t_env_pair *env_list)
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->key, search, ft_strlen(tmp->key)+1) == 0)
-			return (ft_strdup(tmp->value));
+		{
+			if (tmp->value)
+				return (ft_strdup(tmp->value));
+			else
+				break ;
+		}
 		tmp = tmp->next;
 	}
 	return (ft_strdup(""));
