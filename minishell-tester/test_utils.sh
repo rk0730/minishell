@@ -5,6 +5,13 @@
 # メモリリークを見るかどうか
 declare is_leak_test=false
 
+# 引数が渡されている時
+if [ $# > 0 ]; then
+	if [ "$1" == "leak" ]; then
+		is_leak_test=true
+	fi
+fi
+
 RESET="\033[0m"
 BLACK="\033[30m"
 RED="\033[31m"
@@ -59,6 +66,9 @@ start_test() {
 	printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 	echo
 
+	if [ "$is_leak_test" == true ]; then
+		printf "$BOLDMAGENTA Memory leak test$RESET\n\n"
+	fi
 	# カウンターの初期化
 	wrong_counter=0
 
@@ -74,14 +84,14 @@ exec_test() {
 	# minishellで結合されたコマンドを実行
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
-	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
-	ERR1=$(cat $stderr_file)
+	TEST1=$(strings $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
+	ERR1=$(strings $stderr_file)
 
 	# bashで結合されたコマンドを実行
 	printf "%b" "$commands" | bash > $stdout_file 2> $stderr_file
 	ES_2=$?
-	TEST2=$(cat $stdout_file)
-	ERR2=$(cat $stderr_file)
+	TEST2=$(strings $stdout_file)
+	ERR2=$(strings $stderr_file)
 
 	# ERR1の各行がERR2の各行に含まれているか確認する
 	is_err_same=true

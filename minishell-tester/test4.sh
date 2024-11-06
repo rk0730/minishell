@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source ./test_utils.sh
 
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then
+	source ./test_utils.sh
 	start_test
 fi
 

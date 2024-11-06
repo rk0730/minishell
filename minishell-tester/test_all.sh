@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source ./test_utils.sh
 
+# ./test_utils.sh $*
+source ./test_utils.sh
 start_test
 
 # 連番のtestスクリプトを順番にsourceする
