@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-# ./test_utils.sh $*
 source ./test_utils.sh
 start_test
 

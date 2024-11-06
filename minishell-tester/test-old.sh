@@ -117,7 +117,7 @@ stdout_file=$(mktemp)
 stderr_file=$(mktemp)
 
 # コマンドをテストする　必ず最後にexitを入れる
-exec_test '/bin/ls'
+exec_test '/bin/ls' 'exit'
 exec_test '/bin/ls' 'exit'
 exec_test '/bin/pwd' 'exit'
 exec_test '/bin/echo' 'exit'

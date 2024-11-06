@@ -84,14 +84,16 @@ exec_test() {
 	# minishellで結合されたコマンドを実行
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
-	TEST1=$(strings $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
-	ERR1=$(strings $stderr_file)
+	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
+	# ERR1=$(cat $stderr_file)
+	ERR1=$(tr -d '\0' < "$stderr_file")
 
 	# bashで結合されたコマンドを実行
 	printf "%b" "$commands" | bash > $stdout_file 2> $stderr_file
 	ES_2=$?
-	TEST2=$(strings $stdout_file)
-	ERR2=$(strings $stderr_file)
+	TEST2=$(cat $stdout_file)
+	# ERR2=$(cat $stderr_file)
+	ERR2=$(tr -d '\0' < "$stderr_file")
 
 	# ERR1の各行がERR2の各行に含まれているか確認する
 	is_err_same=true
