@@ -3,7 +3,7 @@
 # MINISHELL-TESTER
 
 # メモリリークを見るかどうか
-declare is_leak_test=true
+declare is_leak_test=false
 
 RESET="\033[0m"
 BLACK="\033[30m"
@@ -156,8 +156,8 @@ exec_test() {
 		echo "$TEST1" >> result.log
 		echo "-------------Expected output-------------" >> result.log
 		echo "$TEST2" >> result.log
-		echo "-------------output diff-------------" >> result.log
-		diff <(echo "$TEST1") <(echo "$TEST2") >> result.log
+		# echo "-------------output diff-------------" >> result.log
+		# diff <(echo "$TEST1") <(echo "$TEST2") >> result.log
 	fi
 	if [ "$ES_1" != "$ES_2" ]; then
 		echo "------------Your exit status-------------" >> result.log

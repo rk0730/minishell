@@ -92,8 +92,6 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 		free(node->value);
 		node->value = tmp;
 	}
-	// TODO considering why segumentation fault if free new variable
-	// ここは、もしかしたらsubstrの部分で問題かもしれない。export作り直した方がはやそう。
 	free(new);
 }
 
@@ -114,35 +112,50 @@ static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 	last->next = new;
 }
 
-static  int ft_setenv(t_env_pair *env_list, char *str)
+static	int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len, int mode)
 {
 	t_env_pair	*new;
-	char		*e_pos;
 	char		*key;
 	char		*value;
-	int			plus_flg;
 
-	e_pos = ft_strchr(str, '=');
-	plus_flg = REPLACE;
-	// =がない場合で変数名に禁足文字ない場合と変数名が上書きできない_の場合
-	if ((!e_pos && ft_is_valid_envnm(str, ft_strlen(str))) ||(e_pos - str == 1 && *str == '_'))
-		return (0);
-	if (!e_pos)
-		return (1);
-	// 変数名に禁足文字ある場合
-	if (ft_strchr(str, '+') == e_pos - 1)
-		plus_flg = ADD;
-	key = ft_substr(str, 0, e_pos - str - plus_flg);
-	if (!ft_is_valid_envnm(key, e_pos - str - plus_flg))
-		return (1);
-	value = ft_substr(str, e_pos - str + 1, str + ft_strlen(str) - e_pos - 1);
+	if (mode == -1)
+	{
+		key = ft_strdup(str);
+		value = NULL;
+	} 
+	else
+	{
+		key = ft_substr(str, 0, key_len - mode);
+		value = ft_substr(str, key_len + 1, ft_strlen(str) - key_len - 1);
+	}
 	new = ft_new_env(key, value);
-	// printf("new key: %s new value: %s\n", new->key, new->value);
-	if (ft_search_env_node(new->key, env_list) && *(new->value))
-		ft_update_env_list(&env_list, new, plus_flg);
+	if (ft_search_env_node(new->key, env_list) && (new->value))
+		ft_update_env_list(&env_list, new, mode);
 	else if (!ft_search_env_node(new->key, env_list))
 		ft_add_env_list(&env_list, new);
 	return (0);
+}
+
+static  int ft_setenv(t_env_pair *env_list, char *str)
+{
+	char		*equal_pos;
+	int			plus_flg;
+
+	equal_pos = ft_strchr(str, '=');
+	plus_flg = 0;
+	if (!equal_pos)
+	{
+		if (!ft_is_valid_envnm(str, ft_strlen(str)))
+			return (1);
+		return (ft_add_env_process(env_list, str, ft_strlen(str), -1));
+	}
+	if (equal_pos - str == 1 && *str == '_')
+		return (0);
+	if (ft_strchr(str, '+') == equal_pos - 1)
+		plus_flg = 1;
+	if (!ft_is_valid_envnm(str, equal_pos - str - plus_flg))
+		return (1);
+	return (ft_add_env_process(env_list, str, equal_pos - str, plus_flg));
 }
 
 int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
