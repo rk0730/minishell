@@ -7,6 +7,7 @@ if [ "${BASH_SOURCE[0]}" == "$0" ]; then
 fi
 
 exec_test 'cat <"./test_files/infile_big" | echo hi' 'exit'
+exec_test 'echo hi | cat <"./test_files/infile_big" | cat' 'exit'
 exec_test 'grep hi "<infile" <         ./test_files/infile' 'echo $?' 'exit'
 exec_test '$PWD' 'exit'
 exec_test './test_files' 'exit'

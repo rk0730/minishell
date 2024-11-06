@@ -11,8 +11,6 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	{
 		if (tmp->value)
 			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
-		else
-			ft_printf_fd(1, "declare -x %s\n", tmp->key);
 		tmp = tmp->next;
 	}
 }
@@ -44,7 +42,7 @@ static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, search, ft_strlen(tmp->key) + 1) == 0)
+		if (ft_strncmp(tmp->key, search, ft_strlen(tmp->key)+1) == 0)
 			return (tmp);
 		tmp = tmp->next;
 	}
