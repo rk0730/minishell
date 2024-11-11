@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/14 07:26:38 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:48:40 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ int	main(int argc, char **argv, char **envp)
 		// 入力されたものを一旦パイプに書き込み、あとでここから読み取って使う
 		pipe(input_pipe);
 		ft_printf_fd(input_pipe[1], "%s", env_info_p->input);
-		close(input_pipe[1]);
+		ft_close(input_pipe[1], 1);
 		env_info_p->input_fd = input_pipe[0];
 		// ctrl+dが押されるとNULLが返ってくるので終了
 		if (env_info_p->input == NULL)
 		{
+			ft_close(input_pipe[0], 2);
 			ft_free_env_list(env_list);
 			free(env_info_p);
 			printf("exit\n");
@@ -61,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		// 空文字の場合は何もせず次のループへ
 		if (ft_strlen(env_info_p->input) == 0)
 		{
+			ft_close(input_pipe[0], 3);
 			free(env_info_p->input);
 			continue ;
 		}

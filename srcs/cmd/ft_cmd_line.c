@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/29 00:54:49 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/11 22:50:16 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,11 @@ static int	ft_help2(char **cmds, t_cmd_info *cmd_list, t_env_info *env_info_p)
 	return (status);
 }
 
-static void	ft_clean(int std_in, int std_out, char **cmds, t_env_info *env_info_p)
-{
-	ft_free_array(cmds);
-	dup2(std_in, STDIN_FILENO);
-	dup2(std_out, STDOUT_FILENO);
-	close(std_in);
-	close(std_out);
-	close(env_info_p->input_fd);
-}
+// static void	ft_clean(char **cmds, t_env_info *env_info_p)
+// {
+// 	ft_free_array(cmds);
+// 	ft_close(env_info_p->input_fd, 10);
+// }
 
 
 // コマンドを実行し、終了ステータスを返す
@@ -64,20 +60,24 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 {
 	char		**cmds;
 	t_cmd_info	*cmd_list;
-	int			std_in;
-	int			std_out;
 	int			status;
 
-	std_in = dup(STDIN_FILENO);
-	std_out = dup(STDOUT_FILENO);
+	env_info_p->std_in = dup(STDIN_FILENO);
+	env_info_p->std_out = dup(STDOUT_FILENO);
 	cmds = ft_help(env_info_p);
 	if (!cmds)
 		return (SYNTAX_ERROR);
 	//　各コマンドのリダイレクトや環境変数展開などを実行する
 	cmd_list = ft_cmd_info_list(cmds, env_info_p);
+	ft_close(env_info_p->input_fd, 10);
 	if (!cmd_list)
 	{
-		ft_clean(std_in, std_out, cmds, env_info_p);
+		// ft_clean(cmds, env_info_p);
+		dup2(env_info_p->std_in, STDIN_FILENO);
+		dup2(env_info_p->std_out, STDOUT_FILENO);
+		ft_close(env_info_p->std_in, 11);
+		ft_close(env_info_p->std_out, 12);
+		ft_free_array(cmds);
 		if (g_signum == SIGINT)
 			return (SIGINT_ERROR);
 		return (SYNTAX_ERROR);
@@ -85,6 +85,12 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	// コマンドを実行する
 	status = ft_help2(cmds, cmd_list, env_info_p);
 	// 掃除
-	ft_clean(std_in, std_out, cmds, env_info_p);
+	// ft_clean(cmds, env_info_p);
+	dup2(env_info_p->std_in, STDIN_FILENO);
+	dup2(env_info_p->std_out, STDOUT_FILENO);
+	ft_close(env_info_p->std_in, 13);
+	ft_close(env_info_p->std_out, 14);
+	ft_free_array(cmds);
+	ft_close(env_info_p->input_fd, 15);
 	return (status);
 }

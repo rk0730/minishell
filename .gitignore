@@ -5,5 +5,8 @@ hello
 argv
 *.o
 *.a
+.vscode
 minishell-tester/result.log
 playground/
+# なぜかminishell-testerで生成されるファイル
+0

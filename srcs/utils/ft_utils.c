@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:07:33 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/01 11:24:42 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/11 22:55:55 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,13 @@ char	**ft_add_str(char **array, char *str)
 	new_array[i + 1] = NULL;
 	free(array);
 	return (new_array);
+}
+
+// flagはデバックでつけたもの
+int ft_close(int fd, int flag){
+	// printf("%d at %d, close fd: %d\n", flag, getpid(), fd);
+	if (fd >= 0)
+		return (close(fd));
+	else
+		return (-1);
 }

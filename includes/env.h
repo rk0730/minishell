@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/27 22:16:04 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/11 22:25:35 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_env_info
 	// int			last_status; statusはcmdのint	ft_status_code(int flag, int new_status)で管理する
 	char		*input;//ヒアドクなども含めた入力　環境変数ではないが都合がいいのでここに入れる
 	int			input_fd;//同上
+	int			std_in;// 実行が終わってからstdinを元に戻すために保持
+	int			std_out;// 同上
 }	t_env_info;
 
 enum e_export_mode

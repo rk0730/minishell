@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 15:52:55 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/11/11 22:52:34 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_sigint_heredoc(int sig)
 {
 	g_signum = sig;
 	printf("\n");
-	close(STDIN_FILENO);
+	ft_close(STDIN_FILENO, 31);
 }
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
@@ -104,7 +104,7 @@ static int	ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 		{
 			if (g_signum == SIGINT)
 			{
-				close(pipe_fd[1]);
+				ft_close(pipe_fd[1], 32);
 				return (-2);
 			}
 			else
@@ -130,7 +130,7 @@ static int	ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 		write(pipe_fd[1], "\n", 1);
 		free(line);
 	}
-	close(pipe_fd[1]);
+	ft_close(pipe_fd[1], 33);
 	free(limiter);
 	return (0);
 }
@@ -153,7 +153,7 @@ int	ft_heredoc(char **tokens, t_env_info *env_info_p)
 		{
 			// 前回のheredocがあれば不要なので閉じる
 			if (result != -1)
-				close(result);
+				ft_close(result, 34);
 			if (tokens[i + 1] == NULL)//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
 				return (-2);
 			pipe(pipe_fd);
