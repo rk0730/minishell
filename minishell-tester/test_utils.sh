@@ -91,7 +91,8 @@ exec_test() {
 	# bashで結合されたコマンドを実行
 	printf "%b" "$commands" | bash > $stdout_file 2> $stderr_file
 	ES_2=$?
-	TEST2=$(cat $stdout_file)
+	# TEST2=$(cat $stdout_file)
+	TEST2=$(tr -d '\0' < "$stdout_file")
 	# ERR2=$(cat $stderr_file)
 	ERR2=$(tr -d '\0' < "$stderr_file")
 
@@ -121,7 +122,7 @@ exec_test() {
 		printf "%b" "$commands" | valgrind --leak-check=full --track-fds=yes --error-exitcode=$VALGRIND_ERROR ./minishell > $stdout_file 2> $stderr_file
 		ES_VAL=$?
 		# fdリークが起きているか確認
-		if grep -q "Open file descriptor" $stderr_file; then
+		if grep -a -q "Open file descriptor" $stderr_file; then
 			FD_LEAK=true
 		else
 			FD_LEAK=false

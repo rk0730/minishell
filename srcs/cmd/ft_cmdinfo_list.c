@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmdinfo_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/12 16:37:24 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:50:48 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	ft_help1(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
 		{
 			// リダイレクトエラーがあった場合はヒアドクを実行して終了
 			cmd_list[i].fd_in = ft_heredoc(tokens, env_info_p);
+			ft_close(cmd_list[i].fd_in, 16);
 			ft_free_array(tokens);
 			return (1);
 		}

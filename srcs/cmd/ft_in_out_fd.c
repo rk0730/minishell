@@ -6,29 +6,36 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/04 23:06:26 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/11 22:53:15 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
 // 入力リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
-static int	ft_in_fd(char **tokens, t_env_info env_info, int i)
+static int	ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, int i)
 {
 	int		result;
 	char	*file;
+	t_bool	is_err;
 
+	is_err = FALSE;
 	file = ft_tokenize(tokens[i + 1], env_info);
 	if (file == NULL)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
-		return (-2);
+		is_err = TRUE;
 	}
 	result = open(file, O_RDONLY);
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
 		free(file);
+		is_err = TRUE;
+	}
+	if (is_err == TRUE)
+	{
+		ft_close(cmd_info->fd_in, 35);
 		return (-2);
 	}
 	free(file);
@@ -70,18 +77,17 @@ static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
 }
 
 // エラーなら1を返す
-static int	ft_in_out_fd_h(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int i)
-{
-	if (tokens[i][0] == '>')
-	{
-		if (cmd_info->fd_out != -1)
-			close(cmd_info->fd_out);
-		cmd_info->fd_out = ft_out_fd(tokens, env_info, i);
-		if (cmd_info->fd_out == -2)
-			return (1);
-	}
-	return (0);
-}
+// static int	ft_in_out_fd_h(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int i)
+// {
+// 	if (tokens[i][0] == '>')
+// 	{
+// 		ft_close(cmd_info->fd_out, 25);
+// 		cmd_info->fd_out = ft_out_fd(tokens, env_info, i);
+// 		if (cmd_info->fd_out == -2)
+// 			return (1);
+// 	}
+// 	return (0);
+// }
 
 // エラーがあった場合は-2を返す（権限、ambiguous redirectなど）
 // リダイレクト先がない場合は-1を返す
@@ -89,28 +95,51 @@ static int	ft_in_out_fd_h(char **tokens, t_env_info env_info, t_cmd_info *cmd_in
 void	ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd)
 {
 	int	i;
+	t_bool	is_err;
 
+	is_err = FALSE;
 	i = 0;
 	cmd_info->fd_in = -1;
 	cmd_info->fd_out = -1;
 	while (tokens[i])
 	{
-		if (ft_in_out_fd_h(tokens, env_info, cmd_info, i) == 1)
-			return ;
+		// ft_in_out_fd_h(tokens, env_info, cmd_info, i) == 1);
+		if (tokens[i][0] == '>')
+		{
+			ft_close(cmd_info->fd_out, 36);
+			cmd_info->fd_out = ft_out_fd(tokens, env_info, i);
+			if (cmd_info->fd_out == -2)
+			{
+				is_err = TRUE;
+				break ;
+			}
+		}
 		else if (ft_strncmp(tokens[i], "<", 2) == 0)
 		{
 			if (cmd_info->fd_in != -1 && cmd_info->fd_in != heredoc_fd)
-				close(cmd_info->fd_in);
-			cmd_info->fd_in = ft_in_fd(tokens, env_info, i);
+				ft_close(cmd_info->fd_in, 37);
+			cmd_info->fd_in = ft_in_fd(tokens, cmd_info, env_info, i);
 			if (cmd_info->fd_in == -2)
-				return ;
+			{
+				is_err = TRUE;
+				break ;
+			}
 		}
 		else if (ft_strncmp(tokens[i], "<<", 3) == 0)
 		{
 			if (cmd_info->fd_in != -1 && cmd_info->fd_in != heredoc_fd)
-				close(cmd_info->fd_in);
+				ft_close(cmd_info->fd_in, 38);
 			cmd_info->fd_in = heredoc_fd;
 		}
 		i++;
+	}
+	if (cmd_info->fd_in != heredoc_fd)
+		ft_close(heredoc_fd, 39);
+	if (is_err == TRUE)
+	{
+		ft_close(cmd_info->fd_in, 40);
+		ft_close(cmd_info->fd_out, 41);
+		cmd_info->fd_in = -2;
+		cmd_info->fd_out = -2;
 	}
 }
