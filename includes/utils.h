@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/09 19:34:00 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/12 13:24:41 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+
+#ifdef RKITAO_DEBUG
+# define RKITAO(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#else
+# define RKITAO(fmt, ...)
+#endif
+#ifdef YYAMASAK_DEBUG
+# define YYAMASAK(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#else
+# define YYAMASAK(fmt, ...)
+#endif
 
 extern volatile sig_atomic_t	g_signum;
 
