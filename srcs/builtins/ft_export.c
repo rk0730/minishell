@@ -9,7 +9,7 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, "_", 2) == 0)
+		if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH", 5) == 0)
 			tmp = tmp;
 		else if (tmp->value)
 			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
