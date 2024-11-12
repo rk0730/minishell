@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:29:34 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/10/31 14:22:48 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:24:42 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_echo(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 		n_option = 1;
 	while (cmd_info.cmd_argv[i])
 	{
+		YYAMASAK("token: %d content:%s\n",i, cmd_info.cmd_argv[i]);
 		ft_printf_fd(STDOUT_FILENO, "%s", cmd_info.cmd_argv[i]);
 		if (cmd_info.cmd_argv[i + 1])
 			ft_printf_fd(STDOUT_FILENO, " ");
