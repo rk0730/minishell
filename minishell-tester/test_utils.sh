@@ -5,6 +5,13 @@
 # メモリリークを見るかどうか
 declare is_leak_test=false
 
+# 引数が渡されている時
+if [ $# > 0 ]; then
+	if [ "$1" == "leak" ]; then
+		is_leak_test=true
+	fi
+fi
+
 RESET="\033[0m"
 BLACK="\033[30m"
 RED="\033[31m"
@@ -59,6 +66,9 @@ start_test() {
 	printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 	echo
 
+	if [ "$is_leak_test" == true ]; then
+		printf "$BOLDMAGENTA Memory leak test$RESET\n\n"
+	fi
 	# カウンターの初期化
 	wrong_counter=0
 
@@ -75,13 +85,15 @@ exec_test() {
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
 	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
-	ERR1=$(cat $stderr_file)
+	# ERR1=$(cat $stderr_file)
+	ERR1=$(tr -d '\0' < "$stderr_file")
 
 	# bashで結合されたコマンドを実行
 	printf "%b" "$commands" | bash > $stdout_file 2> $stderr_file
 	ES_2=$?
 	TEST2=$(cat $stdout_file)
-	ERR2=$(cat $stderr_file)
+	# ERR2=$(cat $stderr_file)
+	ERR2=$(tr -d '\0' < "$stderr_file")
 
 	# ERR1の各行がERR2の各行に含まれているか確認する
 	is_err_same=true
@@ -101,51 +113,67 @@ exec_test() {
 
 	# メモリリークのテスト
 	declare ES_VAL
+	declare FD_LEAK
 	if [ "$is_leak_test" == true ]; then
 		# メモリリークが起きた時のステータスコードを決める
 		VALGRIND_ERROR=$(($ES_1 + 1))
 		# Valgrindで結合されたコマンドを実行
-		printf "%b" "$commands" | valgrind --leak-check=full --error-exitcode=$VALGRIND_ERROR ./minishell > $stdout_file 2> $stderr_file
+		printf "%b" "$commands" | valgrind --leak-check=full --track-fds=yes --error-exitcode=$VALGRIND_ERROR ./minishell > $stdout_file 2> $stderr_file
 		ES_VAL=$?
+		# fdリークが起きているか確認
+		if grep -q "Open file descriptor" $stderr_file; then
+			FD_LEAK=true
+		else
+			FD_LEAK=false
+		fi
 	fi
 
 	# テスト結果を変数に格納
 	declare TEST_RESULT
 	declare LEAK_TEST_RESULT
+	# 出力とエラー出力が正しいかどうか
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ] && [ "$is_err_same" == true ]; then
-		TEST_RESULT=true
+		TEST_RESULT=ok
 	else
-		TEST_RESULT=false
+		TEST_RESULT=failed
 	fi
-	# リークテスト結果も変数に格納
-	if [ "$is_leak_test" == false ] || [ "$ES_1" -eq "$ES_VAL" ]; then
-		LEAK_TEST_RESULT=true
+	# メモリリークのテスト結果
+	if [ "$is_leak_test" == false ]; then
+		LEAK_TEST_RESULT=ok
+	elif [ "$ES_1" -eq "$ES_VAL" ] && [ "$FD_LEAK" == false ]; then
+		LEAK_TEST_RESULT=ok
 	else
-		LEAK_TEST_RESULT=false
+		if [ "$ES_1" -ne "$ES_VAL" ] && [ "$FD_LEAK" == true ]; then
+			LEAK_TEST_RESULT=both
+		elif [ "$ES_1" -ne "$ES_VAL" ]; then
+			LEAK_TEST_RESULT=memory
+		else
+			LEAK_TEST_RESULT=fd
+		fi
 	fi
 
 	# コンソールにテスト結果を表示
-	if [ "$TEST_RESULT" == true ] && [ "$LEAK_TEST_RESULT" == true ]; then
-		# 結果があっていてメモリリークもなし
+	if [ "$TEST_RESULT" == "ok" ] && [ "$LEAK_TEST_RESULT" == "ok" ]; then
+		# 結果があっていてリークもなし
 		printf " $BOLDGREEN%s$RESET" "✓ "
-	elif [ "$TEST_RESULT" == false ]; then
+	elif [ "$TEST_RESULT" == "failed" ]; then
 		# 間違い
 		printf " $BOLDRED%s$RESET" "✗ "
 		wrong_counter=$((wrong_counter + 1))
 	else
-		# 結果はあってるがメモリリークがある
+		# 結果はあってるがリークがある
 		printf " $BOLDYELLOW%s$RESET" "⚠️ "
 		wrong_counter=$((wrong_counter + 1))
 	fi
+
 	# コマンドの表示
 	printf "$CYAN"
 	printf "\n%s" "$commands"
 	printf "$RESET"
 	echo
 
-
 	# result.log にテスト結果を書き込む
-	if [ "$TEST_RESULT" == false ] || [ "$LEAK_TEST_RESULT" == false ]; then
+	if [ "$TEST_RESULT" != "ok" ] || [ "$LEAK_TEST_RESULT" != "ok" ]; then
 		# 何かしらのミスがあるのでエラーコマンドを result.log に書き込む
 		echo "---------------Command-------------------" >> result.log
 		echo "$commands" >> result.log
@@ -171,13 +199,20 @@ exec_test() {
 		echo "---------Expected error messages---------" >> result.log
 		echo "$ERR2" >> result.log
 	fi
-	# メモリリークのテスト結果を result.log に書き込む
-	if [ "$LEAK_TEST_RESULT" == false ]; then
+	# リークのテスト結果を result.log に書き込む
+	if [ "$LEAK_TEST_RESULT" != "ok" ]; then
 		echo "--------------leak summary--------------" >> result.log
-		echo "memory leak detected" >> result.log
+		if [ "$LEAK_TEST_RESULT" == "both" ]; then
+			echo "memory leak detected" >> result.log
+			echo "fd leak detected" >> result.log
+		elif [ "$LEAK_TEST_RESULT" == "memory" ]; then
+			echo "memory leak detected" >> result.log
+		elif [ "$LEAK_TEST_RESULT" == "fd" ]; then
+			echo "fd leak detected" >> result.log
+		fi
 	fi
 
-	if [ "$TEST_RESULT" == false ] || [ "$LEAK_TEST_RESULT" == false ]; then
+	if [ "$TEST_RESULT" != "ok" ] || [ "$LEAK_TEST_RESULT" != "ok" ]; then
 		# 何かしらのミスがあったので区切りを result.log に書き込む
 		echo "-----------------------------------------" >> result.log
 		echo "" >> result.log
