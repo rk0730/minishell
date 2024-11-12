@@ -1,6 +1,9 @@
 .DS_Store
 a.out
 minishell
+minishell_both
+minishell_rkitao
+minishell_yyamasak
 hello
 argv
 *.o

@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/11 22:48:40 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/12 13:06:06 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv, char **envp)
 	t_env_info	*env_info_p;
 	int			input_pipe[2];
 
+	RKITAO("print RKITAO\n");
+	YYAMASAK("print YYAMASAK\n");
 	(void)argc;
 	(void)argv;
 	env_list = ft_gen_env_list(envp);
