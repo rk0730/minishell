@@ -7,6 +7,7 @@ if [ "${BASH_SOURCE[0]}" == "$0" ]; then
 fi
 
 # minishell_tester buitins
+
 exec_test 'echo hello world' 'exit'
 exec_test 'echo "hello world"' 'exit'
 exec_test "echo 'hello world'" 'exit'
