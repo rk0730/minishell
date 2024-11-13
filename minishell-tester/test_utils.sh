@@ -33,6 +33,7 @@ BOLDWHITE="\033[1m\033[37m"
 
 # カウンター
 declare wrong_counter
+declare test_counter
 
 # テスト用のファイル
 declare stdout_file
@@ -71,6 +72,7 @@ start_test() {
 	fi
 	# カウンターの初期化
 	wrong_counter=0
+	test_counter=0
 
 	# テスト用のファイルを作成
 	stdout_file=$(mktemp)
@@ -78,6 +80,7 @@ start_test() {
 }
 
 exec_test() {
+	test_counter=$((test_counter + 1))
 	# 全ての引数を改行で結合
 	commands=$(printf "%s\n" "$@")
 
@@ -156,14 +159,14 @@ exec_test() {
 	# コンソールにテスト結果を表示
 	if [ "$TEST_RESULT" == "ok" ] && [ "$LEAK_TEST_RESULT" == "ok" ]; then
 		# 結果があっていてリークもなし
-		printf " $BOLDGREEN%s$RESET" "✓ "
+		printf "$BOLDGREEN%d: %s$RESET" $test_counter "OK"
 	elif [ "$TEST_RESULT" == "failed" ]; then
 		# 間違い
-		printf " $BOLDRED%s$RESET" "✗ "
+		printf "$BOLDRED%d: %s$RESET" $test_counter "KO"
 		wrong_counter=$((wrong_counter + 1))
 	else
 		# 結果はあってるがリークがある
-		printf " $BOLDYELLOW%s$RESET" "⚠️ "
+		printf "$BOLDYELLOW%d: %s$RESET" $test_counter "LEAKSKO"
 		wrong_counter=$((wrong_counter + 1))
 	fi
 
@@ -219,7 +222,6 @@ exec_test() {
 		echo "" >> result.log
 		echo "" >> result.log
 	fi
-
 	# 出力結果の表示
 	# if [ "$TEST1" != "$TEST2" ]; then
 	# 	echo
