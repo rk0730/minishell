@@ -175,6 +175,7 @@ exec_test() {
 	printf "\n%s" "$commands"
 	printf "$RESET"
 	echo
+	echo
 
 	# result.log にテスト結果を書き込む
 	if [ "$TEST_RESULT" != "ok" ] || [ "$LEAK_TEST_RESULT" != "ok" ]; then
