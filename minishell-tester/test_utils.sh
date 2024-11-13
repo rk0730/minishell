@@ -84,7 +84,7 @@ exec_test() {
 	# minishellで結合されたコマンドを実行
 	printf "%b" "$commands" | ./minishell > $stdout_file 2> $stderr_file
 	ES_1=$?
-	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc" | grep -v "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
+	TEST1=$(cat $stdout_file | grep -v "MINISHELL" | grep -v "heredoc >" | grep -v -x "exit") #Linux環境でなぜかプロンプトも標準出力に出力されてしまうのでとりあえずこれで除外 exitも同様
 	# ERR1=$(cat $stderr_file)
 	ERR1=$(tr -d '\0' < "$stderr_file")
 
