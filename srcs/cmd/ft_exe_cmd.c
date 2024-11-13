@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/11 23:00:50 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/13 14:53:09 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env, char **path_ar
 	int		i;
 
 	i = 0;
+	// TODO ここきれいにしたいね
+	if (!path_array[i])
+	{
+		ft_printf_fd(STDERR_FILENO, "%s: No such file or directory\n", cmd_info.cmd_argv[0]);
+		ft_free_array(cmd_info.cmd_argv);
+		exit(CMD_ERROR);
+		return ;
+	}
 	while (path_array[i])
 	{
 		tmp = ft_strjoin(path_array[i], "/");
@@ -33,6 +41,7 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env, char **path_ar
 		free(cmd_path);
 		i++;
 	}
+	// YYAMASAK("path %d\n", i);
 	ft_printf_fd(STDERR_FILENO, "%s: command not found\n", cmd_info.cmd_argv[0]);
 	ft_free_array(cmd_info.cmd_argv);
 	exit(CMD_NOT_FOUND);
