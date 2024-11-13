@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/13 15:15:45 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:16:26 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env, char **path_ar
 	int		i;
 
 	i = 0;
-	// TODO ここきれいにしたいね
 	while (path_array[i])
 	{
 		tmp = ft_strjoin(path_array[i], "/");
