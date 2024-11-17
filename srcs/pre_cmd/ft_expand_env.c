@@ -6,11 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/29 17:24:04 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/17 18:44:45 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 static char	*ft_help1(int i, int *endp)
 {
@@ -60,7 +60,7 @@ static char	*ft_help4(char *word, int i, int end, t_env_info env_info)
 // $(英数字とアンダースコア以外（ヌル文字も含む）)ならそのまま表示する
 
 // wordの環境変数を展開した文字列を返す（wordはfreeされる） doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
-char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
+char	*_ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 {
 	char	*result;
 	char	*tmp;

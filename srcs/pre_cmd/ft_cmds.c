@@ -6,11 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 22:44:14 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/17 17:00:57 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 // エラーなら1を返す
 static int	ft_next_cmd_h(char *cmd, int *ip)

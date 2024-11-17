@@ -6,11 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/11 22:52:34 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/17 18:44:49 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 static void	ft_sigint_heredoc(int sig)
 {
@@ -125,7 +125,7 @@ static int	ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 		}
 		// 読み取った行と改行をfdに書き込む
 		if (!is_quote)
-			line = ft_expand_env(line, *env_info_p, 1);
+			line = _ft_expand_env(line, *env_info_p, 1);
 		write(pipe_fd[1], line, ft_strlen(line));
 		write(pipe_fd[1], "\n", 1);
 		free(line);
@@ -136,7 +136,7 @@ static int	ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 }
 
 // heredocでの入力が入ったfdを返す 一回もheredocがなければ-1 エラーがあれば-2を返す fork使わないものに書き直し
-int	ft_heredoc(char **tokens, t_env_info *env_info_p)
+int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 {
 	int		pipe_fd[2];
 	int		i;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/02 16:56:30 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/11/17 17:29:47 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 static int	ft_next_token_h2(char *input, int i)
 {
@@ -101,7 +101,7 @@ static void	ft_gen_tokens_h(char **tokens, char *input, int len)
 }
 
 // トークンを生成する関数　クォーテーションエラーがある場合はNULLを返す　他のエラーはここでは見逃す
-char	**ft_gen_tokens(char *input)
+char	**_ft_gen_tokens(char *input)
 {
 	int		token_status;
 	char	**tokens;

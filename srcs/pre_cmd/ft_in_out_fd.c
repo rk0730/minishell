@@ -6,11 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/11 22:53:15 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/17 18:34:57 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 // 入力リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
 static int	ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, int i)
@@ -20,7 +20,7 @@ static int	ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, in
 	t_bool	is_err;
 
 	is_err = FALSE;
-	file = ft_tokenize(tokens[i + 1], env_info);
+	file = _ft_tokenize(tokens[i + 1], env_info);
 	if (file == NULL)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
@@ -49,7 +49,7 @@ static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
 	int		result;
 	char	*file;
 
-	file = ft_tokenize(tokens[i + 1], env_info);
+	file = _ft_tokenize(tokens[i + 1], env_info);
 	if (file == NULL)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
@@ -92,7 +92,7 @@ static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
 // エラーがあった場合は-2を返す（権限、ambiguous redirectなど）
 // リダイレクト先がない場合は-1を返す
 // cmd_infoの入力リダイレクト、出力リダイレクトのfdを入れる　ヒアドクはすでに処理が完了している前提
-void	ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd)
+void	_ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd)
 {
 	int	i;
 	t_bool	is_err;

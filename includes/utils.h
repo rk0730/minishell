@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/12 13:24:41 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/17 17:09:11 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <signal.h>
-# include <linux/limits.h>
+# include <limits.h>
+// # include <linux/limits.h>
 
 # include "libft.h"
 # include "ft_printf.h"
