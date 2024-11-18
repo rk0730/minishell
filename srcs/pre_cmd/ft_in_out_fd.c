@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/21 01:03:36 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/21 01:04:31 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,19 @@ static int	_ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, i
 {
 	int		result;
 	char	*file;
-	t_bool	is_err;
 
-	is_err = FALSE;
 	file = _ft_tokenize(tokens[i + 1], env_info);
-	if (file == NULL)
+	if (file == NULL || _ft_is_ambiguous_redirect(tokens[i + 1], env_info) == 1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
-		is_err = TRUE;
+		ft_close(cmd_info->fd_in, 35);
+		return (-2);
 	}
 	result = open(file, O_RDONLY);
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
 		free(file);
-		is_err = TRUE;
-	}
-	if (is_err == TRUE)
-	{
 		ft_close(cmd_info->fd_in, 35);
 		return (-2);
 	}
@@ -51,7 +46,7 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 
 	file = _ft_tokenize(tokens[i + 1], env_info);
 	// file名がない、もしくは環境変数展開後にファイル名が2つ以上ある場合
-	if (file == NULL || ft_isspace_str(file) == 1)
+	if (file == NULL || _ft_is_ambiguous_redirect(tokens[i + 1], env_info) == 1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
 		return (-2);
