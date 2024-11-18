@@ -6,14 +6,14 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/04 22:44:14 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:30:02 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 // エラーなら1を返す
-static int	ft_next_cmd_h(char *cmd, int *ip)
+static int	_ft_next_cmd_h(char *cmd, int *ip)
 {
 	char	c;
 
@@ -36,13 +36,13 @@ static int	ft_next_cmd_h(char *cmd, int *ip)
 	return (0);
 }
 
-static char	*ft_next_cmd(char *cmd, int *ip)
+static char	*_ft_next_cmd(char *cmd, int *ip)
 {
 	int		start;
 	int		tmp;
 
 	start = *ip;
-	if (ft_next_cmd_h(cmd, ip) == 1)
+	if (_ft_next_cmd_h(cmd, ip) == 1)
 		return (NULL);
 	//すべてスペースでないか確認する
 	tmp = start;
@@ -71,7 +71,7 @@ char	**ft_gen_cmds(char *cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		tmp = ft_next_cmd(cmd, &i);
+		tmp = _ft_next_cmd(cmd, &i);
 		if (tmp == NULL)
 		{
 			ft_free_array(cmd_argv);

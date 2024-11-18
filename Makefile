@@ -34,19 +34,21 @@ SRCS += $(SRCDIR)/$(BUILIN)/ft_echo.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_export.c
 SRCS += $(SRCDIR)/$(BUILIN)/ft_unset.c
 
+PRE_CMD := pre_cmd
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmd_argv.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmdinfo_list.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmds.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_in_out_fd.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_token.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_heredoc.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_expand_env.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_redirect.c
+
 CMD := cmd
-SRCS += $(SRCDIR)/$(CMD)/ft_token.c
-SRCS += $(SRCDIR)/$(CMD)/ft_cmd_argv.c
-SRCS += $(SRCDIR)/$(CMD)/ft_cmds.c
-SRCS += $(SRCDIR)/$(CMD)/ft_in_out_fd.c
-SRCS += $(SRCDIR)/$(CMD)/ft_cmdinfo_list.c
-SRCS += $(SRCDIR)/$(CMD)/ft_heredoc.c
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
-SRCS += $(SRCDIR)/$(CMD)/ft_redirect.c
-SRCS += $(SRCDIR)/$(CMD)/ft_expand_env.c
 
 #OBJS
 OBJDIR := objs
@@ -107,6 +109,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)/$(ENV)
 	@mkdir -p $(OBJDIR)/$(UTILS)
 	@mkdir -p $(OBJDIR)/$(CMD)
+	@mkdir -p $(OBJDIR)/$(PRE_CMD)
 	@mkdir -p $(OBJDIR)/$(BUILIN)
 
 $(OBJDIR)/%$(SUFFIX).o: $(SRCDIR)/%.c | $(OBJDIR)

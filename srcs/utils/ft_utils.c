@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:07:33 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/12 13:30:58 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:45:12 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**ft_add_str(char **array, char *str)
 
 // flagはデバックでつけたもの
 int ft_close(int fd, int flag){
-	RKITAO("%d at %d, close fd: %d\n", flag, getpid(), fd);
+	// RKITAO("%d at %d, close fd: %d\n", flag, getpid(), fd);
 	if (fd >= 0)
 		return (close(fd));
 	else
