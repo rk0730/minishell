@@ -47,6 +47,7 @@ exec_test 'env | grep TEST' 'export TEST=test | env | grep USER=' 'env | grep TE
 exec_test 'export TEST=test' 'env | grep TEST' 'unset TEST | ls | echo 1' 'env | grep TEST' 'pwd | unset TEST | echo 2' 'env | grep TEST' 'unset TEST' 'env | grep TEST' 'exit'
 exec_test 'export foo="a   b"' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
 exec_test 'export foo=abc$USER' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
+exec_test 'export TEST="| grep test"' 'ls $TEST' 'unset TEST' 'exit'
 exec_test 'pwd' 'cd | ls' 'pwd' 'exit'
 exec_test 'pwd' 'ls | cd ..' 'pwd' 'exit'
 exec_test 'pwd' 'ls | cd hello | cat' 'pwd' 'exit'
