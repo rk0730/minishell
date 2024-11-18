@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:19:40 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/18 17:21:47 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 18:21:36 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,19 @@ int	ft_isspace(char c)
 {
 	if (c == 32 || (c >= 9 && c <= 13))
 		return (1);
+	return (0);
+}
+
+int	ft_isspace_str(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			return (1);
+		i++;
+	}
 	return (0);
 }

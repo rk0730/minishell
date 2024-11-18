@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/21 01:02:02 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/21 01:03:26 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ char	*ft_join_free(char *s1, char *s2);
 
 int		ft_close(int fd, int flag);
 int		ft_isspace(char c);
+int		ft_isspace_str(char *str);
 
 #endif

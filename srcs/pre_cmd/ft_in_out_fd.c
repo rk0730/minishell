@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/20 14:36:48 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:03:36 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 	char	*file;
 
 	file = _ft_tokenize(tokens[i + 1], env_info);
-	if (file == NULL)
+	// file名がない、もしくは環境変数展開後にファイル名が2つ以上ある場合
+	if (file == NULL || ft_isspace_str(file) == 1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
 		return (-2);
