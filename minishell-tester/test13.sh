@@ -11,6 +11,7 @@ fi
 exec_test 'export foo="a   b"' 'echo $foo' 'echo "$foo"' './argv $foo' './argv "$foo"' 'exit'
 exec_test 'export TEST="-n hello"' 'env | grep TEST' 'echo $TEST' 'exit'
 exec_test 'export TEST="| grep test"' 'ls $TEST' 'unset TEST' 'exit'
+exec_test 'cat < file1 file2' 'exit'
 exec_test 'export TEST="file1 file2"' 'cat < $TEST' 'unset TEST' 'exit'
 exec_test 'export TEST="file1	file2"' 'cat < $TEST' 'unset TEST' 'exit'
 exec_test 'export TEST="file1 file2"' 'cat < "$TEST" > out' 'unset TEST' 'exit'
