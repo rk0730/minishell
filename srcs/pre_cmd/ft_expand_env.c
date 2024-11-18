@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 09:30:48 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 18:54:36 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*_ft_help4(char *word, int i, int end, t_env_info env_info)
 // $（数字）ならその2文字を無視する
 // $(英数字とアンダースコア以外（ヌル文字も含む）)ならそのまま表示する
 
-// wordの環境変数を展開した文字列を返す（wordはfreeされる） doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
+// wordの環境変数を展開した文字列を返す（wordはfreeされる） // doublequoteをフラグに使っていたが、おそらくいらなくなった　一応引数には残している（doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要）
 char	*_ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 {
 	char	*result;
