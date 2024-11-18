@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/17 18:49:27 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:23:21 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define PRE_CMD_PRIVATE_H
 
 # include "pre_cmd.h"
+
+typedef enum e_token_status
+{
+	NORMAL,
+	SINGLE_QUOTE,//'が足りない
+	DOUBLE_QUOTE,//"が足りない
+	// REDIRECT,// >>>や<<<,<>など不適なリダイレクト
+}	t_token_status;
 
 // モジュール内部でしか使わない関数の宣言を行う　最初に_をつける
 
