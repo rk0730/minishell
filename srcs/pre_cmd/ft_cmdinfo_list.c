@@ -6,14 +6,14 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 18:35:49 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:29:23 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
 // エラーなら1を返す
-static int	ft_help1(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
+static int	_ft_help1(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
 {
 	char	**tokens;
 	int		i;
@@ -38,7 +38,7 @@ static int	ft_help1(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
 }
 
 // エラーなら1を返す
-static int	ft_help2(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
+static int	_ft_help2(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
 {
 	char	**tokens;
 	int		i;
@@ -76,9 +76,9 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 	cmd_list = (t_cmd_info *)malloc(sizeof(t_cmd_info) * ft_array_len(cmds));
 	if (!cmd_list)
 		exit(EXIT_FAILURE);
-	if (ft_help1(cmds, env_info_p, cmd_list) == 1)
+	if (_ft_help1(cmds, env_info_p, cmd_list) == 1)
 		return (NULL);
-	if (ft_help2(cmds, env_info_p, cmd_list) == 1)
+	if (_ft_help2(cmds, env_info_p, cmd_list) == 1)
 		return (NULL);
 	// リダイレクト処理と環境変数を展開し、cmd_argvを生成する
 	i = 0;

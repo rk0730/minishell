@@ -6,14 +6,14 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/17 18:34:57 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:32:23 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
 // 入力リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
-static int	ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, int i)
+static int	_ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, int i)
 {
 	int		result;
 	char	*file;
@@ -44,7 +44,7 @@ static int	ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, in
 
 // tokens[i]が">>"か">"かを判定して、その後のファイル名を開いて、そのfdを返す
 // 出力、追記リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
-static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
+static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 {
 	int		result;
 	char	*file;
@@ -107,7 +107,7 @@ void	_ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int
 		if (tokens[i][0] == '>')
 		{
 			ft_close(cmd_info->fd_out, 36);
-			cmd_info->fd_out = ft_out_fd(tokens, env_info, i);
+			cmd_info->fd_out = _ft_out_fd(tokens, env_info, i);
 			if (cmd_info->fd_out == -2)
 			{
 				is_err = TRUE;
@@ -118,7 +118,7 @@ void	_ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int
 		{
 			if (cmd_info->fd_in != -1 && cmd_info->fd_in != heredoc_fd)
 				ft_close(cmd_info->fd_in, 37);
-			cmd_info->fd_in = ft_in_fd(tokens, cmd_info, env_info, i);
+			cmd_info->fd_in = _ft_in_fd(tokens, cmd_info, env_info, i);
 			if (cmd_info->fd_in == -2)
 			{
 				is_err = TRUE;

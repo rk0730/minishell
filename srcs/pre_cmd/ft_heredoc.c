@@ -6,13 +6,13 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 18:44:49 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:36:15 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-static void	ft_sigint_heredoc(int sig)
+static void	_ft_sigint_heredoc(int sig)
 {
 	g_signum = sig;
 	printf("\n");
@@ -21,7 +21,7 @@ static void	ft_sigint_heredoc(int sig)
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
 // limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
-static char	*ft_limit_tokenize(char *str, int *is_quote)
+static char	*_ft_limit_tokenize(char *str, int *is_quote)
 {
 	char	*result;
 	char	*tmp;
@@ -67,7 +67,7 @@ static char	*ft_limit_tokenize(char *str, int *is_quote)
 	return (result);
 }
 
-static void	ft_one_heredoc_h(t_env_info *env_info_p, char *line)
+static void	_ft_one_heredoc_h(t_env_info *env_info_p, char *line)
 {
 	char	*tmp;
 
@@ -87,7 +87,7 @@ static void	ft_one_heredoc_h(t_env_info *env_info_p, char *line)
 	free(tmp);
 }
 
-static int	ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
+static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
 {
 	char	*line;
 	char	*tmp;
@@ -116,7 +116,7 @@ static int	ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 				break ;
 			}
 		}
-		ft_one_heredoc_h(env_info_p, line);
+		_ft_one_heredoc_h(env_info_p, line);
 		// 読み取った行とlimiterが一致したらループを抜ける
 		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
 		{
@@ -146,7 +146,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 
 	i = 0;
 	result = -1;
-	signal(SIGINT, ft_sigint_heredoc);
+	signal(SIGINT, _ft_sigint_heredoc);
 	while (tokens[i])
 	{
 		if (ft_strncmp(tokens[i], "<<", 3) == 0)
@@ -157,14 +157,14 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 			if (tokens[i + 1] == NULL)//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
 				return (-2);
 			pipe(pipe_fd);
-			limiter = ft_limit_tokenize(tokens[i + 1], &is_quote);
+			limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
 			if (limiter == NULL)
 			{
 				ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
 				return (-2);
 			}
 			// ヒアドクが１つ実行してresultに格納
-			if (ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote) == -2)
+			if (_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote) == -2)
 				return (-2);
 			result = pipe_fd[0];
 		}

@@ -6,14 +6,14 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 18:29:39 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:28:44 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
 // ""や''を開き、""なら中身をexpand_env、''ならそのまま返す
-static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
+static char	*_ft_help1(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
 	char	*result;
@@ -42,7 +42,7 @@ static char	*ft_help1(char *str, int i, int *endp, t_env_info env_info)
 
 // $"や$'の時は飛ばす　それ以外の$はexpand_envする
 // ""や''で囲まれていない文字列をexpand_envする
-static char	*ft_help2(char *str, int i, int *endp, t_env_info env_info)
+static char	*_ft_help2(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
 	char	*result;
@@ -84,9 +84,9 @@ char	*_ft_tokenize(char *str, t_env_info env_info)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\"' || str[i] == '\'')
-			tmp = ft_help1(str, i, &end, env_info);
+			tmp = _ft_help1(str, i, &end, env_info);
 		else
-			tmp = ft_help2(str, i, &end, env_info);
+			tmp = _ft_help2(str, i, &end, env_info);
 		i = end;
 		result = ft_join_free(result, tmp);
 	}
