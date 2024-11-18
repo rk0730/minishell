@@ -18,11 +18,11 @@ SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_gen_cmd_env.c
 
 UTILS := utils
-SRCS += $(SRCDIR)/$(UTILS)/ft_utils.c
+SRCS += $(SRCDIR)/$(UTILS)/ft_utils1.c
+SRCS += $(SRCDIR)/$(UTILS)/ft_utils2.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line.c
 SRCS += $(SRCDIR)/$(UTILS)/get_next_line_utils.c
 SRCS += $(SRCDIR)/$(UTILS)/ft_static.c
-SRCS += $(SRCDIR)/$(UTILS)/ft_join_free.c
 
 BUILIN := builtins
 SRCS += $(SRCDIR)/$(BUILIN)/ft_call_builtin.c

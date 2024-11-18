@@ -15,6 +15,7 @@ exec_test 'export TEST="file1 file2"' 'cat < $TEST' 'unset TEST' 'exit'
 exec_test 'export TEST="file1	file2"' 'cat < $TEST' 'unset TEST' 'exit'
 exec_test 'export TEST="file1 file2"' 'cat < "$TEST" > out' 'unset TEST' 'exit'
 exec_test 'export TEST="out1 > out2"' 'ls > $TEST' 'unset TEST' 'exit'
+exec_test 'ls|  	  |ls' 'exit'
 
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then
 	end_test

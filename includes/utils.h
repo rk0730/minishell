@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/20 14:35:23 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:02:02 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int		ft_status_code(int flag, int new_status);
 char	*ft_join_free(char *s1, char *s2);
 
 int		ft_close(int fd, int flag);
+int		ft_isspace(char c);
 
 #endif
