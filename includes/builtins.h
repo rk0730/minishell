@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/31 14:24:32 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/17 04:42:16 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ enum e_cmd_error
 {
 	CMD_ERROR = 1,
 	CMD_NOT_FOUND = 127,
+	CMD_EXEC_FAILED = 126,
 	SYNTAX_ERROR = 2,
 	SIGINT_ERROR = 130,
 	SIGQUIT_ERROR = 131,
