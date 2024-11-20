@@ -6,14 +6,14 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 04:42:16 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:35:51 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "env.h"
+# include "pre_cmd.h"
 
 enum e_cmd_error
 {
@@ -24,21 +24,6 @@ enum e_cmd_error
 	SIGINT_ERROR = 130,
 	SIGQUIT_ERROR = 131,
 };
-
-typedef enum e_token_status
-{
-	NORMAL,
-	SINGLE_QUOTE,//'が足りない
-	DOUBLE_QUOTE,//"が足りない
-	// REDIRECT,// >>>や<<<,<>など不適なリダイレクト
-}	t_token_status;
-
-typedef struct s_cmd_info
-{
-	char	**cmd_argv;
-	int		fd_in;
-	int		fd_out;
-}	t_cmd_info;	
 
 
 void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe, t_bool need_input);

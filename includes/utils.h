@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/14 14:06:36 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:35:23 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
-# include <linux/limits.h>
+# include <limits.h>
+// # include <linux/limits.h>
 
 # include "libft.h"
 # include "ft_printf.h"

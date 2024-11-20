@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:13:31 by rkitao            #+#    #+#             */
-/*   Updated: 2024/08/02 15:24:25 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/11/17 18:45:30 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
 // リダイレクト記号かどうかを判定する
-int	ft_is_redirect(char *str)
+int	_ft_is_redirect(char *str)
 {
 	if (ft_strncmp(str, ">", 2) == 0 || ft_strncmp(str, "<", 2) == 0 || ft_strncmp(str, ">>", 3) == 0 || ft_strncmp(str, "<<", 3) == 0)
 		return (1);
@@ -22,7 +22,7 @@ int	ft_is_redirect(char *str)
 }
 
 // リダイレクト先がない、<<< >>>などがないかどうか確認する　あったら1を返す（最後のリダイレクト記号のリダイレクト先がない問題はここではチェックしない）
-int	ft_redirect_err(char **tokens)
+int	_ft_redirect_err(char **tokens)
 {
 	int	i;
 
@@ -30,15 +30,15 @@ int	ft_redirect_err(char **tokens)
 	while (tokens[i])
 	{
 		// >>>や<<<などの処理 bashの挙動とやや異なるが、ここはディフェンスできる気がする　一旦シンプルに作る
-		if ((tokens[i][0] == '>' || tokens[i][0] == '<') && ft_is_redirect(tokens[i]) == 0)
+		if ((tokens[i][0] == '>' || tokens[i][0] == '<') && _ft_is_redirect(tokens[i]) == 0)
 		{
 			ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `%s'\n", tokens[i]);
 			return (1);
 		}
 		// リダイレクト先がない場合の処理
-		if (ft_is_redirect(tokens[i]))
+		if (_ft_is_redirect(tokens[i]))
 		{
-			if (tokens[i + 1] != NULL && ft_is_redirect(tokens[i + 1]))
+			if (tokens[i + 1] != NULL && _ft_is_redirect(tokens[i + 1]))
 			{
 				ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `%s'\n", tokens[i]);
 				return (1);
@@ -50,7 +50,7 @@ int	ft_redirect_err(char **tokens)
 }
 
 // 最後がリダイレクト記号でないかどうかチェックする
-int	ft_is_last_redirect(char **tokens)
+int	_ft_is_last_redirect(char **tokens)
 {
 	int	i;
 
@@ -58,7 +58,7 @@ int	ft_is_last_redirect(char **tokens)
 	while (tokens[i])
 		i++;
 	i--;
-	if (ft_is_redirect(tokens[i]))
+	if (_ft_is_redirect(tokens[i]))
 		return (1);
 	else
 		return (0);

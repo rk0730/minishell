@@ -6,13 +6,13 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/29 17:24:04 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 09:30:48 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pre_cmd_private.h"
 
-static char	*ft_help1(int i, int *endp)
+static char	*_ft_help1(int i, int *endp)
 {
 	*endp = i + 2;
 	return (ft_itoa(ft_status_code(0, 0)));
@@ -35,7 +35,7 @@ static char	*ft_help1(int i, int *endp)
 // 		return (NULL);
 // }
 
-static char	*ft_help3(char *word, int i, int *endp)
+static char	*_ft_help3(char *word, int i, int *endp)
 {
 	*endp = i;
 	while (word[*endp] != '\0' && word[*endp] != '$')
@@ -43,7 +43,7 @@ static char	*ft_help3(char *word, int i, int *endp)
 	return (ft_substr(word, i, *endp - i));
 }
 
-static char	*ft_help4(char *word, int i, int end, t_env_info env_info)
+static char	*_ft_help4(char *word, int i, int end, t_env_info env_info)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -60,7 +60,7 @@ static char	*ft_help4(char *word, int i, int end, t_env_info env_info)
 // $(英数字とアンダースコア以外（ヌル文字も含む）)ならそのまま表示する
 
 // wordの環境変数を展開した文字列を返す（wordはfreeされる） doubleqouteが1なら"で囲まれているものを展開,0なら"で囲まれているわけではない　$の処理でこのフラグが必要
-char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
+char	*_ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 {
 	char	*result;
 	char	*tmp;
@@ -76,7 +76,7 @@ char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 		{
 			// $の処理
 			if (word[i] == '$' && word[i+1] == '?')//環境変数展開でも$?だけ別処理
-				tmp = ft_help1(i, &end);
+				tmp = _ft_help1(i, &end);
 			else if (word[i] == '$' && ft_isdigit(word[i + 1]))// $（数字）は無視（bashではコマンドライン引数を入れている）
 			{
 				end += 2;
@@ -93,11 +93,11 @@ char	*ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 				end += 2;//1文字目は確実に英字か_なので2文字目から判定を始める
 				while (ft_isalnum(word[end]) || word[end] == '_')
 					end++;
-				tmp = ft_help4(word, i, end, env_info);
+				tmp = _ft_help4(word, i, end, env_info);
 			}
 		}
 		else
-			tmp = ft_help3(word, i, &end);
+			tmp = _ft_help3(word, i, &end);
 		i = end;
 		result = ft_join_free(result, tmp);
 	}
