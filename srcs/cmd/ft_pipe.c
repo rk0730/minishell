@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/11 23:01:26 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/20 14:27:01 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void	ft_recursive(t_cmd_info *cmd_list, t_env_info *env_info_p, int index
 }
 
 // パイプを使う　ここに入ったプロセスは全てexitされる
+// TODO change status ??
 static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_index)
 {
 	int		pipe_fd[4];
@@ -127,17 +128,19 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_
 }
 
 // コマンドが1つしかないのでそれを実行して終了ステータスを返す
+// TODO change status ??
 static int	ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info *env_info_p)
 {
 	int		status;
 
 	status = ft_exec_cmd(cmd_list[0], env_info_p, -1, -1);
-	if (status % 128 == SIGINT)
+	YYAMASAK("status=%d\n", status);
+	if (status >= 128 && status % 128 == SIGINT)
 	{
 		printf("\n");
 		return (SIGINT_ERROR);
 	}
-	else if (status % 128 == SIGQUIT)
+	else if (status >= 128 && status % 128 == SIGQUIT)
 	{
 		printf("Quit\n");
 		return (SIGQUIT_ERROR);

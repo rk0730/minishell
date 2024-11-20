@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 17:00:30 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/20 14:36:09 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	ft_help2(char **cmds, t_cmd_info *cmd_list, t_env_info *env_info_p)
 	int	i;
 
 	// コマンドを実行する
+	// YYAMASAK("ft_help2\n");
 	last_index = ft_array_len(cmds) - 1;
 	status = ft_exec_cmd_list(cmd_list, env_info_p, last_index);
 	i = 0;
