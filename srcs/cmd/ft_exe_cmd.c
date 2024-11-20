@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/14 14:53:24 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:21:33 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,43 +25,6 @@ static int ft_is_directory(char *dir)
     return S_ISDIR(statbuf.st_mode);
 }
 
-// 相対パスなのでPATHから探して実行する
-static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env, char **path_array, t_env_info *env_info_p)
-{
-	char	*tmp;
-	char	*cmd_path;
-	int		i;
-
-	i = 0;
-	// YYAMASAK("relative path: %s\n", cmd_info.cmd_argv[0]);
-	while (path_array[i])
-	{
-		tmp = ft_strjoin(path_array[i], "/");
-		cmd_path = ft_strjoin(tmp, cmd_info.cmd_argv[0]);
-		free(tmp);
-		if (access(cmd_path, X_OK) == 0)
-		{
-			if (execve(cmd_path, cmd_info.cmd_argv, cmd_env) == -1)
-				exit(CMD_ERROR);
-		}
-		free(cmd_path);
-		i++;
-	}
-	// YYAMASAK("path %d\n", i);
-	if (i == 0 && ft_is_directory(cmd_info.cmd_argv[0]))
-	{
-		ft_printf_fd(STDERR_FILENO, "%s: Is a directory\n", cmd_info.cmd_argv[0]);
-		ft_free_array(cmd_info.cmd_argv);
-		exit(SYNTAX_ERROR);
-	}
-	else if (i == 0)
-		ft_printf_fd(STDERR_FILENO, "%s: No such file or directory\n", cmd_info.cmd_argv[0]);
-	else
-		ft_printf_fd(STDERR_FILENO, "%s: command not found\n", cmd_info.cmd_argv[0]);
-	ft_free_array(cmd_info.cmd_argv);
-	exit(CMD_NOT_FOUND);
-}
-
 // 絶対パスなのでそのまま実行する
 static void	ft_exec_direct(t_cmd_info cmd_info, char **cmd_env)
 {
@@ -70,14 +33,51 @@ static void	ft_exec_direct(t_cmd_info cmd_info, char **cmd_env)
 	if (ft_is_directory(cmd_info.cmd_argv[0]))
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: Is a directory\n", cmd_info.cmd_argv[0]);
-		exit(SYNTAX_ERROR);
+		exit(CMD_EXEC_FAILED);
 	}
 	if (execve(cmd_info.cmd_argv[0], cmd_info.cmd_argv, cmd_env) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0], strerror(errno));
+		if (errno == ENOENT) 
+			exit(CMD_NOT_FOUND);
+		else if (errno == EACCES)
+			exit(CMD_EXEC_FAILED);
+		YYAMASAK("relative_path: %d\n", errno);
 		exit(CMD_ERROR);
 	}
 	ft_free_array(cmd_info.cmd_argv);
+}
+
+// 相対パスなのでPATHから探して実行する
+static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env, char **path_array, t_env_info *env_info_p)
+{
+	char	*tmp;
+	char	*cmd_path;
+	int		i;
+
+	i = 0;
+	if (!path_array[i])
+		ft_exec_direct(cmd_info, cmd_env);
+	while (path_array[i])
+	{
+		tmp = ft_strjoin(path_array[i], "/");
+		cmd_path = ft_strjoin(tmp, cmd_info.cmd_argv[0]);
+		free(tmp);
+		if (access(cmd_path, X_OK) == 0)
+		{
+			if (execve(cmd_path, cmd_info.cmd_argv, cmd_env) == -1)
+			{
+				ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0], strerror(errno));
+				YYAMASAK("relative_path: %d\n", errno);
+				exit(CMD_ERROR);
+			}
+		}
+		free(cmd_path);
+		i++;
+	}
+	ft_printf_fd(STDERR_FILENO, "%s: command not found\n", cmd_info.cmd_argv[0]);
+	ft_free_array(cmd_info.cmd_argv);
+	exit(CMD_NOT_FOUND);
 }
 
 // ここで終了しない場合は-1を返す　エラーかビルトインの場合は終了ステータスを返す

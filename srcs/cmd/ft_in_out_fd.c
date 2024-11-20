@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/11 22:53:15 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/17 04:55:46 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ static int	ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, in
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		YYAMASAK("test: result=-1\n");
 		free(file);
 		is_err = TRUE;
 	}
 	if (is_err == TRUE)
 	{
+		YYAMASAK("test: is_err=1\n");
 		ft_close(cmd_info->fd_in, 35);
 		return (-2);
 	}
@@ -69,6 +71,7 @@ static int	ft_out_fd(char **tokens, t_env_info env_info, int i)
 	if (result == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: %s\n", file, strerror(errno));
+		YYAMASAK("test: result=-1\n");
 		free(file);
 		return (-2);
 	}
