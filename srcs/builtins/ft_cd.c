@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/31 14:22:52 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:35:02 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,51 @@
 // }
 
 // {cd PATH}で動くが{cd}のみで来た場合は動かさない方針で 終了ステータスを返す
+
+// TODO add logic
+// TODO add directory change
+// TODO add PWD, OLDPWD variable updating
+// TODO add error message
+static int ft_run_cd(t_cmd_info cmd_info, int mode, char *variable_name)
+{
+	if (!cmd_info.cmd_argv[1])
+	{
+		ft_printf_fd(STDERR_FILENO, "this is moving to HOME\n");
+		return (0);
+	}
+	if (strncmp(cmd_info.cmd_argv[1], "-", 2) == 0)
+		return 0;
+	if (chdir(cmd_info.cmd_argv[1]) == -1)
+	{
+		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", cmd_info.cmd_argv[1], strerror(errno));
+		return (CMD_ERROR);
+	}
+}
 int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
 {
 	int		argc;
-	char	*dir_name;
+    char	cwd[PATH_MAX];
 
 	(void)env_info;
 	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	argc = ft_array_len(cmd_info.cmd_argv);
-	if (argc < 2)
-		return (0);
-	dir_name = cmd_info.cmd_argv[1];
 	if (argc > 2)
 	{
 		ft_printf_fd(STDERR_FILENO, "cd: too many arguments\n");
 		return (CMD_ERROR);
 	}
-	else if (chdir(dir_name) == -1)
-	{
-		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", dir_name, strerror(errno));
-		return (CMD_ERROR);
-	}
-	// ft_printf_fd(STDERR_FILENO, "error in ft_cd\n");
+	if (getcwd(cwd, PATH_MAX) == NULL) 
+		ft_printf_fd(STDERR_FILENO, "cd: error retrieving current directory: getcwd: cannot access parent directories: %s\n", strerror(errno));
+	if (!cmd_info.cmd_argv[1])
+		return (ft_run_cd(cmd_info, 0, "HOME"));
+	else if (strncmp(cmd_info.cmd_argv[1], "-", 2) == 0)
+		return (ft_run_cd(cmd_info, 0, "OLDPWD"));
+	return (ft_run_cd(cmd_info, 1, ""));
+	// if (chdir(cmd_info.cmd_argv[1]) == -1)
+	// {
+	// 	ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", cmd_info.cmd_argv[1], strerror(errno));
+	// 	return (CMD_ERROR);
+	// }
 	return (0);
 }
 
