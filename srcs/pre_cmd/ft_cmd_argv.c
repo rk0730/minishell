@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 09:28:44 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/19 00:02:40 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static char	*_ft_help1(char *str, int i, int *endp, t_env_info env_info)
 		(*endp)++;
 		return (ft_substr(str, i + 1, *endp - i - 2));
 	}
-	ft_printf_fd(STDERR_FILENO, "error in ft_tokenize ft_help1\n");
+	ft_printf_fd(STDERR_FILENO, "error in ft_tokenize _ft_help1\n");
 	return (NULL);
 }
 
 // $"や$'の時は飛ばす　それ以外の$はexpand_envする
 // ""や''で囲まれていない文字列をexpand_envする
-static char	*_ft_help2(char *str, int i, int *endp, t_env_info env_info)
+char	*_ft_expand_normal(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
 	char	*result;
@@ -70,6 +70,7 @@ static char	*_ft_help2(char *str, int i, int *endp, t_env_info env_info)
 // 	return (result);
 // }
 
+// "や'は開いて除いて返す
 // ""で囲まれているものはft_expand_envで環境変数展開、''で囲まれていたらそのままつなげる
 char	*_ft_tokenize(char *str, t_env_info env_info)
 {
@@ -86,7 +87,7 @@ char	*_ft_tokenize(char *str, t_env_info env_info)
 		if (str[i] == '\"' || str[i] == '\'')
 			tmp = _ft_help1(str, i, &end, env_info);
 		else
-			tmp = _ft_help2(str, i, &end, env_info);
+			tmp = _ft_expand_normal(str, i, &end, env_info);
 		i = end;
 		result = ft_join_free(result, tmp);
 	}

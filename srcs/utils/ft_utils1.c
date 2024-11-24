@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_utils1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 13:07:33 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 09:45:12 by kitaoryoma       ###   ########.fr       */
+/*   Created: 2024/11/18 17:19:50 by kitaoryoma        #+#    #+#             */
+/*   Updated: 2024/11/18 17:33:03 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_show_all(char **array)
 	i = 0;
 	while (array[i] != NULL)
 	{
-		printf("array[%d]: %s\n", i, array[i]);
+		RKITAO("array[%d]: %s\n", i, array[i]);
+		YYAMASAK("array[%d]: %s\n", i, array[i]);
 		i++;
 	}
 }
