@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 09:29:23 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 21:34:50 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 	while (i < ft_array_len(cmds))
 	{
 		tokens = _ft_gen_tokens(cmds[i]);
+		RKITAO("tokens\n");
+		ft_show_all(tokens);
 		_ft_in_out_fd(tokens, *env_info_p, &(cmd_list[i]), cmd_list[i].fd_in);
 		cmd_list[i].cmd_argv = _ft_gen_cmd_argv(tokens, *env_info_p);
 		ft_free_array(tokens);

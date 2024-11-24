@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 09:36:15 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 18:09:27 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,25 @@ static char	*_ft_limit_tokenize(char *str, int *is_quote)
 	return (result);
 }
 
-static void	_ft_one_heredoc_h(t_env_info *env_info_p, char *line)
-{
-	char	*tmp;
+// static void	_ft_one_heredoc_h(t_env_info *env_info_p, char *line)
+// {
+// 	char	*tmp;
 
-	// 初めての入力の場合、改行を追加
-	if (ft_strchr(env_info_p->input, '\n') == NULL)
-	{
-		tmp = env_info_p->input;
-		env_info_p->input = ft_strjoin(tmp, "\n");
-		free(tmp);
-	}
-	// 読み取った行と改行を履歴に追加
-	tmp = env_info_p->input;
-	env_info_p->input = ft_strjoin(tmp, line);
-	free(tmp);
-	tmp = env_info_p->input;
-	env_info_p->input = ft_strjoin(tmp, "\n");
-	free(tmp);
-}
+// 	// 初めての入力の場合、改行を追加
+// 	if (ft_strchr(env_info_p->input, '\n') == NULL)
+// 	{
+// 		tmp = env_info_p->input;
+// 		env_info_p->input = ft_strjoin(tmp, "\n");
+// 		free(tmp);
+// 	}
+// 	// 読み取った行と改行を履歴に追加
+// 	tmp = env_info_p->input;
+// 	env_info_p->input = ft_strjoin(tmp, line);
+// 	free(tmp);
+// 	tmp = env_info_p->input;
+// 	env_info_p->input = ft_strjoin(tmp, "\n");
+// 	free(tmp);
+// }
 
 static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
 {
@@ -116,7 +116,21 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 				break ;
 			}
 		}
-		_ft_one_heredoc_h(env_info_p, line);
+		// _ft_one_heredoc_h(env_info_p, line);
+		// 初めての入力の場合、改行を追加
+		if (ft_strchr(env_info_p->input, '\n') == NULL)
+		{
+			tmp = env_info_p->input;
+			env_info_p->input = ft_strjoin(tmp, "\n");
+			free(tmp);
+		}
+		// 読み取った行と改行を履歴に追加
+		tmp = env_info_p->input;
+		env_info_p->input = ft_strjoin(tmp, line);
+		free(tmp);
+		tmp = env_info_p->input;
+		env_info_p->input = ft_strjoin(tmp, "\n");
+		free(tmp);	
 		// 読み取った行とlimiterが一致したらループを抜ける
 		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
 		{

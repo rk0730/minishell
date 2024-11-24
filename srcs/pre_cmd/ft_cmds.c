@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 09:30:02 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/18 17:21:04 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static char	*_ft_next_cmd(char *cmd, int *ip)
 	start = *ip;
 	if (_ft_next_cmd_h(cmd, ip) == 1)
 		return (NULL);
-	//すべてスペースでないか確認する
+	//すべて空白文字でないか確認する
 	tmp = start;
-	while (cmd[tmp] && cmd[tmp] == ' ')
+	while (cmd[tmp] && ft_isspace(cmd[tmp]))
 		tmp++;
 	if (tmp == *ip)
 	{
