@@ -39,7 +39,7 @@ static	int	ft_is_valid_envnm(char *s, int len)
 	}
 	return (is_all_num);
 }
-static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
+t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 {
 	t_env_pair	*tmp;
 
@@ -53,7 +53,7 @@ static t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 	return (NULL);
 }
 
-static t_env_pair	*ft_new_env(char *key, char *value)
+t_env_pair	*ft_new_env2(char *key, char *value)
 {
 	t_env_pair	*env_pair;
 
@@ -130,7 +130,7 @@ static	int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len, int 
 		key = ft_substr(str, 0, key_len - mode);
 		value = ft_substr(str, key_len + 1, ft_strlen(str) - key_len - 1);
 	}
-	new = ft_new_env(key, value);
+	new = ft_new_env2(key, value);
 	if (ft_search_env_node(new->key, env_list) && (new->value))
 		ft_update_env_list(&env_list, new, mode);
 	else if (!ft_search_env_node(new->key, env_list))

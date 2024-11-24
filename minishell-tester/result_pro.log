@@ -1,0 +1,380 @@
+---------------Command-------------------
+./test_files/invalid_permission 
+exit
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+126
+-----------------------------------------
+
+
+---------------Command-------------------
+/test_files
+exit
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+127
+-----------------------------------------
+
+
+---------------Command-------------------
+./missing.out
+exit
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+127
+-----------------------------------------
+
+
+---------------Command-------------------
+export TEST="-n hello"
+env | grep TEST
+echo $TEST
+exit
+--------------Your output----------------
+TEST=-n hello
+-n hello
+-------------Expected output-------------
+TEST=-n hello
+hello
+-----------------------------------------
+
+
+---------------Command-------------------
+export a=" "
+echo$a-a
+exit
+--------------Your output----------------
+
+-------------Expected output-------------
+-a
+------------Your exit status-------------
+127
+-----------Expected exit status----------
+0
+-----------Your error messages-----------
+echo -a: command not found
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+mkdir dir
+cd dir
+rmdir ../dir
+pwd
+cd .
+pwd
+exit
+--------------Your output----------------
+
+-------------Expected output-------------
+/home/hello/minishell/builtins/minishell-tester/dir
+/home/hello/minishell/builtins/minishell-tester/dir/.
+-----------Your error messages-----------
+
+---------Expected error messages---------
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+-----------------------------------------
+
+
+---------------Command-------------------
+echo "echo hello" > exe && chmod +x exe
+ln -s exe symexe
+chmod -h -x symexe
+ls -l
+./symexe 
+exit
+--------------Your output----------------
+total 348
+-rw-r--r-- 1 root root     0 Nov 17 05:49 0
+-rwxr-xr-x 1 root root 70312 Oct  3 14:30 a.out
+-rwxr-xr-x 1 root root 70304 Nov 17 05:49 argv
+-rw-r--r-- 1 root root   158 Sep  8 08:31 argv.c
+-rw-r--r-- 1 root root   964 Oct 28 13:14 check_leaks.sh
+-rwxr-xr-x 1 root root    27 Nov 17 05:49 exe
+-rwxr-xr-x 1 root root  9597 Oct 28 13:14 expect.sh
+-rw-r--r-- 1 root root     0 Nov 17 05:08 f0
+-rw-r--r-- 1 root root     0 Nov 17 05:08 f1
+-rw-r--r-- 1 root root     0 Nov 17 05:08 f2
+-rw-r--r-- 1 root root     4 Nov 17 05:08 f3
+-rwxr-xr-x 1 root root 70304 Nov 17 05:49 hello
+-rw-r--r-- 1 root root    98 Sep  8 08:31 hello.c
+-rw-r--r-- 1 root root    18 Nov 17 04:49 infile
+-rw-r--r-- 1 root root  2999 Sep  8 08:31 ls1000.txt
+-rw-r--r-- 1 root root  1346 Sep  8 08:31 manual_test.txt
+-rwxr-xr-x 1 root root 81432 Nov 17 05:49 minishell
+---------- 1 root root     4 Nov 17 05:49 no_permission
+--w--w--w- 1 root root    24 Sep  8 08:31 no_read_permission
+-r--r--r-- 1 root root     0 Nov 17 05:49 no_write_permission
+-rw-r--r-- 1 root root 53758 Nov 17 05:49 result.log
+-rw-r--r-- 1 root root 20629 Nov 14 14:56 result_new2.log
+lrwxrwxrwx 1 root root     3 Nov 13 14:55 symexe -> exe
+-rwxr-xr-x 1 root root 12735 Nov 12 14:07 test-old.sh
+-rw-r--r-- 1 root root     4 Nov 17 05:08 test1
+-rwxr-xr-x 1 root root  3317 Nov 12 14:07 test1.sh
+-rwxr-xr-x 1 root root   395 Nov 13 14:55 test10.sh
+-rwxr-xr-x 1 root root  5339 Nov 13 14:55 test11.sh
+-rwxr-xr-x 1 root root   617 Nov 13 14:55 test12.sh
+-rw-r--r-- 1 root root     4 Nov 17 05:08 test2
+-rwxr-xr-x 1 root root  2849 Nov 12 14:07 test2.sh
+-rw-r--r-- 1 root root     0 Nov 17 05:08 test3
+-rwxr-xr-x 1 root root  1418 Nov 12 14:07 test3.sh
+-rwxr-xr-x 1 root root  2082 Nov 12 14:07 test4.sh
+-rwxr-xr-x 1 root root  3113 Nov 12 14:07 test5.sh
+-rwxr-xr-x 1 root root  9992 Nov 12 14:07 test6.sh
+-rwxr-xr-x 1 root root   524 Nov 12 14:07 test7.sh
+-rwxr-xr-x 1 root root  1744 Nov 13 14:55 test8.sh
+-rwxr-xr-x 1 root root  1912 Nov 13 14:55 test9.sh
+-rwxr-xr-x 1 root root   380 Nov 12 14:07 test_all.sh
+-rwxr-xr-x 1 root root  5502 Oct 28 13:14 test_export_old.sh
+drwxr-xr-x 2 root root  4096 Nov 13 15:38 test_files
+-rwxr-xr-x 1 root root  8168 Nov 13 15:38 test_utils.sh
+-------------Expected output-------------
+total 348
+-rw-r--r-- 1 root root     0 Nov 17 05:49 0
+-rwxr-xr-x 1 root root 70312 Oct  3 14:30 a.out
+-rwxr-xr-x 1 root root 70304 Nov 17 05:49 argv
+-rw-r--r-- 1 root root   158 Sep  8 08:31 argv.c
+-rw-r--r-- 1 root root   964 Oct 28 13:14 check_leaks.sh
+-rwxr-xr-x 1 root root    11 Nov 17 05:49 exe
+-rwxr-xr-x 1 root root  9597 Oct 28 13:14 expect.sh
+-rw-r--r-- 1 root root     0 Nov 17 05:08 f0
+-rw-r--r-- 1 root root     0 Nov 17 05:08 f1
+-rw-r--r-- 1 root root     0 Nov 17 05:08 f2
+-rw-r--r-- 1 root root     4 Nov 17 05:08 f3
+-rwxr-xr-x 1 root root 70304 Nov 17 05:49 hello
+-rw-r--r-- 1 root root    98 Sep  8 08:31 hello.c
+-rw-r--r-- 1 root root    18 Nov 17 04:49 infile
+-rw-r--r-- 1 root root  2999 Sep  8 08:31 ls1000.txt
+-rw-r--r-- 1 root root  1346 Sep  8 08:31 manual_test.txt
+-rwxr-xr-x 1 root root 81432 Nov 17 05:49 minishell
+---------- 1 root root     4 Nov 17 05:49 no_permission
+--w--w--w- 1 root root    24 Sep  8 08:31 no_read_permission
+-r--r--r-- 1 root root     0 Nov 17 05:49 no_write_permission
+-rw-r--r-- 1 root root 53758 Nov 17 05:49 result.log
+-rw-r--r-- 1 root root 20629 Nov 14 14:56 result_new2.log
+lrwxrwxrwx 1 root root     3 Nov 13 14:55 symexe -> exe
+-rwxr-xr-x 1 root root 12735 Nov 12 14:07 test-old.sh
+-rw-r--r-- 1 root root     4 Nov 17 05:08 test1
+-rwxr-xr-x 1 root root  3317 Nov 12 14:07 test1.sh
+-rwxr-xr-x 1 root root   395 Nov 13 14:55 test10.sh
+-rwxr-xr-x 1 root root  5339 Nov 13 14:55 test11.sh
+-rwxr-xr-x 1 root root   617 Nov 13 14:55 test12.sh
+-rw-r--r-- 1 root root     4 Nov 17 05:08 test2
+-rwxr-xr-x 1 root root  2849 Nov 12 14:07 test2.sh
+-rw-r--r-- 1 root root     0 Nov 17 05:08 test3
+-rwxr-xr-x 1 root root  1418 Nov 12 14:07 test3.sh
+-rwxr-xr-x 1 root root  2082 Nov 12 14:07 test4.sh
+-rwxr-xr-x 1 root root  3113 Nov 12 14:07 test5.sh
+-rwxr-xr-x 1 root root  9992 Nov 12 14:07 test6.sh
+-rwxr-xr-x 1 root root   524 Nov 12 14:07 test7.sh
+-rwxr-xr-x 1 root root  1744 Nov 13 14:55 test8.sh
+-rwxr-xr-x 1 root root  1912 Nov 13 14:55 test9.sh
+-rwxr-xr-x 1 root root   380 Nov 12 14:07 test_all.sh
+-rwxr-xr-x 1 root root  5502 Oct 28 13:14 test_export_old.sh
+drwxr-xr-x 2 root root  4096 Nov 13 15:38 test_files
+-rwxr-xr-x 1 root root  8168 Nov 13 15:38 test_utils.sh
+hello
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+0
+-----------Your error messages-----------
+ln: failed to create symbolic link 'symexe': File exists
+chmod: invalid option -- 'h'
+Try 'chmod --help' for more information.
+./symexe: Exec format error
+---------Expected error messages---------
+ln: failed to create symbolic link 'symexe': File exists
+chmod: invalid option -- 'h'
+Try 'chmod --help' for more information.
+-----------------------------------------
+
+
+---------------Command-------------------
+exit -- 42
+echo $?
+exit
+------------Your exit status-------------
+2
+-----------Expected exit status----------
+42
+-----------Your error messages-----------
+exit: --: numeric argument required
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+export SHLVL=	
+
+ 42
+echo $SHLVL
+exit
+-----------Your error messages-----------
+42: command not found
+---------Expected error messages---------
+bash: line 2: $'\v\f\r': command not found
+-----------------------------------------
+
+
+---------------Command-------------------
+export SHLVL=	
+
+ 42
+echo $SHLVL
+exit
+-----------Your error messages-----------
+42: command not found
+---------Expected error messages---------
+bash: line 2: $'\v\f\r': command not found
+-----------------------------------------
+
+
+---------------Command-------------------
+echo -nnnnnnn hello
+exit
+--------------Your output----------------
+
+-------------Expected output-------------
+hello
+-----------------------------------------
+
+
+---------------Command-------------------
+echo a > test1 b
+echo > test2 "d	ef"
+cat test1 > test3 test2
+cat test3
+cat test2
+exit
+--------------Your output----------------
+a b
+def
+def
+-------------Expected output-------------
+a b
+d	ef
+d	ef
+-----------Your error messages-----------
+
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+echo a > test1 b
+echo > test2 "d	ef"
+cat test1 > test3 > test2
+cat test3
+cat test2
+exit
+-----------Your error messages-----------
+
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+export $nothing $nothing $nothing $nothing
+exit
+--------------Your output----------------
+declare -x SHELL="/bin/bash"
+declare -x COLORTERM="truecolor"
+declare -x TERM_PROGRAM_VERSION="1.95.1"
+declare -x HOSTNAME="2d69353bd17c"
+declare -x SSH_AUTH_SOCK="/tmp/vscode-ssh-auth-09b38404-2466-4405-8a62-0541788dcf61.sock"
+declare -x REMOTE_CONTAINERS_IPC="/tmp/vscode-remote-containers-ipc-09b38404-2466-4405-8a62-0541788dcf61.sock"
+declare -x PWD="/home/hello/minishell/builtins/minishell-tester"
+declare -x VSCODE_GIT_ASKPASS_NODE="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/node"
+declare -x HOME="/root"
+declare -x LANG="en_US.UTF-8"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
+declare -x REMOTE_CONTAINERS="true"
+declare -x GIT_ASKPASS="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/extensions/git/dist/askpass.sh"
+declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS=""
+declare -x LESSCLOSE="/usr/bin/lesspipe %s %s"
+declare -x TERM="xterm-256color"
+declare -x REMOTE_CONTAINERS_SOCKETS="["/tmp/vscode-ssh-auth-09b38404-2466-4405-8a62-0541788dcf61.sock","/tmp/.X11-unix/X36"]"
+declare -x LESSOPEN="| /usr/bin/lesspipe %s"
+declare -x VSCODE_GIT_IPC_HANDLE="/tmp/vscode-git-dc94f1c42c.sock"
+declare -x DISPLAY=":36"
+declare -x SHLVL="3"
+declare -x DEBUGINFOD_URLS="https://debuginfod.ubuntu.com "
+declare -x VSCODE_GIT_ASKPASS_MAIN="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/extensions/git/dist/askpass-main.js"
+declare -x BROWSER="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/bin/helpers/browser.sh"
+declare -x REMOTE_CONTAINERS_DISPLAY_SOCK="/tmp/.X11-unix/X36"
+declare -x OLDPWD="/home/hello/minishell/builtins"
+declare -x TERM_PROGRAM="vscode"
+declare -x VSCODE_IPC_HOOK_CLI="/tmp/vscode-ipc-26738759-5c34-445a-acac-de61bc44a7c9.sock"
+-------------Expected output-------------
+declare -x BROWSER="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/bin/helpers/browser.sh"
+declare -x COLORTERM="truecolor"
+declare -x DEBUGINFOD_URLS="https://debuginfod.ubuntu.com "
+declare -x DISPLAY=":36"
+declare -x GIT_ASKPASS="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/extensions/git/dist/askpass.sh"
+declare -x HOME="/root"
+declare -x HOSTNAME="2d69353bd17c"
+declare -x LANG="en_US.UTF-8"
+declare -x LESSCLOSE="/usr/bin/lesspipe %s %s"
+declare -x LESSOPEN="| /usr/bin/lesspipe %s"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
+declare -x OLDPWD="/home/hello/minishell/builtins"
+declare -x PATH="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+declare -x PWD="/home/hello/minishell/builtins/minishell-tester"
+declare -x REMOTE_CONTAINERS="true"
+declare -x REMOTE_CONTAINERS_DISPLAY_SOCK="/tmp/.X11-unix/X36"
+declare -x REMOTE_CONTAINERS_IPC="/tmp/vscode-remote-containers-ipc-09b38404-2466-4405-8a62-0541788dcf61.sock"
+declare -x REMOTE_CONTAINERS_SOCKETS="[\"/tmp/vscode-ssh-auth-09b38404-2466-4405-8a62-0541788dcf61.sock\",\"/tmp/.X11-unix/X36\"]"
+declare -x SHELL="/bin/bash"
+declare -x SHLVL="4"
+declare -x SSH_AUTH_SOCK="/tmp/vscode-ssh-auth-09b38404-2466-4405-8a62-0541788dcf61.sock"
+declare -x TERM="xterm-256color"
+declare -x TERM_PROGRAM="vscode"
+declare -x TERM_PROGRAM_VERSION="1.95.1"
+declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS=""
+declare -x VSCODE_GIT_ASKPASS_MAIN="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/extensions/git/dist/askpass-main.js"
+declare -x VSCODE_GIT_ASKPASS_NODE="/root/.vscode-server/bin/65edc4939843c90c34d61f4ce11704f09d3e5cb6/node"
+declare -x VSCODE_GIT_IPC_HANDLE="/tmp/vscode-git-dc94f1c42c.sock"
+declare -x VSCODE_IPC_HOOK_CLI="/tmp/vscode-ipc-26738759-5c34-445a-acac-de61bc44a7c9.sock"
+declare -x _="/usr/bin/bash"
+-----------------------------------------
+
+
+---------------Command-------------------
+./test_files/invalid_permission
+exit
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+126
+-----------------------------------------
+
+
+---------------Command-------------------
+./missing.out
+exit
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+127
+-----------------------------------------
+
+
+---------------Command-------------------
+/test_files
+exit
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+127
+-----------------------------------------
+
+

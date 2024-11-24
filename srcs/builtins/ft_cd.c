@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/21 15:35:02 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:26:36 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,34 @@
 // TODO add directory change
 // TODO add PWD, OLDPWD variable updating
 // TODO add error message
-static int ft_run_cd(t_cmd_info cmd_info, int mode, char *variable_name)
+static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_name, char *cwd)
 {
-	if (!cmd_info.cmd_argv[1])
+	t_env_pair	*env_pair;
+	t_env_pair	*tmp;
+	char		*target;
+
+	if (!variable_name) 
+		target = cmd_info.cmd_argv[1];
+	else 
 	{
-		ft_printf_fd(STDERR_FILENO, "this is moving to HOME\n");
-		return (0);
+		env_pair = ft_search_env_node(variable_name, env_list);
+		if (!env_pair)
+		{
+			ft_printf_fd(STDERR_FILENO, "cd: %s not set\n", variable_name);
+			return (CMD_ERROR);
+		}
+		target = env_pair->value;
 	}
-	if (strncmp(cmd_info.cmd_argv[1], "-", 2) == 0)
-		return 0;
-	if (chdir(cmd_info.cmd_argv[1]) == -1)
+	if (chdir(target) == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", cmd_info.cmd_argv[1], strerror(errno));
+		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", target, strerror(errno));
 		return (CMD_ERROR);
 	}
+	tmp = ft_new_env2(ft_strdup("OLDPWD"), ft_strdup(cwd));
+	ft_update_env_list(&env_list, tmp, 0);
+	return (0);
 }
+
 int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
 {
 	int		argc;
@@ -62,19 +75,16 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pip
 		ft_printf_fd(STDERR_FILENO, "cd: too many arguments\n");
 		return (CMD_ERROR);
 	}
-	if (getcwd(cwd, PATH_MAX) == NULL) 
+	if (getcwd(cwd, PATH_MAX) == NULL)
+	{
 		ft_printf_fd(STDERR_FILENO, "cd: error retrieving current directory: getcwd: cannot access parent directories: %s\n", strerror(errno));
+		return (0);
+	}
 	if (!cmd_info.cmd_argv[1])
-		return (ft_run_cd(cmd_info, 0, "HOME"));
+		return (ft_run_cd(cmd_info, env_info.env_list, "HOME", cwd));
 	else if (strncmp(cmd_info.cmd_argv[1], "-", 2) == 0)
-		return (ft_run_cd(cmd_info, 0, "OLDPWD"));
-	return (ft_run_cd(cmd_info, 1, ""));
-	// if (chdir(cmd_info.cmd_argv[1]) == -1)
-	// {
-	// 	ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", cmd_info.cmd_argv[1], strerror(errno));
-	// 	return (CMD_ERROR);
-	// }
-	return (0);
+		return (ft_run_cd(cmd_info, env_info.env_list, "OLDPWD", cwd));
+	return (ft_run_cd(cmd_info, env_info.env_list, NULL, cwd));
 }
 
 // int main(int ac, char **av)
