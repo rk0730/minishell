@@ -39,19 +39,6 @@ static	int	ft_is_valid_envnm(char *s, int len)
 	}
 	return (is_all_num);
 }
-t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
-{
-	t_env_pair	*tmp;
-
-	tmp = env_list;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->key, search, ft_strlen(tmp->key) + 1) == 0)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
 
 t_env_pair	*ft_new_env2(char *key, char *value)
 {
@@ -64,54 +51,6 @@ t_env_pair	*ft_new_env2(char *key, char *value)
 	env_pair->value = value;
 	env_pair->next = NULL;
 	return (env_pair);
-}
-
-// mode 0: replace, 1: add
-// newのkeyとnew自身はfreeされる
-void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
-{
-	t_env_pair	*node;
-	char		*tmp;
-
-	if (!new)
-		return ;
-	if (!*env_list_p)
-	{
-		*env_list_p = new;
-		return ;
-	}
-	node = ft_search_env_node(new->key, *env_list_p);
-	free(new->key);
-	if (mode == 0)
-	{
-		free(node->value);
-		node->value = new->value;
-	}
-	else
-	{
-		tmp = ft_strjoin(node->value, new->value);
-		free(new->value);
-		free(node->value);
-		node->value = tmp;
-	}
-	free(new);
-}
-
-static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
-{
-	t_env_pair	*last;
-
-	if (!new)
-		return ;
-	if (!*env_list_p)
-	{
-		*env_list_p = new;
-		return ;
-	}
-	last = *env_list_p;
-	while (last->next)
-		last = last->next;
-	last->next = new;
 }
 
 static	int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len, int mode)

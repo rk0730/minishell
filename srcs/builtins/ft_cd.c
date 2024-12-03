@@ -6,39 +6,19 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/24 14:26:36 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:37:08 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <unistd.h>
-// #include <linux/limits.h>
-// #include <stdio.h>
-// #include <errno.h>
-// #include <sys/stat.h>
-// #include <string.h>
 # include "builtins.h"
 
-// static  int count_args(char **argv)
-// {
-//     int num;
-
-//     num = 0;
-//     while (argv[num])
-//         num++;
-//     return (num);
-// }
-
 // {cd PATH}で動くが{cd}のみで来た場合は動かさない方針で 終了ステータスを返す
-
-// TODO add logic
-// TODO add directory change
-// TODO add PWD, OLDPWD variable updating
-// TODO add error message
 static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_name, char *cwd)
 {
 	t_env_pair	*env_pair;
 	t_env_pair	*tmp;
 	char		*target;
+	char		current_dir[PATH_MAX];
 
 	if (!variable_name) 
 		target = cmd_info.cmd_argv[1];
@@ -58,6 +38,9 @@ static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_n
 		return (CMD_ERROR);
 	}
 	tmp = ft_new_env2(ft_strdup("OLDPWD"), ft_strdup(cwd));
+	ft_update_env_list(&env_list, tmp, 0);
+	getcwd(current_dir, PATH_MAX);
+	tmp = ft_new_env2(ft_strdup("PWD"), ft_strdup(current_dir));
 	ft_update_env_list(&env_list, tmp, 0);
 	return (0);
 }
