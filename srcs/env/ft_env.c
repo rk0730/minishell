@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/10/27 19:19:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:32:05 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_env_pair	*ft_new_env(char *env)
 	return (env_pair);
 }
 
-static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
+void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 {
 	t_env_pair	*last;
 
@@ -42,6 +42,35 @@ static void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 	while (last->next)
 		last = last->next;
 	last->next = new;
+}
+
+// mode 0: replace, 1: add
+// newのkeyとnew自身はfreeされる
+void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
+{
+	t_env_pair	*node;
+	char		*tmp;
+
+	if (!new)
+		return ;
+	node = ft_search_env_node(new->key, *env_list_p);
+	if (!node)
+		ft_add_env_list(env_list_p, new);
+	else if (mode == 0)
+	{
+		free(new->key);
+		free(node->value);
+		node->value = new->value;
+	}
+	else
+	{
+		free(new->key);
+		tmp = ft_strjoin(node->value, new->value);
+		free(new->value);
+		free(node->value);
+		node->value = tmp;
+	}
+	free(new);
 }
 
 t_env_pair	*ft_gen_env_list(char **envp)

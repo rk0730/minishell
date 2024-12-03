@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/11 22:25:35 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/03 13:34:23 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ char		**ft_gen_path_array(t_env_pair *env_list);
 void		ft_free_env_list(t_env_pair *env_list);
 void		ft_show_env_list(t_env_pair *env_list);
 char		*ft_search_env(char *search, t_env_pair *env_list);
+t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list);
 char		**ft_gen_cmd_env(t_env_pair *env_list);
+void		ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new);
+void		ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode);
 
 #endif
