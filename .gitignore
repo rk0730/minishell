@@ -13,6 +13,6 @@ argv
 minishell-tester/result.log
 playground/
 check_signal.sh
-check_leaks.sh
+check_leaks_cop.sh
 # なぜかminishell-testerで生成されるファイル
 0
