@@ -47,6 +47,13 @@ exec_test 'echo a"a"  a  "a"' 'exit'
 exec_test 'echo a"a"   a   "a"' 'exit'
 exec_test 'echo  a  "a"   a   "a"' 'exit'
 exec_test 'echo  a  "a"   a   "a"' 'exit'
+exec_test 'echo $NONE  $USER' 'exit'
+exec_test 'echo $NONE  $USER  $NONE' 'exit'
+exec_test 'echo $NONE $NONE $NONE $USER' 'exit'
+exec_test 'echo ""  $USER' 'exit'
+exec_test 'echo ""  $USER  ""' 'exit'
+exec_test 'echo "" "" "" $USER' 'exit'
+
 
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then
 	end_test

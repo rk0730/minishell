@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/21 01:04:31 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/04 18:42:10 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static int	_ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, i
 	char	*file;
 
 	file = _ft_tokenize(tokens[i + 1], env_info);
+	// cat > $NOTHING と cat > ""を区別するためにif文をつけている　ここでNULLにすることでambiguous redirectになる
+	if (ft_strchr(tokens[i + 1], '\'') == NULL && ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
+		file = NULL;
 	if (file == NULL || _ft_is_ambiguous_redirect(tokens[i + 1], env_info) == 1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
@@ -45,6 +48,9 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 	char	*file;
 
 	file = _ft_tokenize(tokens[i + 1], env_info);
+	// cat > $NOTHING と cat > ""を区別するためにif文をつけている　ここでNULLにすることでambiguous redirectになる
+	if (ft_strchr(tokens[i + 1], '\'') == NULL && ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
+		file = NULL;
 	// file名がない、もしくは環境変数展開後にファイル名が2つ以上ある場合
 	if (file == NULL || _ft_is_ambiguous_redirect(tokens[i + 1], env_info) == 1)
 	{

@@ -44,6 +44,7 @@ SRCS += $(SRCDIR)/$(PRE_CMD)/ft_token.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_heredoc.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_expand_env.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_redirect.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_split_after_index.c
 
 CMD := cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
