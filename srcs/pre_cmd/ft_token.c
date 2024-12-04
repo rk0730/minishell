@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/18 17:38:07 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/11/21 17:22:32 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	_ft_next_token_h2(char *input, int i)
 	return (i);
 }
 
-static int	_ft_next_token_h(char *input, int i, int *token_status, char c)
+// iをクォーテーションcの中身の次の文字に移動させる　token_statusにはクォーテーションの種類を入れる
+int	_ft_skip_quotation(char *input, int i, int *token_status, char c)
 {
 	i++;
 	while (input[i] != '\0' && input[i] != c)
@@ -28,10 +29,13 @@ static int	_ft_next_token_h(char *input, int i, int *token_status, char c)
 		i++;
 	else
 	{
-		if (c == '\'')
-			*token_status = SINGLE_QUOTE;
-		else
-			*token_status = DOUBLE_QUOTE;
+		if (token_status != NULL)
+		{
+			if (c == '\'')
+				*token_status = SINGLE_QUOTE;
+			else
+				*token_status = DOUBLE_QUOTE;
+		}
 	}
 	return (i);
 }
@@ -44,9 +48,9 @@ static int	_ft_next_token(char *in, int i, int *token_status)
 	while (in[i] != '\0' && in[i] != ' ' && in[i] != '<' && in[i] != '>')
 	{
 		if (in[i] == '\'')
-			i = _ft_next_token_h(in, i, token_status, '\'');
+			i = _ft_skip_quotation(in, i, token_status, '\'');
 		else if (in[i] == '\"')
-			i = _ft_next_token_h(in, i, token_status, '\"');
+			i = _ft_skip_quotation(in, i, token_status, '\"');
 		else
 		{
 			while (in[i] && in[i] != ' ' && in[i] != '\'' && in[i] != '\"'
