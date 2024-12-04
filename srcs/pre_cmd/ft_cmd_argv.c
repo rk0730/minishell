@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/04 19:05:43 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/04 22:06:46 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info)
 			else
 				tmp = ft_substr(token, i, end - i);
 			RKITAO("now : %s\n", now);
-			RKITAO("tokenize : %s\n", _ft_tokenize(tmp, env_info));
+			// RKITAO("tokenize : %s\n", _ft_tokenize(tmp, env_info));
 			now = ft_join_free(now, _ft_tokenize(tmp, env_info));
 			free(tmp);
 			// split_index以降で空白文字で分割し、cmd_argvに追加する
@@ -163,7 +163,7 @@ char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info)
 			tmp_array = _ft_split_after_index(now, split_index);
 			tmp = now;
 			// nowの末尾が空白文字の場合はそこで区切るが、そうでない場合は次の要素と繋げる
-			if (ft_isspace(tmp[ft_strlen(tmp) - 1]))
+			if (ft_strlen(tmp) > 0 && ft_isspace(tmp[ft_strlen(tmp) - 1]))
 			{
 				RKITAO("last of now is space\n");
 				last_add = FALSE;// 空白文字で終わっているので、最後に追加するnowはない
@@ -183,6 +183,7 @@ char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info)
 				{
 					last_add = FALSE;
 					now = ft_strdup("");
+					free(tmp_array);
 				}
 			}
 			RKITAO("now: %s\n", now);
@@ -199,6 +200,7 @@ char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info)
 			tmp = ft_substr(token, i, end - i + 1);
 			RKITAO("tmp: %s\n", tmp);
 			now = ft_join_free(now, _ft_tokenize(tmp, env_info));
+			free(tmp);
 			// クウォーテーションがある際は分割しないのでsplit_indexをnowの最後にする
 			split_index = ft_strlen(now);
 			RKITAO("now: %s\n", now);
@@ -209,6 +211,8 @@ char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info)
 	// 最後の文字列をcmd_argvに追加する
 	if (last_add)
 		cmd_argv = ft_add_str(cmd_argv, now);
+	else
+		free(now);
 	return (cmd_argv);
 }
 
