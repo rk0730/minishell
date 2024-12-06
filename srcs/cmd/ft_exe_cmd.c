@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/20 14:36:21 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:32:21 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ static void	ft_exec_cmd_child(t_cmd_info cmd_info, t_env_info *env_info_p, int r
 	//シグナルはデフォに戻す
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
 	path_array = ft_gen_path_array(env_info_p->env_list);
 	cmd_env = ft_gen_cmd_env(env_info_p->env_list);
 	if (ft_strchr(cmd_info.cmd_argv[0], '/') != NULL)
