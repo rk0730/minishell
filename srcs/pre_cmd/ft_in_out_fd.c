@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/04 22:08:46 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/07 15:28:23 by rkitao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	_ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, i
 	}
 	if (file == NULL || _ft_is_ambiguous_redirect(tokens[i + 1], env_info) == 1)
 	{
+		free(file);
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
 		ft_close(cmd_info->fd_in, 35);
 		return (-2);
@@ -60,6 +61,7 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 	// file名がない、もしくは環境変数展開後にファイル名が2つ以上ある場合
 	if (file == NULL || _ft_is_ambiguous_redirect(tokens[i + 1], env_info) == 1)
 	{
+		free(file);
 		ft_printf_fd(STDERR_FILENO, "%s: ambiguous redirect\n", tokens[i + 1]);
 		return (-2);
 	}
