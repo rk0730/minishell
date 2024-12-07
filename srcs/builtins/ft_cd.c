@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/03 13:37:08 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:09:58 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_n
 	tmp = ft_new_env2(ft_strdup("OLDPWD"), ft_strdup(cwd));
 	ft_update_env_list(&env_list, tmp, 0);
 	getcwd(current_dir, PATH_MAX);
+	ft_internal_pwd(1);
 	tmp = ft_new_env2(ft_strdup("PWD"), ft_strdup(current_dir));
 	ft_update_env_list(&env_list, tmp, 0);
 	return (0);
