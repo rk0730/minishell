@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/20 14:36:09 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:20:12 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	t_cmd_info	*cmd_list;
 	int			status;
 
-	env_info_p->std_in = dup(STDIN_FILENO);
-	env_info_p->std_out = dup(STDOUT_FILENO);
 	cmds = ft_help(env_info_p);
 	if (!cmds)
+	{
+		ft_close(env_info_p->input_fd, 9);
 		return (SYNTAX_ERROR);
+	}
+	env_info_p->std_in = dup(STDIN_FILENO);
+	env_info_p->std_out = dup(STDOUT_FILENO);
 	//　各コマンドのリダイレクトや環境変数展開などを実行する
 	cmd_list = ft_cmd_info_list(cmds, env_info_p);
 	ft_close(env_info_p->input_fd, 10);
