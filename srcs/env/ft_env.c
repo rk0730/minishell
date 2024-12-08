@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/03 13:32:05 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:42:17 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,34 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 	free(new);
 }
 
+static void _create_default_env(t_env_pair **env_list)
+{
+	t_env_pair *new;
+	char	pathname[PATH_MAX];
+	char *tmp;
+
+	new = ft_new_env("_=]");
+	ft_add_env_list(env_list, new);
+
+	new = ft_new_env("SHLVL=1");
+	ft_add_env_list(env_list, new);
+
+	new = (t_env_pair *)malloc(sizeof(t_env_pair));
+	if (new)
+	{
+		new->key = ft_strdup("OLDPWD");
+		new->value = NULL;
+		if (new->key)
+			ft_add_env_list(env_list, new);
+	}
+
+	getcwd(pathname, PATH_MAX);
+	tmp = ft_strjoin("PWD=", pathname);
+	new = ft_new_env(tmp);
+	ft_add_env_list(env_list, new);
+	free(tmp);
+}
+
 t_env_pair	*ft_gen_env_list(char **envp)
 {
 	t_env_pair	*env_list;
@@ -81,6 +109,8 @@ t_env_pair	*ft_gen_env_list(char **envp)
 
 	i = 0;
 	env_list = NULL;
+	if (!envp || !*envp)
+		_create_default_env(&env_list);
 	while (envp[i])
 	{
 		new = ft_new_env(envp[i]);
