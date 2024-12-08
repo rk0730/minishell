@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/08 16:59:48 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:48:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,13 @@ static char	*_ft_limit_tokenize(char *str, int *is_quote)
 // 	free(tmp);
 // }
 
-char *_line_member(int mode, char *line)
-{
-	static char *line2;
-
-	if (mode == 0)
-		line2 = line;
-	return (line2);
-}
-
 static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
 {
 	char	*line;
 	char	*tmp;
 	int		is_first;
 
-	signal(SIGINT, _ft_sigint_heredoc);
+	// signal(SIGINT, _ft_sigint_heredoc);
 	is_first = 0;
 	while (1)
 	{
@@ -120,7 +111,6 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 				tmp = ft_strndup(line, ft_strlen(line) - 1);
 				free(line);
 				line = tmp;
-				_line_member(0, line);
 			}
 			YYAMASAK("line desu: %s\n", line);
 			// line = readline("heredoc > "); //最初に入力したinput_fdが切れたので標準入力から受け取る
@@ -135,16 +125,12 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 			}
 			else
 			{
-				YYAMASAK("line_member: %s\n", _line_member(1, ""));
-				if (!_line_member(1, ""))
-				{
-					YYAMASAK("line nullde close\n");
-					//lineがNULLなのにSIGINTではないということはctrl+dが押されたということ
-					ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
-					write(STDERR_FILENO, limiter, ft_strlen(limiter));
-					ft_printf_fd(STDERR_FILENO, "')\n");
-					break ;
-				}
+				YYAMASAK("line nullde close\n");
+				//lineがNULLなのにSIGINTではないということはctrl+dが押されたということ
+				ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
+				write(STDERR_FILENO, limiter, ft_strlen(limiter));
+				ft_printf_fd(STDERR_FILENO, "')\n");
+				break ;
 			}
 		}
 		// _ft_one_heredoc_h(env_info_p, line);
@@ -174,7 +160,6 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 		write(pipe_fd[1], line, ft_strlen(line));
 		write(pipe_fd[1], "\n", 1);
 		free(line);
-		_line_member(0, NULL);
 	}
 	ft_close(pipe_fd[1], 33);
 	free(limiter);

@@ -28,6 +28,7 @@ SRCS = $(SRCDIR)/ft_isalpha.c \
 	$(SRCDIR)/ft_atoi.c \
 	$(SRCDIR)/ft_calloc.c \
 	$(SRCDIR)/ft_strdup.c \
+	$(SRCDIR)/ft_strndup.c \
 	$(SRCDIR)/ft_substr.c \
 	$(SRCDIR)/ft_strjoin.c \
 	$(SRCDIR)/ft_strtrim.c \
