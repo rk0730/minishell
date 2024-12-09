@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/07 14:35:55 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/12/07 14:37:10 by yyamasak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
 #include "cmd.h"
 #include "env.h"
@@ -9,8 +21,9 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH", 5) == 0)
-			tmp = tmp;
+		if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
+				5) == 0)
+			(void)env_list;
 		else if (tmp->value)
 			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
 		else
@@ -20,7 +33,7 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 }
 
 // to do: create test case
-static	int	ft_is_valid_envnm(char *s, int len)
+static int	ft_is_valid_envnm(char *s, int len)
 {
 	int	i;
 	int	is_all_num;
@@ -53,7 +66,8 @@ t_env_pair	*ft_new_env2(char *key, char *value)
 	return (env_pair);
 }
 
-static	int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len, int mode)
+static int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len,
+		int mode)
 {
 	t_env_pair	*new;
 	char		*key;
@@ -63,7 +77,7 @@ static	int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len, int 
 	{
 		key = ft_strdup(str);
 		value = NULL;
-	} 
+	}
 	else
 	{
 		key = ft_substr(str, 0, key_len - mode);
@@ -77,10 +91,10 @@ static	int	ft_add_env_process(t_env_pair *env_list, char *str, int key_len, int 
 	return (0);
 }
 
-static  int ft_setenv(t_env_pair *env_list, char *str)
+static int	ft_setenv(t_env_pair *env_list, char *str)
 {
-	char		*equal_pos;
-	int			plus_flg;
+	char	*equal_pos;
+	int		plus_flg;
 
 	equal_pos = ft_strchr(str, '=');
 	plus_flg = 0;
@@ -99,25 +113,27 @@ static  int ft_setenv(t_env_pair *env_list, char *str)
 	return (ft_add_env_process(env_list, str, equal_pos - str, plus_flg));
 }
 
-int		ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe,
+		int write_pipe)
 {
-    int i;
-    int status;
-	int return_st;
+	int	i;
+	int	status;
+	int	return_st;
 
-    i = 1;
+	i = 1;
 	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	status = 0;
-    while (cmd_info.cmd_argv[i])
+	while (cmd_info.cmd_argv[i])
 	{
 		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
-        return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
-		if (return_st == 1) 
-			ft_printf_fd(STDERR_FILENO, "export: `%s': not a valid identifier\n", cmd_info.cmd_argv[i]);
+		return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
+		if (return_st == 1)
+			ft_printf_fd(STDERR_FILENO,
+				"export: `%s': not a valid identifier\n", cmd_info.cmd_argv[i]);
 		status |= return_st;
 		i++;
 	}
 	if (i == 1)
 		ft_show_env_list2(env_info.env_list);
-    return (status);
+	return (status);
 }

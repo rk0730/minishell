@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/03 13:37:08 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:12:26 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,14 @@ static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_n
 		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", target, strerror(errno));
 		return (CMD_ERROR);
 	}
-	tmp = ft_new_env2(ft_strdup("OLDPWD"), ft_strdup(cwd));
+	tmp = ft_search_env_node("PWD", env_list);
+	if (!tmp)
+		tmp = ft_new_env2(ft_strdup("OLDPWD"), NULL);
+	else
+		tmp = ft_new_env2(ft_strdup("OLDPWD"), ft_strdup(tmp->value));
 	ft_update_env_list(&env_list, tmp, 0);
 	getcwd(current_dir, PATH_MAX);
+	ft_internal_pwd(1);
 	tmp = ft_new_env2(ft_strdup("PWD"), ft_strdup(current_dir));
 	ft_update_env_list(&env_list, tmp, 0);
 	return (0);
@@ -65,6 +70,8 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pip
 	}
 	if (!cmd_info.cmd_argv[1])
 		return (ft_run_cd(cmd_info, env_info.env_list, "HOME", cwd));
+	else if (!*cmd_info.cmd_argv[1])
+		return (0);
 	else if (strncmp(cmd_info.cmd_argv[1], "-", 2) == 0)
 		return (ft_run_cd(cmd_info, env_info.env_list, "OLDPWD", cwd));
 	return (ft_run_cd(cmd_info, env_info.env_list, NULL, cwd));

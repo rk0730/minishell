@@ -3,7 +3,7 @@
 # MINISHELL-TESTER
 
 # メモリリークを見るかどうか
-declare is_leak_test=false
+declare is_leak_test=true
 
 # 引数が渡されている時
 if [ $# > 0 ]; then

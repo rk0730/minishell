@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_out_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkitao <rkitao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/07 15:28:23 by rkitao           ###   ########.fr       */
+/*   Updated: 2024/12/07 16:17:38 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 	int		result;
 	char	*file;
 
+	result = 0;
 	file = _ft_tokenize(tokens[i + 1], env_info);
 	// cat > $NOTHING と cat > ""を区別するためにif文をつけている　ここでNULLにすることでambiguous redirectになる
 	if (ft_strchr(tokens[i + 1], '\'') == NULL && ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
