@@ -55,7 +55,10 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 		return ;
 	node = ft_search_env_node(new->key, *env_list_p);
 	if (!node)
+	{
 		ft_add_env_list(env_list_p, new);
+		return ;
+	}
 	else if (mode == 0)
 	{
 		free(new->key);

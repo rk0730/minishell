@@ -32,6 +32,11 @@ exec_test 'mkdir dir' 'cd dir' 'rmdir ../dir' 'pwd' 'cd .' 'pwd' 'echo $?' 'exit
 exec_test 'mkdir dir' 'cd dir' 'rmdir ../dir' 'pwd' 'cd test test' 'pwd' 'echo $?' 'exit'
 exec_test 'mkdir test' 'cd test' 'pwd' 'rmdir ../test' 'pwd' 'cd .' 'pwd' 'echo $?' 'exit'
 exec_test 'mkdir test' 'cd test' 'pwd' 'rmdir ../test' 'pwd' 'cd test test' 'pwd' 'echo $?' 'exit'
+# add test feedback by kazuki
+exec_test 'cd ""' 'pwd' 'exit'
+exec_test 'cd "" | cd ""' 'pwd' 'exit'
+exec_test 'env | grep "PWD"' 'unset PWD' 'env | grep "PWD"' 'cd ..' 'env | grep "PWD"' 'export | grep "PWD"' 'exit'
+exec_test 'cd ""' 'exit'
 
 exec_test 'unset $OLDPWD' 'echo $OLDPWD' 'cd | ls' 'echo $OLDPWD' 'echo $?' 'exit'
 exec_test 'unset $OLDPWD' 'echo $OLDPWD' 'ls | cd ..' 'echo $OLDPWD' 'echo $?' 'exit'

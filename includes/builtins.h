@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/03 15:42:37 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:10:16 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		ft_env(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 int		ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
 int		ft_export(t_cmd_info cmd_info, t_env_info env_info,  int read_pipe, int write_pipe);
 int 	ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe);
+char 	*ft_internal_pwd(int mode);
 t_env_pair	*ft_new_env2(char *key, char *value);
 #endif

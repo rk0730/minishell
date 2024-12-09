@@ -1,0 +1,1373 @@
+---------------Command-------------------
+export _=9 | echo $_ $B
+echo $?
+exit
+--------------Your output----------------
+./minishell
+0
+-------------Expected output-------------
+/usr/bin/bash
+0
+-----------------------------------------
+
+
+---------------Command-------------------
+export K
+export
+echo $K
+exit
+--------------Your output----------------
+declare -x SHELL="/bin/zsh"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x QT_ACCESSIBILITY="1"
+declare -x COLORTERM="truecolor"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GTK_IM_MODULE="ibus"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x XMODIFIERS="@im=ibus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x FT_HOOK_NAME="login-user"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x LOGNAME="yyamasak"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x GDM_LANG="en"
+declare -x HOME="/home/yyamasak"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LANG="en_US.UTF-8"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x VTE_VERSION="6800"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x XDG_SESSION_CLASS="user"
+declare -x TERM="xterm-256color"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x USER="yyamasak"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x DISPLAY=":0"
+declare -x SHLVL="1"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x QT_IM_MODULE="ibus"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x GDMSESSION="ubuntu"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+declare -x K
+-------------Expected output-------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDMSESSION="ubuntu"
+declare -x GDM_LANG="en"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x K
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+declare -x PATH="/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+-----------------------------------------
+
+
+---------------Command-------------------
+export K
+env
+echo $K
+exit
+--------------Your output----------------
+SHELL=/bin/zsh
+SESSION_MANAGER=local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+SSH_AGENT_LAUNCHER=gnome-keyring
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_MENU_PREFIX=gnome-
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GTK_IM_MODULE=ibus
+LANGUAGE=en_US:
+LC_ADDRESS=ja_JP.UTF-8
+LC_NAME=ja_JP.UTF-8
+SSH_AUTH_SOCK=/run/user/9518/keyring/ssh
+XMODIFIERS=@im=ibus
+DESKTOP_SESSION=ubuntu
+LC_MONETARY=ja_JP.UTF-8
+FT_HOOK_NAME=login-user
+GTK_MODULES=gail:atk-bridge
+FT_HOOK_PATHNAME=login-user.d
+KRB5CCNAME=FILE:/tmp/krb5cc_9518_Zv9XXt
+PWD=/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester
+LOGNAME=yyamasak
+XDG_SESSION_DESKTOP=ubuntu
+XDG_SESSION_TYPE=x11
+GPG_AGENT_INFO=/run/user/9518/gnupg/S.gpg-agent:0:1
+SYSTEMD_EXEC_PID=413886
+XAUTHORITY=/home/yyamasak/.Xauthority
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/yyamasak
+GDM_LANG=en
+HOME=/home/yyamasak
+LC_PAPER=ja_JP.UTF-8
+LANG=en_US.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+VTE_VERSION=6800
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977
+XDG_SESSION_CLASS=user
+TERM=xterm-256color
+LC_IDENTIFICATION=ja_JP.UTF-8
+LIBVIRT_DEFAULT_URI=qemu:///system
+USER=yyamasak
+GNOME_TERMINAL_SERVICE=:1.100
+DISPLAY=:0
+SHLVL=1
+LC_TELEPHONE=ja_JP.UTF-8
+QT_IM_MODULE=ibus
+LC_MEASUREMENT=ja_JP.UTF-8
+XDG_RUNTIME_DIR=/run/user/9518
+LC_TIME=ja_JP.UTF-8
+DOCKER_HOST=unix:///run/user/9518/docker.sock
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+GDMSESSION=ubuntu
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/9518/bus
+LC_NUMERIC=ja_JP.UTF-8
+OLDPWD=/home/yyamasak/Desktop/cursus/minishell2/private
+_=/usr/bin/env
+-------------Expected output-------------
+SHELL=/bin/zsh
+SESSION_MANAGER=local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+SSH_AGENT_LAUNCHER=gnome-keyring
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_MENU_PREFIX=gnome-
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GTK_IM_MODULE=ibus
+LANGUAGE=en_US:
+LC_ADDRESS=ja_JP.UTF-8
+LC_NAME=ja_JP.UTF-8
+SSH_AUTH_SOCK=/run/user/9518/keyring/ssh
+XMODIFIERS=@im=ibus
+DESKTOP_SESSION=ubuntu
+LC_MONETARY=ja_JP.UTF-8
+FT_HOOK_NAME=login-user
+GTK_MODULES=gail:atk-bridge
+FT_HOOK_PATHNAME=login-user.d
+PWD=/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester
+KRB5CCNAME=FILE:/tmp/krb5cc_9518_Zv9XXt
+XDG_SESSION_DESKTOP=ubuntu
+LOGNAME=yyamasak
+XDG_SESSION_TYPE=x11
+GPG_AGENT_INFO=/run/user/9518/gnupg/S.gpg-agent:0:1
+SYSTEMD_EXEC_PID=413886
+XAUTHORITY=/home/yyamasak/.Xauthority
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/yyamasak
+GDM_LANG=en
+HOME=/home/yyamasak
+LANG=en_US.UTF-8
+LC_PAPER=ja_JP.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+VTE_VERSION=6800
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977
+XDG_SESSION_CLASS=user
+LC_IDENTIFICATION=ja_JP.UTF-8
+TERM=xterm-256color
+LIBVIRT_DEFAULT_URI=qemu:///system
+USER=yyamasak
+GNOME_TERMINAL_SERVICE=:1.100
+DISPLAY=:0
+SHLVL=2
+LC_TELEPHONE=ja_JP.UTF-8
+QT_IM_MODULE=ibus
+LC_MEASUREMENT=ja_JP.UTF-8
+XDG_RUNTIME_DIR=/run/user/9518
+DOCKER_HOST=unix:///run/user/9518/docker.sock
+LC_TIME=ja_JP.UTF-8
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+GDMSESSION=ubuntu
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/9518/bus
+LC_NUMERIC=ja_JP.UTF-8
+OLDPWD=/home/yyamasak/Desktop/cursus/minishell2/private
+_=/usr/bin/env
+-----------------------------------------
+
+
+---------------Command-------------------
+export =9
+env
+echo $K
+exit
+--------------Your output----------------
+SHELL=/bin/zsh
+SESSION_MANAGER=local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+SSH_AGENT_LAUNCHER=gnome-keyring
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_MENU_PREFIX=gnome-
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GTK_IM_MODULE=ibus
+LANGUAGE=en_US:
+LC_ADDRESS=ja_JP.UTF-8
+LC_NAME=ja_JP.UTF-8
+SSH_AUTH_SOCK=/run/user/9518/keyring/ssh
+XMODIFIERS=@im=ibus
+DESKTOP_SESSION=ubuntu
+LC_MONETARY=ja_JP.UTF-8
+FT_HOOK_NAME=login-user
+GTK_MODULES=gail:atk-bridge
+FT_HOOK_PATHNAME=login-user.d
+KRB5CCNAME=FILE:/tmp/krb5cc_9518_Zv9XXt
+PWD=/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester
+LOGNAME=yyamasak
+XDG_SESSION_DESKTOP=ubuntu
+XDG_SESSION_TYPE=x11
+GPG_AGENT_INFO=/run/user/9518/gnupg/S.gpg-agent:0:1
+SYSTEMD_EXEC_PID=413886
+XAUTHORITY=/home/yyamasak/.Xauthority
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/yyamasak
+GDM_LANG=en
+HOME=/home/yyamasak
+LC_PAPER=ja_JP.UTF-8
+LANG=en_US.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+VTE_VERSION=6800
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977
+XDG_SESSION_CLASS=user
+TERM=xterm-256color
+LC_IDENTIFICATION=ja_JP.UTF-8
+LIBVIRT_DEFAULT_URI=qemu:///system
+USER=yyamasak
+GNOME_TERMINAL_SERVICE=:1.100
+DISPLAY=:0
+SHLVL=1
+LC_TELEPHONE=ja_JP.UTF-8
+QT_IM_MODULE=ibus
+LC_MEASUREMENT=ja_JP.UTF-8
+XDG_RUNTIME_DIR=/run/user/9518
+LC_TIME=ja_JP.UTF-8
+DOCKER_HOST=unix:///run/user/9518/docker.sock
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+GDMSESSION=ubuntu
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/9518/bus
+LC_NUMERIC=ja_JP.UTF-8
+OLDPWD=/home/yyamasak/Desktop/cursus/minishell2/private
+_=/usr/bin/env
+-------------Expected output-------------
+SHELL=/bin/zsh
+SESSION_MANAGER=local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+SSH_AGENT_LAUNCHER=gnome-keyring
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_MENU_PREFIX=gnome-
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GTK_IM_MODULE=ibus
+LANGUAGE=en_US:
+LC_ADDRESS=ja_JP.UTF-8
+LC_NAME=ja_JP.UTF-8
+SSH_AUTH_SOCK=/run/user/9518/keyring/ssh
+XMODIFIERS=@im=ibus
+DESKTOP_SESSION=ubuntu
+LC_MONETARY=ja_JP.UTF-8
+FT_HOOK_NAME=login-user
+GTK_MODULES=gail:atk-bridge
+FT_HOOK_PATHNAME=login-user.d
+PWD=/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester
+KRB5CCNAME=FILE:/tmp/krb5cc_9518_Zv9XXt
+XDG_SESSION_DESKTOP=ubuntu
+LOGNAME=yyamasak
+XDG_SESSION_TYPE=x11
+GPG_AGENT_INFO=/run/user/9518/gnupg/S.gpg-agent:0:1
+SYSTEMD_EXEC_PID=413886
+XAUTHORITY=/home/yyamasak/.Xauthority
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/yyamasak
+GDM_LANG=en
+HOME=/home/yyamasak
+LANG=en_US.UTF-8
+LC_PAPER=ja_JP.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+VTE_VERSION=6800
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977
+XDG_SESSION_CLASS=user
+LC_IDENTIFICATION=ja_JP.UTF-8
+TERM=xterm-256color
+LIBVIRT_DEFAULT_URI=qemu:///system
+USER=yyamasak
+GNOME_TERMINAL_SERVICE=:1.100
+DISPLAY=:0
+SHLVL=2
+LC_TELEPHONE=ja_JP.UTF-8
+QT_IM_MODULE=ibus
+LC_MEASUREMENT=ja_JP.UTF-8
+XDG_RUNTIME_DIR=/run/user/9518
+DOCKER_HOST=unix:///run/user/9518/docker.sock
+LC_TIME=ja_JP.UTF-8
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+GDMSESSION=ubuntu
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/9518/bus
+LC_NUMERIC=ja_JP.UTF-8
+OLDPWD=/home/yyamasak/Desktop/cursus/minishell2/private
+_=/usr/bin/env
+-----------------------------------------
+
+
+---------------Command-------------------
+export K4+
+export
+echo $K4+
+exit
+--------------Your output----------------
+declare -x SHELL="/bin/zsh"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x QT_ACCESSIBILITY="1"
+declare -x COLORTERM="truecolor"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GTK_IM_MODULE="ibus"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x XMODIFIERS="@im=ibus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x FT_HOOK_NAME="login-user"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x LOGNAME="yyamasak"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x GDM_LANG="en"
+declare -x HOME="/home/yyamasak"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LANG="en_US.UTF-8"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x VTE_VERSION="6800"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x XDG_SESSION_CLASS="user"
+declare -x TERM="xterm-256color"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x USER="yyamasak"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x DISPLAY=":0"
+declare -x SHLVL="1"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x QT_IM_MODULE="ibus"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x GDMSESSION="ubuntu"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
++
+-------------Expected output-------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDMSESSION="ubuntu"
+declare -x GDM_LANG="en"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+declare -x PATH="/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
++
+-----------------------------------------
+
+
+---------------Command-------------------
+export K4+
+export
+echo $K4
+exit
+--------------Your output----------------
+declare -x SHELL="/bin/zsh"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x QT_ACCESSIBILITY="1"
+declare -x COLORTERM="truecolor"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GTK_IM_MODULE="ibus"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x XMODIFIERS="@im=ibus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x FT_HOOK_NAME="login-user"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x LOGNAME="yyamasak"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x GDM_LANG="en"
+declare -x HOME="/home/yyamasak"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LANG="en_US.UTF-8"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x VTE_VERSION="6800"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x XDG_SESSION_CLASS="user"
+declare -x TERM="xterm-256color"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x USER="yyamasak"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x DISPLAY=":0"
+declare -x SHLVL="1"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x QT_IM_MODULE="ibus"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x GDMSESSION="ubuntu"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+-------------Expected output-------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDMSESSION="ubuntu"
+declare -x GDM_LANG="en"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+declare -x PATH="/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+-----------------------------------------
+
+
+---------------Command-------------------
+export
+echo $?
+exit
+--------------Your output----------------
+declare -x SHELL="/bin/zsh"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x QT_ACCESSIBILITY="1"
+declare -x COLORTERM="truecolor"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GTK_IM_MODULE="ibus"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x XMODIFIERS="@im=ibus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x FT_HOOK_NAME="login-user"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x LOGNAME="yyamasak"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x GDM_LANG="en"
+declare -x HOME="/home/yyamasak"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LANG="en_US.UTF-8"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x VTE_VERSION="6800"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x XDG_SESSION_CLASS="user"
+declare -x TERM="xterm-256color"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x USER="yyamasak"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x DISPLAY=":0"
+declare -x SHLVL="1"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x QT_IM_MODULE="ibus"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x GDMSESSION="ubuntu"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+0
+-------------Expected output-------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDMSESSION="ubuntu"
+declare -x GDM_LANG="en"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+declare -x PATH="/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+declare -x _="/usr/bin/bash"
+0
+-----------------------------------------
+
+
+---------------Command-------------------
+echo $_
+exit
+--------------Your output----------------
+./minishell
+-------------Expected output-------------
+/usr/bin/bash
+-----------------------------------------
+
+
+---------------Command-------------------
+echo -n test tout
+exit
+--------------Your output----------------
+
+-------------Expected output-------------
+test tout
+-----------------------------------------
+
+
+---------------Command-------------------
+echo -n -n -n test tout
+exit
+--------------Your output----------------
+
+-------------Expected output-------------
+test tout
+-----------------------------------------
+
+
+---------------Command-------------------
+echo "\$TEST"
+exit
+--------------Your output----------------
+\
+-------------Expected output-------------
+$TEST
+-----------------------------------------
+
+
+---------------Command-------------------
+export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD
+--------------Your output----------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDM_LANG="en"
+declare -x GDMSESSION="ubuntu"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+-------------Expected output-------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDM_LANG="en"
+declare -x GDMSESSION="ubuntu"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x PATH="/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+-----------------------------------------
+
+
+---------------Command-------------------
+export TEST="-n hello"
+env | grep TEST
+echo $TEST
+exit
+--------------Your output----------------
+TEST=-n hello
+-------------Expected output-------------
+TEST=-n hello
+hello
+-----------------------------------------
+
+
+---------------Command-------------------
+mkdir dir
+cd dir
+rmdir ../dir
+pwd
+cd .
+pwd
+exit
+--------------Your output----------------
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir
+-------------Expected output-------------
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir/.
+-----------------------------------------
+
+
+---------------Command-------------------
+echo "echo hello" > exe && chmod +x exe
+ln -s exe symexe
+chmod -h -x symexe
+ls -l
+./symexe 
+exit
+--------------Your output----------------
+total 324
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 17:13 0
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:00 a
+-rwxr-xr-x 1 yyamasak 2020 15920 12月  7 17:13 argv
+-rw-r--r-- 1 yyamasak 2020   158 12月  7 14:00 argv.c
+-rw-r--r-- 1 yyamasak 2020   964 12月  7 14:00 check_leaks.sh
+-rw-r--r-- 1 yyamasak 2020  1060 12月  7 14:00 check_signal_cop.sh
+-rwxr-xr-x 1 yyamasak 2020    27 12月  7 17:18 exe
+-rwxr-xr-x 1 yyamasak 2020  9597 12月  7 14:00 expect.sh
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:43 f0
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:43 f1
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:43 f2
+-rw-r--r-- 1 yyamasak 2020     4 12月  7 14:43 f3
+-rwxr-xr-x 1 yyamasak 2020 15928 12月  7 17:13 hello
+-rw-r--r-- 1 yyamasak 2020    98 12月  7 14:00 hello.c
+-rw-r--r-- 1 yyamasak 2020    18 12月  7 14:00 infile
+-rw-r--r-- 1 yyamasak 2020  2999 12月  7 14:00 ls1000.txt
+-rw-r--r-- 1 yyamasak 2020  1346 12月  7 14:00 manual_test.txt
+-rwxr-xr-x 1 yyamasak 2020 61448 12月  7 17:13 minishell
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:00 no_perm
+---------- 1 yyamasak 2020     4 12月  7 14:00 no_permission
+--w--w--w- 1 yyamasak 2020    24 12月  7 14:00 no_read_permission
+-r--r--r-- 1 yyamasak 2020     0 12月  7 14:00 no_write_permission
+-rw-r--r-- 1 yyamasak 2020 58518 12月  7 17:18 result.log
+lrwxrwxrwx 1 yyamasak 2020     3 12月  7 14:00 symexe -> exe
+-rw-r--r-- 1 yyamasak 2020     4 12月  7 16:16 test1
+-rwxr-xr-x 1 yyamasak 2020   395 12月  7 14:00 test10.sh
+-rwxr-xr-x 1 yyamasak 2020  5339 12月  7 14:00 test11.sh
+-rwxr-xr-x 1 yyamasak 2020   617 12月  7 14:00 test12.sh
+-rwxr-xr-x 1 yyamasak 2020  3328 12月  7 14:00 test13.sh
+-rwxr-xr-x 1 yyamasak 2020  2728 12月  7 14:00 test14.sh
+-rwxr-xr-x 1 yyamasak 2020  3317 12月  7 14:00 test1.sh
+-rw-r--r-- 1 yyamasak 2020     4 12月  7 14:53 test2
+-rwxr-xr-x 1 yyamasak 2020  2849 12月  7 14:00 test2.sh
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:53 test3
+-rwxr-xr-x 1 yyamasak 2020  1418 12月  7 14:00 test3.sh
+-rwxr-xr-x 1 yyamasak 2020  2082 12月  7 14:00 test4.sh
+-rwxr-xr-x 1 yyamasak 2020  3182 12月  7 14:00 test5.sh
+-rwxr-xr-x 1 yyamasak 2020  9992 12月  7 14:00 test6.sh
+-rwxr-xr-x 1 yyamasak 2020   524 12月  7 14:00 test7.sh
+-rwxr-xr-x 1 yyamasak 2020  1744 12月  7 14:00 test8.sh
+-rwxr-xr-x 1 yyamasak 2020  1912 12月  7 14:00 test9.sh
+-rwxr-xr-x 1 yyamasak 2020   380 12月  7 14:00 test_all.sh
+-rwxr-xr-x 1 yyamasak 2020  5502 12月  7 14:00 test_export_old.sh
+drwxr-xr-x 2 yyamasak 2020   176 12月  7 16:16 test_filescd 
+-rwxr-xr-x 1 yyamasak 2020 12735 12月  7 14:00 test-old.sh
+-rwxr-xr-x 1 yyamasak 2020  8167 12月  7 16:16 test_utils.sh
+-------------Expected output-------------
+total 324
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 17:13 0
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:00 a
+-rwxr-xr-x 1 yyamasak 2020 15920 12月  7 17:13 argv
+-rw-r--r-- 1 yyamasak 2020   158 12月  7 14:00 argv.c
+-rw-r--r-- 1 yyamasak 2020   964 12月  7 14:00 check_leaks.sh
+-rw-r--r-- 1 yyamasak 2020  1060 12月  7 14:00 check_signal_cop.sh
+-rwxr-xr-x 1 yyamasak 2020    11 12月  7 17:18 exe
+-rwxr-xr-x 1 yyamasak 2020  9597 12月  7 14:00 expect.sh
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:43 f0
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:43 f1
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:43 f2
+-rw-r--r-- 1 yyamasak 2020     4 12月  7 14:43 f3
+-rwxr-xr-x 1 yyamasak 2020 15928 12月  7 17:13 hello
+-rw-r--r-- 1 yyamasak 2020    98 12月  7 14:00 hello.c
+-rw-r--r-- 1 yyamasak 2020    18 12月  7 14:00 infile
+-rw-r--r-- 1 yyamasak 2020  2999 12月  7 14:00 ls1000.txt
+-rw-r--r-- 1 yyamasak 2020  1346 12月  7 14:00 manual_test.txt
+-rwxr-xr-x 1 yyamasak 2020 61448 12月  7 17:13 minishell
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:00 no_perm
+---------- 1 yyamasak 2020     4 12月  7 14:00 no_permission
+--w--w--w- 1 yyamasak 2020    24 12月  7 14:00 no_read_permission
+-r--r--r-- 1 yyamasak 2020     0 12月  7 14:00 no_write_permission
+-rw-r--r-- 1 yyamasak 2020 58518 12月  7 17:18 result.log
+lrwxrwxrwx 1 yyamasak 2020     3 12月  7 14:00 symexe -> exe
+-rw-r--r-- 1 yyamasak 2020     4 12月  7 16:16 test1
+-rwxr-xr-x 1 yyamasak 2020   395 12月  7 14:00 test10.sh
+-rwxr-xr-x 1 yyamasak 2020  5339 12月  7 14:00 test11.sh
+-rwxr-xr-x 1 yyamasak 2020   617 12月  7 14:00 test12.sh
+-rwxr-xr-x 1 yyamasak 2020  3328 12月  7 14:00 test13.sh
+-rwxr-xr-x 1 yyamasak 2020  2728 12月  7 14:00 test14.sh
+-rwxr-xr-x 1 yyamasak 2020  3317 12月  7 14:00 test1.sh
+-rw-r--r-- 1 yyamasak 2020     4 12月  7 14:53 test2
+-rwxr-xr-x 1 yyamasak 2020  2849 12月  7 14:00 test2.sh
+-rw-r--r-- 1 yyamasak 2020     0 12月  7 14:53 test3
+-rwxr-xr-x 1 yyamasak 2020  1418 12月  7 14:00 test3.sh
+-rwxr-xr-x 1 yyamasak 2020  2082 12月  7 14:00 test4.sh
+-rwxr-xr-x 1 yyamasak 2020  3182 12月  7 14:00 test5.sh
+-rwxr-xr-x 1 yyamasak 2020  9992 12月  7 14:00 test6.sh
+-rwxr-xr-x 1 yyamasak 2020   524 12月  7 14:00 test7.sh
+-rwxr-xr-x 1 yyamasak 2020  1744 12月  7 14:00 test8.sh
+-rwxr-xr-x 1 yyamasak 2020  1912 12月  7 14:00 test9.sh
+-rwxr-xr-x 1 yyamasak 2020   380 12月  7 14:00 test_all.sh
+-rwxr-xr-x 1 yyamasak 2020  5502 12月  7 14:00 test_export_old.sh
+drwxr-xr-x 2 yyamasak 2020   176 12月  7 16:16 test_files
+-rwxr-xr-x 1 yyamasak 2020 12735 12月  7 14:00 test-old.sh
+-rwxr-xr-x 1 yyamasak 2020  8167 12月  7 16:16 test_utils.sh
+hello
+------------Your exit status-------------
+1
+-----------Expected exit status----------
+0
+-----------Your error messages-----------
+ln: failed to create symbolic link 'symexe': File exists
+chmod: invalid option -- 'h'
+Try 'chmod --help' for more information.
+./symexe: Exec format error
+---------Expected error messages---------
+ln: failed to create symbolic link 'symexe': File exists
+chmod: invalid option -- 'h'
+Try 'chmod --help' for more information.
+-----------------------------------------
+
+
+---------------Command-------------------
+exit -- 42
+echo $?
+exit
+------------Your exit status-------------
+2
+-----------Expected exit status----------
+42
+-----------Your error messages-----------
+exit: --: numeric argument required
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+export SHLVL=	
+
+ 42
+echo $SHLVL
+exit
+-----------Your error messages-----------
+42: command not found
+---------Expected error messages---------
+bash: line 2: $'\v\f\r': command not found
+-----------------------------------------
+
+
+---------------Command-------------------
+export SHLVL=	
+
+ 42
+echo $SHLVL
+exit
+-----------Your error messages-----------
+42: command not found
+---------Expected error messages---------
+bash: line 2: $'\v\f\r': command not found
+-----------------------------------------
+
+
+---------------Command-------------------
+echo -nnnnnnn hello
+exit
+--------------Your output----------------
+
+-------------Expected output-------------
+hello
+-----------------------------------------
+
+
+---------------Command-------------------
+echo a > test1 b
+echo > test2 "d	ef"
+cat test1 > test3 test2
+cat test3
+cat test2
+exit
+--------------Your output----------------
+a b
+def
+def
+-------------Expected output-------------
+a b
+d	ef
+d	ef
+-----------Your error messages-----------
+
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+echo a > test1 b
+echo > test2 "d	ef"
+cat test1 > test3 > test2
+cat test3
+cat test2
+exit
+-----------Your error messages-----------
+
+---------Expected error messages---------
+
+-----------------------------------------
+
+
+---------------Command-------------------
+export $nothing $nothing $nothing $nothing
+exit
+--------------Your output----------------
+declare -x SHELL="/bin/zsh"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x QT_ACCESSIBILITY="1"
+declare -x COLORTERM="truecolor"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GTK_IM_MODULE="ibus"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x XMODIFIERS="@im=ibus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x FT_HOOK_NAME="login-user"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x LOGNAME="yyamasak"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x GDM_LANG="en"
+declare -x HOME="/home/yyamasak"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LANG="en_US.UTF-8"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x VTE_VERSION="6800"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x XDG_SESSION_CLASS="user"
+declare -x TERM="xterm-256color"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x USER="yyamasak"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x DISPLAY=":0"
+declare -x SHLVL="1"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x QT_IM_MODULE="ibus"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x GDMSESSION="ubuntu"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+-------------Expected output-------------
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/9518/bus"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/9518/docker.sock"
+declare -x FT_HOOK_NAME="login-user"
+declare -x FT_HOOK_PATHNAME="login-user.d"
+declare -x GDMSESSION="ubuntu"
+declare -x GDM_LANG="en"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/d2dd5d85_0841_46ad_bb37_6a158c2fa977"
+declare -x GNOME_TERMINAL_SERVICE=":1.100"
+declare -x GPG_AGENT_INFO="/run/user/9518/gnupg/S.gpg-agent:0:1"
+declare -x GTK_IM_MODULE="ibus"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/yyamasak"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_9518_Zv9XXt"
+declare -x LANG="en_US.UTF-8"
+declare -x LANGUAGE="en_US:"
+declare -x LC_ADDRESS="ja_JP.UTF-8"
+declare -x LC_IDENTIFICATION="ja_JP.UTF-8"
+declare -x LC_MEASUREMENT="ja_JP.UTF-8"
+declare -x LC_MONETARY="ja_JP.UTF-8"
+declare -x LC_NAME="ja_JP.UTF-8"
+declare -x LC_NUMERIC="ja_JP.UTF-8"
+declare -x LC_PAPER="ja_JP.UTF-8"
+declare -x LC_TELEPHONE="ja_JP.UTF-8"
+declare -x LC_TIME="ja_JP.UTF-8"
+declare -x LIBVIRT_DEFAULT_URI="qemu:///system"
+declare -x LOGNAME="yyamasak"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
+declare -x OLDPWD="/home/yyamasak/Desktop/cursus/minishell2/private"
+declare -x PATH="/home/yyamasak/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/c2r6s6.42tokyo.jp:@/tmp/.ICE-unix/413858,unix/c2r6s6.42tokyo.jp:/tmp/.ICE-unix/413858"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AGENT_LAUNCHER="gnome-keyring"
+declare -x SSH_AUTH_SOCK="/run/user/9518/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="413886"
+declare -x TERM="xterm-256color"
+declare -x USER="yyamasak"
+declare -x VTE_VERSION="6800"
+declare -x XAUTHORITY="/home/yyamasak/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/yyamasak"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/9518"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session1"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+declare -x _="/usr/bin/bash"
+-----------------------------------------
+
+
+---------------Command-------------------
+export TEST="-n hello"
+env | grep TEST
+echo $TEST
+exit
+--------------Your output----------------
+TEST=-n hello
+-------------Expected output-------------
+TEST=-n hello
+hello
+-----------------------------------------
+
+
+---------------Command-------------------
+export TEST="file1	file2"
+cat < $TEST
+unset TEST
+exit
+-----------Your error messages-----------
+file1file2: No such file or directory
+---------Expected error messages---------
+bash: line 2: $TEST: ambiguous redirect
+-----------------------------------------
+
+
+---------------Command-------------------
+ls|  	  |ls
+exit
+-----------Your error messages-----------
+syntax error near unexpected token `|'
+---------Expected error messages---------
+bash: line 1: syntax error near unexpected token `|'
+bash: line 1: `ls|  	  |ls'
+-----------------------------------------
+
+
+---------------Command-------------------
+mkdir dir
+cd dir
+rmdir ../dir
+pwd
+cd .
+pwd
+echo $?
+exit
+--------------Your output----------------
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir
+0
+-------------Expected output-------------
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/dir/.
+0
+-----------------------------------------
+
+
+---------------Command-------------------
+mkdir test
+cd test
+pwd
+rmdir ../test
+pwd
+cd .
+pwd
+echo $?
+exit
+--------------Your output----------------
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/test
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/test
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/test
+0
+-------------Expected output-------------
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/test
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/test
+/home/yyamasak/Desktop/cursus/minishell2/private/minishell-tester/test/.
+0
+-----------------------------------------
+
+
