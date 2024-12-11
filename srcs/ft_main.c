@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/07 17:12:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:17:43 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_sigint(int sig)
 {
 	(void)sig;
 	ft_status_code(1, 130);
-	printf("\n");
+	ft_printf_fd(STDIN_FILENO, "\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
