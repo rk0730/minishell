@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/06 16:32:21 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/11 11:06:04 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ static void	ft_exec_cmd_parent(t_cmd_info cmd_info, int read_pipe, int write_pip
 	ft_close(read_pipe, 25);
 	ft_close(write_pipe, 26);
 	//親プロセスはシグナルを無視する
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_change_g_signum);
+	signal(SIGQUIT, ft_change_g_signum);
 }
 
 // コマンドを実行する（execveならfork ビルトインならそのまま）終了ステータスを返す

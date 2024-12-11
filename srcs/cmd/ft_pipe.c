@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/06 16:24:10 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/11 11:08:19 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,12 @@ static int	ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info *env_info_p)
 
 	status = ft_exec_cmd(cmd_list[0], env_info_p, -1, -1);
 	YYAMASAK("status=%d\n", status);
-	if (status >= 128 && status % 128 == SIGINT)
+	if (g_signum == SIGINT)
 	{
 		printf("\n");
 		return (SIGINT_ERROR);
 	}
-	else if (status >= 128 && status % 128 == SIGQUIT)
+	else if (g_signum == SIGQUIT)
 	{
 		printf("Quit\n");
 		return (SIGQUIT_ERROR);
