@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 11:08:19 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/11 11:49:37 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,13 @@ static void	ft_recursive(t_cmd_info *cmd_list, t_env_info *env_info_p, int index
 	}
 }
 
+void _ft_print_newline(int sig)
+{
+	(void)sig;
+	printf("\n");
+}
+
 // パイプを使う　ここに入ったプロセスは全てexitされる
-// TODO change status ??
 static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_index)
 {
 	int		pipe_fd[4];
@@ -123,10 +128,25 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_
 		ft_close_fd_inout(cmd_list, last_index);
 		ft_close(pipe_fd[1], 62);
 		status = ft_exec_cmd(cmd_list[last_index], env_info_p, pipe_fd[0], -1);
+		signal(SIGINT, _ft_print_newline);// 最後のコマンドの実行が終わったので、これらのプロセスはもうシグナルを受け付けない
+		signal(SIGQUIT, SIG_IGN);
 		ft_close(env_info_p->std_in, 63);
 		ft_close(env_info_p->std_out, 64);
 		waitpid(pid, NULL, 0);
-		exit(status);
+		if (g_signum == SIGINT)
+		{
+			printf("\n");
+			exit(SIGINT_ERROR);
+		}
+		else if (g_signum == SIGQUIT)
+		{
+			printf("Quit\n");
+			exit(SIGQUIT_ERROR);
+		}
+		else
+		{
+			exit(status);
+		}
 	}
 }
 
@@ -157,25 +177,9 @@ static int	ft_wait_pipe(pid_t pid)
 {
 	int		status;
 
-	signal(SIGINT, ft_change_g_signum);
-	signal(SIGQUIT, ft_change_g_signum);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	waitpid(pid, &status, 0);
-	if (g_signum == SIGINT)
-	{
-		printf("\n");
-		if (status != 0)
-			return (SIGINT_ERROR);
-		return (WEXITSTATUS(status));
-	}
-	else if (g_signum == SIGQUIT)
-	{
-		if (status != 0)
-		{
-			printf("Quit\n");
-			return (SIGQUIT_ERROR);
-		}
-		return (WEXITSTATUS(status));
-	}
 	return (WEXITSTATUS(status));
 }
 
