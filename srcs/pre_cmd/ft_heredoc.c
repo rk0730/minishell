@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 18:09:27 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/11 13:29:15 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void	_ft_sigint_heredoc(int sig)
 {
 	g_signum = sig;
-	printf("\n");
+	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
+	{
+        perror("ioctl failed");
+	}
 	ft_close(STDIN_FILENO, 31);
 }
 
