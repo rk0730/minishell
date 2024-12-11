@@ -6,19 +6,19 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 13:29:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:23:35 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
+
 static void	_ft_sigint_heredoc(int sig)
 {
 	g_signum = sig;
-	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
-	{
-        perror("ioctl failed");
-	}
+	rl_done = 1;
+	// if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
+    //     perror("ioctl failed");
 	ft_close(STDIN_FILENO, 31);
 }
 
@@ -163,7 +163,9 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 
 	i = 0;
 	result = -1;
+	rl_catch_signals = 0;
 	signal(SIGINT, _ft_sigint_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 	while (tokens[i])
 	{
 		if (ft_strncmp(tokens[i], "<<", 3) == 0)
@@ -187,5 +189,6 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 		}
 		i++;
 	}
+	rl_catch_signals = 1;
 	return (result);
 }

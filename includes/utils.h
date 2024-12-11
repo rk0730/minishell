@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 13:26:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:20:49 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <signal.h>
 # include <limits.h>
 # include <sys/ioctl.h>
+# include <termios.h>
+# include <unistd.h>
 // # include <linux/limits.h>
 
 # include "libft.h"
