@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/07 17:12:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:22:44 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ static void	ft_sigint(int sig)
 	rl_redisplay();
 }
 
+int	_ft_is_all_space(char *str)
+{
+	while (*str)
+	{
+		if (!ft_isspace(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
 
 
 int	main(int argc, char **argv, char **envp)
@@ -62,8 +72,8 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			exit(ft_status_code(0, 0));
 		}
-		// 空文字の場合は何もせず次のループへ
-		if (ft_strlen(env_info_p->input) == 0)
+		// 空文字、もしくは全て空白文字の場合は何もせず次のループへ
+		if (ft_strlen(env_info_p->input) == 0 || _ft_is_all_space(env_info_p->input))
 		{
 			ft_close(input_pipe[0], 3);
 			free(env_info_p->input);
