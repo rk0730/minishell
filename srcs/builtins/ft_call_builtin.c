@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:24:47 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:10:52 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 18:31:35 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int w
 		result = ft_call_builtin(cmd_info, env_info_p, rw_pipe, std_in_out);
 		dup2(std_in_out[0], STDIN_FILENO);
 		dup2(std_in_out[1], STDOUT_FILENO);
-		close(std_in_out[0]);
-		close(std_in_out[1]);
+		ft_close(std_in_out[0], 1);
+		ft_close(std_in_out[1], 2);
 		return (result);
 	}
 	return (-1);

@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:30:11 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 18:32:17 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static void	_ft_close_all_fd(int fd)
 	i = 3;
 	while (i < fd)
 	{
-		close(i);
+		ft_close(i, i);
 		i++;
 	}
 }
