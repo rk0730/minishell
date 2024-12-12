@@ -5,7 +5,7 @@ void	refresh_node(t_env_pair *node)
 {
 	if (!node)
 		return ;
-	// printf("%s=%s\n", node->key, node->value);
+	// ft_printf_fd(STDOUT_FILENO, "%s=%s\n", node->key, node->value);
 	RKITAO("%s=%s\n", node->key, node->value);
 	if (node->key)
 	{
@@ -52,18 +52,16 @@ static int	ft_delenv(t_env_pair **env_list, char *key)
 	return (0);
 }
 
-int	ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe,
-		int write_pipe)
+int	ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p)
 {
 	int i;
 	int status;
 
 	i = 1;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	status = 0;
 	while (cmd_info.cmd_argv[i])
 	{
-		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
+		// ft_printf_fd(STDOUT_FILENO, "this node will change: %s\n", cmd_info.cmd_argv[i]);
 		if (ft_strncmp(cmd_info.cmd_argv[i], "_", 2) != 0)
 			status |= ft_delenv(&(env_info_p->env_list), cmd_info.cmd_argv[i]);
 		i++;

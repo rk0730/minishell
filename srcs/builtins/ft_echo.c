@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:29:34 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/12 15:24:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:11:35 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ static int	ft_is_option(char *str)
 }
 
 // 終了ステータスを返す
-int	ft_echo(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_echo(t_cmd_info cmd_info, t_env_info env_info)
 {
 	int	n_option;
 	int	i;
 
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	i = 1;
 	while (ft_is_option(cmd_info.cmd_argv[i]))
 		i++;

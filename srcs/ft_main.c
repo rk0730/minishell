@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 13:09:54 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:42:54 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_env_pair	*env_list;
 	t_env_info	*env_info_p;
-	int			input_pipe[2];
 
 	RKITAO("print RKITAO\n");
 	YYAMASAK("print YYAMASAK\n");
@@ -58,24 +57,17 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGQUIT, SIG_IGN);
 		// Readlineを使用してユーザー入力を取得
 		env_info_p->input = readline("MINISHELL$ ");
-		// 入力されたものを一旦パイプに書き込み、あとでここから読み取って使う
-		pipe(input_pipe);
-		ft_printf_fd(input_pipe[1], "%s", env_info_p->input);
-		ft_close(input_pipe[1], 1);
-		env_info_p->input_fd = input_pipe[0];
 		// ctrl+dが押されるとNULLが返ってくるので終了
 		if (env_info_p->input == NULL)
 		{
-			ft_close(input_pipe[0], 2);
 			ft_free_env_list(env_list);
 			free(env_info_p);
-			printf("exit\n");
+			ft_printf_fd(STDOUT_FILENO, "exit\n");
 			exit(ft_status_code(0, 0));
 		}
 		// 空文字、もしくは全て空白文字の場合は何もせず次のループへ
 		if (ft_strlen(env_info_p->input) == 0 || _ft_is_all_space(env_info_p->input))
 		{
-			ft_close(input_pipe[0], 3);
 			free(env_info_p->input);
 			continue ;
 		}

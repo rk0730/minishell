@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/07 16:17:38 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 	// else
 	// {
 	// 	result = -1;
-	// 	printf("error in ft_out_fd\n");
+	// 	ft_printf_fd(STDOUT_FILENO, "error in ft_out_fd\n");
 	// }
 	if (result == -1)
 	{

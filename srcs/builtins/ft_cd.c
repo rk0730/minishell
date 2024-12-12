@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/08 13:12:26 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:42 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_n
 	return (0);
 }
 
-int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_cd(t_cmd_info cmd_info, t_env_info env_info)
 {
 	int		argc;
     char	cwd[PATH_MAX];
 
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	argc = ft_array_len(cmd_info.cmd_argv);
 	if (argc > 2)
 	{
@@ -83,5 +82,5 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pip
 
 //     ft_cd(av);
 //     getcwd(pathname, PATH_MAX);
-//     fprintf(stdout,"現在のファイルパス:%s\n", pathname);
+//     fft_printf_fd(STDOUT_FILENO, stdout,"現在のファイルパス:%s\n", pathname);
 // }

@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heredoc_fork.c                                  :+:      :+:    :+:   */
+/*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 12:24:51 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:38 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
-
-
-static void	_ft_sigint_heredoc(int sig)
-{
-	g_signum = sig;
-}
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
 // limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
@@ -66,70 +60,42 @@ static char	*_ft_limit_tokenize(char *str, int *is_quote)
 	return (result);
 }
 
-// static void	_ft_one_heredoc_h(t_env_info *env_info_p, char *line)
-// {
-// 	char	*tmp;
+// heredocで書き込み中のfdを入れる　SIGINTが来た時にcloseできるように保持しておく
+static int _ft_heredoc_write_fd(int flag, int fd)
+{
+	static int heredoc_write_fd;
 
-// 	// 初めての入力の場合、改行を追加
-// 	if (ft_strchr(env_info_p->input, '\n') == NULL)
-// 	{
-// 		tmp = env_info_p->input;
-// 		env_info_p->input = ft_strjoin(tmp, "\n");
-// 		free(tmp);
-// 	}
-// 	// 読み取った行と改行を履歴に追加
-// 	tmp = env_info_p->input;
-// 	env_info_p->input = ft_strjoin(tmp, line);
-// 	free(tmp);
-// 	tmp = env_info_p->input;
-// 	env_info_p->input = ft_strjoin(tmp, "\n");
-// 	free(tmp);
-// }
+	if (flag)
+		heredoc_write_fd = fd;
+	return (heredoc_write_fd);
+}
+
+static void	_ft_sigint_heredoc(int sig)
+{
+	g_signum = sig;
+	ft_close(_ft_heredoc_write_fd(0, 0), 32);
+	// デフォルトの SIGINT 動作させる
+	signal(SIGINT, SIG_DFL);
+	kill(getpid(), SIGINT);
+}
 
 static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
 {
 	char	*line;
-	char	*tmp;
+	// char	*tmp;
 
 	while (1)
 	{
-		line = get_next_line(env_info_p->input_fd);
-		tmp = line;
-		line = ft_strtrim(tmp, "\n");
-		free(tmp);
-		if (line == NULL)
-			line = readline("heredoc > ");//最初に入力したinput_fdが切れたので標準入力から受け取る
+		_ft_heredoc_write_fd(1, pipe_fd[1]);
+		line = readline("heredoc > ");
 		if (line == NULL)
 		{
-			if (g_signum == SIGINT)
-			{
-				ft_close(pipe_fd[1], 32);
-				return (-2);
-			}
-			else
-			{
-				//lineがNULLなのにSIGINTではないということはctrl+dが押されたということ
-				ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
-				write(STDERR_FILENO, limiter, ft_strlen(limiter));
-				ft_printf_fd(STDERR_FILENO, "')\n");
-				break ;
-			}
+			//lineがNULLということはctrl+dが押されたということ
+			ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
+			write(STDERR_FILENO, limiter, ft_strlen(limiter));
+			ft_printf_fd(STDERR_FILENO, "')\n");
+			break ;
 		}
-		// _ft_one_heredoc_h(env_info_p, line);
-		// 初めての入力の場合、改行を追加
-		if (ft_strchr(env_info_p->input, '\n') == NULL)
-		{
-			tmp = env_info_p->input;
-			env_info_p->input = ft_strjoin(tmp, "\n");
-			free(tmp);
-		}
-		// 読み取った行と改行を履歴に追加
-		tmp = env_info_p->input;
-		env_info_p->input = ft_strjoin(tmp, line);
-		free(tmp);
-		tmp = env_info_p->input;
-		env_info_p->input = ft_strjoin(tmp, "\n");
-		free(tmp);	
 		// 読み取った行とlimiterが一致したらループを抜ける
 		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
 		{
@@ -146,6 +112,24 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 	ft_close(pipe_fd[1], 33);
 	free(limiter);
 	return (0);
+}
+
+// 引数fdより小さいファイルディスクリプタを全て閉じる
+static void	_ft_close_all_fd(int fd)
+{
+	int	i;
+
+	i = 3;
+	while (i < fd)
+	{
+		ft_close(i, i);
+		i++;
+	}
+}
+
+static void	_ft_change_g_signum(int sig)
+{
+	g_signum = sig;
 }
 
 // heredocでの入力が入ったfdを返す 一回もheredocがなければ-1 エラーがあれば-2を返す fork使わないものに書き直し
@@ -175,12 +159,10 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				return (-1);
 			if (pid == 0)
 			{
-				signal(SIGINT, SIG_DFL);//デフォルト動作にする
+				signal(SIGINT, _ft_sigint_heredoc);// 書き込みのpipe_fd[1]を閉じてデフォルトのSIGINT動作をする
 				signal(SIGQUIT, SIG_IGN);
-				ft_close(env_info_p->std_in, 35);
-				ft_close(env_info_p->std_out, 35);
-				ft_close(env_info_p->input_fd, 35);
 				ft_close(pipe_fd[0], 35);
+				_ft_close_all_fd(pipe_fd[1]);
 				limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
 				if (limiter == NULL)
 				{
@@ -188,24 +170,27 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 					exit(-2);
 				}
 				// ヒアドクが１つ実行してresultに格納
-				if (_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote) == -2)
-					exit(-2);
+				_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote);
 				exit(EXIT_SUCCESS);
 			}
 			else
 			{
-				signal(SIGINT, _ft_sigint_heredoc);//g_signumをSIGINTに変えるだけ
+				signal(SIGINT, _ft_change_g_signum);//g_signumをSIGINTに変えるだけ
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[1], 36);
 				waitpid(pid, &result, 0);
+				result = pipe_fd[0];
 				if (g_signum == SIGINT)
-					printf("\n");
+				{
+					ft_printf_fd(STDOUT_FILENO, "\n");
+					ft_close(result, 37);
+					return (result);
+				}
 				if (WEXITSTATUS(result) == -2)
 				{
 					ft_close(pipe_fd[0], 37);
 					return (-2);
 				}
-				result = pipe_fd[0];
 			}
 		}
 		i++;

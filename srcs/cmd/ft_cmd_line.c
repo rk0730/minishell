@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/06 17:20:12 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 19:17:17 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 
 static char	**ft_help(t_env_info *env_info_p)
 {
-	char	*input_cmd;
-	char	*tmp;
 	char	**cmds;
 
-	// 入力の１行目がコマンド
-	input_cmd = get_next_line(env_info_p->input_fd);
-	tmp = input_cmd;
-	input_cmd = ft_strtrim(tmp, "\n");
-	free(tmp);
 	// コマンドを|で分割
-	cmds = ft_gen_cmds(input_cmd);
-	free(input_cmd);
+	cmds = ft_gen_cmds(env_info_p->input);
 	return (cmds);
 }
 
@@ -66,21 +58,13 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	cmds = ft_help(env_info_p);
 	if (!cmds)
 	{
-		ft_close(env_info_p->input_fd, 9);
 		return (SYNTAX_ERROR);
 	}
-	env_info_p->std_in = dup(STDIN_FILENO);
-	env_info_p->std_out = dup(STDOUT_FILENO);
 	//　各コマンドのリダイレクトや環境変数展開などを実行する
 	cmd_list = ft_cmd_info_list(cmds, env_info_p);
-	ft_close(env_info_p->input_fd, 10);
 	if (!cmd_list)
 	{
 		// ft_clean(cmds, env_info_p);
-		dup2(env_info_p->std_in, STDIN_FILENO);
-		dup2(env_info_p->std_out, STDOUT_FILENO);
-		ft_close(env_info_p->std_in, 11);
-		ft_close(env_info_p->std_out, 12);
 		ft_free_array(cmds);
 		if (g_signum == SIGINT)
 			return (SIGINT_ERROR);
@@ -90,11 +74,6 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	status = ft_help2(cmds, cmd_list, env_info_p);
 	// 掃除
 	// ft_clean(cmds, env_info_p);
-	dup2(env_info_p->std_in, STDIN_FILENO);
-	dup2(env_info_p->std_out, STDOUT_FILENO);
-	ft_close(env_info_p->std_in, 13);
-	ft_close(env_info_p->std_out, 14);
 	ft_free_array(cmds);
-	ft_close(env_info_p->input_fd, 15);
 	return (status);
 }

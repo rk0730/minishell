@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 14:35:55 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/07 14:37:10 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:00:34 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
-				5) == 0)
+		// if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
+		// 		5) == 0)
+		if (ft_strncmp(tmp->key, "_", 2) == 0)
 			(void)env_list;
 		else if (tmp->value)
 			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
@@ -113,19 +114,17 @@ static int	ft_setenv(t_env_pair *env_list, char *str)
 	return (ft_add_env_process(env_list, str, equal_pos - str, plus_flg));
 }
 
-int	ft_export(t_cmd_info cmd_info, t_env_info env_info, int read_pipe,
-		int write_pipe)
+int	ft_export(t_cmd_info cmd_info, t_env_info env_info)
 {
 	int	i;
 	int	status;
 	int	return_st;
 
 	i = 1;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	status = 0;
 	while (cmd_info.cmd_argv[i])
 	{
-		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
+		// ft_printf_fd(STDOUT_FILENO, "this node will change: %s\n", cmd_info.cmd_argv[i]);
 		return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
 		if (return_st == 1)
 			ft_printf_fd(STDERR_FILENO,

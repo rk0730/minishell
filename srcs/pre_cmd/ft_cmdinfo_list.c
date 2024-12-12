@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 21:34:50 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 21:53:23 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,15 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 	if (!cmd_list)
 		exit(EXIT_FAILURE);
 	if (_ft_help1(cmds, env_info_p, cmd_list) == 1)
+	{
+		free(cmd_list);
 		return (NULL);
+	}
 	if (_ft_help2(cmds, env_info_p, cmd_list) == 1)
+	{
+		free(cmd_list);
 		return (NULL);
+	}
 	// リダイレクト処理と環境変数を展開し、cmd_argvを生成する
 	i = 0;
 	while (i < ft_array_len(cmds))
