@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heredoc_fork.c                                  :+:      :+:    :+:   */
+/*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 12:24:51 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:05:31 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,11 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 			line = readline("heredoc > ");//最初に入力したinput_fdが切れたので標準入力から受け取る
 		if (line == NULL)
 		{
-			if (g_signum == SIGINT)
-			{
-				ft_close(pipe_fd[1], 32);
-				return (-2);
-			}
-			else
-			{
-				//lineがNULLなのにSIGINTではないということはctrl+dが押されたということ
-				ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
-				write(STDERR_FILENO, limiter, ft_strlen(limiter));
-				ft_printf_fd(STDERR_FILENO, "')\n");
-				break ;
-			}
+			//lineがNULLということはctrl+dが押されたということ
+			ft_printf_fd(STDERR_FILENO, "warning: here-document delimited by end-of-file (wanted `");
+			write(STDERR_FILENO, limiter, ft_strlen(limiter));
+			ft_printf_fd(STDERR_FILENO, "')\n");
+			break ;
 		}
 		// _ft_one_heredoc_h(env_info_p, line);
 		// 初めての入力の場合、改行を追加
