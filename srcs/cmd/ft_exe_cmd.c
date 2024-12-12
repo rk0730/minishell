@@ -98,7 +98,7 @@ static int	ft_exec_cmd_h(t_cmd_info cmd_info, t_env_info *env_info_p, int read_p
 		return (EXIT_SUCCESS);
 	}
 	//ビルトインの場合はforkせずにここで実行し、終了ステータスを返す
-	return (ft_call_builtin(cmd_info, env_info_p, read_pipe, write_pipe));
+	return (ft_builtin(cmd_info, env_info_p, read_pipe, write_pipe));
 }
 
 static void	ft_exec_cmd_child(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe)

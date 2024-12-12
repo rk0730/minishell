@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:11 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 12:24:36 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 18:11:52 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,6 @@ int	ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 	char	*trim;
 
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
-	ft_close(env_info.std_in, 8);
-	ft_close(env_info.std_out, 9);
 	if (cmd_info.cmd_argv[1] == NULL)
 	{
 		// パイプがない時はexit パイプがある時はreturn

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:27:26 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/07 17:11:50 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:12:09 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ char *ft_internal_pwd(int mode)
 	return (pathname);
 }
 
-int	ft_pwd(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_pwd(t_cmd_info cmd_info, t_env_info env_info)
 {
 	(void)env_info;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	printf("%s\n", ft_internal_pwd(0));
 	return (0);
 }

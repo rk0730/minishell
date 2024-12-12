@@ -52,14 +52,12 @@ static int	ft_delenv(t_env_pair **env_list, char *key)
 	return (0);
 }
 
-int	ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe,
-		int write_pipe)
+int	ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p)
 {
 	int i;
 	int status;
 
 	i = 1;
-	ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 	status = 0;
 	while (cmd_info.cmd_argv[i])
 	{
