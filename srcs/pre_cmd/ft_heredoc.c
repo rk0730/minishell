@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 15:09:13 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:42 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,19 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 	return (0);
 }
 
+// 引数fdより小さいファイルディスクリプタを全て閉じる
+static void	_ft_close_all_fd(int fd)
+{
+	int	i;
+
+	i = 3;
+	while (i < fd)
+	{
+		close(i);
+		i++;
+	}
+}
+
 // heredocでの入力が入ったfdを返す 一回もheredocがなければ-1 エラーがあれば-2を返す fork使わないものに書き直し
 int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 {
@@ -173,6 +186,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				ft_close(env_info_p->std_out, 35);
 				ft_close(env_info_p->input_fd, 35);
 				ft_close(pipe_fd[0], 35);
+				_ft_close_all_fd(pipe_fd[1]);
 				limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
 				if (limiter == NULL)
 				{
