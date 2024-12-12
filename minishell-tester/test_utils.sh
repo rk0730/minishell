@@ -2,10 +2,10 @@
 
 # MINISHELL-TESTER
 
-# メモリリークを見るかどうか
-declare is_leak_test=true
+# メモリリークを見るかどうかの初期設定
+declare is_leak_test=false
 
-# 引数が渡されている時
+# 引数でleakが渡されている時はtrueに変える
 if [ $# > 0 ]; then
 	if [ "$1" == "leak" ]; then
 		is_leak_test=true
