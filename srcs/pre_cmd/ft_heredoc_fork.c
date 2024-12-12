@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heredoc.c                                       :+:      :+:    :+:   */
+/*   ft_heredoc_fork.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 17:23:35 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:24:51 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 static void	_ft_sigint_heredoc(int sig)
 {
 	g_signum = sig;
-	rl_done = 1;
-	// if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
-    //     perror("ioctl failed");
-	ft_close(STDIN_FILENO, 31);
 }
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
@@ -160,12 +156,10 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 	char	*limiter;
 	int		is_quote;
 	int		result;
+	pid_t	pid;
 
 	i = 0;
 	result = -1;
-	rl_catch_signals = 0;
-	signal(SIGINT, _ft_sigint_heredoc);
-	signal(SIGQUIT, SIG_IGN);
 	while (tokens[i])
 	{
 		if (ft_strncmp(tokens[i], "<<", 3) == 0)
@@ -176,19 +170,45 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 			if (tokens[i + 1] == NULL)//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
 				return (-2);
 			pipe(pipe_fd);
-			limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
-			if (limiter == NULL)
+			pid = fork();
+			if (pid == -1)
+				return (-1);
+			if (pid == 0)
 			{
-				ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
-				return (-2);
+				signal(SIGINT, SIG_DFL);//デフォルト動作にする
+				signal(SIGQUIT, SIG_IGN);
+				ft_close(env_info_p->std_in, 35);
+				ft_close(env_info_p->std_out, 35);
+				ft_close(env_info_p->input_fd, 35);
+				ft_close(pipe_fd[0], 35);
+				limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
+				if (limiter == NULL)
+				{
+					ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
+					exit(-2);
+				}
+				// ヒアドクが１つ実行してresultに格納
+				if (_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote) == -2)
+					exit(-2);
+				exit(EXIT_SUCCESS);
 			}
-			// ヒアドクが１つ実行してresultに格納
-			if (_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote) == -2)
-				return (-2);
-			result = pipe_fd[0];
+			else
+			{
+				signal(SIGINT, _ft_sigint_heredoc);//g_signumをSIGINTに変えるだけ
+				signal(SIGQUIT, SIG_IGN);
+				ft_close(pipe_fd[1], 36);
+				waitpid(pid, &result, 0);
+				if (g_signum == SIGINT)
+					printf("\n");
+				if (WEXITSTATUS(result) == -2)
+				{
+					ft_close(pipe_fd[0], 37);
+					return (-2);
+				}
+				result = pipe_fd[0];
+			}
 		}
 		i++;
 	}
-	rl_catch_signals = 1;
 	return (result);
 }
