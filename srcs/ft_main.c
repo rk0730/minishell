@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 19:16:42 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:42:54 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			ft_free_env_list(env_list);
 			free(env_info_p);
-			printf("exit\n");
+			ft_printf_fd(STDOUT_FILENO, "exit\n");
 			exit(ft_status_code(0, 0));
 		}
 		// 空文字、もしくは全て空白文字の場合は何もせず次のループへ

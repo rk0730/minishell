@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ambiguous_redirect.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:54:42 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/19 00:07:15 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:35 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	_ft_is_ambiguous_redirect(char *file_name, t_env_info env_info)
 			while (file_name[end] != '\0' && file_name[end] != file_name[i])
 				end++;
 			if (file_name[end] == '\0')
-				printf("bug in _ft_is_ambiguous_redirect\n");
+				ft_printf_fd(STDOUT_FILENO, "bug in _ft_is_ambiguous_redirect\n");
 			i = end + 1;
 		}
 		else

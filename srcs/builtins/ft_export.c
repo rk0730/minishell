@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 14:35:55 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 18:12:03 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:09 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	ft_export(t_cmd_info cmd_info, t_env_info env_info)
 	status = 0;
 	while (cmd_info.cmd_argv[i])
 	{
-		// printf("this node will change: %s\n", cmd_info.cmd_argv[i]);
+		// ft_printf_fd(STDOUT_FILENO, "this node will change: %s\n", cmd_info.cmd_argv[i]);
 		return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
 		if (return_st == 1)
 			ft_printf_fd(STDERR_FILENO,

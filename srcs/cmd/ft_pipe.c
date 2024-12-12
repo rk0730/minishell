@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:30:00 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:28 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	ft_recursive(t_cmd_info *cmd_list, t_env_info *env_info_p, int index
 void _ft_print_newline(int sig)
 {
 	(void)sig;
-	printf("\n");
+	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 // パイプを使う　ここに入ったプロセスは全てexitされる
@@ -127,12 +127,12 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_
 		waitpid(pid, NULL, 0);
 		if (g_signum == SIGINT)
 		{
-			printf("\n");
+			ft_printf_fd(STDOUT_FILENO, "\n");
 			exit(SIGINT_ERROR);
 		}
 		else if (g_signum == SIGQUIT)
 		{
-			printf("Quit\n");
+			ft_printf_fd(STDOUT_FILENO, "Quit\n");
 			exit(SIGQUIT_ERROR);
 		}
 		else
@@ -152,12 +152,12 @@ static int	ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info *env_info_p)
 	YYAMASAK("status=%d\n", status);
 	if (g_signum == SIGINT)
 	{
-		printf("\n");
+		ft_printf_fd(STDOUT_FILENO, "\n");
 		return (SIGINT_ERROR);
 	}
 	else if (g_signum == SIGQUIT)
 	{
-		printf("Quit\n");
+		ft_printf_fd(STDOUT_FILENO, "Quit\n");
 		return (SIGQUIT_ERROR);
 	}
 	else
@@ -180,7 +180,7 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_inde
 {
 	pid_t	pid;
 
-	// printf("fd_in:%d, fd_out:%d in ft_exec_cmd_list\n", cmd_list[last_index].fd_in, cmd_list[last_index].fd_out);
+	// ft_printf_fd(STDOUT_FILENO, "fd_in:%d, fd_out:%d in ft_exec_cmd_list\n", cmd_list[last_index].fd_in, cmd_list[last_index].fd_out);
 	if (last_index == 0)
 		return (ft_exec_one_cmd(cmd_list, env_info_p));
 	RKITAO("process %d: wait for pipe\n", getpid());

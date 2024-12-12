@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:11 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:11:52 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:05 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	ft_exec_exit(t_cmd_info cmd_info, int result, int read_pipe, int writ
 		// パイプがない時はexit パイプがある時はreturn	
 		if (read_pipe == -1 && write_pipe == -1)
 		{
-			printf("exit\n");
+			ft_printf_fd(STDOUT_FILENO, "exit\n");
 			exit(2);
 		}
 		return 2;
@@ -86,7 +86,7 @@ static int	ft_exec_exit(t_cmd_info cmd_info, int result, int read_pipe, int writ
 		// パイプがない時はexit パイプがある時はreturn
 		if (read_pipe == -1 && write_pipe == -1)
 		{
-			printf("exit\n");
+			ft_printf_fd(STDOUT_FILENO, "exit\n");
 			exit(result);
 		}
 		return result;
@@ -104,7 +104,7 @@ int	ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_p
 		// パイプがない時はexit パイプがある時はreturn
 		if (read_pipe == -1 && write_pipe == -1)
 		{
-			printf("exit\n");
+			ft_printf_fd(STDOUT_FILENO, "exit\n");
 			exit(ft_status_code(0, 0));
 		}
 		return (ft_status_code(0, 0));

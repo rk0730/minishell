@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:21:48 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/01 03:35:14 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:43:32 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 void	ft_sigint_cmd(int sig)
 {
 	g_signum = sig;
-	printf("\n");
+	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 //コマンド実行中SIGQUITの処理
 void	ft_sigquit_cmd(int sig)
 {
 	g_signum = sig;
-	printf("Quit\n");
+	ft_printf_fd(STDOUT_FILENO, "Quit\n");
 }
 
 void	ft_change_g_signum(int sig)
