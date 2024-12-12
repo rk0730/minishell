@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 23:22:44 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 13:09:54 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_sigint(int sig)
 {
 	(void)sig;
 	ft_status_code(1, 130);
-	printf("\n");
+	ft_printf_fd(STDIN_FILENO, "\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
