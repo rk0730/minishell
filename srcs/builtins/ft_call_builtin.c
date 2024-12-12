@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:24:47 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:31:35 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 22:57:42 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ int	ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int w
 		|| ft_strncmp(cmd_info.cmd_argv[0], "env", 4) == 0
 		|| ft_strncmp(cmd_info.cmd_argv[0], "exit", 5) == 0)
 	{
-		ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 		rw_pipe[0] = read_pipe;
 		rw_pipe[1] = write_pipe;
 		std_in_out[0] = dup(STDIN_FILENO);
 		std_in_out[1] = dup(STDOUT_FILENO);
+		ft_choose_fd(cmd_info, read_pipe, write_pipe, FALSE);
 		result = ft_call_builtin(cmd_info, env_info_p, rw_pipe, std_in_out);
 		dup2(std_in_out[0], STDIN_FILENO);
 		dup2(std_in_out[1], STDOUT_FILENO);
