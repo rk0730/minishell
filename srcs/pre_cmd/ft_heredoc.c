@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 15:05:31 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 15:09:13 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 					exit(-2);
 				}
 				// ヒアドクが１つ実行してresultに格納
-				if (_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote) == -2)
-					exit(-2);
+				_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote);
 				exit(EXIT_SUCCESS);
 			}
 			else
