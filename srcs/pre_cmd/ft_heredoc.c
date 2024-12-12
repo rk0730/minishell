@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:32:17 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 19:17:33 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,11 @@ static char	*_ft_limit_tokenize(char *str, int *is_quote)
 static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
 {
 	char	*line;
-	char	*tmp;
+	// char	*tmp;
 
 	while (1)
 	{
-		line = get_next_line(env_info_p->input_fd);
-		tmp = line;
-		line = ft_strtrim(tmp, "\n");
-		free(tmp);
-		if (line == NULL)
-			line = readline("heredoc > ");//最初に入力したinput_fdが切れたので標準入力から受け取る
+		line = readline("heredoc > ");
 		if (line == NULL)
 		{
 			//lineがNULLということはctrl+dが押されたということ
@@ -148,7 +143,6 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 			{
 				signal(SIGINT, SIG_DFL);//デフォルト動作にする
 				signal(SIGQUIT, SIG_IGN);
-				ft_close(env_info_p->input_fd, 35);
 				ft_close(pipe_fd[0], 35);
 				_ft_close_all_fd(pipe_fd[1]);
 				limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);

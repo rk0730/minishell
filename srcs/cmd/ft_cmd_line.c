@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:13:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 18:29:33 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 19:17:17 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 
 static char	**ft_help(t_env_info *env_info_p)
 {
-	char	*input_cmd;
-	char	*tmp;
 	char	**cmds;
 
-	// 入力の１行目がコマンド
-	input_cmd = get_next_line(env_info_p->input_fd);
-	tmp = input_cmd;
-	input_cmd = ft_strtrim(tmp, "\n");
-	free(tmp);
 	// コマンドを|で分割
-	cmds = ft_gen_cmds(input_cmd);
-	free(input_cmd);
+	cmds = ft_gen_cmds(env_info_p->input);
 	return (cmds);
 }
 
@@ -66,12 +58,10 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	cmds = ft_help(env_info_p);
 	if (!cmds)
 	{
-		ft_close(env_info_p->input_fd, 9);
 		return (SYNTAX_ERROR);
 	}
 	//　各コマンドのリダイレクトや環境変数展開などを実行する
 	cmd_list = ft_cmd_info_list(cmds, env_info_p);
-	ft_close(env_info_p->input_fd, 10);
 	if (!cmd_list)
 	{
 		// ft_clean(cmds, env_info_p);
@@ -85,6 +75,5 @@ int	ft_exec_cmdline(t_env_info *env_info_p)
 	// 掃除
 	// ft_clean(cmds, env_info_p);
 	ft_free_array(cmds);
-	ft_close(env_info_p->input_fd, 15);
 	return (status);
 }
