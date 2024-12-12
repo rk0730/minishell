@@ -6,17 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 19:17:33 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 21:45:47 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
-
-
-static void	_ft_sigint_heredoc(int sig)
-{
-	g_signum = sig;
-}
 
 // クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
 // limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
@@ -66,6 +60,24 @@ static char	*_ft_limit_tokenize(char *str, int *is_quote)
 	return (result);
 }
 
+// heredocで書き込み中のfdを入れる　SIGINTが来た時にcloseできるように保持しておく
+static int _ft_heredoc_write_fd(int flag, int fd)
+{
+	static int heredoc_write_fd;
+
+	if (flag)
+		heredoc_write_fd = fd;
+	return (heredoc_write_fd);
+}
+
+static void	_ft_sigint_heredoc(int sig)
+{
+	g_signum = sig;
+	ft_close(_ft_heredoc_write_fd(0, 0), 32);
+	// デフォルトの SIGINT 動作させる
+	signal(SIGINT, SIG_DFL);
+	kill(getpid(), SIGINT);
+}
 
 static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote)
 {
@@ -74,6 +86,7 @@ static int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter
 
 	while (1)
 	{
+		_ft_heredoc_write_fd(1, pipe_fd[1]);
 		line = readline("heredoc > ");
 		if (line == NULL)
 		{
@@ -114,6 +127,11 @@ static void	_ft_close_all_fd(int fd)
 	}
 }
 
+static void	_ft_change_g_signum(int sig)
+{
+	g_signum = sig;
+}
+
 // heredocでの入力が入ったfdを返す 一回もheredocがなければ-1 エラーがあれば-2を返す fork使わないものに書き直し
 int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 {
@@ -141,7 +159,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				return (-1);
 			if (pid == 0)
 			{
-				signal(SIGINT, SIG_DFL);//デフォルト動作にする
+				signal(SIGINT, _ft_sigint_heredoc);// 書き込みのpipe_fd[1]を閉じてデフォルトのSIGINT動作をする
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[0], 35);
 				_ft_close_all_fd(pipe_fd[1]);
@@ -157,18 +175,22 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 			}
 			else
 			{
-				signal(SIGINT, _ft_sigint_heredoc);//g_signumをSIGINTに変えるだけ
+				signal(SIGINT, _ft_change_g_signum);//g_signumをSIGINTに変えるだけ
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[1], 36);
 				waitpid(pid, &result, 0);
+				result = pipe_fd[0];
 				if (g_signum == SIGINT)
+				{
 					printf("\n");
+					ft_close(result, 37);
+					return (result);
+				}
 				if (WEXITSTATUS(result) == -2)
 				{
 					ft_close(pipe_fd[0], 37);
 					return (-2);
 				}
-				result = pipe_fd[0];
 			}
 		}
 		i++;
