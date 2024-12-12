@@ -3,28 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_call_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:24:47 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 22:57:42 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 17:03:25 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-
-// #include <unistd.h>
-// #include <fcntl.h>
-// #include <stdio.h>
-// #include <errno.h>
-
 // fdが開いているかどうかを判定する
 // static int	is_fd_open(int fd) {
 // 	return fcntl(fd, F_GETFD) != -1 || errno != EBADF;
 // }
 
 // pipeに入出力するのか、ファイルに入出力するのかを判断する
-void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe, t_bool need_input)
+void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe,
+		int write_pipe, t_bool need_input)
 {
 	if (cmd_info.fd_in != -1)
 	{
@@ -51,7 +45,8 @@ void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe, t_bool nee
 }
 
 // ビルトインを呼び出し、終了ステータスを返す　見つからなかったら-1を返す
-static int	ft_call_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int rw_pipe[2], int std_in_out[2])
+static int	ft_call_builtin(t_cmd_info cmd_info, t_env_info *env_info_p,
+			int rw_pipe[2], int std_in_out[2])
 {
 	if (ft_strncmp(cmd_info.cmd_argv[0], "echo", 5) == 0)
 		return (ft_echo(cmd_info, *env_info_p));
@@ -76,11 +71,12 @@ static int	ft_call_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int rw_p
 }
 
 // ビルトインコマンドかどうか確認し、前処理を行う
-int	ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe)
+int	ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p,
+	int read_pipe, int write_pipe)
 {
-	int rw_pipe[2];
-	int std_in_out[2];
-	int result;
+	int	rw_pipe[2];
+	int	std_in_out[2];
+	int	result;
 
 	if (ft_strncmp(cmd_info.cmd_argv[0], "echo", 5 == 0)
 		|| ft_strncmp(cmd_info.cmd_argv[0], "cd", 3) == 0

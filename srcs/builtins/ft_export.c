@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 14:35:55 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 16:00:34 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:44:19 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,6 @@
 #include "cmd.h"
 #include "env.h"
 
-static void	ft_show_env_list2(t_env_pair *env_list)
-{
-	t_env_pair	*tmp;
-
-	tmp = env_list;
-	while (tmp)
-	{
-		// if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
-		// 		5) == 0)
-		if (ft_strncmp(tmp->key, "_", 2) == 0)
-			(void)env_list;
-		else if (tmp->value)
-			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
-		else
-			ft_printf_fd(1, "declare -x %s\n", tmp->key);
-		tmp = tmp->next;
-	}
-}
-
-// to do: create test case
 static int	ft_is_valid_envnm(char *s, int len)
 {
 	int	i;
@@ -124,8 +104,8 @@ int	ft_export(t_cmd_info cmd_info, t_env_info env_info)
 	status = 0;
 	while (cmd_info.cmd_argv[i])
 	{
-		// ft_printf_fd(STDOUT_FILENO, "this node will change: %s\n", cmd_info.cmd_argv[i]);
-		return_st = ft_setenv(env_info.env_list, cmd_info.cmd_argv[i]);
+		return_st = ft_setenv(env_info.env_list,
+				cmd_info.cmd_argv[i]);
 		if (return_st == 1)
 			ft_printf_fd(STDERR_FILENO,
 				"export: `%s': not a valid identifier\n", cmd_info.cmd_argv[i]);

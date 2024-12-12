@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:11 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:05 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:16:05 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_help2(char *str, int sign)
 	{
 		if (sign == 1 && ft_strncmp(str, "9223372036854775807", 19) > 0)
 			return (-1);
-		else if(sign == -1 && ft_strncmp(str, "9223372036854775808", 19) > 0)
+		else if (sign == -1 && ft_strncmp(str, "9223372036854775808", 19) > 0)
 			return (-1);
 	}
 	return (0);
@@ -61,19 +61,28 @@ static int	ft_exit_help(char *str)
 	return (result);
 }
 
-static int	ft_exec_exit(t_cmd_info cmd_info, int result, int read_pipe, int write_pipe)
+static int	is_pipe_valid(int read_pipe, int write_pipe)
+{
+	if (read_pipe == -1 && write_pipe == -1)
+	{
+		ft_printf_fd(STDOUT_FILENO, "exit\n");
+		return (0);
+	}
+	return (1);
+}
+
+static int	ft_exec_exit(t_cmd_info cmd_info, int result,
+			int read_pipe, int write_pipe)
 {
 	// long範囲外か数値でなければエラーを表示して終了する
 	if (result == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, "exit: %s: numeric argument required\n", cmd_info.cmd_argv[1]);
+		ft_printf_fd(STDERR_FILENO,
+			"exit: %s: numeric argument required\n", cmd_info.cmd_argv[1]);
 		// パイプがない時はexit パイプがある時はreturn	
-		if (read_pipe == -1 && write_pipe == -1)
-		{
-			ft_printf_fd(STDOUT_FILENO, "exit\n");
+		if (!is_pipe_valid(read_pipe, write_pipe))
 			exit(2);
-		}
-		return 2;
+		return (2);
 	}
 	else
 	{
@@ -84,16 +93,14 @@ static int	ft_exec_exit(t_cmd_info cmd_info, int result, int read_pipe, int writ
 			return (CMD_ERROR);
 		}
 		// パイプがない時はexit パイプがある時はreturn
-		if (read_pipe == -1 && write_pipe == -1)
-		{
-			ft_printf_fd(STDOUT_FILENO, "exit\n");
+		if (!is_pipe_valid(read_pipe, write_pipe))
 			exit(result);
-		}
-		return result;
+		return (result);
 	}
 }
 
-int	ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe)
+int	ft_exit(t_cmd_info cmd_info, t_env_info env_info,
+	int read_pipe, int write_pipe)
 {
 	int		result;
 	char	*trim;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/12 16:44:44 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/12/12 16:45:38 by yyamasak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
 #include "env.h"
 
@@ -5,7 +17,6 @@ void	refresh_node(t_env_pair *node)
 {
 	if (!node)
 		return ;
-	// ft_printf_fd(STDOUT_FILENO, "%s=%s\n", node->key, node->value);
 	RKITAO("%s=%s\n", node->key, node->value);
 	if (node->key)
 	{
@@ -39,7 +50,6 @@ static int	ft_delenv(t_env_pair **env_list, char *key)
 				*env_list = tmp->next;
 			else
 				prev->next = tmp->next;
-			// TODO fix segumentation fault when following condition: unset SHELL
 			refresh_node(tmp);
 			break ;
 		}
@@ -54,14 +64,13 @@ static int	ft_delenv(t_env_pair **env_list, char *key)
 
 int	ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p)
 {
-	int i;
-	int status;
+	int	i;
+	int	status;
 
 	i = 1;
 	status = 0;
 	while (cmd_info.cmd_argv[i])
 	{
-		// ft_printf_fd(STDOUT_FILENO, "this node will change: %s\n", cmd_info.cmd_argv[i]);
 		if (ft_strncmp(cmd_info.cmd_argv[i], "_", 2) != 0)
 			status |= ft_delenv(&(env_info_p->env_list), cmd_info.cmd_argv[i]);
 		i++;
