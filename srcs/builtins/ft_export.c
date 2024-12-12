@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 14:35:55 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:09 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:00:34 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static void	ft_show_env_list2(t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
-				5) == 0)
+		// if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
+		// 		5) == 0)
+		if (ft_strncmp(tmp->key, "_", 2) == 0)
 			(void)env_list;
 		else if (tmp->value)
 			ft_printf_fd(1, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
