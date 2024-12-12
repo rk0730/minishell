@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:04:09 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/03 13:34:23 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:29:13 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ typedef struct s_env_info
 	// int			last_status; statusはcmdのint	ft_status_code(int flag, int new_status)で管理する
 	char		*input;//ヒアドクなども含めた入力　環境変数ではないが都合がいいのでここに入れる
 	int			input_fd;//同上
-	int			std_in;// 実行が終わってからstdinを元に戻すために保持
-	int			std_out;// 同上
 }	t_env_info;
 
 enum e_export_mode

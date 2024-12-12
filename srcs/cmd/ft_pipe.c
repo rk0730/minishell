@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 11:49:37 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 18:30:00 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static void	ft_recursive_fin(t_cmd_info *cmd_list, t_env_info *env_info_p, int i
 		//他のコマンドのfd_in, fd_outを閉じる
 		RKITAO("process %d: exec first write fd: %d\n", getpid(), pipe_fd[1]);
 		ft_exec_cmd(cmd_list[index], env_info_p, -1, pipe_fd[1]);
-		ft_close(env_info_p->std_in, 45);
-		ft_close(env_info_p->std_out, 46);
 		exit(EXIT_SUCCESS);
 	}
 	else
@@ -48,8 +46,6 @@ static void	ft_recursive_fin(t_cmd_info *cmd_list, t_env_info *env_info_p, int i
 		ft_close(pipe_fd[1], 47);
 		ft_close(cmd_list[index].fd_out, 48);
 		ft_close(cmd_list[index].fd_in, 49);
-		ft_close(env_info_p->std_in, 50);
-		ft_close(env_info_p->std_out, 51);
 		waitpid(pid, NULL, 0);
 	}
 }
@@ -85,8 +81,6 @@ static void	ft_recursive(t_cmd_info *cmd_list, t_env_info *env_info_p, int index
 			ft_close(pipe_fd[3], 57);
 			RKITAO("process %d: exec %s\n", getpid(), cmd_list[index].cmd_argv[0]);
 			ft_exec_cmd(cmd_list[index], env_info_p, pipe_fd[2], pipe_fd[1]);
-			ft_close(env_info_p->std_in, 58);
-			ft_close(env_info_p->std_out, 59);
 			waitpid(pid, NULL, 0);
 		}
 	}
@@ -130,8 +124,6 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_
 		status = ft_exec_cmd(cmd_list[last_index], env_info_p, pipe_fd[0], -1);
 		signal(SIGINT, _ft_print_newline);// 最後のコマンドの実行が終わったので、これらのプロセスはもうシグナルを受け付けない
 		signal(SIGQUIT, SIG_IGN);
-		ft_close(env_info_p->std_in, 63);
-		ft_close(env_info_p->std_out, 64);
 		waitpid(pid, NULL, 0);
 		if (g_signum == SIGINT)
 		{

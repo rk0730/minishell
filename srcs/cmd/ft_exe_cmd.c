@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/11 11:06:04 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 18:29:44 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,6 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int 
 	if (pid == -1)
 		exit(EXIT_FAILURE);
 	else if (pid == 0){
-		ft_close(env_info_p->std_in, 29);
-		ft_close(env_info_p->std_out, 30);
 		ft_exec_cmd_child(cmd_info, env_info_p, read_pipe, write_pipe);
 	}
 	else

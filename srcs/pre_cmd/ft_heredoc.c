@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 15:49:33 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 18:30:11 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,6 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 			{
 				signal(SIGINT, SIG_DFL);//デフォルト動作にする
 				signal(SIGQUIT, SIG_IGN);
-				ft_close(env_info_p->std_in, 35);
-				ft_close(env_info_p->std_out, 35);
 				ft_close(env_info_p->input_fd, 35);
 				ft_close(pipe_fd[0], 35);
 				_ft_close_all_fd(pipe_fd[1]);
