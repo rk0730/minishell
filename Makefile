@@ -17,6 +17,7 @@ SRCS += $(SRCDIR)/$(ENV)/ft_path.c
 SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_gen_cmd_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_show_env_list.c
+SRCS += $(SRCDIR)/$(ENV)/ft_free_env_list.c
 
 UTILS := utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils1.c
@@ -38,11 +39,14 @@ SRCS += $(SRCDIR)/$(BUILIN)/ft_unset.c
 PRE_CMD := pre_cmd
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_ambiguous_redirect.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmd_argv.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmd_argv2.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmds.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_in_out_fd.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_token.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_heredoc.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_exec_heredoc.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_heredoc_limiter.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_expand_env.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_redirect.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_split_after_index.c
@@ -52,6 +56,7 @@ SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd_childp.c
 
 #OBJS
 OBJDIR := objs

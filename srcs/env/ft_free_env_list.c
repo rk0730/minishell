@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal.c                                        :+:      :+:    :+:   */
+/*   ft_free_env_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 11:21:48 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:35:08 by kitaoryoma       ###   ########.fr       */
+/*   Created: 2024/12/13 12:38:53 by kitaoryoma        #+#    #+#             */
+/*   Updated: 2024/12/13 12:42:18 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "env.h"
 
-//コマンド実行中SIGINTの処理
-void	ft_sigint_cmd(int sig)
+void	ft_free_env_list(t_env_pair *env_list)
 {
-	g_signum = sig;
-	ft_printf_fd(STDOUT_FILENO, "\n");
-}
+	t_env_pair	*node;
 
-//コマンド実行中SIGQUITの処理
-void	ft_sigquit_cmd(int sig)
-{
-	g_signum = sig;
-	ft_printf_fd(STDOUT_FILENO, "Quit\n");
-}
-
-void	ft_change_g_signum(int sig)
-{
-	g_signum = sig;
+	node = env_list;
+	if (!env_list)
+		return ;
+	while (env_list)
+	{
+		node = env_list->next;
+		if (env_list->key)
+		{
+			free(env_list->key);
+			env_list->key = NULL;
+		}
+		if (env_list->value)
+		{
+			free(env_list->value);
+			env_list->value = NULL;
+		}
+		free(env_list);
+		env_list = node;
+	}
 }

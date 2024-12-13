@@ -6,18 +6,18 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:48:51 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/21 17:22:32 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:04:55 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-static int	_ft_next_token_h2(char *input, int i)
-{
-	while (input[i] == '>' || input[i] == '<')
-		i++;
-	return (i);
-}
+// static int	_ft_next_token_h2(char *input, int i)
+// {
+// 	while (input[i] == '>' || input[i] == '<')
+// 		i++;
+// 	return (i);
+// }
 
 // iをクォーテーションcの中身の次の文字に移動させる　token_statusにはクォーテーションの種類を入れる
 int	_ft_skip_quotation(char *input, int i, int *token_status, char c)
@@ -44,7 +44,12 @@ int	_ft_skip_quotation(char *input, int i, int *token_status, char c)
 static int	_ft_next_token(char *in, int i, int *token_status)
 {
 	if (in[i] == '>' || in[i] == '<')
-		return (_ft_next_token_h2(in, i));
+	{
+		while (in[i] == '>' || in[i] == '<')
+			i++;
+		return (i);
+		// return (_ft_next_token_h2(in, i));
+	}
 	while (in[i] != '\0' && in[i] != ' ' && in[i] != '<' && in[i] != '>')
 	{
 		if (in[i] == '\'')

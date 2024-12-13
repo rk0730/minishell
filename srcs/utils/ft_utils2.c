@@ -6,11 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:19:40 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/18 18:21:36 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 12:47:41 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "utils.h"
+#include "utils.h"
 
 char	*ft_join_free(char *s1, char *s2)
 {
@@ -31,7 +31,7 @@ int	ft_isspace(char c)
 
 int	ft_isspace_str(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
