@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:55:05 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 19:32:34 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 12:10:29 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int			ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_in
 void		ft_sigint_cmd(int sig);
 void		ft_sigquit_cmd(int sig);
 void		ft_change_g_signum(int sig);
+void		ft_exec_cmd_child(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe);
 
 #endif

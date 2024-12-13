@@ -55,6 +55,7 @@ SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
+SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd_childp.c
 
 #OBJS
 OBJDIR := objs
