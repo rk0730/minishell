@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:21:48 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:32 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:35:08 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cmd.h"
+#include "cmd.h"
 
 //コマンド実行中SIGINTの処理
 void	ft_sigint_cmd(int sig)
