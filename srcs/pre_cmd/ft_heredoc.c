@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 11:35:22 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:47:19 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 			// 前回のheredocがあれば不要なので閉じる
 			if (result != -1)
 				ft_close(result, 34);
-			if (tokens[i + 1] == NULL)//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
+			if (tokens[i + 1] == NULL) //最後に<<がある場合、あとでエラー文は出すのでここでは出さない
 				return (-2);
 			pipe(pipe_fd);
 			pid = fork();
@@ -73,16 +73,18 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
 				if (limiter == NULL)
 				{
-					ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
+					ft_printf_fd(STDERR_FILENO,
+						"syntax error near unexpected token `newline'\n");
 					exit(-2);
 				}
 				// ヒアドクが１つ実行してresultに格納
 				_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote);
+				free(limiter);
 				exit(EXIT_SUCCESS);
 			}
 			else
 			{
-				signal(SIGINT, _ft_change_g_signum);//g_signumをSIGINTに変えるだけ
+				signal(SIGINT, _ft_change_g_signum); // g_signumをSIGINTに変えるだけ
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[1], 36);
 				waitpid(pid, &result, 0);
