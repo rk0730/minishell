@@ -38,6 +38,7 @@ SRCS += $(SRCDIR)/$(BUILIN)/ft_unset.c
 PRE_CMD := pre_cmd
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_ambiguous_redirect.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmd_argv.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmd_argv2.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmds.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_in_out_fd.c

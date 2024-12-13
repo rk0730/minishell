@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/21 16:45:51 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:11:48 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		_ft_is_redirect(char *str);
 int		_ft_skip_quotation(char *input, int i, int *token_status, char c);
 char	**_ft_gen_tokens(char *input);
 char	**_ft_split_after_index(char *str, int split_index);
+char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info);
 char	**_ft_gen_cmd_argv(char **tokens, t_env_info env_info);
 char	*_ft_tokenize(char *str, t_env_info env_info);
 char	*_ft_expand_normal(char *str, int i, int *endp, t_env_info env_info);
