@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/18 17:21:04 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 10:50:37 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	_ft_next_cmd_h(char *cmd, int *ip)
 				(*ip)++;
 			if (cmd[*ip] == '\0')
 			{
-				ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `newline'\n");
+				ft_printf_fd(STDERR_FILENO,
+					"syntax error near unexpected token `newline'\n");
 				return (1);
 			}
 		}
@@ -38,8 +39,8 @@ static int	_ft_next_cmd_h(char *cmd, int *ip)
 
 static char	*_ft_next_cmd(char *cmd, int *ip)
 {
-	int		start;
-	int		tmp;
+	int	start;
+	int	tmp;
 
 	start = *ip;
 	if (_ft_next_cmd_h(cmd, ip) == 1)
