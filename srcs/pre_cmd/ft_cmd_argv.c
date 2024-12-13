@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 11:13:56 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:16:22 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,12 @@ char	*_ft_expand_normal(char *str, int i, int *endp, t_env_info env_info)
 	return (result);
 }
 
-// static char	*ft_help4(int *ip, int end, char **old_p, char **tmp_p)
-// {
-// 	char	*result;
-
-// 	*ip = end;
-// 	result = ft_strjoin(*old_p, *tmp_p);
-// 	free(*old_p);
-// 	free(*tmp_p);
-// 	return (result);
-// }
-
 // "や'は開いて除いて返す
 // ""で囲まれているものはft_expand_envで環境変数展開、''で囲まれていたらそのままつなげる
 char	*_ft_tokenize(char *str, t_env_info env_info)
 {
 	char	*result;
 	char	*tmp;
-	// char	*before;
 	int		i;
 	int		end;
 
@@ -91,20 +79,13 @@ char	*_ft_tokenize(char *str, t_env_info env_info)
 		i = end;
 		result = ft_join_free(result, tmp);
 	}
-	// if (ft_strchr(str, '\'') == NULL && ft_strchr(str, '\"') == NULL && ft_strlen(result) == 0)
-	// {
-	// 	free(result);
-	// 	return (NULL);
-	// }
 	return (result);
 }
-
 
 // tokenの各文字列が"で挟まれていたら環境変数展開したり、'で挟まれていたらそれを除く（リダイレクトは飛ばす）
 char	**_ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 {
 	char	**cmd_argv;
-	// char	*tmp;
 	int		i;
 
 	i = 0;
