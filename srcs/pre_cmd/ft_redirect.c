@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:13:31 by rkitao            #+#    #+#             */
-/*   Updated: 2024/11/17 18:45:30 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:50:03 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 // リダイレクト記号かどうかを判定する
 int	_ft_is_redirect(char *str)
 {
-	if (ft_strncmp(str, ">", 2) == 0 || ft_strncmp(str, "<", 2) == 0 || ft_strncmp(str, ">>", 3) == 0 || ft_strncmp(str, "<<", 3) == 0)
+	if (ft_strncmp(str, ">", 2) == 0 || ft_strncmp(str, "<", 2) == 0
+		|| ft_strncmp(str, ">>", 3) == 0 || ft_strncmp(str, "<<", 3) == 0)
 		return (1);
 	else
 		return (0);
@@ -30,9 +31,11 @@ int	_ft_redirect_err(char **tokens)
 	while (tokens[i])
 	{
 		// >>>や<<<などの処理 bashの挙動とやや異なるが、ここはディフェンスできる気がする　一旦シンプルに作る
-		if ((tokens[i][0] == '>' || tokens[i][0] == '<') && _ft_is_redirect(tokens[i]) == 0)
+		if ((tokens[i][0] == '>' || tokens[i][0] == '<')
+			&& _ft_is_redirect(tokens[i]) == 0)
 		{
-			ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `%s'\n", tokens[i]);
+			ft_printf_fd(STDERR_FILENO,
+				"syntax error near unexpected token `%s'\n", tokens[i]);
 			return (1);
 		}
 		// リダイレクト先がない場合の処理
@@ -40,7 +43,8 @@ int	_ft_redirect_err(char **tokens)
 		{
 			if (tokens[i + 1] != NULL && _ft_is_redirect(tokens[i + 1]))
 			{
-				ft_printf_fd(STDERR_FILENO, "syntax error near unexpected token `%s'\n", tokens[i]);
+				ft_printf_fd(STDERR_FILENO,
+					"syntax error near unexpected token `%s'\n", tokens[i]);
 				return (1);
 			}
 		}
