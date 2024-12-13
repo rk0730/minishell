@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 12:38:53 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:39:19 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 12:42:18 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_free_env_list(t_env_pair *env_list)
 {
 	t_env_pair	*node;
-	
+
 	node = env_list;
 	if (!env_list)
 		return ;

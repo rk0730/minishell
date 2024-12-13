@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 12:40:20 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 12:42:03 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static t_env_pair	*ft_new_env(char *env)
 	if (!env_pair)
 		return (NULL);
 	env_pair->key = ft_substr(env, 0, ft_strchr(env, '=') - env);
-	env_pair->value = ft_substr(env, ft_strchr(env, '=') - env + 1, env + ft_strlen(env) - ft_strchr(env, '=') - 1);
+	env_pair->value = ft_substr(env, ft_strchr(env, '=') - env + 1, env
+			+ ft_strlen(env) - ft_strchr(env, '=') - 1);
 	env_pair->next = NULL;
 	return (env_pair);
 }
@@ -68,26 +69,25 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 	else
 	{
 		free(new->key);
-		tmp = ft_strjoin(node->value, new->value);
-		free(new->value);
-		free(node->value);
+		// tmp = ft_strjoin(node->value, new->value);
+		// free(new->value);
+		// free(node->value);
+		tmp = ft_join_free(node->value, new->value); //これでコメントアウト部分を同じ処理
 		node->value = tmp;
 	}
 	free(new);
 }
 
-static void _create_default_env(t_env_pair **env_list)
+static void	_create_default_env(t_env_pair **env_list)
 {
-	t_env_pair *new;
-	char	pathname[PATH_MAX];
-	char *tmp;
+	t_env_pair	*new;
+	char		pathname[PATH_MAX];
+	char		*tmp;
 
 	new = ft_new_env("_=]");
 	ft_add_env_list(env_list, new);
-
 	new = ft_new_env("SHLVL=1");
 	ft_add_env_list(env_list, new);
-
 	new = (t_env_pair *)malloc(sizeof(t_env_pair));
 	if (new)
 	{
@@ -96,7 +96,6 @@ static void _create_default_env(t_env_pair **env_list)
 		if (new->key)
 			ft_add_env_list(env_list, new);
 	}
-
 	getcwd(pathname, PATH_MAX);
 	tmp = ft_strjoin("PWD=", pathname);
 	new = ft_new_env(tmp);
