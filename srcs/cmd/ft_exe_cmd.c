@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:34:01 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 15:10:30 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,16 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe,
 	int			status;
 	pid_t		pid;
 	t_env_pair	*new_;
+	int			array_len;
 
 	// 環境変数_を更新する
 	new_ = (t_env_pair *)malloc(sizeof(t_env_pair));
 	new_->key = ft_strdup("_");
-	if (ft_array_len(cmd_info.cmd_argv) == 0)
+	array_len = ft_array_len(cmd_info.cmd_argv);
+	if (array_len == 0)
 		new_->value = ft_strdup("");
 	else
-		new_->value = ft_strdup(cmd_info.cmd_argv[ft_array_len(cmd_info.cmd_argv)
-				- 1]);
+		new_->value = ft_strdup(cmd_info.cmd_argv[array_len - 1]);
 	new_->next = NULL;
 	// builtinの場合はここで実行し、終了ステータスを返す
 	status = ft_exec_cmd_h(cmd_info, env_info_p, read_pipe, write_pipe);

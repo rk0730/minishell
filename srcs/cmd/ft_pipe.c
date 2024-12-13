@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:28 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:19:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	ft_close_fd_inout(t_cmd_info *cmd_list, int index)
 	}
 }
 
-
 // 最初のコマンドを実行して終了
-static void	ft_recursive_fin(t_cmd_info *cmd_list, t_env_info *env_info_p, int index, int pipe_fd[4])
+static void	ft_recursive_fin(t_cmd_info *cmd_list,
+		t_env_info *env_info_p, int index, int pipe_fd[4])
 {
 	pid_t	pid;
 
@@ -50,50 +50,51 @@ static void	ft_recursive_fin(t_cmd_info *cmd_list, t_env_info *env_info_p, int i
 	}
 }
 
-static void	ft_recursive(t_cmd_info *cmd_list, t_env_info *env_info_p, int index, int pipe_fd[4])
+static void	ft_recursive(t_cmd_info *cmd_list,
+		t_env_info *env_info_p, int index, int pipe_fd[4])
 {
 	pid_t	pid;
 
-	if (index == 0){
+	if (index == 0)
+	{
 		ft_recursive_fin(cmd_list, env_info_p, index, pipe_fd);
+		return ;
+	}
+	pipe(pipe_fd + 2);
+	pid = fork();
+	if (pid == 0)
+	{
+		ft_close(pipe_fd[0], 52);
+		ft_close(pipe_fd[1], 53);
+		pipe_fd[0] = pipe_fd[2];
+		pipe_fd[1] = pipe_fd[3];
+		// ここで実行しない最後のコマンドのfd_in, fd_outを閉じる
+		ft_close(cmd_list[index].fd_in, 54);
+		ft_close(cmd_list[index].fd_out, 55);
+		ft_recursive(cmd_list, env_info_p, index - 1, pipe_fd);
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
-		pipe(pipe_fd + 2);
-		pid = fork();
-		if (pid == 0)
-		{
-			ft_close(pipe_fd[0], 52);
-			ft_close(pipe_fd[1], 53);
-			pipe_fd[0] = pipe_fd[2];
-			pipe_fd[1] = pipe_fd[3];
-			// ここで実行しない最後のコマンドのfd_in, fd_outを閉じる
-			ft_close(cmd_list[index].fd_in, 54);
-			ft_close(cmd_list[index].fd_out, 55);
-			ft_recursive(cmd_list, env_info_p, index - 1, pipe_fd);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			//他のコマンドのfd_in, fd_outを閉じる
-			ft_close_fd_inout(cmd_list, index);
-			ft_close(pipe_fd[0], 56);
-			ft_close(pipe_fd[3], 57);
-			RKITAO("process %d: exec %s\n", getpid(), cmd_list[index].cmd_argv[0]);
-			ft_exec_cmd(cmd_list[index], env_info_p, pipe_fd[2], pipe_fd[1]);
-			waitpid(pid, NULL, 0);
-		}
+		//他のコマンドのfd_in, fd_outを閉じる
+		ft_close_fd_inout(cmd_list, index);
+		ft_close(pipe_fd[0], 56);
+		ft_close(pipe_fd[3], 57);
+		RKITAO("process %d: exec %s\n", getpid(), cmd_list[index].cmd_argv[0]);
+		ft_exec_cmd(cmd_list[index], env_info_p, pipe_fd[2], pipe_fd[1]);
+		waitpid(pid, NULL, 0);
 	}
 }
 
-void _ft_print_newline(int sig)
+void	_ft_print_newline(int sig)
 {
 	(void)sig;
 	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 // パイプを使う　ここに入ったプロセスは全てexitされる
-static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_index)
+static void	ft_exec_pipe(t_cmd_info *cmd_list,
+		t_env_info *env_info_p, int last_index)
 {
 	int		pipe_fd[4];
 	pid_t	pid;
@@ -122,7 +123,8 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_
 		ft_close_fd_inout(cmd_list, last_index);
 		ft_close(pipe_fd[1], 62);
 		status = ft_exec_cmd(cmd_list[last_index], env_info_p, pipe_fd[0], -1);
-		signal(SIGINT, _ft_print_newline);// 最後のコマンドの実行が終わったので、これらのプロセスはもうシグナルを受け付けない
+		// 最後のコマンドの実行が終わったので、これらのプロセスはもうシグナルを受け付けない
+		signal(SIGINT, _ft_print_newline);
 		signal(SIGQUIT, SIG_IGN);
 		waitpid(pid, NULL, 0);
 		if (g_signum == SIGINT)
@@ -176,11 +178,11 @@ static int	ft_wait_pipe(pid_t pid)
 }
 
 // cmd_listにまとめた全コマンドを実行し、終了ステータスを返す（複数コマンドがあればft_exec_pipeにまわす）
-int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_index)
+int	ft_exec_cmd_list(t_cmd_info *cmd_list,
+	t_env_info *env_info_p, int last_index)
 {
 	pid_t	pid;
 
-	// ft_printf_fd(STDOUT_FILENO, "fd_in:%d, fd_out:%d in ft_exec_cmd_list\n", cmd_list[last_index].fd_in, cmd_list[last_index].fd_out);
 	if (last_index == 0)
 		return (ft_exec_one_cmd(cmd_list, env_info_p));
 	RKITAO("process %d: wait for pipe\n", getpid());
@@ -194,7 +196,7 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list, t_env_info *env_info_p, int last_inde
 	}
 	else
 	{
-		ft_close_fd_inout(cmd_list, last_index+1);
+		ft_close_fd_inout(cmd_list, last_index + 1);
 		return (ft_wait_pipe(pid));
 	}
 	ft_printf_fd(STDERR_FILENO, "error in ft_exec_cmd_list\n");
