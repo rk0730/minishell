@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_show_env_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:39:55 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 16:41:49 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:46:35 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_show_env_list(t_env_pair *env_list)
 		if (tmp->value)
 		{
 			if (strncmp(tmp->key, "_", 2) == 0)
-				ft_printf_fd(STDOUT_FILENO, "%s=%s\n", tmp->key, "/usr/bin/env");
+				ft_printf_fd(STDOUT_FILENO, "%s=%s\n", tmp->key,
+					"/usr/bin/env");
 			else
 				ft_printf_fd(STDOUT_FILENO, "%s=%s\n", tmp->key, tmp->value);
 		}
