@@ -17,6 +17,7 @@ SRCS += $(SRCDIR)/$(ENV)/ft_path.c
 SRCS += $(SRCDIR)/$(ENV)/ft_search_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_gen_cmd_env.c
 SRCS += $(SRCDIR)/$(ENV)/ft_show_env_list.c
+SRCS += $(SRCDIR)/$(ENV)/ft_free_env_list.c
 
 UTILS := utils
 SRCS += $(SRCDIR)/$(UTILS)/ft_utils1.c

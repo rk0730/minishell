@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 16:40:08 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:40:20 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,29 +121,4 @@ t_env_pair	*ft_gen_env_list(char **envp)
 		i++;
 	}
 	return (env_list);
-}
-
-void	ft_free_env_list(t_env_pair *env_list)
-{
-	t_env_pair	*node;
-	
-	node = env_list;
-	if (!env_list)
-		return ;
-	while (env_list)
-	{
-		node = env_list->next;
-		if (env_list->key)
-		{
-			free(env_list->key);
-			env_list->key = NULL;
-		}
-		if (env_list->value)
-		{
-			free(env_list->value);
-			env_list->value = NULL;
-		}
-		free(env_list);
-		env_list = node;
-	}
 }
