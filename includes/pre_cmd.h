@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_cmd.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:55:40 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/11/18 09:25:02 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/12 16:38:55 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ typedef struct s_cmd_info
 
 t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p);
 char		**ft_gen_cmds(char *cmd);
-
 
 #endif

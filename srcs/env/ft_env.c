@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 15:25:57 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:40:08 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,24 +121,6 @@ t_env_pair	*ft_gen_env_list(char **envp)
 		i++;
 	}
 	return (env_list);
-}
-
-void	ft_show_env_list(t_env_pair *env_list)
-{
-	t_env_pair	*tmp;
-
-	tmp = env_list;
-	while (tmp)
-	{
-		if (tmp->value)
-		{
-			if (strncmp(tmp->key, "_", 2) == 0)
-				ft_printf_fd(STDOUT_FILENO, "%s=%s\n", tmp->key, "/usr/bin/env");
-			else
-				ft_printf_fd(STDOUT_FILENO, "%s=%s\n", tmp->key, tmp->value);
-		}
-		tmp = tmp->next;
-	}
 }
 
 void	ft_free_env_list(t_env_pair *env_list)

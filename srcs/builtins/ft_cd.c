@@ -6,23 +6,22 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:02:04 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "builtins.h"
+#include "builtins.h"
 
-// {cd PATH}で動くが{cd}のみで来た場合は動かさない方針で 終了ステータスを返す
-static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_name, char *cwd)
+static int	change_dir(t_cmd_info cmd_info, t_env_pair *env_list,
+			char *variable_name)
 {
 	t_env_pair	*env_pair;
-	t_env_pair	*tmp;
 	char		*target;
-	char		current_dir[PATH_MAX];
 
-	if (!variable_name) 
+	target = NULL;
+	if (!variable_name)
 		target = cmd_info.cmd_argv[1];
-	else 
+	else
 	{
 		env_pair = ft_search_env_node(variable_name, env_list);
 		if (!env_pair)
@@ -37,6 +36,17 @@ static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_n
 		ft_printf_fd(STDERR_FILENO, "cd: %s: %s\n", target, strerror(errno));
 		return (CMD_ERROR);
 	}
+	return (0);
+}
+
+static int	ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list,
+			char *variable_name, char *cwd)
+{
+	t_env_pair	*tmp;
+	char		current_dir[PATH_MAX];
+
+	if (change_dir(cmd_info, env_list, variable_name) == CMD_ERROR)
+		return (CMD_ERROR);
 	tmp = ft_search_env_node("PWD", env_list);
 	if (!tmp)
 		tmp = ft_new_env2(ft_strdup("OLDPWD"), NULL);
@@ -53,7 +63,7 @@ static int ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list, char *variable_n
 int	ft_cd(t_cmd_info cmd_info, t_env_info env_info)
 {
 	int		argc;
-    char	cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 
 	(void)env_info;
 	argc = ft_array_len(cmd_info.cmd_argv);
@@ -64,7 +74,10 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info)
 	}
 	if (getcwd(cwd, PATH_MAX) == NULL)
 	{
-		ft_printf_fd(STDERR_FILENO, "cd: error retrieving current directory: getcwd: cannot access parent directories: %s\n", strerror(errno));
+		ft_printf_fd(STDERR_FILENO,
+			"cd: error retrieving current directory: "
+			"getcwd: cannot access parent directories: %s\n",
+			strerror(errno));
 		return (0);
 	}
 	if (!cmd_info.cmd_argv[1])

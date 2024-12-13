@@ -6,16 +6,15 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:27:26 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:13 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:16:41 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-
-char *ft_internal_pwd(int mode)
+char	*ft_internal_pwd(int mode)
 {
-	static char pathname[PATH_MAX];
+	static char	pathname[PATH_MAX];
 
 	if (mode)
 	{
