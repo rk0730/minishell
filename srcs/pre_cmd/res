@@ -1,0 +1,144 @@
+pre_cmd_private.h: OK!
+ft_cmds.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:   5):	Comment is invalid in this scope
+ft_cmdinfo_list.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  57, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  80, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  84, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  85, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  86, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  87, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  88, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  89, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  90, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  97, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 102, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 103, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 110, col:   1):	Function has more than 25 lines
+ft_in_out_fd.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  24, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  48, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line:  59, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  60, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  80, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  84, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  93, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line: 124, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 163, col:   1):	Function has more than 25 lines
+ft_redirect.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  55, col:   1):	Function has more than 25 lines
+ft_heredoc.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  19, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  59, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  62, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  71, col:  17):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:  17):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  90, col:  54):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  90, col:  54):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 111, col:   1):	Function has more than 25 lines
+ft_expand_env.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  88, col:  17):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  95, col:  38):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  95, col:  38):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 100, col:  17):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:  26):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:  26):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 114, col:   1):	Function has more than 25 lines
+ft_heredoc_old.c: Error!
+Error: CONSECUTIVE_NEWLINES (line:  15, col:   1):	Consecutive newlines
+Error: WRONG_SCOPE_COMMENT  (line:  20, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line:  21, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  21, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  26, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  26, col:  84):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  46, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  71, col:   1):	Function has more than 25 lines
+Error: LINE_TOO_LONG        (line:  93, col:  82):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:  43):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:  43):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 115, col:  17):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 116, col: 104):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 122, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 123, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 130, col:   9):	Comment is invalid in this scope
+Error: TAB_INSTEAD_SPC      (line: 136, col:  19):	Found tab when expecting space
+Error: WRONG_SCOPE_COMMENT  (line: 137, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 143, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 153, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line: 173, col:  13):	Comment is invalid in this scope
+Error: SPC_AFTER_PAR        (line: 176, col:  38):	Missing space after parenthesis (brace/bracket)
+Error: WRONG_SCOPE_COMMENT  (line: 176, col:  39):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 176, col:  39):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 182, col:  93):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 185, col:  13):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 194, col:   1):	Function has more than 25 lines
+ft_split_after_index.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line: 104, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 108, col:  34):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 108, col:  34):	Comment is invalid in this scope
+ft_exec_heredoc.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  36, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  51):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  51):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:  41):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:  41):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  60, col:   1):	Function has more than 25 lines
+ft_heredoc_limiter.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  37, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  59, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  63, col:   1):	Function has more than 25 lines
+ft_cmd_argv.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:   9):	Comment is invalid in this scope
+ft_token.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:   9):	Comment is invalid in this scope
+ft_cmd_argv2.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  71, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  78, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  79, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  86, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  89, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  94, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  34):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  34):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:  17):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 128, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 131, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 145, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 151, col:   1):	Function has more than 25 lines
+ft_ambiguous_redirect.c: Error!
+Error: TOO_MANY_LINES       (line:  56, col:   1):	Function has more than 25 lines
