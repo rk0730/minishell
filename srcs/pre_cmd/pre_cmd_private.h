@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 11:11:48 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:33:01 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int		_ft_is_last_redirect(char **tokens);
 int		_ft_redirect_err(char **tokens);
 int		_ft_is_ambiguous_redirect(char *file_name, t_env_info env_info);
 void	_ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd);
+char	*_ft_limit_tokenize(char *str, int *is_quote);
+int 	_ft_heredoc_write_fd(int flag, int fd);
+int		_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter, int is_quote);
 int		_ft_heredoc(char **tokens, t_env_info *env_info_p);
 
 #endif
