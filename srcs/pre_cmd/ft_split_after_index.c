@@ -6,11 +6,11 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:35:17 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/04 21:13:35 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 11:53:03 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pre_cmd_private.h"
+#include "pre_cmd_private.h"
 
 static size_t	ft_count_words(char const *s)
 {
@@ -36,7 +36,7 @@ static size_t	ft_count_words(char const *s)
 	return (count);
 }
 
-static	void	ft_check_free(char ***result_p, size_t count)
+static void	ft_check_free(char ***result_p, size_t count)
 {
 	if ((*result_p)[count] != NULL)
 		return ;
@@ -105,7 +105,7 @@ char	**_ft_split_after_index(char *str, int split_index)
 	// 1つもなければstrが1つ目の要素になり、2つ目の用をはNULLになる
 	if (array[0] != NULL)
 		array[0] = ft_join_free(ft_substr(str, 0, split_index), array[0]);
-	else if (ft_strlen(str) > 0)//追加すべき文字列strがある場合
+	else if (ft_strlen(str) > 0) //追加すべき文字列strがある場合
 	{
 		free(array);
 		array = (char **)malloc(sizeof(char *) * 2);
