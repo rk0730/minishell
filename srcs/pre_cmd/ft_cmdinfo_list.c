@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 14:47:16 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 15:05:33 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ static int _ft_heredoc_syntax_err(char **cmds)
 		{
 			if (ft_strncmp(tokens[j], "<<", 3) == 0 && _ft_is_redirect(tokens[j + 1]))
 			{
-				ft_printf_fd(STDERR_FILENO, "syntax error in heredoc\n");
+				ft_printf_fd(STDERR_FILENO, "syntax error\n");
 				return (1);
 			}
 			j++;
 		}
 		if (ft_strncmp(tokens[ft_array_len(tokens) - 1], "<<", 3) == 0)
 		{
-			ft_printf_fd(STDERR_FILENO, "syntax error in heredoc\n");
+			ft_printf_fd(STDERR_FILENO, "syntax error\n");
 			return (1);
 		}
 		i++;
