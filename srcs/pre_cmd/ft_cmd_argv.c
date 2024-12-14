@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 17:54:34 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:55:33 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,5 @@ char	**_ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 		cmd_argv = _ft_one_token(tokens[i], cmd_argv, env_info);
 		i++;
 	}
-	RKITAO("cmd_argv\n");
-	ft_show_all(cmd_argv);
 	return (cmd_argv);
 }

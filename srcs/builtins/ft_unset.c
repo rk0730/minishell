@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:44:44 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 16:45:38 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:55:21 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	refresh_node(t_env_pair *node)
 {
 	if (!node)
 		return ;
-	RKITAO("%s=%s\n", node->key, node->value);
 	if (node->key)
 	{
 		free(node->key);

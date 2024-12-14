@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:19:50 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 18:24:23 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:57:11 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,6 @@ void	ft_free_array(char **array)
 		i++;
 	}
 	free(array);
-}
-
-void	ft_show_all(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] != NULL)
-	{
-		RKITAO("array[%d]: [%s]\n", i, array[i]);
-		YYAMASAK("array[%d]: [%s]\n", i, array[i]);
-		i++;
-	}
-	RKITAO("array[%d]: [%s]\n", i, array[i]);
-	YYAMASAK("array[%d]: [%s]\n", i, array[i]);
 }
 
 int	ft_array_len(char **array)

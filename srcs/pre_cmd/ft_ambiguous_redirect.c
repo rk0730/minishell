@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:54:42 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 18:20:19 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:55:28 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	_ft_help(char *file_name, int *ip, int *endp, t_env_info env_info)
 	char	*tmp;
 
 	expanded = _ft_expand_normal(file_name, *ip, endp, env_info);
-	RKITAO("expanded: %s\n", expanded);
 	tmp = expanded;
 	while (*tmp)
 	{

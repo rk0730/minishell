@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 13:55:07 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 19:02:23 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	main(int argc, char **argv, char **envp)
 	t_env_pair	*env_list;
 	t_env_info	*env_info_p;
 
-	RKITAO("print RKITAO\n");
-	YYAMASAK("print YYAMASAK\n");
 	(void)argc;
 	(void)argv;
 	env_list = ft_gen_env_list(envp);

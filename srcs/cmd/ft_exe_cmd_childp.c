@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd_childp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:10:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/14 15:15:25 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:56:25 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void	ft_exec_indirect(t_cmd_info cmd_info, char **cmd_env,
 		{
 			ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0],
 				strerror(errno));
-			YYAMASAK("relative_path: %d\n", errno);
 			exit(CMD_ERROR);
 		}
 	}

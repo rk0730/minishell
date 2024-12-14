@@ -67,49 +67,18 @@ SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd_childp.c
 OBJDIR := objs
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%$(SUFFIX).o)
 
-# コンパイルオプション
 INCDIR := includes
 INCLUDES := -I$(SRCDIR) -I$(INCDIR) -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(SRCDIR)/$(UTILS)
 LIB := -lreadline
 
-# 実行ファイル名
 NAME = $(PJT)$(SUFFIX)
 
-# プロジェクト名
 PJT := minishell
 
-# SUFFIX一覧
-SUFFIXES := _both _rkitao _yyamasak
-
-# デバッグの場合分け
-ifdef BOTH_DEBUG
-	DEFINES := -D RKITAO_DEBUG -D YYAMASAK_DEBUG
-	SUFFIX := $(word 1, $(SUFFIXES))
-else ifdef RKITAO_DEBUG
-	DEFINES := -D RKITAO_DEBUG
-	SUFFIX := $(word 2, $(SUFFIXES))
-else ifdef YYAMASAK_DEBUG
-	DEFINES := -D YYAMASAK_DEBUG
-	SUFFIX := $(word 3, $(SUFFIXES))
-else
-	DEFINES :=
-	SUFFIX :=
-endif
-
-# ターゲット
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(FTPRINTF)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIB)
-
-rkitao:
-	make RKITAO_DEBUG=1
-
-yyamasak:
-	make YYAMASAK_DEBUG=1
-
-both:
-	make BOTH_DEBUG=1
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) all
@@ -135,7 +104,6 @@ clean:
 
 fclean: clean
 	rm -f $(PJT)
-	rm -f $(foreach SUFFIX,$(SUFFIXES),$(NAME))
 	make -C $(LIBFT_DIR) fclean
 	make -C $(FTPRINTF_DIR) fclean
 

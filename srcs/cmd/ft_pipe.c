@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 15:42:53 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:55:12 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list,
 
 	if (last_index == 0)
 		return (_ft_exec_one_cmd(cmd_list, env_info_p));
-	RKITAO("process %d: wait for pipe\n", getpid());
 	pid = fork();
 	if (pid == 0)
 	{

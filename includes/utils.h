@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:05:45 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/11 15:20:49 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:59:48 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,11 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <unistd.h>
-// # include <linux/limits.h>
-
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-#ifdef RKITAO_DEBUG
-# define RKITAO(fmt, ...) printf(fmt, ##__VA_ARGS__)
-#else
-# define RKITAO(fmt, ...)
-#endif
-#ifdef YYAMASAK_DEBUG
-# define YYAMASAK(fmt, ...) printf(fmt, ##__VA_ARGS__)
-#else
-# define YYAMASAK(fmt, ...)
-#endif
-
 extern volatile sig_atomic_t	g_signum;
-
 
 typedef enum e_bool
 {
@@ -54,7 +40,6 @@ typedef enum e_bool
 }	t_bool;
 
 void	ft_free_array(char **array);
-void	ft_show_all(char **array);
 int		ft_array_len(char **array);
 char	**ft_add_str(char **array, char *str);
 int		ft_status_code(int flag, int new_status);

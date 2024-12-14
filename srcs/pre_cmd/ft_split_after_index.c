@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_after_index.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:35:17 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 16:23:28 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:57:00 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ char	**_ft_split_after_index(char *str, int split_index)
 		array[0] = ft_substr(str, 0, split_index);
 		array[1] = NULL;
 	}
-	ft_show_all(array);
 	return (array);
 }
