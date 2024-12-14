@@ -6,11 +6,41 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 11:00:16 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 15:05:33 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
+
+static int _ft_heredoc_syntax_err(char **cmds)
+{
+	int i;
+	int j;
+	char **tokens;
+
+	i = 0;
+	while (i < ft_array_len(cmds))
+	{
+		tokens = _ft_gen_tokens(cmds[i]);
+		j = 0;
+		while (j < ft_array_len(tokens) - 1)
+		{
+			if (ft_strncmp(tokens[j], "<<", 3) == 0 && _ft_is_redirect(tokens[j + 1]))
+			{
+				ft_printf_fd(STDERR_FILENO, "syntax error\n");
+				return (1);
+			}
+			j++;
+		}
+		if (ft_strncmp(tokens[ft_array_len(tokens) - 1], "<<", 3) == 0)
+		{
+			ft_printf_fd(STDERR_FILENO, "syntax error\n");
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 // エラーなら1を返す
 static int	_ft_help1(char **cmds, t_env_info *env_info_p, t_cmd_info *cmd_list)
@@ -88,7 +118,7 @@ t_cmd_info	*ft_cmd_info_list(char **cmds, t_env_info *env_info_p)
 	// 	return (NULL);
 	// }
 	// C言語のif文は必ず左からチェックし、左が真で||の場合は右を見ないので、これで上のコメントアウトと同じ処理になるはず
-	if (_ft_help1(cmds, env_info_p, cmd_list) || _ft_help2(cmds, env_info_p,
+	if (_ft_heredoc_syntax_err(cmds) || _ft_help1(cmds, env_info_p, cmd_list) || _ft_help2(cmds, env_info_p,
 			cmd_list))
 	{
 		free(cmd_list);
