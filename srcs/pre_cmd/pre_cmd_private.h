@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 17:57:45 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:15:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	_ft_change_g_signum(int sig);
 int		_ft_in_fd(char **tokens,
 		t_cmd_info *cmd_info, t_env_info env_info, int i);
 int		_ft_out_fd(char **tokens, t_env_info env_info, int i);
+int		_ft_heredoc_syntax_err(char **cmds);
 
 #endif
