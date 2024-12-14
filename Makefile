@@ -44,6 +44,7 @@ SRCS += $(SRCDIR)/$(PRE_CMD)/ft_one_token2.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmdinfo_list.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_cmds.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_in_out_fd.c
+SRCS += $(SRCDIR)/$(PRE_CMD)/ft_in_out_fd2.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_token.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_heredoc.c
 SRCS += $(SRCDIR)/$(PRE_CMD)/ft_heredoc2.c

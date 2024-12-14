@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:12:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 11:16:22 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 17:54:34 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-// ""や''を開き、""なら中身をexpand_env、''ならそのまま返す
 static char	*_ft_help1(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
@@ -40,8 +39,6 @@ static char	*_ft_help1(char *str, int i, int *endp, t_env_info env_info)
 	return (NULL);
 }
 
-// $"や$'の時は飛ばす　それ以外の$はexpand_envする
-// ""や''で囲まれていない文字列をexpand_envする
 char	*_ft_expand_normal(char *str, int i, int *endp, t_env_info env_info)
 {
 	char	*tmp;
@@ -50,7 +47,6 @@ char	*_ft_expand_normal(char *str, int i, int *endp, t_env_info env_info)
 	*endp = i;
 	while (str[*endp] != '\0' && str[*endp] != '\"' && str[*endp] != '\'')
 		(*endp)++;
-	// 末尾が$"や$'の時は$を無視する
 	if (str[*endp - 1] == '$' && (str[*endp] == '\'' || str[*endp] == '\"'))
 		tmp = ft_substr(str, i, *endp - i - 1);
 	else
@@ -59,8 +55,6 @@ char	*_ft_expand_normal(char *str, int i, int *endp, t_env_info env_info)
 	return (result);
 }
 
-// "や'は開いて除いて返す
-// ""で囲まれているものはft_expand_envで環境変数展開、''で囲まれていたらそのままつなげる
 char	*_ft_tokenize(char *str, t_env_info env_info)
 {
 	char	*result;
@@ -82,7 +76,6 @@ char	*_ft_tokenize(char *str, t_env_info env_info)
 	return (result);
 }
 
-// tokenの各文字列が"で挟まれていたら環境変数展開したり、'で挟まれていたらそれを除く（リダイレクトは飛ばす）
 char	**_ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 {
 	char	**cmd_argv;
@@ -95,7 +88,6 @@ char	**_ft_gen_cmd_argv(char **tokens, t_env_info env_info)
 	cmd_argv[0] = NULL;
 	while (tokens[i])
 	{
-		//リダイレクト関連の文字列だったら次のトークンはファイル名なので飛ばす
 		if (_ft_is_redirect(tokens[i]))
 		{
 			i += 2;

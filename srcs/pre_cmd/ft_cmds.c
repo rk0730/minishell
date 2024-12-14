@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmds.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:42:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 10:50:37 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 17:53:21 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-// エラーなら1を返す
 static int	_ft_next_cmd_h(char *cmd, int *ip)
 {
 	char	c;
@@ -45,7 +44,6 @@ static char	*_ft_next_cmd(char *cmd, int *ip)
 	start = *ip;
 	if (_ft_next_cmd_h(cmd, ip) == 1)
 		return (NULL);
-	//すべて空白文字でないか確認する
 	tmp = start;
 	while (cmd[tmp] && ft_isspace(cmd[tmp]))
 		tmp++;
@@ -58,7 +56,6 @@ static char	*_ft_next_cmd(char *cmd, int *ip)
 		return (ft_substr(cmd, start, *ip - start));
 }
 
-// |で分割する。クォーテーションエラーと| |のエラーも確認する
 char	**ft_gen_cmds(char *cmd)
 {
 	char	**cmd_argv;
