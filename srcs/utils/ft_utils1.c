@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:19:50 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 14:31:32 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:07:51 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	**ft_add_str(char **array, char *str)
 int	ft_close(int fd, int flag)
 {
 	(void)flag;
+	// RKITAO("%d at %d, close fd: %d\n", flag, getpid(), fd);
 	if (fd >= 0)
 		return (close(fd));
 	else

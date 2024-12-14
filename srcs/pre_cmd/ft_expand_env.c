@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:01:46 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 15:38:02 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:50:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	*_ft_expand_env(char *word, t_env_info env_info, int is_doublequote)
 	result = ft_strdup("");
 	i = 0;
 	end = 0;
+	(void)is_doublequote;
 	while (word[i] != '\0')
 	{
 		if (word[i] == '$')
