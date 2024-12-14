@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:09:42 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 17:40:09 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:21:46 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,6 @@ static void	_ft_help5(t_param param, char *token, t_env_info env_info)
 	}
 }
 
-// トークンと現在のcmd_argvを引数に取り、トークンを展開し、cmd_argvに追加して返す
-/*
-
-	・char	*now;
-	⇨ 次にcmd_argvに追加する文字列
-	・char	*tmp;
-	・char	**tmp_array;
-	→ cmd_argvに追加する文字列配列
-	・int		utils[3]
-		0: int		split_index;
-		→tokenを分割する際はこのsplit_index以降で分割する　
-		→tokenに"や'があるときは空白文字で分割しないで次に進む必要があるため
-		1: int		i;
-		2: int		end;
-	⇨ iとendでtokenのindexを管理する
-*/
 char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info)
 {
 	char	*now;

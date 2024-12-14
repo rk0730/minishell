@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:54:42 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 15:54:59 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:20:19 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static int	_ft_help(char *file_name, int *ip, int *endp, t_env_info env_info)
 	return (0);
 }
 
-// ノーマルモードで展開された環境変数に空白文字があったらambiguous redirectと判定する
-// リダイレクト記号の次にあるトークンを引数に取り、ambiguous redirectかどうかを判定する
 int	_ft_is_ambiguous_redirect(char *file_name, t_env_info env_info)
 {
 	int		i;

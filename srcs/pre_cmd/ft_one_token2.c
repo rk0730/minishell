@@ -6,13 +6,12 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:09:42 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 18:17:01 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:21:59 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-// array1のlen1個とarray2のlen2個をつなげる
 char	**_ft_join_array(char **array1, char **array2, int len1, int len2)
 {
 	char	**new_array;
