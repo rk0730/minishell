@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 15:19:52 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:21:20 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list,
 		}
 		else if (g_signum == SIGQUIT)
 		{
-			ft_printf_fd(STDOUT_FILENO, "Quit\n");
+			ft_printf_fd(STDOUT_FILENO, "Quit (core dumped)\n");
 			exit(SIGQUIT_ERROR);
 		}
 		else
@@ -159,7 +159,7 @@ static int	ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info *env_info_p)
 	}
 	else if (g_signum == SIGQUIT)
 	{
-		ft_printf_fd(STDOUT_FILENO, "Quit\n");
+		ft_printf_fd(STDOUT_FILENO, "Quit (core dumped)\n");
 		return (SIGQUIT_ERROR);
 	}
 	else
