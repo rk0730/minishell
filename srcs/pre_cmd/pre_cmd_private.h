@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_cmd_private.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 16:42:34 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:39:11 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ typedef enum e_token_status
 					// REDIRECT,// >>>や<<<,<>など不適なリダイレクト
 }		t_token_status;
 
+typedef struct s_param
+{
+	int		*utils;
+	char	**now_p;
+	char	***tmp_array_p;
+	t_bool	*last_add_p;
+	char	***cmd_argv_p;
+}			t_param;
+
 // モジュール内部でしか使わない関数の宣言を行う　最初に_をつける
 
 char	*_ft_expand_env(char *word, t_env_info env_info, int is_doublequote);
@@ -30,6 +39,8 @@ int		_ft_is_redirect(char *str);
 int		_ft_skip_quotation(char *input, int i, int *token_status, char c);
 char	**_ft_gen_tokens(char *input);
 char	**_ft_split_after_index(char *str, int split_index);
+char	**_ft_join_array(char **array1, char **array2, int len1, int len2);
+char	*_ft_help_one_token(char *token, t_env_info env_info, int *utils, char *now);
 char	**_ft_one_token(char *token, char **cmd_argv, t_env_info env_info);
 char	**_ft_gen_cmd_argv(char **tokens, t_env_info env_info);
 char	*_ft_tokenize(char *str, t_env_info env_info);
