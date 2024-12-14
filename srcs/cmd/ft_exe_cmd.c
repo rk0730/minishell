@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:05:08 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 13:18:57 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:04:04 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,30 @@ static void	ft_exec_cmd_parent(t_cmd_info cmd_info, int read_pipe,
 	signal(SIGQUIT, ft_change_g_signum);
 }
 
+static t_env_pair	*ft_create__env(t_cmd_info *cmd_info)
+{
+	t_env_pair	*new_;
+	int			array_len;
+
+	new_ = (t_env_pair *)malloc(sizeof(t_env_pair));
+	new_->key = ft_strdup("_");
+	array_len = ft_array_len(cmd_info->cmd_argv);
+	if (array_len == 0)
+		new_->value = ft_strdup("");
+	else
+		new_->value = ft_strdup(cmd_info->cmd_argv[array_len - 1]);
+	new_->next = NULL;
+	return (new_);
+}
+
 int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe,
 		int write_pipe)
 {
 	int			status;
 	pid_t		pid;
 	t_env_pair	*new_;
-	int			array_len;
 
-	new_ = (t_env_pair *)malloc(sizeof(t_env_pair));
-	new_->key = ft_strdup("_");
-	array_len = ft_array_len(cmd_info.cmd_argv);
-	if (array_len == 0)
-		new_->value = ft_strdup("");
-	else
-		new_->value = ft_strdup(cmd_info.cmd_argv[array_len - 1]);
-	new_->next = NULL;
+	new_ = ft_create__env(&cmd_info);
 	status = ft_exec_cmd_h(cmd_info, env_info_p, read_pipe, write_pipe);
 	if (status != -1)
 	{
@@ -67,12 +75,8 @@ int	ft_exec_cmd(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe,
 		return (status);
 	}
 	pid = fork();
-	if (pid == -1)
-		exit(EXIT_FAILURE);
-	else if (pid == 0)
-	{
+	if (pid == 0)
 		ft_exec_cmd_child(cmd_info, env_info_p, read_pipe, write_pipe);
-	}
 	else
 	{
 		ft_exec_cmd_parent(cmd_info, read_pipe, write_pipe);

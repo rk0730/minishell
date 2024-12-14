@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 12:06:32 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 13:20:51 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:14:04 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,30 @@ static void	ft_exec_direct(t_cmd_info cmd_info, char **cmd_env)
 	ft_free_array(cmd_info.cmd_argv);
 }
 
-static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env,
-		char **path_array, t_env_info *env_info_p)
+static void	ft_exec_indirect(t_cmd_info cmd_info, char **cmd_env,
+		char **path_array, int i)
 {
 	char	*tmp;
 	char	*cmd_path;
+
+	tmp = ft_strjoin(path_array[i], "/");
+	cmd_path = ft_strjoin(tmp, cmd_info.cmd_argv[0]);
+	free(tmp);
+	if (access(cmd_path, X_OK) == 0)
+	{
+		if (execve(cmd_path, cmd_info.cmd_argv, cmd_env) == -1)
+		{
+			ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0],
+				strerror(errno));
+			exit(CMD_ERROR);
+		}
+	}
+	free(cmd_path);
+}
+
+static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env,
+		char **path_array, t_env_info *env_info_p)
+{
 	int		i;
 
 	i = 0;
@@ -57,19 +76,7 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env,
 		ft_exec_direct(cmd_info, cmd_env);
 	while (path_array[i])
 	{
-		tmp = ft_strjoin(path_array[i], "/");
-		cmd_path = ft_strjoin(tmp, cmd_info.cmd_argv[0]);
-		free(tmp);
-		if (access(cmd_path, X_OK) == 0)
-		{
-			if (execve(cmd_path, cmd_info.cmd_argv, cmd_env) == -1)
-			{
-				ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0],
-					strerror(errno));
-				exit(CMD_ERROR);
-			}
-		}
-		free(cmd_path);
+		ft_exec_indirect(cmd_info, cmd_env, path_array, i);
 		i++;
 	}
 	ft_printf_fd(STDERR_FILENO, "%s: command not found\n",
