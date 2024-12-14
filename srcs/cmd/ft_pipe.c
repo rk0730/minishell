@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 15:29:50 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:31:17 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,6 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list,
 		}
 	}
 }
-
-// ft_exec_pipeの終了を待つ部分
-static int	ft_wait_pipe(pid_t pid)
-{
-	int		status;
-
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
-}
-
 // cmd_listにまとめた全コマンドを実行し、終了ステータスを返す（複数コマンドがあればft_exec_pipeにまわす）
 int	ft_exec_cmd_list(t_cmd_info *cmd_list,
 	t_env_info *env_info_p, int last_index)
