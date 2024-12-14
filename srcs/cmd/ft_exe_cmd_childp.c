@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd_childp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 12:06:32 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:33:53 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 14:51:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env,
 	int		i;
 
 	i = 0;
+	(void)env_info_p;
 	if (!path_array[i])
 		ft_exec_direct(cmd_info, cmd_env);
 	while (path_array[i])

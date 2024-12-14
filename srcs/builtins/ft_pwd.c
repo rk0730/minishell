@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:27:26 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 17:16:41 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:49:37 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_internal_pwd(int mode)
 int	ft_pwd(t_cmd_info cmd_info, t_env_info env_info)
 {
 	(void)env_info;
+	(void)cmd_info;
 	ft_printf_fd(STDOUT_FILENO, "%s\n", ft_internal_pwd(0));
 	return (0);
 }

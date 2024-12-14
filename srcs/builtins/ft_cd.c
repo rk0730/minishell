@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 17:02:04 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:36:47 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	ft_run_cd(t_cmd_info cmd_info, t_env_pair *env_list,
 	t_env_pair	*tmp;
 	char		current_dir[PATH_MAX];
 
+	(void)cwd;
 	if (change_dir(cmd_info, env_list, variable_name) == CMD_ERROR)
 		return (CMD_ERROR);
 	tmp = ft_search_env_node("PWD", env_list);
