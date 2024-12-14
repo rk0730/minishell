@@ -6,7 +6,7 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:42:33 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:45:35 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:24:02 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_env_pair	*ft_search_env_node(char *search, t_env_pair *env_list)
 	return (NULL);
 }
 
-// searchという環境変数が見つかったらそのvalueを返す
 char	*ft_search_env(char *search, t_env_pair *env_list)
 {
 	t_env_pair	*tmp;

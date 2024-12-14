@@ -6,13 +6,12 @@
 /*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:07:53 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/08/04 17:08:00 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 18:23:57 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-// execveに渡すcmd_envを生成する
 char	**ft_gen_cmd_env(t_env_pair *env_list)
 {
 	char		**cmd_env;

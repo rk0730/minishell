@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:01:23 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 16:39:14 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:29:39 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "pre_cmd.h"
 
-enum e_cmd_error
+enum		e_cmd_error
 {
 	CMD_ERROR = 1,
 	CMD_NOT_FOUND = 127,
@@ -25,16 +25,18 @@ enum e_cmd_error
 	SIGQUIT_ERROR = 131,
 };
 
-void		ft_choose_fd(t_cmd_info cmd_info, int read_pipe,
-				int write_pipe, t_bool need_input);
-int			ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p, int read_pipe, int write_pipe);
+void		ft_choose_fd(t_cmd_info cmd_info, int read_pipe, int write_pipe,
+				t_bool need_input);
+int			ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p,
+				int read_pipe, int write_pipe);
 int			ft_echo(t_cmd_info cmd_info, t_env_info env_info);
 int			ft_cd(t_cmd_info cmd_info, t_env_info env_info);
 int			ft_pwd(t_cmd_info cmd_info, t_env_info env_info);
 int			ft_env(t_cmd_info cmd_info, t_env_info env_info);
-int			ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe, int write_pipe);
+int			ft_exit(t_cmd_info cmd_info, t_env_info env_info, int read_pipe,
+				int write_pipe);
 int			ft_export(t_cmd_info cmd_info, t_env_info env_info);
-int 		ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p);
-char 		*ft_internal_pwd(int mode);
+int			ft_unset(t_cmd_info cmd_info, t_env_info *env_info_p);
+char		*ft_internal_pwd(int mode);
 t_env_pair	*ft_new_env2(char *key, char *value);
 #endif
