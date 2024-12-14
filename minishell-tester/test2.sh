@@ -9,6 +9,17 @@ fi
 # テスト2 必ず最後にexitを入れる
 
 # heredoc
+exec_test 'cat <<' 'exit'
+exec_test 'cat << <<' 'exit'
+exec_test 'cat << | cat << eof' 'exit'
+exec_test 'cat << > | cat << <<' 'exit'
+exec_test 'cat << >> | cat <<' 'exit'
+exec_test 'cat << EOF | cat <<' '1' 'EOF' 'exit'
+exec_test 'cat << | cat < no_such_file' 'exit'
+exec_test 'cat << < no_such_file' 'exit'
+exec_test 'cat << < no_such_file | cat << EOF' 'exit'
+exec_test 'cat << < no_such_file | cat << ' 'exit'
+exec_test 'cat < no_such_file << | cat << EOF' 'exit'
 exec_test 'cat << EOF' 'test' '$USER' '$TEST' '$1' '$11' 'EOF' 'exit'
 exec_test 'cat << EOF' '$a111111$' '"$USE'"'R'$"'"' '$""' '$"' 'EOF' 'exit'
 exec_test '<< EOF << eof << eee cat' 'test1' 'eof' 'test2' 'eee' 'test3' 'EOF' 'test4' 'eof' 'test5' 'test6' 'eee' 'exit'
