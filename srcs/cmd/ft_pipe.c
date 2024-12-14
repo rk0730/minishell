@@ -6,24 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 13:22:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:25:23 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
-
-static void	ft_close_fd_inout(t_cmd_info *cmd_list, int index)
-{
-	int		i;
-
-	i = 0;
-	while (i < index)
-	{
-		ft_close(cmd_list[i].fd_in, 42);
-		ft_close(cmd_list[i].fd_out, 43);
-		i++;
-	}
-}
 
 static void	ft_recursive_fin(t_cmd_info *cmd_list,
 		t_env_info *env_info_p, int index, int pipe_fd[4])
@@ -69,17 +56,11 @@ static void	ft_recursive(t_cmd_info *cmd_list,
 		ft_recursive(cmd_list, env_info_p, index - 1, pipe_fd);
 		exit(EXIT_SUCCESS);
 	}
-	ft_close_fd_inout(cmd_list, index);
+	_ft_close_fd_inout(cmd_list, index);
 	ft_close(pipe_fd[0], 56);
 	ft_close(pipe_fd[3], 57);
 	ft_exec_cmd(cmd_list[index], env_info_p, pipe_fd[2], pipe_fd[1]);
 	waitpid(pid, NULL, 0);
-}
-
-void	_ft_print_newline(int sig)
-{
-	(void)sig;
-	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 static void	ft_exec_pipe(t_cmd_info *cmd_list,
@@ -103,7 +84,7 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list,
 	else
 	{
 		RKITAO("process %d: exec last command\n", getpid());
-		ft_close_fd_inout(cmd_list, last_index);
+		_ft_close_fd_inout(cmd_list, last_index);
 		ft_close(pipe_fd[1], 62);
 		status = ft_exec_cmd(cmd_list[last_index], env_info_p, pipe_fd[0], -1);
 		signal(SIGINT, _ft_print_newline);
@@ -126,42 +107,13 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list,
 	}
 }
 
-static int	ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info *env_info_p)
-{
-	int		status;
-
-	status = ft_exec_cmd(cmd_list[0], env_info_p, -1, -1);
-	if (g_signum == SIGINT)
-	{
-		ft_printf_fd(STDOUT_FILENO, "\n");
-		return (SIGINT_ERROR);
-	}
-	else if (g_signum == SIGQUIT)
-	{
-		ft_printf_fd(STDOUT_FILENO, "Quit\n");
-		return (SIGQUIT_ERROR);
-	}
-	else
-		return (status);
-}
-
-static int	ft_wait_pipe(pid_t pid)
-{
-	int		status;
-
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
-}
-
 int	ft_exec_cmd_list(t_cmd_info *cmd_list,
 	t_env_info *env_info_p, int last_index)
 {
 	pid_t	pid;
 
 	if (last_index == 0)
-		return (ft_exec_one_cmd(cmd_list, env_info_p));
+		return (_ft_exec_one_cmd(cmd_list, env_info_p));
 	RKITAO("process %d: wait for pipe\n", getpid());
 	pid = fork();
 	if (pid == 0)
@@ -171,8 +123,8 @@ int	ft_exec_cmd_list(t_cmd_info *cmd_list,
 	}
 	else
 	{
-		ft_close_fd_inout(cmd_list, last_index + 1);
-		return (ft_wait_pipe(pid));
+		_ft_close_fd_inout(cmd_list, last_index + 1);
+		return (_ft_wait_pipe(pid));
 	}
 	ft_printf_fd(STDERR_FILENO, "error in ft_exec_cmd_list\n");
 	return (-1);
