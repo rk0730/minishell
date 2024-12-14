@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:24:50 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 17:54:01 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 19:25:53 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 		if (line == NULL)
 		{
 			ft_printf_fd(STDERR_FILENO,
-				"warning: here-document delimited by end-of-file (wanted `");
-			ft_putendl_fd(limiter, STDERR_FILENO);
+				"warning: here-document delimited"
+				"by end-of-file (wanted `%s')\n", limiter);
 			break ;
 		}
 		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
