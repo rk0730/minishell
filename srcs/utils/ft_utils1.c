@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:19:50 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:47:33 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:29:18 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ char	**ft_add_str(char **array, char *str)
 	return (new_array);
 }
 
-// flagはデバックでつけたもの
 int	ft_close(int fd, int flag)
 {
-	// RKITAO("%d at %d, close fd: %d\n", flag, getpid(), fd);
 	if (fd >= 0)
 		return (close(fd));
 	else
