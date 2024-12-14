@@ -6,13 +6,12 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:29:34 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/12 16:44:36 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:15:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-// -が1つの後にnが任意個続いたものがは-nオプション
 static int	ft_is_option(char *str)
 {
 	int	i;
@@ -30,7 +29,6 @@ static int	ft_is_option(char *str)
 	return (0);
 }
 
-// 終了ステータスを返す
 int	ft_echo(t_cmd_info cmd_info, t_env_info env_info)
 {
 	int	n_option;

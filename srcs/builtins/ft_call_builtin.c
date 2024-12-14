@@ -6,17 +6,12 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:24:47 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/12 17:03:25 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:15:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-// fdが開いているかどうかを判定する
-// static int	is_fd_open(int fd) {
-// 	return fcntl(fd, F_GETFD) != -1 || errno != EBADF;
-// }
 
-// pipeに入出力するのか、ファイルに入出力するのかを判断する
 void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe,
 		int write_pipe, t_bool need_input)
 {
@@ -44,7 +39,6 @@ void	ft_choose_fd(t_cmd_info cmd_info, int read_pipe,
 	ft_close(write_pipe, 7);
 }
 
-// ビルトインを呼び出し、終了ステータスを返す　見つからなかったら-1を返す
 static int	ft_call_builtin(t_cmd_info cmd_info, t_env_info *env_info_p,
 			int rw_pipe[2], int std_in_out[2])
 {
@@ -70,7 +64,6 @@ static int	ft_call_builtin(t_cmd_info cmd_info, t_env_info *env_info_p,
 		return (-1);
 }
 
-// ビルトインコマンドかどうか確認し、前処理を行う
 int	ft_builtin(t_cmd_info cmd_info, t_env_info *env_info_p,
 	int read_pipe, int write_pipe)
 {

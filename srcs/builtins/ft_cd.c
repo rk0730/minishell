@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:48:53 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/12 17:02:04 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:15:47 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,3 @@ int	ft_cd(t_cmd_info cmd_info, t_env_info env_info)
 		return (ft_run_cd(cmd_info, env_info.env_list, "OLDPWD", cwd));
 	return (ft_run_cd(cmd_info, env_info.env_list, NULL, cwd));
 }
-
-// int main(int ac, char **av)
-// {
-//     char pathname[PATH_MAX];
-
-//     ft_cd(av);
-//     getcwd(pathname, PATH_MAX);
-//     fft_printf_fd(STDOUT_FILENO, stdout,"現在のファイルパス:%s\n", pathname);
-// }
