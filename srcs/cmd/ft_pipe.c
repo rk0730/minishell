@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:40:42 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 15:31:17 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:42:53 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,32 +81,15 @@ static void	ft_exec_pipe(t_cmd_info *cmd_list,
 		ft_recursive(cmd_list, env_info_p, last_index - 1, pipe_fd);
 		exit(EXIT_SUCCESS);
 	}
-	else
-	{
-		RKITAO("process %d: exec last command\n", getpid());
-		_ft_close_fd_inout(cmd_list, last_index);
-		ft_close(pipe_fd[1], 62);
-		status = ft_exec_cmd(cmd_list[last_index], env_info_p, pipe_fd[0], -1);
-		signal(SIGINT, _ft_print_newline);
-		signal(SIGQUIT, SIG_IGN);
-		waitpid(pid, NULL, 0);
-		if (g_signum == SIGINT)
-		{
-			ft_printf_fd(STDOUT_FILENO, "\n");
-			exit(SIGINT_ERROR);
-		}
-		else if (g_signum == SIGQUIT)
-		{
-			ft_printf_fd(STDOUT_FILENO, "Quit (core dumped)\n");
-			exit(SIGQUIT_ERROR);
-		}
-		else
-		{
-			exit(status);
-		}
-	}
+	_ft_close_fd_inout(cmd_list, last_index);
+	ft_close(pipe_fd[1], 62);
+	status = ft_exec_cmd(cmd_list[last_index], env_info_p, pipe_fd[0], -1);
+	signal(SIGINT, _ft_print_newline);
+	signal(SIGQUIT, SIG_IGN);
+	waitpid(pid, NULL, 0);
+	_ft_wait_signal(status);
 }
-// cmd_listにまとめた全コマンドを実行し、終了ステータスを返す（複数コマンドがあればft_exec_pipeにまわす）
+
 int	ft_exec_cmd_list(t_cmd_info *cmd_list,
 	t_env_info *env_info_p, int last_index)
 {

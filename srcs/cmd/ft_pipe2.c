@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 14:15:07 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/14 15:31:10 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:44:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,22 @@ int	_ft_exec_one_cmd(t_cmd_info *cmd_list, t_env_info *env_info_p)
 	}
 	else
 		return (status);
+}
+
+void	_ft_wait_signal(int status)
+{
+	if (g_signum == SIGINT)
+	{
+		ft_printf_fd(STDOUT_FILENO, "\n");
+		exit(SIGINT_ERROR);
+	}
+	else if (g_signum == SIGQUIT)
+	{
+		ft_printf_fd(STDOUT_FILENO, "Quit (core dumped)\n");
+		exit(SIGQUIT_ERROR);
+	}
+	else
+	{
+		exit(status);
+	}
 }
