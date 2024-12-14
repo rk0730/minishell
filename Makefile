@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall
+CFLAGS := -Wall -Werror -Wextra
 
 LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a
@@ -53,6 +53,7 @@ SRCS += $(SRCDIR)/$(PRE_CMD)/ft_split_after_index.c
 
 CMD := cmd
 SRCS += $(SRCDIR)/$(CMD)/ft_pipe.c
+SRCS += $(SRCDIR)/$(CMD)/ft_pipe2.c
 SRCS += $(SRCDIR)/$(CMD)/ft_signal.c
 SRCS += $(SRCDIR)/$(CMD)/ft_cmd_line.c
 SRCS += $(SRCDIR)/$(CMD)/ft_exe_cmd.c
