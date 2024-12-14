@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:13:31 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/14 15:03:47 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 16:21:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-// リダイレクト記号かどうかを判定する
 int	_ft_is_redirect(char *str)
 {
 	if (!str)
@@ -24,8 +23,6 @@ int	_ft_is_redirect(char *str)
 		return (0);
 }
 
-// リダイレクト先がない、<<< >>>などがないかどうか確認する　あったら1を返す
-// （最後のリダイレクト記号のリダイレクト先がない問題はここではチェックしない）
 int	_ft_redirect_err(char **tokens)
 {
 	int	i;
@@ -33,7 +30,6 @@ int	_ft_redirect_err(char **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		// >>>や<<<などの処理 bashの挙動とやや異なるが、ここはディフェンスできる気がする　一旦シンプルに作る
 		if ((tokens[i][0] == '>' || tokens[i][0] == '<')
 			&& _ft_is_redirect(tokens[i]) == 0)
 		{
@@ -41,7 +37,6 @@ int	_ft_redirect_err(char **tokens)
 				"syntax error\n");
 			return (1);
 		}
-		// リダイレクト先がない場合の処理
 		if (_ft_is_redirect(tokens[i]))
 		{
 			if (tokens[i + 1] == NULL || _ft_is_redirect(tokens[i + 1]))
@@ -56,7 +51,6 @@ int	_ft_redirect_err(char **tokens)
 	return (0);
 }
 
-// 最後がリダイレクト記号でないかどうかチェックする
 int	_ft_is_last_redirect(char **tokens)
 {
 	int	i;
