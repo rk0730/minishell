@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_cmd_private.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 11:57:44 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 16:42:34 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ int		_ft_heredoc_write_fd(int flag, int fd);
 int		_ft_one_heredoc(t_env_info *env_info_p, int pipe_fd[2], char *limiter,
 			int is_quote);
 int		_ft_heredoc(char **tokens, t_env_info *env_info_p);
+void	_ft_sigint_heredoc(int sig);
+void	_ft_close_all_fd(int fd);
+void	_ft_change_g_signum(int sig);
 
 #endif
