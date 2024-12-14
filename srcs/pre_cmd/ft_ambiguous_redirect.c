@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ambiguous_redirect.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:54:42 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 15:51:34 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:54:59 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
+
+static int	_ft_help(char *file_name, int *ip, int *endp, t_env_info env_info)
+{
+	char	*expanded;
+	char	*tmp;
+
+	expanded = _ft_expand_normal(file_name, *ip, endp, env_info);
+	RKITAO("expanded: %s\n", expanded);
+	tmp = expanded;
+	while (*tmp)
+	{
+		if (ft_isspace(*tmp) == 1)
+		{
+			free(expanded);
+			return (1);
+		}
+		tmp++;
+	}
+	free(expanded);
+	*ip = *endp;
+	return (0);
+}
 
 // ノーマルモードで展開された環境変数に空白文字があったらambiguous redirectと判定する
 // リダイレクト記号の次にあるトークンを引数に取り、ambiguous redirectかどうかを判定する
@@ -18,8 +40,6 @@ int	_ft_is_ambiguous_redirect(char *file_name, t_env_info env_info)
 {
 	int		i;
 	int		end;
-	char	*tmp;
-	char	*expanded;
 
 	i = 0;
 	while (file_name[i])
@@ -36,20 +56,8 @@ int	_ft_is_ambiguous_redirect(char *file_name, t_env_info env_info)
 		}
 		else
 		{
-			expanded = _ft_expand_normal(file_name, i, &end, env_info);
-			RKITAO("expanded: %s\n", expanded);
-			tmp = expanded;
-			while (*tmp)
-			{
-				if (ft_isspace(*tmp) == 1)
-				{
-					free(expanded);
-					return (1);
-				}
-				tmp++;
-			}
-			free(expanded);
-			i = end;
+			if (_ft_help(file_name, &i, &end, env_info) == 1)
+				return (1);
 		}
 	}
 	return (0);
