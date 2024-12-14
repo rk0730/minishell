@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:21:48 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:35:08 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:20:25 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-//コマンド実行中SIGINTの処理
 void	ft_sigint_cmd(int sig)
 {
 	g_signum = sig;
 	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
-//コマンド実行中SIGQUITの処理
 void	ft_sigquit_cmd(int sig)
 {
 	g_signum = sig;

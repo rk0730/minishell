@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe_cmd_childp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 12:06:32 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 12:33:53 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:20:51 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,11 @@ static int	ft_is_directory(char *dir)
 		return (0);
 	if (stat(dir, &statbuf) == -1)
 		return (0);
-	// YYAMASAK("%s is dir: %d\n", dir, S_ISDIR(statbuf.st_mode));
 	return (S_ISDIR(statbuf.st_mode));
 }
 
-// 絶対パスなのでそのまま実行する
 static void	ft_exec_direct(t_cmd_info cmd_info, char **cmd_env)
 {
-	// YYAMASAK("absolute path: %s\n", cmd_info.cmd_argv[0]);
 	if (ft_is_directory(cmd_info.cmd_argv[0]))
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: Is a directory\n",
@@ -43,13 +40,11 @@ static void	ft_exec_direct(t_cmd_info cmd_info, char **cmd_env)
 			exit(CMD_NOT_FOUND);
 		else if (errno == EACCES)
 			exit(CMD_EXEC_FAILED);
-		YYAMASAK("relative_path: %d\n", errno);
 		exit(CMD_ERROR);
 	}
 	ft_free_array(cmd_info.cmd_argv);
 }
 
-// 相対パスなのでPATHから探して実行する
 static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env,
 		char **path_array, t_env_info *env_info_p)
 {
@@ -71,7 +66,6 @@ static void	ft_find_and_exec(t_cmd_info cmd_info, char **cmd_env,
 			{
 				ft_printf_fd(STDERR_FILENO, "%s: %s\n", cmd_info.cmd_argv[0],
 					strerror(errno));
-				YYAMASAK("relative_path: %d\n", errno);
 				exit(CMD_ERROR);
 			}
 		}
@@ -90,9 +84,7 @@ void	ft_exec_cmd_child(t_cmd_info cmd_info, t_env_info *env_info_p,
 	char	**path_array;
 	char	**cmd_env;
 
-	// pipeに入出力するのか、ファイルに入出力するのかを判断する
 	ft_choose_fd(cmd_info, read_pipe, write_pipe, TRUE);
-	//シグナルはデフォに戻す
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGPIPE, SIG_DFL);
