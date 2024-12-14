@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:37:13 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 10:46:21 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:55:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ static void	_ft_loop(t_env_info *env_info_p)
 	{
 		signal(SIGINT, ft_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		// Readlineを使用してユーザー入力を取得
 		env_info_p->input = readline("MINISHELL$ ");
-		// ctrl+dが押されるとNULLが返ってくるので終了
 		if (env_info_p->input == NULL)
 		{
 			ft_free_env_list(env_info_p->env_list);
@@ -52,16 +50,13 @@ static void	_ft_loop(t_env_info *env_info_p)
 			ft_printf_fd(STDOUT_FILENO, "exit\n");
 			exit(ft_status_code(0, 0));
 		}
-		// 空文字、もしくは全て空白文字の場合は何もせず次のループへ
 		if (ft_strlen(env_info_p->input) == 0
 			|| _ft_is_all_space(env_info_p->input))
 		{
 			free(env_info_p->input);
 			continue ;
 		}
-		// コマンドを実行
 		ft_status_code(1, ft_exec_cmdline(env_info_p));
-		// ヒストリーに入力を追加
 		add_history(env_info_p->input);
 		g_signum = 0;
 		free(env_info_p->input);
