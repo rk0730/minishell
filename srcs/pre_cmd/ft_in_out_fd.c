@@ -6,21 +6,24 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:39:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/12 15:43:39 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:25:49 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
 // 入力リダイレクト処理　文法エラー処理はここではしない。エラーがあった場合は-2を返す
-static int	_ft_in_fd(char **tokens, t_cmd_info *cmd_info, t_env_info env_info, int i)
+static int	_ft_in_fd(char **tokens,
+		t_cmd_info *cmd_info, t_env_info env_info, int i)
 {
 	int		result;
 	char	*file;
 
 	file = _ft_tokenize(tokens[i + 1], env_info);
-	// cat > $NOTHING と cat > ""を区別するためにif文をつけている　ここでNULLにすることでambiguous redirectになる
-	if (ft_strchr(tokens[i + 1], '\'') == NULL && ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
+	// cat > $NOTHING と cat > ""を区別するためにif文をつけている　
+	// ここでNULLにすることでambiguous redirectになる
+	if (ft_strchr(tokens[i + 1], '\'') == NULL
+		&& ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
 	{
 		free(file);
 		file = NULL;
@@ -53,8 +56,10 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 
 	result = 0;
 	file = _ft_tokenize(tokens[i + 1], env_info);
-	// cat > $NOTHING と cat > ""を区別するためにif文をつけている　ここでNULLにすることでambiguous redirectになる
-	if (ft_strchr(tokens[i + 1], '\'') == NULL && ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
+	// cat > $NOTHING と cat > ""を区別するためにif文をつけている
+	// ここでNULLにすることでambiguous redirectになる
+	if (ft_strchr(tokens[i + 1], '\'') == NULL
+		&& ft_strchr(tokens[i + 1], '\"') == NULL && ft_strlen(file) == 0)
 	{
 		free(file);
 		file = NULL;
@@ -88,7 +93,8 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 }
 
 // エラーなら1を返す
-// static int	ft_in_out_fd_h(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int i)
+// static int	ft_in_out_fd_h(char **tokens,
+// 			t_env_info env_info, t_cmd_info *cmd_info, int i)
 // {
 // 	if (tokens[i][0] == '>')
 // 	{
@@ -103,9 +109,10 @@ static int	_ft_out_fd(char **tokens, t_env_info env_info, int i)
 // エラーがあった場合は-2を返す（権限、ambiguous redirectなど）
 // リダイレクト先がない場合は-1を返す
 // cmd_infoの入力リダイレクト、出力リダイレクトのfdを入れる　ヒアドクはすでに処理が完了している前提
-void	_ft_in_out_fd(char **tokens, t_env_info env_info, t_cmd_info *cmd_info, int heredoc_fd)
+void	_ft_in_out_fd(char **tokens, t_env_info env_info,
+		t_cmd_info *cmd_info, int heredoc_fd)
 {
-	int	i;
+	int		i;
 	t_bool	is_err;
 
 	is_err = FALSE;

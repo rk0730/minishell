@@ -10,6 +10,7 @@ argv
 *.o
 *.a
 .vscode
+.venv
 minishell-tester/result.log
 playground/
 check_signal.sh

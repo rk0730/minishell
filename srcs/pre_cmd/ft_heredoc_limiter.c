@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc_limiter.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:29:02 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/13 11:29:35 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 15:38:46 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pre_cmd_private.h"
 
-// クォーテーションエラーがあった際はNULLを返すように作ったが、最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
-// limiterを求める関数、"や'で囲まれているものはそのまま返す、 is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
+// クォーテーションエラーがあった際はNULLを返すように作った。
+// 最初にクォーテーションはチェックしているため、ここでそのエラーが出ることはなさそう
+// limiterを求める関数、"や'で囲まれているものはそのまま返す。
+// is_quoteはheredoc中に打ち込まれるものを展開する際の場合分けのflagになる
 char	*_ft_limit_tokenize(char *str, int *is_quote)
 {
 	char	*result;

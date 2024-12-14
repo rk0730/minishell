@@ -1,1 +1,1 @@
-echo hello && chmod +x exe
+echo hello

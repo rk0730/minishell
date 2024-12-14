@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 11:47:19 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/13 15:34:37 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,27 @@ static void	_ft_change_g_signum(int sig)
 }
 
 // heredocでの入力が入ったfdを返す 一回もheredocがなければ-1 エラーがあれば-2を返す fork使わないものに書き直し
+// utils[0] = i (tokensのindex)
+// utils[1] = result (前回のヒアドクの結果)
+// utils[2] = is_quote ()
 int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 {
 	int		pipe_fd[2];
-	int		i;
 	char	*limiter;
-	int		is_quote;
-	int		result;
+	int		utils[3];
 	pid_t	pid;
 
-	i = 0;
-	result = -1;
-	while (tokens[i])
+	utils[0] = 0;
+	utils[1] = -1;
+	while (tokens[utils[0]])
 	{
-		if (ft_strncmp(tokens[i], "<<", 3) == 0)
+		if (ft_strncmp(tokens[utils[0]], "<<", 3) == 0)
 		{
 			// 前回のheredocがあれば不要なので閉じる
-			if (result != -1)
-				ft_close(result, 34);
-			if (tokens[i + 1] == NULL) //最後に<<がある場合、あとでエラー文は出すのでここでは出さない
+			if (utils[1] != -1)
+				ft_close(utils[1], 34);
+			//最後に<<がある場合、あとでエラー文は出すのでここでは出さない
+			if (tokens[utils[0] + 1] == NULL)
 				return (-2);
 			pipe(pipe_fd);
 			pid = fork();
@@ -66,11 +68,12 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				return (-1);
 			if (pid == 0)
 			{
-				signal(SIGINT, _ft_sigint_heredoc);// 書き込みのpipe_fd[1]を閉じてデフォルトのSIGINT動作をする
+				// 書き込みのpipe_fd[1]を閉じてデフォルトのSIGINT動作をする
+				signal(SIGINT, _ft_sigint_heredoc);
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[0], 35);
 				_ft_close_all_fd(pipe_fd[1]);
-				limiter = _ft_limit_tokenize(tokens[i + 1], &is_quote);
+				limiter = _ft_limit_tokenize(tokens[utils[0] + 1], &utils[2]);
 				if (limiter == NULL)
 				{
 					ft_printf_fd(STDERR_FILENO,
@@ -78,7 +81,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 					exit(-2);
 				}
 				// ヒアドクが１つ実行してresultに格納
-				_ft_one_heredoc(env_info_p, pipe_fd, limiter, is_quote);
+				_ft_one_heredoc(env_info_p, pipe_fd, limiter, utils[2]);
 				free(limiter);
 				exit(EXIT_SUCCESS);
 			}
@@ -87,22 +90,22 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				signal(SIGINT, _ft_change_g_signum); // g_signumをSIGINTに変えるだけ
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[1], 36);
-				waitpid(pid, &result, 0);
-				result = pipe_fd[0];
+				waitpid(pid, &utils[1], 0);
+				utils[1] = pipe_fd[0];
 				if (g_signum == SIGINT)
 				{
 					ft_printf_fd(STDOUT_FILENO, "\n");
-					ft_close(result, 37);
-					return (result);
+					ft_close(utils[1], 37);
+					return (utils[1]);
 				}
-				if (WEXITSTATUS(result) == -2)
+				if (WEXITSTATUS(utils[1]) == -2)
 				{
 					ft_close(pipe_fd[0], 37);
 					return (-2);
 				}
 			}
 		}
-		i++;
+		utils[0]++;
 	}
-	return (result);
+	return (utils[1]);
 }
