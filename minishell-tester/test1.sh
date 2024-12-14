@@ -9,6 +9,10 @@ fi
 # テスト1 必ず最後にexitを入れる
 
 exec_test '   ' 'exit'
+exec_test 'cat <<' 'exit'
+exec_test 'cat >' 'exit'
+exec_test 'cat < | ls' 'exit'
+exec_test 'cat < | ls < no_such_file' 'exit'
 exec_test '/bin/ls' 'exit'
 exec_test '/bin/pwd' 'exit'
 exec_test '/bin/echo' 'exit'

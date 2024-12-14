@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:35:53 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 15:34:37 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:19:48 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				ft_close(pipe_fd[0], 35);
 				_ft_close_all_fd(pipe_fd[1]);
 				limiter = _ft_limit_tokenize(tokens[utils[0] + 1], &utils[2]);
-				if (limiter == NULL)
-				{
-					ft_printf_fd(STDERR_FILENO,
-						"syntax error near unexpected token `newline'\n");
-					exit(-2);
-				}
+				// if (limiter == NULL)
+				// {
+				// 	ft_printf_fd(STDERR_FILENO,
+				// 		"syntax error near unexpected token `newline'\n");
+				// 	exit(-2);
+				// }
 				// ヒアドクが１つ実行してresultに格納
 				_ft_one_heredoc(env_info_p, pipe_fd, limiter, utils[2]);
 				free(limiter);
@@ -90,7 +90,7 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 				signal(SIGINT, _ft_change_g_signum); // g_signumをSIGINTに変えるだけ
 				signal(SIGQUIT, SIG_IGN);
 				ft_close(pipe_fd[1], 36);
-				waitpid(pid, &utils[1], 0);
+				waitpid(pid, NULL, 0);
 				utils[1] = pipe_fd[0];
 				if (g_signum == SIGINT)
 				{
@@ -98,11 +98,11 @@ int	_ft_heredoc(char **tokens, t_env_info *env_info_p)
 					ft_close(utils[1], 37);
 					return (utils[1]);
 				}
-				if (WEXITSTATUS(utils[1]) == -2)
-				{
-					ft_close(pipe_fd[0], 37);
-					return (-2);
-				}
+				// if (WEXITSTATUS(utils[1]) == -2)
+				// {
+				// 	ft_close(pipe_fd[0], 37);
+				// 	return (-2);
+				// }
 			}
 		}
 		utils[0]++;

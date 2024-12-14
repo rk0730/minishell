@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:21:48 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 13:20:25 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:29:22 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sigint_cmd(int sig)
 void	ft_sigquit_cmd(int sig)
 {
 	g_signum = sig;
-	ft_printf_fd(STDOUT_FILENO, "Quit\n");
+	ft_printf_fd(STDOUT_FILENO, "Quit (core dumped)\n");
 }
 
 void	ft_change_g_signum(int sig)
