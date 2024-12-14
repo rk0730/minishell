@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:57:26 by kitaoryoma        #+#    #+#             */
-/*   Updated: 2024/12/14 18:15:39 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:26:19 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef struct s_param
 	t_bool	*last_add_p;
 	char	***cmd_argv_p;
 }			t_param;
+
+typedef struct s_param2
+{
+	int		i;
+	int		heredoc_fd;
+	t_bool	is_err;
+}			t_param2;
 
 // モジュール内部でしか使わない関数の宣言を行う　最初に_をつける
 
