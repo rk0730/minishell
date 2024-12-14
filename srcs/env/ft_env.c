@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:18:19 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 12:42:03 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:27:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-// 新しい環境変数を作成する
-// envには"USER=rkitao"のような文字列が入る
 static t_env_pair	*ft_new_env(char *env)
 {
 	t_env_pair	*env_pair;
@@ -45,8 +43,6 @@ void	ft_add_env_list(t_env_pair **env_list_p, t_env_pair *new)
 	last->next = new;
 }
 
-// mode 0: replace, 1: add
-// newのkeyとnew自身はfreeされる
 void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 {
 	t_env_pair	*node;
@@ -69,10 +65,7 @@ void	ft_update_env_list(t_env_pair **env_list_p, t_env_pair *new, int mode)
 	else
 	{
 		free(new->key);
-		// tmp = ft_strjoin(node->value, new->value);
-		// free(new->value);
-		// free(node->value);
-		tmp = ft_join_free(node->value, new->value); //これでコメントアウト部分を同じ処理
+		tmp = ft_join_free(node->value, new->value);
 		node->value = tmp;
 	}
 	free(new);

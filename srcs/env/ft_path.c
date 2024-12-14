@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:59:39 by rkitao            #+#    #+#             */
-/*   Updated: 2024/07/29 03:32:25 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:27:20 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	**ft_gen_path_array(t_env_pair *env_list)
 	char		**path_array;
 	char		*path;
 
-	// to do: 環境変数ごとdelete?されたときは、env_listがnullになるためif文を追加
 	tmp = NULL;
 	if (env_list != NULL)
 		tmp = env_list;
@@ -34,6 +33,5 @@ char	**ft_gen_path_array(t_env_pair *env_list)
 	}
 	path_array = (char **)malloc(sizeof(char *) * 1);
 	path_array[0] = NULL;
-	// ft_show_all(path_array);
 	return (path_array);
 }

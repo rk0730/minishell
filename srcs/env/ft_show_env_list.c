@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_show_env_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:39:55 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/13 12:46:35 by kitaoryoma       ###   ########.fr       */
+/*   Updated: 2024/12/14 13:27:31 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	ft_show_env_list2(t_env_pair *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		// if (ft_strncmp(tmp->key, "_", 2) == 0 || ft_strncmp(tmp->key, "PATH",
-		// 		5) == 0)
 		if (ft_strncmp(tmp->key, "_", 2) == 0)
 			(void)env_list;
 		else if (tmp->value)
