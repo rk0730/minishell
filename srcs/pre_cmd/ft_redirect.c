@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kitaoryoma <kitaoryoma@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:13:31 by rkitao            #+#    #+#             */
-/*   Updated: 2024/12/13 15:26:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:03:47 by kitaoryoma       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // リダイレクト記号かどうかを判定する
 int	_ft_is_redirect(char *str)
 {
+	if (!str)
+		return (0);
 	if (ft_strncmp(str, ">", 2) == 0 || ft_strncmp(str, "<", 2) == 0
 		|| ft_strncmp(str, ">>", 3) == 0 || ft_strncmp(str, "<<", 3) == 0)
 		return (1);
@@ -36,16 +38,16 @@ int	_ft_redirect_err(char **tokens)
 			&& _ft_is_redirect(tokens[i]) == 0)
 		{
 			ft_printf_fd(STDERR_FILENO,
-				"syntax error near unexpected token `%s'\n", tokens[i]);
+				"syntax error\n");
 			return (1);
 		}
 		// リダイレクト先がない場合の処理
 		if (_ft_is_redirect(tokens[i]))
 		{
-			if (tokens[i + 1] != NULL && _ft_is_redirect(tokens[i + 1]))
+			if (tokens[i + 1] == NULL || _ft_is_redirect(tokens[i + 1]))
 			{
 				ft_printf_fd(STDERR_FILENO,
-					"syntax error near unexpected token `%s'\n", tokens[i]);
+					"syntax error\n");
 				return (1);
 			}
 		}
